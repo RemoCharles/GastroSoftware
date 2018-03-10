@@ -5,11 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 
 
 public class GastroSoftwareGUI extends Application {
-
+    private static Logger logger = (Logger) LogManager.getLogger(GastroSoftwareGUI.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -17,8 +18,6 @@ public class GastroSoftwareGUI extends Application {
         primaryStage.setTitle("Gastro Software");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-
-
     }
 
 
