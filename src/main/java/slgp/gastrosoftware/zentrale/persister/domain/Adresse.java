@@ -1,6 +1,7 @@
 package slgp.gastrosoftware.zentrale.persister.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,6 +49,26 @@ public class Adresse implements Serializable {
 
 	public void setOrt(String ort) {
 		this.ort = ort;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(strasse, plz);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		
+		if(!(obj instanceof Adresse)) {
+			return false;
+		}
+		
+		Adresse adres = (Adresse)obj;
+		
+		return this.strasse == adres.strasse && this.plz == adres.plz;
 	}
 	
 	@Override
