@@ -1,10 +1,14 @@
-package slgp.gastrosoftware.zentrale.persister.domain;
+package slgp.gastrosoftware.zentrale.persister.domain.menu;
+
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Esswaren;
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Getraenke;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Menukarte {
+public class Menukarte implements Serializable {
     @Id
     @GeneratedValue
     private int id;
@@ -14,10 +18,11 @@ public class Menukarte {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Getraenke> listeGetraenke;
 
-    public Menukarte(){
+    public Menukarte() {
 
     }
-    public Menukarte(List<Getraenke> listeGetraenke, List<Esswaren> listeEsswaren, String bezeichnung){
+
+    public Menukarte(List<Getraenke> listeGetraenke, List<Esswaren> listeEsswaren, String bezeichnung) {
         this.listeGetraenke = listeGetraenke;
         this.listeEsswaren = listeEsswaren;
         this.bezeichnung = bezeichnung;

@@ -1,7 +1,7 @@
 package slgp.gastrosoftware.zentrale.persister.util;
 
 
-import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Esswaren;
 
 import java.util.List;
 

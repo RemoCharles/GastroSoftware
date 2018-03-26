@@ -1,27 +1,30 @@
-package slgp.gastrosoftware.zentrale.persister.domain;
+package slgp.gastrosoftware.zentrale.persister.domain.menu;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Esswaren;
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.impl.Util;
 import slgp.gastrosoftware.zentrale.persister.util.DbHelper;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;
-
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class KonsumartikelTest {
+public class MenuTest {
     private static Logger logger = LogManager.getLogger(KonsumartikelTest.class);
     private static List<Esswaren> esswaren;
     private static List<Getraenke> getraenke;
+    private static List<Tagesmenu> tagesmenu;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         esswaren = Util.createEsswarenListe();
         getraenke = Util.createGetraenkeListe();
+        tagesmenu = Util.createTagesmenuListe();
     }
 
     @AfterClass
@@ -36,52 +39,25 @@ public class KonsumartikelTest {
 
     @After
     public void tearDown() throws Exception {
-
-    }
-
-
-    public void testEsswarenSpeichern() {
-        EntityManager em = JpaUtil.createEntityManager();
-        em.getTransaction().begin();
-
-        try {
-            for (Esswaren a : esswaren) {
-                em.persist(a);
-            }
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            logger.error("Essware konnte nicht erfasst werden!", e);
-
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            if (em.isOpen()) {
-                em.close();
-            }
-        }
-        em = JpaUtil.createEntityManager();
-        List<Esswaren> esswarenList = em.createQuery("SELECT a FROM Esswaren a ORDER BY a.kategorie", Esswaren.class).getResultList();
-        assertTrue(esswarenList.size() == esswaren.size());
-        for (Esswaren e : esswarenList) {
-            logger.info(e);
-        }
-        em.close();
     }
 
     @Test
-    public void testGetraenkeSpeichern() {
+    public void menuErstellenTest() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
         em.getTransaction().begin();
 
         try {
-            for (Getraenke a : getraenke) {
-                em.persist(a);
+            for(Esswaren e : esswaren) {
+                em.persist(e);
             }
+
+            Tagesmenu tm = new Tagesmenu("Montag", esswaren);
+                em.persist(tm);
+
+
             em.getTransaction().commit();
         } catch (Exception e) {
-            logger.error("Getraenk konnte nicht erfasst werden!", e);
-
+            logger.error("Menu konnte nicht erfasst werden!", e);
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
@@ -91,10 +67,10 @@ public class KonsumartikelTest {
             }
         }
         em = JpaUtil.createEntityManager();
-        List<Getraenke> getraenkeList = em.createQuery("SELECT a FROM Getraenke a ORDER BY a.preis", Getraenke.class).getResultList();
-        assertTrue(getraenkeList.size() == getraenke.size());
-        for (Getraenke g : getraenkeList) {
-            logger.info(g);
+        List<Tagesmenu> tagesmenuList = em.createQuery("SELECT a FROM Tagesmenu a ORDER BY a.wochenTag", Tagesmenu.class).getResultList();
+        assertTrue(tagesmenuList.size() == tagesmenu.size());
+        for (Tagesmenu tm : tagesmenuList) {
+            logger.info(tm);
         }
 
         em.close();

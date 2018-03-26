@@ -1,9 +1,10 @@
-package slgp.gastrosoftware.zentrale.persister.domain;
+package slgp.gastrosoftware.zentrale.persister.domain.artikel;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Konsumartikel {
+public class Konsumartikel implements Serializable {
 
     @Id
     @GeneratedValue

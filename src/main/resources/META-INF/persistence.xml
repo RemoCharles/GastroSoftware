@@ -10,11 +10,20 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 
-        <class>slgp.gastrosoftware.zentrale.persister.domain.Esswaren</class>
-        <class>slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel</class>
-        <class>slgp.gastrosoftware.zentrale.persister.domain.Getraenke</class>
-        <class>slgp.gastrosoftware.zentrale.persister.domain.Tagesmenu</class>
-        <class>slgp.gastrosoftware.zentrale.persister.domain.Person</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.artikel.Esswaren</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.artikel.Konsumartikel</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.artikel.Getraenke</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.menu.Tagesmenu</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Person</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Adresse</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Kontakt</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Mitarbeiter</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.menu.Menukarte</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.MAAbrechnung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.Rechnung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.TischRechnung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.Bestellung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.Tisch</class>
         <validation-mode>AUTO</validation-mode>
 
         <properties>

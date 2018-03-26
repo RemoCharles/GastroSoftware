@@ -1,4 +1,4 @@
-package slgp.gastrosoftware.zentrale.persister.domain;
+package slgp.gastrosoftware.zentrale.persister.domain.artikel;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,8 +1,12 @@
-package slgp.gastrosoftware.zentrale.persister.domain;
+package slgp.gastrosoftware.zentrale.persister.domain.menu;
+
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Esswaren;
+import slgp.gastrosoftware.zentrale.persister.domain.artikel.Konsumartikel;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Tagesmenu implements Serializable {
@@ -14,7 +18,6 @@ public class Tagesmenu implements Serializable {
     private List<Esswaren> listeEsswaren;
 
     public Tagesmenu(){
-
     }
 
     public Tagesmenu(String wochenTag, List<Esswaren> listeEsswaren) {
@@ -44,5 +47,20 @@ public class Tagesmenu implements Serializable {
                 "wochenTag='" + wochenTag + '\'' +
                 ", konsumartikel=" + listeEsswaren +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tagesmenu tagesmenu = (Tagesmenu) o;
+        return Objects.equals(wochenTag, tagesmenu.wochenTag) &&
+                Objects.equals(listeEsswaren, tagesmenu.listeEsswaren);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(wochenTag, listeEsswaren);
     }
 }
