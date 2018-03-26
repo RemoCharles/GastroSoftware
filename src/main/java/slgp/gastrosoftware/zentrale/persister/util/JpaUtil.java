@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class JpaUtil {
 
+<<<<<<< HEAD
 	private static Logger logger = LogManager.getLogger(JpaUtil.class);
 
 	private static EntityManagerFactory entityManagerFactory = null;
@@ -27,3 +28,23 @@ public class JpaUtil {
 		return entityManagerFactory.createEntityManager();
 	}
 }
+=======
+    private static Logger logger = LogManager.getLogger(JpaUtil.class);
+
+    private static EntityManagerFactory entityManagerFactory = null;
+
+    static {
+        try {
+            /* EntityManagerFactory erzeugen */
+            entityManagerFactory = Persistence.createEntityManagerFactory("JpaDemosPU");
+        } catch (Throwable e) {
+            logger.error("ERROR: ", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static EntityManager createEntityManager() {
+        return entityManagerFactory.createEntityManager();
+    }
+}
+>>>>>>> origin/master

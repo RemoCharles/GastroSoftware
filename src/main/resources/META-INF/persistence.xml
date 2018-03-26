@@ -10,17 +10,38 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 
+<<<<<<< HEAD
         <class>slgp.gastrosoftware.zentrale.persister.domain.Esswaren</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.Getraenke</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.Tagesmenu</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.Person</class>
+=======
+        <class>slgp.gastrosoftware.zentrale.persister.domain.artikel.Esswaren</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.artikel.Konsumartikel</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.artikel.Getraenke</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.menu.Tagesmenu</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Person</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Adresse</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Kontakt</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Mitarbeiter</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.menu.Menukarte</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.MAAbrechnung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.Rechnung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.TischRechnung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.Bestellung</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.Tisch</class>
+>>>>>>> origin/master
         <validation-mode>AUTO</validation-mode>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.url"
+<<<<<<< HEAD
                       value="jdbc:postgresql://localhost:5432/GastroSoftware"/>
+=======
+                      value="jdbc:postgresql://localhost:5432/SLGP"/>
+>>>>>>> origin/master
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="postgres"/>
 
