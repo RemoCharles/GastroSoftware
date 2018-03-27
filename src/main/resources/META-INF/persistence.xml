@@ -17,6 +17,8 @@
         <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Adresse</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Kontakt</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Mitarbeiter</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Login</class>
+        <class>slgp.gastrosoftware.zentrale.persister.domain.personen.Login</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.menu.Menukarte</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.MAAbrechnung</class>
         <class>slgp.gastrosoftware.zentrale.persister.domain.rechnungen.Rechnung</class>

@@ -15,13 +15,10 @@ import slgp.gastrosoftware.zentrale.persister.util.DbHelper;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
 
 public class BestellungTest {
     private static Logger logger = LogManager.getLogger(KonsumartikelTest.class);
