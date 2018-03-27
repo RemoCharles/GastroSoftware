@@ -8,7 +8,9 @@ import slgp.gastrosoftware.zentrale.persister.domain.artikel.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.domain.menu.Tagesmenu;
 import slgp.gastrosoftware.zentrale.persister.domain.personen.Adresse;
 import slgp.gastrosoftware.zentrale.persister.domain.personen.Kontakt;
+import slgp.gastrosoftware.zentrale.persister.domain.personen.Login;
 import slgp.gastrosoftware.zentrale.persister.domain.personen.Mitarbeiter;
+import slgp.gastrosoftware.zentrale.persister.domain.personen.Person;
 import slgp.gastrosoftware.zentrale.persister.domain.rechnungen.TischRechnung;
 
 import java.text.DateFormat;
@@ -20,78 +22,94 @@ import java.util.List;
 
 public class Util {
 
-    public static List<Esswaren> createEsswarenListe() {
+	public static List <Person> erstellePersonenListe(){
 
-        List<Esswaren> liste = new ArrayList<Esswaren>();
+		List<Person> liste = new ArrayList<Person>();
 
-        liste.add(new Esswaren("Pizza", "Hauptspeise", 500));
-        liste.add(new Esswaren("Steak", "Hauptspeise", 20));
-        liste.add(new Esswaren("Salat", "Vorspeise", 30));
+		Person persA = new Person("Meier", "Marco", new Adresse("Kusterweg 4", 6004, "Luzern"), new Kontakt("mmarco@gmx.ch", "041 234 56 67"));
+		Person persB = new Person("Münch", "Jana", new Adresse("Müllweg 8", 6008, "Luzern"), new Kontakt("mjana@gmx.ch", "041 234 56 67"), new Login("mjana", "abcde"));
+		Person persC = new Person("Mohn", "Kevin", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88"));
 
-        return liste;
-    }
+		liste.add(persA);
+		liste.add(persB);
+		liste.add(persC);
 
-    public static List<Getraenke> createGetraenkeListe() {
+		return liste;
 
-        List<Getraenke> liste = new ArrayList<Getraenke>();
+	}
 
-        liste.add(new Getraenke("Bier", "Bier", 10));
-        liste.add(new Getraenke("Porto", "Wein", 50));
-        liste.add(new Getraenke("Cola", "Softgetraenke", 5));
+	public static List<Esswaren> createEsswarenListe() {
 
-        return liste;
-    }
+		List<Esswaren> liste = new ArrayList<Esswaren>();
 
-    public static List<Konsumartikel> createKonsumartikelListe() {
+		liste.add(new Esswaren("Pizza", "Hauptspeise", 500));
+		liste.add(new Esswaren("Steak", "Hauptspeise", 20));
+		liste.add(new Esswaren("Salat", "Vorspeise", 30));
 
-        List<Konsumartikel> liste = new ArrayList<Konsumartikel>();
+		return liste;
+	}
 
-        liste.add(new Esswaren("Pizza", "Hauptspeise", 500));
-        liste.add(new Getraenke("Cola", "Softgetraenke", 5));
+	public static List<Getraenke> createGetraenkeListe() {
 
-        return liste;
-    }
+		List<Getraenke> liste = new ArrayList<Getraenke>();
 
-    public static List<Tagesmenu> createTagesmenuListe() {
-        List<Tagesmenu> liste = new ArrayList<Tagesmenu>();
-        liste.add(new Tagesmenu("Montag", createEsswarenListe()));
-        return liste;
-    }
+		liste.add(new Getraenke("Bier", "Bier", 10));
+		liste.add(new Getraenke("Porto", "Wein", 50));
+		liste.add(new Getraenke("Cola", "Softgetraenke", 5));
 
-    public static Mitarbeiter createMitarbeiter(Adresse adr, Kontakt kontakt) {
-        Mitarbeiter ma = new Mitarbeiter("Hans", "MÃ¼ller", adr, kontakt);
-        return ma;
-    }
-    public static Adresse createAdresse(){
-        Adresse adr = new Adresse("Luzernerstrasse", 54, "Luzern");
-        return  adr;
-    }
+		return liste;
+	}
 
-    public static Kontakt createKontakt(){
-        Kontakt kontakt = new Kontakt("Test@test.ch", "079223123123");
-        return kontakt;
-    }
+	public static List<Konsumartikel> createKonsumartikelListe() {
 
-    public static Tisch createTisch() {
-        Tisch tisch = new Tisch(6);
-        return tisch;
-    }
+		List<Konsumartikel> liste = new ArrayList<Konsumartikel>();
 
-    public static Date createDate() {
-        Date date = new Date();
-        return date;
-    }
+		liste.add(new Esswaren("Pizza", "Hauptspeise", 500));
+		liste.add(new Getraenke("Cola", "Softgetraenke", 5));
 
-    //public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, Date datum) {
-    public static List<Bestellung> createBestellungListe(Mitarbeiter ma, Tisch tisch, List<Konsumartikel> konsumliste){
-        List<Bestellung> bestList = new ArrayList<Bestellung>();
-        Bestellung best = new Bestellung(ma, tisch, konsumliste, false, new Date());
-        bestList.add(best);
-        return bestList;
-    }
-    public static TischRechnung createTischRechnung(Date date, String restaurant, List<Bestellung> bestellungList) {
-        TischRechnung tr = new TischRechnung(date, restaurant, bestellungList);
-        return tr;
-    }
+		return liste;
+	}
+
+	public static List<Tagesmenu> createTagesmenuListe() {
+		List<Tagesmenu> liste = new ArrayList<Tagesmenu>();
+		liste.add(new Tagesmenu("Montag", createEsswarenListe()));
+		return liste;
+	}
+
+	public static Mitarbeiter createMitarbeiter(Adresse adr, Kontakt kontakt) {
+		Mitarbeiter ma = new Mitarbeiter("Hans", "MÃ¼ller", adr, kontakt);
+		return ma;
+	}
+	public static Adresse createAdresse(){
+		Adresse adr = new Adresse("Luzernerstrasse", 54, "Luzern");
+		return  adr;
+	}
+
+	public static Kontakt createKontakt(){
+		Kontakt kontakt = new Kontakt("Test@test.ch", "079223123123");
+		return kontakt;
+	}
+
+	public static Tisch createTisch() {
+		Tisch tisch = new Tisch(6);
+		return tisch;
+	}
+
+	public static Date createDate() {
+		Date date = new Date();
+		return date;
+	}
+
+	//public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, Date datum) {
+	public static List<Bestellung> createBestellungListe(Mitarbeiter ma, Tisch tisch, List<Konsumartikel> konsumliste){
+		List<Bestellung> bestList = new ArrayList<Bestellung>();
+		Bestellung best = new Bestellung(ma, tisch, konsumliste, false, new Date());
+		bestList.add(best);
+		return bestList;
+	}
+	public static TischRechnung createTischRechnung(Date date, String restaurant, List<Bestellung> bestellungList) {
+		TischRechnung tr = new TischRechnung(date, restaurant, bestellungList);
+		return tr;
+	}
 }
 

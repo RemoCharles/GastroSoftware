@@ -1,4 +1,4 @@
-package PersonTest;
+package slgp.gastrosoftware.zentrale.persister.domain.personen;
 
 import static org.junit.Assert.*;
 
@@ -12,8 +12,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import slgp.gastrosoftware.zentrale.persister.domain.Adresse;
-import slgp.gastrosoftware.zentrale.persister.domain.Person;
+import slgp.gastrosoftware.zentrale.persister.domain.personen.*;
+import slgp.gastrosoftware.zentrale.persister.impl.Util;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 public class PersonTest {
@@ -24,7 +24,7 @@ public class PersonTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		personen = DbHelper.erstellePersonenListe();
+		personen = Util.erstellePersonenListe();
 	}
 
 
