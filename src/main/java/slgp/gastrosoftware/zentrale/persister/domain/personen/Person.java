@@ -1,6 +1,11 @@
 package slgp.gastrosoftware.zentrale.persister.domain.personen;
 
+import slgp.gastrosoftware.zentrale.persister.domain.personen.Adresse;
+import slgp.gastrosoftware.zentrale.persister.domain.personen.Kontakt;
+import slgp.gastrosoftware.zentrale.persister.domain.personen.Login;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +17,6 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue
-
     private int id;
     private String name;
     private String vorname;
@@ -20,9 +24,15 @@ public class Person implements Serializable {
     private Adresse adresse;
     @OneToOne
     private Kontakt kontakt;
+    @OneToOne
+    private Login login;
 
-    public Person() {
-
+    public Person(String name, String vorname, Adresse adresse, Kontakt kontakt, Login login) {
+        this.name = name;
+        this.vorname = vorname;
+        this.adresse = adresse;
+        this.kontakt = kontakt;
+        this.login = login;
     }
 
     public Person(String name, String vorname, Adresse adresse, Kontakt kontakt) {
@@ -30,6 +40,13 @@ public class Person implements Serializable {
         this.vorname = vorname;
         this.adresse = adresse;
         this.kontakt = kontakt;
+    }
+
+    public Person() {
+    }
+
+    public Login getLogin() {
+        return login;
     }
 
     public int getId() {
@@ -70,8 +87,29 @@ public class Person implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(name, adresse);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if(!(obj instanceof Person)) {
+            return false;
+        }
+
+        Person pers = (Person)obj;
+
+        return this.name == pers.name && this.adresse == pers.adresse;
+    }
+
+
+    @Override
     public String toString() {
-        return "Person [name=" + name + ", vorname=" + vorname + ", adresse=" + adresse + ", kontakt=" + kontakt + "]";
+        return "Person [name=" + name + ", vorname=" + vorname + ", adresse=" + adresse + ", kontakt=" + kontakt + ", login=" + login + "]";
     }
 
 }
