@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Entity
 public class MAAbrechnung extends Rechnung implements Serializable{
-    @Id
     @GeneratedValue
     private int id;
 

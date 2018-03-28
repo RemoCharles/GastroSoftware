@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class Getraenke extends Konsumartikel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
     @GeneratedValue
     private int id;
 

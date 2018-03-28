@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Leiter extends Person {
 	
-	@Id
 	@GeneratedValue
 	private int id;
 	

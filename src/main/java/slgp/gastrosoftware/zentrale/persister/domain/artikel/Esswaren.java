@@ -7,8 +7,6 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Esswaren extends Konsumartikel implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @Id
     @GeneratedValue
     private int id;
 

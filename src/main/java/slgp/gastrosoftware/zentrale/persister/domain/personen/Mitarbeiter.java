@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Mitarbeiter extends Person implements Serializable{
 
-    @Id
     @GeneratedValue
     private int id;
 
