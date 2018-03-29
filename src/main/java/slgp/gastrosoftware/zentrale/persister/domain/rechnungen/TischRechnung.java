@@ -3,19 +3,24 @@ package slgp.gastrosoftware.zentrale.persister.domain.rechnungen;
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class TischRechnung extends Rechnung{
+
     @OneToMany
     private List<Bestellung> bestellungList;
+
 
     public TischRechnung() {
     }
 
-    public TischRechnung(Date datum, String nameRestaunt, List<Bestellung> bestellungList) {
+    public TischRechnung(LocalDate datum, String nameRestaunt, List<Bestellung> bestellungList) {
+
+        super(datum, nameRestaunt);
         this.bestellungList = bestellungList;
     }
 
@@ -34,6 +39,7 @@ public class TischRechnung extends Rechnung{
     public void setBestellungList(List<Bestellung> bestellungList) {
         this.bestellungList = bestellungList;
     }
+
 
     @Override
     public int hashCode() {

@@ -2,7 +2,7 @@ package slgp.gastrosoftware.zentrale.persister.domain.rechnungen;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -11,38 +11,38 @@ public class Rechnung implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    private Date datum;
-    private String nameRestaunt;
+    private LocalDate datum;
+    private String nameRestaurant;
 
     public Rechnung(){
 
     }
-    public Rechnung(Date datum, String nameRestaunt) {
+    public Rechnung(LocalDate datum, String nameRestaunt) {
         this.datum = datum;
-        this.nameRestaunt = nameRestaunt;
+        this.nameRestaurant = nameRestaunt;
     }
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
-    public String getNameRestaunt() {
-        return nameRestaunt;
+    public String getNameRestaurant() {
+        return nameRestaurant;
     }
 
-    public void setNameRestaunt(String nameRestaunt) {
-        this.nameRestaunt = nameRestaunt;
+    public void setNameRestaurant(String nameRestaunt) {
+        this.nameRestaurant = nameRestaunt;
     }
 
     @Override
     public String toString() {
         return "Rechnung{" +
                 "datum=" + datum +
-                ", nameRestaunt='" + nameRestaunt + '\'' +
+                ", nameRestaunt='" + nameRestaurant + '\'' +
                 '}';
     }
 
@@ -52,12 +52,12 @@ public class Rechnung implements Serializable{
         if (o == null || getClass() != o.getClass()) return false;
         Rechnung rechnung = (Rechnung) o;
         return Objects.equals(datum, rechnung.datum) &&
-                Objects.equals(nameRestaunt, rechnung.nameRestaunt);
+                Objects.equals(nameRestaurant, rechnung.nameRestaurant);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(datum, nameRestaunt);
+        return Objects.hash(datum, nameRestaurant);
     }
 }

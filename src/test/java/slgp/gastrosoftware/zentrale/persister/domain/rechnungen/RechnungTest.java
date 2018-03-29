@@ -16,6 +16,9 @@ import slgp.gastrosoftware.zentrale.persister.util.DbHelper;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,17 +26,23 @@ public class RechnungTest {
 
     private static Logger logger = LogManager.getLogger(KonsumartikelTest.class);
     private static List<Konsumartikel> konsumartikelList;
+    @OneToMany
     private static List<Getraenke> getraenke;
+    @OneToMany
     private static List<Konsumartikel> konsumliste;
+    @OneToOne
     private static Mitarbeiter ma;
+    @OneToOne
     private static Tisch tisch;
+    @OneToOne
     private static Kontakt kontakt;
+    @OneToOne
     private static Adresse adr;
+    @OneToOne
     private static TischRechnung tischRechnung;
+    @OneToMany
     private static List<Bestellung> bestellungListe;
 
-    //public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, Date datum) {
-    //public TischRechnung(Date datum, String nameRestaunt, List<Bestellung> bestellungList)
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
 
@@ -44,7 +53,7 @@ public class RechnungTest {
         ma = Util.createMitarbeiter(adr, kontakt);
         bestellungListe = Util.createBestellungListe(ma, tisch, konsumliste);
 
-        tischRechnung = Util.createTischRechnung(new Date(), "TestResti", bestellungListe);
+        tischRechnung = Util.createTischRechnung(LocalDate.now(), "TestResti", bestellungListe);
     }
 
     @AfterClass
@@ -64,6 +73,7 @@ public class RechnungTest {
 
     @Test
     public void testRechnungspeichern() {
+        tischRechnung = Util.createTischRechnung(LocalDate.now(), "TestResti", bestellungListe);
         EntityManager em = JpaUtil.createEntityManager();
         em.getTransaction().begin();
         try {
@@ -71,8 +81,13 @@ public class RechnungTest {
             em.persist(adr);
             em.persist(ma);
             em.persist(tisch);
-            em.persist(bestellungListe);
-            em.persist(konsumliste);
+
+            for(Bestellung bestellung: bestellungListe) {
+                em.persist(bestellung);
+            }
+            for(Konsumartikel konsumartikel : konsumliste) {
+                em.persist(konsumartikel);
+            }
 
             em.persist(tischRechnung);
 
@@ -89,7 +104,7 @@ public class RechnungTest {
             }
         }
         em = JpaUtil.createEntityManager();
-        List<TischRechnung> tischRechnungList = em.createQuery("SELECT a FROM TischRechnung a ", TischRechnung.class).getResultList();
+        List<TischRechnung> tischRechnungList = em.createQuery("SELECT a FROM TischRechnung a  ORDER BY a.datum", TischRechnung.class).getResultList();
         for (TischRechnung k : tischRechnungList) {
             logger.info(k);
         }

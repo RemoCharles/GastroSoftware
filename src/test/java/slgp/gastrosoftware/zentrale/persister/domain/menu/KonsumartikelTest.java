@@ -101,49 +101,44 @@ public class KonsumartikelTest {
         em.close();
     }
 
-//    @Test
-//    public void testGetraenkLoeschen() {
-//
-//        String suchBegriff = "Cola";
-//
-//        EntityManager em = JpaUtil.createEntityManager();
-//        em.getTransaction().begin();
-//        for (Getraenke g : getraenke) {
-//            em.persist(g);
-//
-//        }
-//        em.getTransaction().commit();
-//
-//        try {
-//            for (int i = 0; i < getraenke.size(); ++i) {
-//                if (getraenke.get(i).getBezeichnung().equals(suchBegriff)) {
-//                    logger.info("Getraenk wurde gefunden an Stelle: " + getraenke.get(i).getId());
-//                    Getraenke getrankVonDb = em.find(Getraenke.class, getraenke.get(i).getId());
-//                    em.remove(getrankVonDb);
-//                    em.getTransaction().commit();
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            logger.error("Getraenk konnte nicht geloescht werden" + e);
-//
-//            if (em.getTransaction().isActive()) {
-//                em.getTransaction().rollback();
-//            }
-//
-//        } finally {
-//            if (em.isOpen()) {
-//                em.close();
-//            }
-//        }
-//
-//        em = JpaUtil.createEntityManager();
-//        List<Getraenke> getraenkeListe = em.createQuery("SELECT a FROM Getraenke a ORDER BY a.id", Getraenke.class).getResultList();
-//        //Assert.assertTrue(getraenkeListe.size() == 2);
-//        for (Getraenke g : getraenke) {
-//            logger.info(g);
-//        }
-//        em.close();
-//
-//    }
+    @Test
+    public void testGetraenkLoeschen() {
+
+        String suchBegriff = "Cola";
+
+        EntityManager em = JpaUtil.createEntityManager();
+        em.getTransaction().begin();
+
+        try {
+            for (int i = 0; i < getraenke.size(); ++i) {
+                if (getraenke.get(i).getBezeichnung().equals(suchBegriff)) {
+                    logger.info("Getraenk wurde gefunden an Stelle: " + getraenke.get(i).getId());
+                    Getraenke getrankVonDb = em.find(Getraenke.class, getraenke.get(i).getId());
+                    em.remove(getrankVonDb);
+                    em.getTransaction().commit();
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error("Getraenk konnte nicht geloescht werden" + e);
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+
+        em = JpaUtil.createEntityManager();
+        List<Getraenke> getraenkeListe = em.createQuery("SELECT a FROM Getraenke a ORDER BY a.id", Getraenke.class).getResultList();
+        //Assert.assertTrue(getraenkeListe.size() == 2);
+        for (Getraenke g : getraenke) {
+            logger.info(g);
+        }
+        em.close();
+
+    }
 }

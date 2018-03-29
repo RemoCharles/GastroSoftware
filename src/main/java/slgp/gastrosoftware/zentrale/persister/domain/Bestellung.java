@@ -5,6 +5,7 @@ import slgp.gastrosoftware.zentrale.persister.domain.personen.Mitarbeiter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -23,10 +24,10 @@ public class Bestellung implements Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Konsumartikel> konsumartikel;
     private boolean zubereitet;
-    @Temporal(TemporalType.DATE)
-    private Date datum;
+//    @Temporal(TemporalType.DATE)
+    private LocalDate datum;
 
-    public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, Date datum) {
+    public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, LocalDate datum) {
         this.mitarbeiter = mitarbeiter;
         this.tisch = tisch;
         this.konsumartikel = konsumartikel;
@@ -69,11 +70,11 @@ public class Bestellung implements Serializable {
         this.zubereitet = zubereitet;
     }
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 

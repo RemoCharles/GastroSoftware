@@ -15,6 +15,7 @@ import slgp.gastrosoftware.zentrale.persister.domain.rechnungen.TischRechnung;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class Util {
 		List<Person> liste = new ArrayList<Person>();
 
 		Person persA = new Person("Meier", "Marco", new Adresse("Kusterweg 4", 6004, "Luzern"), new Kontakt("mmarco@gmx.ch", "041 234 56 67"));
-		Person persB = new Person("Münch", "Jana", new Adresse("Müllweg 8", 6008, "Luzern"), new Kontakt("mjana@gmx.ch", "041 234 56 67"), new Login("mjana", "abcde"));
+		Person persB = new Person("Mï¿½nch", "Jana", new Adresse("Mï¿½llweg 8", 6008, "Luzern"), new Kontakt("mjana@gmx.ch", "041 234 56 67"), new Login("mjana", "abcde"));
 		Person persC = new Person("Mohn", "Kevin", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88"));
 
 		liste.add(persA);
@@ -103,11 +104,11 @@ public class Util {
 	//public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, Date datum) {
 	public static List<Bestellung> createBestellungListe(Mitarbeiter ma, Tisch tisch, List<Konsumartikel> konsumliste){
 		List<Bestellung> bestList = new ArrayList<Bestellung>();
-		Bestellung best = new Bestellung(ma, tisch, konsumliste, false, new Date());
+		Bestellung best = new Bestellung(ma, tisch, konsumliste, false, LocalDate.now());
 		bestList.add(best);
 		return bestList;
 	}
-	public static TischRechnung createTischRechnung(Date date, String restaurant, List<Bestellung> bestellungList) {
+	public static TischRechnung createTischRechnung(LocalDate date, String restaurant, List<Bestellung> bestellungList) {
 		TischRechnung tr = new TischRechnung(date, restaurant, bestellungList);
 		return tr;
 	}

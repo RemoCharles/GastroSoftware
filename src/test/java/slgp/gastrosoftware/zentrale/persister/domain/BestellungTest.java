@@ -15,6 +15,7 @@ import slgp.gastrosoftware.zentrale.persister.util.DbHelper;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -103,7 +104,7 @@ public class BestellungTest {
             for (Konsumartikel k : konsumartikelFuerSpeichernTest) {
                 em.persist(k);
             }
-            Bestellung best = new Bestellung(ma, tisch, konsumartikelFuerSpeichernTest, false, new Date());
+            Bestellung best = new Bestellung(ma, tisch, konsumartikelFuerSpeichernTest, false, LocalDate.now());
             em.persist(best);
 
             em.getTransaction().commit();
