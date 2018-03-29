@@ -4,12 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Konsumartikel implements Serializable {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue
     private int id;
@@ -49,6 +45,10 @@ public class Konsumartikel implements Serializable {
 
     public void setKategorie(String kategorie) {
         this.kategorie = kategorie;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

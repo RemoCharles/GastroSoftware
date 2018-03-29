@@ -1,13 +1,12 @@
 package slgp.gastrosoftware.zentrale.persister.domain.rechnungen;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy= InheritanceType.JOINED)
 public class Rechnung implements Serializable{
     @Id
     @GeneratedValue

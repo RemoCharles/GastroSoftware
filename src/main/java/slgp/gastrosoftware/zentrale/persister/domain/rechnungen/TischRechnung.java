@@ -2,19 +2,13 @@ package slgp.gastrosoftware.zentrale.persister.domain.rechnungen;
 
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class TischRechnung {
-    @Id
-    @GeneratedValue
-    private int id;
+public class TischRechnung extends Rechnung{
     @OneToMany
     private List<Bestellung> bestellungList;
 

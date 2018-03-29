@@ -4,14 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Esswaren extends Konsumartikel implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @GeneratedValue
-    private int id;
+public class Esswaren extends Konsumartikel{
 
     public Esswaren() {
-        super();
     }
 
     public Esswaren(String bezeichnung, String kategorie, double preis) {
