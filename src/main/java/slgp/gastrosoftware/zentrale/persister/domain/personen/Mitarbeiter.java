@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Mitarbeiter extends Person implements Serializable{
+public class Mitarbeiter extends Person {
 
 
     public Mitarbeiter(String name, String vorname, Adresse adresse, Kontakt kontakt) {
