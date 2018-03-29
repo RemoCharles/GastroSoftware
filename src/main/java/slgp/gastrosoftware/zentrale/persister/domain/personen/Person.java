@@ -7,12 +7,16 @@ import slgp.gastrosoftware.zentrale.persister.domain.personen.Login;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Person implements Serializable {
 
     @Id
@@ -20,11 +24,11 @@ public class Person implements Serializable {
     private int id;
     private String name;
     private String vorname;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Adresse adresse;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Kontakt kontakt;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Login login;
 
     public Person(String name, String vorname, Adresse adresse, Kontakt kontakt, Login login) {

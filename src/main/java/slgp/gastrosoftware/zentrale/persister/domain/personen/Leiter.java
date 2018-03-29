@@ -8,9 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Leiter extends Person {
 	
-	@GeneratedValue
-	private int id;
-	
 	
 	public Leiter(String name, String vorname, Adresse adresse, Kontakt kontakt) {
 		super(name, vorname, adresse, kontakt);
@@ -19,9 +16,6 @@ public class Leiter extends Person {
 	public Leiter() {
 	}
 
-	public int getId() {
-		return id;
-	}
 	
 	@Override
 	public String toString() {
