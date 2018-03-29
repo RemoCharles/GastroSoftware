@@ -16,7 +16,7 @@ public class GastroSoftwareGUI extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
         primaryStage.setTitle("Gastro Software");
-        primaryStage.setScene(new Scene(root, 900, 600));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 
