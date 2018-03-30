@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="usrZuru" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" fx:controller="slgp.gastrosoftware.ui.controller.Controller" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="409.0" layoutY="76.0" scaleX="3.0" scaleY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tisch wählen" wrappingWidth="79.447265625">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <ButtonBar layoutX="246.0" layoutY="230.0" prefHeight="40.0" prefWidth="310.0" scaleX="2.0" scaleY="2.0">
+        <buttons>
+            <Button id="usrTisc5" mnemonicParsing="false" text="5" />
+            <Button id="usrTisc6" mnemonicParsing="false" text="6" />
+            <Button id="usrTisc7" mnemonicParsing="false" text="7" />
+            <Button id="usrTisc8" mnemonicParsing="false" text="8" />
+        </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="246.0" layoutY="330.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
+        <buttons>
+          <Button id="usrTisc9" mnemonicParsing="false" text="9" />
+            <Button id="usrTisc10" mnemonicParsing="false" text="10" />
+            <Button id="usrTisc11" mnemonicParsing="false" text="11" />
+            <Button id="usrTisc12" mnemonicParsing="false" text="12" />
+        </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="246.0" layoutY="130.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0" snapToPixel="false">
+        <buttons>
+            <Button id="usrTisc1" mnemonicParsing="false" onAction="#tisch1" text="1" />
+          <Button id="usrTisc2" mnemonicParsing="false" text="2" />
+            <Button id="usrTisc3" mnemonicParsing="false" text="3" />
+            <Button id="usrTisc4" mnemonicParsing="false" text="4" />
+        </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="246.0" layoutY="430.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
+        <buttons>
+            <Button id="usrTisc13" mnemonicParsing="false" text="13" />
+          <Button id="usrTisc14" mnemonicParsing="false" text="14" />
+            <Button id="usrTisc15" mnemonicParsing="false" text="15" />
+            <Button id="usrTisc16" mnemonicParsing="false" text="16" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>
