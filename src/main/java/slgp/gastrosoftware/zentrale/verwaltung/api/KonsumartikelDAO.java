@@ -11,35 +11,31 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface KonsumArtikelDAO<T> extends GenericPersisterDAO<Konsumartikel> {
+public interface KonsumartikelDAO<T> extends GenericPersisterDAO<Konsumartikel> {
 
     /**
-     * Liefert den Benutzer zurück, dessen Benutzername übergeben wurde.
+     * Liefert den Konsumartikel zurück, dessen Bezeichnung übergeben wurde.
      *
-     * @param benutzername
+     * @param bezeichnung
      * @return
      * @throws Exception
      */
-    Konsumartikel findBy(String benutzername) throws Exception;
+    Konsumartikel findByBezeichnung(String bezeichnung) throws Exception;
 
     /**
-     * Liefert alle Benutzer zurück, welche die Rolle vom übergebenen Typ haben,
-     * falls welche vorhanden, sonst eine leere Liste.
+     * Liefert alle Konsumartikel zurück der angegebenen Kategorie
      *
-     * @param rolleTyp
+     * @param kategorie
      * @return
      * @throws Exception
      */
-    List<Konsumartikel> findByRolleTyp(RolleTyp rolleTyp) throws Exception;
+    List<Konsumartikel> findByKategorie(String kategorie) throws Exception;
 
     /**
-     * Liefert den Benutzer zurück, dessen Nachname und Vorname übergeben
-     * wurden.
+     * Liefert alle Konsumartikel zurück der angegebenen Kategorie
      *
-     * @param nachname
-     * @param vorname
      * @return
      * @throws Exception
      */
-    List<Konsumartikel> findByNachnameUndVorname(String nachname, String vorname) throws Exception;
+    List<Konsumartikel> showAll() throws Exception;
 }

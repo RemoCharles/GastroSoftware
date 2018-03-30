@@ -1,7 +1,9 @@
-package slgp.gastrosoftware.zentrale.persister.impl;
+package slgp.gastrosoftware.zentrale.verwaltung.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
+import slgp.gastrosoftware.zentrale.verwaltung.api.GenericPersisterDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -20,7 +22,7 @@ public class GenericPersisterDAOImpl<T> implements GenericPersisterDAO<T> {
 
     public T save(T entity) throws Exception {
 
-        EntityManager em = JPAUtil.createEntityManager();
+        EntityManager em = JpaUtil.createEntityManager();
 
         try {
             em.getTransaction().begin();
@@ -43,7 +45,7 @@ public class GenericPersisterDAOImpl<T> implements GenericPersisterDAO<T> {
 
     public T update(T entity) throws Exception {
 
-        EntityManager em = JPAUtil.createEntityManager();
+        EntityManager em = JpaUtil.createEntityManager();
         em.getTransaction().begin();
 
         T eMerged = null;
@@ -67,7 +69,7 @@ public class GenericPersisterDAOImpl<T> implements GenericPersisterDAO<T> {
 
     public void delete(T entity) throws Exception {
 
-        EntityManager em = JPAUtil.createEntityManager();
+        EntityManager em = JpaUtil.createEntityManager();
         em.getTransaction().begin();
 
         try {
@@ -104,14 +106,14 @@ public class GenericPersisterDAOImpl<T> implements GenericPersisterDAO<T> {
     }
 
     public T findById(long id) throws Exception {
-        return JPAUtil.createEntityManager().find(classType, id);
+        return JpaUtil.createEntityManager().find(classType, id);
     }
 
     public List<T> findAll() throws Exception {
 
         String sql = "SELECT entity FROM " + classType.getSimpleName() + " entity";
 
-        EntityManager em = JPAUtil.createEntityManager();
+        EntityManager em = JpaUtil.createEntityManager();
         TypedQuery<T> q = em.createQuery(sql, classType);
 
         List<T> liste = q.getResultList();

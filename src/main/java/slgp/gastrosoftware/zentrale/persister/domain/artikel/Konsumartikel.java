@@ -4,9 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+        @NamedQuery(name = "Konsumartikel.findByBezeichnung", query = "SELECT e FROM Konsumartikel e WHERE e.bezeichnung=:bezeichnung"),
+        @NamedQuery(name = "Konsumartikel.findByKategorie", query = "SELECT e FROM Konsumartikel e WHERE e.kategorie=:kategorie")})
+
 public class Konsumartikel implements Serializable {
-	@Id
+    @Id
     @GeneratedValue
     private int id;
     private double preis;
