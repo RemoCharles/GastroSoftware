@@ -4,7 +4,7 @@ import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 
 import java.util.List;
 
-public interface KonsumartikelDAO<T> extends GenericPersisterDAO<Konsumartikel> {
+public interface KonsumartikelDAO extends GenericPersisterDAO<Konsumartikel> {
 
     /**
      * Liefert den Konsumartikel zurück, dessen Bezeichnung übergeben wurde.
@@ -25,7 +25,7 @@ public interface KonsumartikelDAO<T> extends GenericPersisterDAO<Konsumartikel> 
     List<Konsumartikel> findByKategorie(String kategorie) throws Exception;
 
     /**
-     * Liefert alle Konsumartikel zurück der angegebenen Kategorie
+     * Liefert alle Konsumartikel zurück
      *
      * @return
      * @throws Exception

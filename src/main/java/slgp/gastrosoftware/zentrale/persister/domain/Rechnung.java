@@ -6,17 +6,21 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy= InheritanceType.JOINED)
-public class Rechnung implements Serializable{
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+        @NamedQuery(name = "Rechnung.findByDatum", query = "SELECT e FROM Rechnung e WHERE e.datum=:datum")})
+
+public class Rechnung implements Serializable {
     @Id
     @GeneratedValue
     private int id;
     private LocalDate datum;
     private String nameRestaurant;
 
-    public Rechnung(){
+    public Rechnung() {
 
     }
+
     public Rechnung(LocalDate datum, String nameRestaunt) {
         this.datum = datum;
         this.nameRestaurant = nameRestaunt;
