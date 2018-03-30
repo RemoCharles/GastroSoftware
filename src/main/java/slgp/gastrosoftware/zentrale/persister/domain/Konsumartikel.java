@@ -7,7 +7,8 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
         @NamedQuery(name = "Konsumartikel.findByBezeichnung", query = "SELECT e FROM Konsumartikel e WHERE e.bezeichnung=:bezeichnung"),
-        @NamedQuery(name = "Konsumartikel.findByKategorie", query = "SELECT e FROM Konsumartikel e WHERE e.kategorie=:kategorie")})
+        @NamedQuery(name = "Konsumartikel.findByKategorie", query = "SELECT e FROM Konsumartikel e WHERE e.kategorie=:kategorie"),
+        @NamedQuery(name = "Konsumartikel.findAll", query = "SELECT e FROM Konsumartikel e")})
 
 public class Konsumartikel implements Serializable {
     @Id
