@@ -9,10 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
+@NamedQueries({
+	@NamedQuery(name = "Person.findByNachname", query = "SELECT e FROM Person e WHERE e.name=:nachname") })
 public class Person implements Serializable {
 
     @Id
