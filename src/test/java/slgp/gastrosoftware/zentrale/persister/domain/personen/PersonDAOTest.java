@@ -12,14 +12,15 @@ import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.domain.Person;
 import slgp.gastrosoftware.zentrale.persister.impl.PersonDAOImpl;
-import slgp.gastrosoftware.zentrale.persister.impl.Util;
+
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 public class PersonDAOTest {
 	
-	private static Logger logger = LogManager.getLogger(PersonTest.class);
+	private static Logger logger = LogManager.getLogger(Person.class);
 
 	private static List<Person> personen;
 
