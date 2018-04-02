@@ -73,4 +73,12 @@ private void tisch1action(ActionEvent event)throws IOException{
 	tisch_stage.show();
 }
 
+@FXML
+private void tiszuruaction(ActionEvent event)throws IOException{
+	Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
+	Scene ma_interface_scene = new Scene(ma_interface_parent);
+	Stage ma_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+	ma_stage.setScene(ma_interface_scene);
+	ma_stage.show(); 
+}
 }
