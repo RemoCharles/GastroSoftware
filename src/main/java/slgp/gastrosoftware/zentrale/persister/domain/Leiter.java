@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 public class Leiter extends Person {
 	
 	
-	public Leiter(String name, String vorname, Adresse adresse, Kontakt kontakt) {
-		super(name, vorname, adresse, kontakt);
+	public Leiter(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt, Login login) {
+		super(name, vorname, funktion, adresse, kontakt, login);
+	}
+	
+	public Leiter(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt) {
+		super(name, vorname, funktion, adresse, kontakt);
 	}
 
 	public Leiter() {

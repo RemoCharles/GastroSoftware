@@ -16,7 +16,11 @@ import javax.persistence.OneToOne;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @NamedQueries({
-	@NamedQuery(name = "Person.findByNachname", query = "SELECT e FROM Person e WHERE e.name=:nachname") })
+	@NamedQuery(name = "Person.findByNachname", query = "SELECT e FROM Person e WHERE e.name=:nachname"),
+	@NamedQuery(name = "Person.findByVorname", query = "SELECT e FROM Person e WHERE e.vorname=:vorname"),
+	@NamedQuery(name = "Person.findByNachnameUndVorname", query = "SELECT e FROM Person e WHERE e.name=:nachname AND e.vorname=:vorname"),
+	@NamedQuery(name = "Person.findByUsername", query = "SELECT e FROM Person e WHERE e.login.username=:username")})
+	
 public class Person implements Serializable {
 
     @Id
@@ -24,6 +28,7 @@ public class Person implements Serializable {
     private int id;
     private String name;
     private String vorname;
+    private String funktion;
     @OneToOne(cascade=CascadeType.ALL)
     private Adresse adresse;
     @OneToOne(cascade=CascadeType.ALL)
@@ -31,21 +36,32 @@ public class Person implements Serializable {
     @OneToOne(cascade=CascadeType.ALL)
     private Login login;
 
-    public Person(String name, String vorname, Adresse adresse, Kontakt kontakt, Login login) {
+    public Person(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt, Login login) {
         this.name = name;
         this.vorname = vorname;
+        this.funktion = funktion;
         this.adresse = adresse;
         this.kontakt = kontakt;
         this.login = login;
     }
 
-    public Person(String name, String vorname, Adresse adresse, Kontakt kontakt) {
+
+	public Person(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt) {
         this.name = name;
         this.vorname = vorname;
+        this.funktion = funktion;
         this.adresse = adresse;
         this.kontakt = kontakt;
     }
 
+	public String getFunktion() {
+		return funktion;
+	}
+
+	public void setFunktion(String funktion) {
+		this.funktion = funktion;
+	}
+	
     public Person() {
     }
 
