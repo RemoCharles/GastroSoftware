@@ -10,10 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class KonsumartikelDAOimpl extends GenericPersisterDAOImpl<Konsumartikel> implements KonsumartikelDAO {
-    private static final Logger logger = LogManager.getLogger(KonsumartikelDAOimpl.class);
+public class KonsumartikelDAOImpl extends GenericPersisterDAOImpl<Konsumartikel> implements KonsumartikelDAO {
+    private static final Logger logger = LogManager.getLogger(KonsumartikelDAOImpl.class);
 
-    public KonsumartikelDAOimpl() {
+    public KonsumartikelDAOImpl() {
         super(Konsumartikel.class);
     }
 

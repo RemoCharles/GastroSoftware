@@ -8,6 +8,8 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+        @NamedQuery(name = "Bestellung.findByDatum", query = "SELECT e FROM Bestellung e WHERE e.datum=:datum")})
 public class Bestellung implements Serializable {
     @Id
     @GeneratedValue
@@ -19,7 +21,6 @@ public class Bestellung implements Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Konsumartikel> konsumartikel;
     private boolean zubereitet;
-//    @Temporal(TemporalType.DATE)
     private LocalDate datum;
 
     public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, LocalDate datum) {

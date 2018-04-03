@@ -6,7 +6,7 @@ import slgp.gastrosoftware.zentrale.persister.domain.Tagesmenu;
 
 public interface TagesmenuDAO extends GenericPersisterDAO<Tagesmenu>{
 	 /**
-     * Liefert das Tagesmenu zu einem gewünschten Wochentag oder das von Heute zurück.
+     * Liefert das Tagesmenu zu einem gewï¿½nschten Wochentag oder das von Heute zurï¿½ck.
      * 
      * @param wochenTag
      * @return
@@ -14,6 +14,6 @@ public interface TagesmenuDAO extends GenericPersisterDAO<Tagesmenu>{
      */
 	
 	List<Tagesmenu> findyByWochenTag(String wochenTag) throws Exception;
-	List<Tagesmenu> show() throws Exception;
+	List<Tagesmenu> showAll() throws Exception;
 
 }

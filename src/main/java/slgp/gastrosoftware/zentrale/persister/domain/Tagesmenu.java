@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Tagesmenu.findyByWochenTag", query = "SELECT e FROM Tagesmenu e WHERE e.wochenTag=:wochenTag"),
+        @NamedQuery(name = "Tagesmenu.findAll", query = "SELECT e FROM Tagesmenu e")})
 public class Tagesmenu implements Serializable {
     @Id
     @GeneratedValue
