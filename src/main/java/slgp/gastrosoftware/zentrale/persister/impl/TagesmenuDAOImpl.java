@@ -1,6 +1,7 @@
 package slgp.gastrosoftware.zentrale.persister.impl;
 
 import slgp.gastrosoftware.zentrale.persister.api.TagesmenuDAO;
+import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.domain.Tagesmenu;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
@@ -9,7 +10,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class TagesmenuDAOImpl implements TagesmenuDAO {
+public class TagesmenuDAOImpl extends GenericPersisterDAOImpl<Tagesmenu> implements TagesmenuDAO {
+    public TagesmenuDAOImpl(Class<Tagesmenu> type) {
+        super(type);
+    }
+
     public List<Tagesmenu> findyByWochenTag(String wochenTag) throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
 
@@ -23,18 +28,7 @@ public class TagesmenuDAOImpl implements TagesmenuDAO {
 
         return liste;
     }
-    public List<Tagesmenu> showAll() throws Exception {
-        EntityManager em = JpaUtil.createEntityManager();
 
-        TypedQuery<Tagesmenu> query = em.createNamedQuery("Tagesmenu.findAll", Tagesmenu.class);
-
-        List<Tagesmenu> liste = query.getResultList();
-
-        em.close();
-
-        return liste;
-
-    }
 
     @Override
     public Tagesmenu save(Tagesmenu entity) throws Exception {
@@ -63,6 +57,14 @@ public class TagesmenuDAOImpl implements TagesmenuDAO {
 
     @Override
     public List<Tagesmenu> findAll() throws Exception {
-        return null;
+        EntityManager em = JpaUtil.createEntityManager();
+
+        TypedQuery<Tagesmenu> query = em.createNamedQuery("Tagesmenu.findAll", Tagesmenu.class);
+
+        List<Tagesmenu> liste = query.getResultList();
+
+        em.close();
+
+        return liste;
     }
 }

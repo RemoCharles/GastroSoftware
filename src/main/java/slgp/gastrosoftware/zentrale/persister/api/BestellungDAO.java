@@ -6,7 +6,7 @@ import java.util.List;
 
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 /**
- * Interface für Persistierung von Bestellung-Entities.
+ * Interface fÃ¼r Persistierung von Bestellung-Entities.
  * 
  *
  * @author sucur
@@ -15,8 +15,8 @@ import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 public interface BestellungDAO extends GenericPersisterDAO<Bestellung> {
 
     /**
-     * Liefert alle Bestellungen zurück, welche die Filiale an dem übergebeneen
-     * Datum getätigt hat, falls welche gefunden worden sind, sonst eine leere liste.
+     * Liefert alle Bestellungen zurï¿½ck, welche die Filiale an dem ï¿½bergebeneen
+     * Datum getÃ¤tigt hat, falls welche gefunden worden sind, sonst eine leere liste.
      * 
      * @param datum
      * @return

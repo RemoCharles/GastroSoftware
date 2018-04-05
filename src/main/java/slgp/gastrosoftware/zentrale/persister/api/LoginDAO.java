@@ -14,13 +14,12 @@ public interface LoginDAO extends GenericPersisterDAO<Login> {
      */
 	boolean pruefeLogin (String username, String passwort) throws Exception;
 	/**
-     * Liefert die Funktion des Mitarbeites zurück
+     * Liefert die Funktion des Mitarbeites zurï¿½ck
      * 
      * @param username
       @return
       @throws Exception
      */
-	
 	String getFunktionPerson(String username, String passwort) throws Exception;
 	
 	

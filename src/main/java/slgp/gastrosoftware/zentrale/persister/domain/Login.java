@@ -10,6 +10,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
+
+@NamedQueries({
+        @NamedQuery(name = "Login.findAll", query = "SELECT e FROM Login e")})
 public class Login implements Serializable {
 
     @Id

@@ -1,12 +1,12 @@
 package slgp.gastrosoftware.zentrale.persister.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+       @NamedQuery(name = "Tisch.findAll", query = "SELECT e FROM Tisch e")})
 public class Tisch implements Serializable {
     @Id
     @GeneratedValue

@@ -21,7 +21,7 @@ public interface TagesmenuDAO extends GenericPersisterDAO<Tagesmenu>{
 	 * @throws Exception
 	 */
 
-	List<Tagesmenu> showAll() throws Exception;
+	List<Tagesmenu> findAll() throws Exception;
 
 
 }

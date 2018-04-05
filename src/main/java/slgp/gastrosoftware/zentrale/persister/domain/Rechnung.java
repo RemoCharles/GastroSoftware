@@ -8,7 +8,8 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-        @NamedQuery(name = "Rechnung.findByDatum", query = "SELECT e FROM Rechnung e WHERE e.datum=:datum")})
+        @NamedQuery(name = "Rechnung.findByDatum", query = "SELECT e FROM Rechnung e WHERE e.datum=:datum"),
+        @NamedQuery(name = "Rechnung.findAll", query = "SELECT e FROM Rechnung e")})
 
 public class Rechnung implements Serializable {
     @Id

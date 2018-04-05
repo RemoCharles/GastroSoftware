@@ -12,6 +12,6 @@ public interface GetraenkeDAO extends GenericPersisterDAO<Getraenke> {
      * @return
      * @throws Exception
      */
-    List<Konsumartikel> showAll() throws Exception;
+    List<Getraenke> findAll() throws Exception;
 
 }

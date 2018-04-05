@@ -14,13 +14,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-	@NamedQuery(name = "Person.findByNachname", query = "SELECT e FROM Person e WHERE e.name=:nachname"),
-	@NamedQuery(name = "Person.findByVorname", query = "SELECT e FROM Person e WHERE e.vorname=:vorname"),
-	@NamedQuery(name = "Person.findByNachnameUndVorname", query = "SELECT e FROM Person e WHERE e.name=:nachname AND e.vorname=:vorname"),
-	@NamedQuery(name = "Person.findByUsername", query = "SELECT e FROM Person e WHERE e.login.username=:username")})
-	
+        @NamedQuery(name = "Person.findByNachname", query = "SELECT e FROM Person e WHERE e.name=:nachname"),
+        @NamedQuery(name = "Person.findByVorname", query = "SELECT e FROM Person e WHERE e.vorname=:vorname"),
+        @NamedQuery(name = "Person.findByNachnameUndVorname", query = "SELECT e FROM Person e WHERE e.name=:nachname AND e.vorname=:vorname"),
+        @NamedQuery(name = "Person.findByUsername", query = "SELECT e FROM Person e WHERE e.login.username=:username"),
+        @NamedQuery(name = "Person.findAll", query = "SELECT e FROM Person e")})
+
 public class Person implements Serializable {
 
     @Id
@@ -29,11 +30,11 @@ public class Person implements Serializable {
     private String name;
     private String vorname;
     private String funktion;
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Adresse adresse;
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Kontakt kontakt;
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Login login;
 
     public Person(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt, Login login) {
@@ -46,7 +47,7 @@ public class Person implements Serializable {
     }
 
 
-	public Person(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt) {
+    public Person(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt) {
         this.name = name;
         this.vorname = vorname;
         this.funktion = funktion;
@@ -54,14 +55,14 @@ public class Person implements Serializable {
         this.kontakt = kontakt;
     }
 
-	public String getFunktion() {
-		return funktion;
-	}
+    public String getFunktion() {
+        return funktion;
+    }
 
-	public void setFunktion(String funktion) {
-		this.funktion = funktion;
-	}
-	
+    public void setFunktion(String funktion) {
+        this.funktion = funktion;
+    }
+
     public Person() {
     }
 
@@ -117,11 +118,11 @@ public class Person implements Serializable {
             return true;
         }
 
-        if(!(obj instanceof Person)) {
+        if (!(obj instanceof Person)) {
             return false;
         }
 
-        Person pers = (Person)obj;
+        Person pers = (Person) obj;
 
         return this.name == pers.name && this.adresse == pers.adresse;
     }

@@ -14,10 +14,6 @@ import slgp.gastrosoftware.zentrale.persister.domain.Person;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements PersonDAO {
-	
-	public PersonDAOImpl() {
-		super(Person.class);
-	}
 
 	private static final Logger logger = LogManager.getLogger(PersonDAOImpl.class);
 
@@ -93,6 +89,46 @@ public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements Pe
 			throw new IllegalStateException(message);
 		}
 	}
-	
-	
+
+	public PersonDAOImpl(Class<Person> type) {
+		super(type);
+	}
+
+	@Override
+	public Person save(Person entity) throws Exception {
+		return super.save(entity);
+	}
+
+	@Override
+	public Person update(Person entity) throws Exception {
+		return super.update(entity);
+	}
+
+	@Override
+	public void delete(Person entity) throws Exception {
+		super.delete(entity);
+	}
+
+	@Override
+	public void deleteById(long id) throws Exception {
+		super.deleteById(id);
+	}
+
+	@Override
+	public Person findById(long id) throws Exception {
+		return super.findById(id);
+	}
+
+	@Override
+	public List<Person> findAll() throws Exception {
+		EntityManager em = JpaUtil.createEntityManager();
+
+		TypedQuery<Person> query = em.createNamedQuery("Person.findAll", Person.class);
+
+		List<Person> liste = query.getResultList();
+
+		em.close();
+
+		return liste;
+	}
 }

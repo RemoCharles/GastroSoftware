@@ -22,7 +22,7 @@
 //    private static List<Konsumartikel> konsumartikelFuerSpeichernTest;
 //    private static Mitarbeiter ma;
 //    private static Tisch tisch;
-//    private static Kontakt kontakt;
+//    private static KontaktDAO kontakt;
 //    private static Adresse adr;
 //
 //    @BeforeClass

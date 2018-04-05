@@ -2,6 +2,7 @@ package slgp.gastrosoftware.zentrale.persister.impl;
 
 import slgp.gastrosoftware.zentrale.persister.api.BestellungDAO;
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
+import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
 import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
@@ -10,7 +11,12 @@ import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.List;
 
-public class BestellungDAOImpl implements BestellungDAO {
+public class BestellungDAOImpl extends GenericPersisterDAOImpl<Bestellung> implements BestellungDAO {
+
+    public BestellungDAOImpl(Class<Bestellung> type) {
+        super(type);
+    }
+
     public List<Bestellung> findByDatum(LocalDate datum) throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
 
@@ -52,6 +58,14 @@ public class BestellungDAOImpl implements BestellungDAO {
 
     @Override
     public List<Bestellung> findAll() throws Exception {
-        return null;
+        EntityManager em = JpaUtil.createEntityManager();
+
+        TypedQuery<Bestellung> query = em.createNamedQuery("Bestellung.findAll", Bestellung.class);
+
+        List<Bestellung> liste = query.getResultList();
+
+        em.close();
+
+        return liste;
     }
 }

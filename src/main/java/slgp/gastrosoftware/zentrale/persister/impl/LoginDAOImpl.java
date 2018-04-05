@@ -1,98 +1,104 @@
 package slgp.gastrosoftware.zentrale.persister.impl;
 
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.zentrale.persister.api.LoginDAO;
+import slgp.gastrosoftware.zentrale.persister.domain.Login;
+import slgp.gastrosoftware.zentrale.persister.domain.MAAbrechnung;
+import slgp.gastrosoftware.zentrale.persister.domain.Person;
+import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+public class LoginDAOImpl extends GenericPersisterDAOImpl<Login> implements LoginDAO {
 
-import slgp.gastrosoftware.zentrale.persister.api.LoginDAO;
-import slgp.gastrosoftware.zentrale.persister.domain.Leiter;
-import slgp.gastrosoftware.zentrale.persister.domain.Login;
-import slgp.gastrosoftware.zentrale.persister.domain.Person;
-import slgp.gastrosoftware.zentrale.persister.domain.personen.PersonDAOTest;
-import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
+    public LoginDAOImpl() {
+        super(Login.class);
+    }
 
-public class LoginDAOImpl extends GenericPersisterDAOImpl<Login> implements LoginDAO{
+    private static Logger logger = LogManager.getLogger(LoginDAOImpl.class);
 
-	public LoginDAOImpl() {
-		super(Login.class);
-	}
+    public boolean pruefeLogin(String username, String passwort) throws Exception {
 
-	private static Logger logger = LogManager.getLogger(PersonDAOTest.class);
+        EntityManager em = JpaUtil.createEntityManager();
 
-	public boolean pruefeLogin(String username, String passwort) throws Exception {
+        TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
 
-		EntityManager em = JpaUtil.createEntityManager();
+        query.setParameter("username", username);
 
-		TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
+        List<Person> liste = query.getResultList();
 
-		query.setParameter("username", username);
+        em.close();
 
-		List<Person> liste = query.getResultList();
+        if (liste.size() != 1) {
+            System.out.println("Es wurden mehrere Personen gefunden");
+            logger.info("Es wurden mehrere Personen gefunden");
 
-		em.close();
+        }
 
-		if (liste.size() != 1) {
-			System.out.println("Es wurden mehrere Personen gefunden");
-			logger.info("Es wurden mehrere Personen gefunden");
+        boolean pw = false;
 
-		}
+        for (Person p : liste) {
+            if (p.getLogin().getPasswort().equals(passwort)) {
+                pw = true;
+            } else {
+                pw = false;
+                logger.info("Passwort falsch");
+            }
+        }
 
-		boolean pw = false;
-
-		for (Person p : liste) {
-			if (p.getLogin().getPasswort().equals(passwort)) {
-				pw = true;
-			} else {
-				pw = false;
-				logger.info("Passwort falsch");
-			}
-		}
-
-		return pw;
+        return pw;
 
 
-	}
+    }
 
-	public String getFunktionPerson (String username, String passwort) throws Exception {
+    public String getFunktionPerson(String username, String passwort) throws Exception {
 
-		EntityManager em = JpaUtil.createEntityManager();
+        EntityManager em = JpaUtil.createEntityManager();
 
-		TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
+        TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
 
-		query.setParameter("username", username);
+        query.setParameter("username", username);
 
-		List<Person> liste = query.getResultList();
+        List<Person> liste = query.getResultList();
 
-		em.close();
+        em.close();
 
-		if (liste.size() != 1) {
-			System.out.println("Es wurden mehrere Personen gefunden");
-			logger.info("Es wurden mehrere Personen gefunden");
+        if (liste.size() != 1) {
+            System.out.println("Es wurden mehrere Personen gefunden");
+            logger.info("Es wurden mehrere Personen gefunden");
 
-		}
+        }
 
-		String funktionPerson = "";
+        String funktionPerson = "";
 
-		for (Person p : liste) {
-			if (p.getLogin().getPasswort().equals(passwort)) {
-				funktionPerson = p.getFunktion();
-			}
+        for (Person p : liste) {
+            if (p.getLogin().getPasswort().equals(passwort)) {
+                funktionPerson = p.getFunktion();
+            } else {
+                System.out.println("Passowrt falsch");
+                logger.info("Passwort falsch");
 
+            }
+        }
 
-			else {
-				System.out.println("Passowrt falsch");
-				logger.info("Passwort falsch");
-
-			}
-		}
-
-		return funktionPerson;
+        return funktionPerson;
 
 
-	}
+    }
 
+    @Override
+    public List<Login> findAll() throws Exception {
+        EntityManager em = JpaUtil.createEntityManager();
+
+        TypedQuery<Login> query = em.createNamedQuery("Login.findAll", Login.class);
+
+        List<Login> liste = query.getResultList();
+
+        em.close();
+
+        return liste;
+    }
 }

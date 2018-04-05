@@ -1,6 +1,7 @@
 package slgp.gastrosoftware.zentrale.persister.impl;
 
 import slgp.gastrosoftware.zentrale.persister.api.GetraenkeDAO;
+import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
 import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
@@ -9,7 +10,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class GetraenkeDAOImpl implements GetraenkeDAO {
+public class GetraenkeDAOImpl extends GenericPersisterDAOImpl<Getraenke> implements GetraenkeDAO {
+
+    public GetraenkeDAOImpl(Class<Getraenke> type) {
+        super(type);
+    }
 
     @Override
     public Getraenke save(Getraenke entity) throws Exception {
@@ -36,6 +41,7 @@ public class GetraenkeDAOImpl implements GetraenkeDAO {
         return null;
     }
 
+
     @Override
     public List<Getraenke> findAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
@@ -47,10 +53,5 @@ public class GetraenkeDAOImpl implements GetraenkeDAO {
         em.close();
 
         return liste;
-    }
-
-    @Override
-    public List<Konsumartikel> showAll() throws Exception {
-        return null;
     }
 }

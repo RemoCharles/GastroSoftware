@@ -4,52 +4,49 @@ import java.util.List;
 
 import slgp.gastrosoftware.zentrale.persister.domain.Person;
 
-public interface PersonDAO extends GenericPersisterDAO<Person>{
-	
-	List<Person> findByNachname(String nachname) throws Exception;
-	/**
-     * Liefert alle Personen für den übergebenen Vornamen zurück, falls welche
+public interface PersonDAO extends GenericPersisterDAO<Person> {
+    /**
+     * Liefert alle Personen fÃ¼r den Ã¼bergebenen Nachnamen zurÃ¼ck, falls welche
      * vorhanden, sonst eine leere Liste.
-     * 
+     *
+     * @param nachname
+     * @return
+     * @throws Exception
+     */
+    List<Person> findByNachname(String nachname) throws Exception;
+
+    /**
+     * Liefert alle Personen fÃ¼r den Ã¼bergebenen Vornamen zurÃ¼ck, falls welche
+     * vorhanden, sonst eine leere Liste.
+     *
      * @param vorname
      * @return
      * @throws Exception
      */
-	
-	List<Person> findByVorname(String vorname)throws Exception;
-	
-	/**
-     * Liefert alle Personen für den übergebenen Vornamen zurück, falls welche
+
+    List<Person> findByVorname(String vorname) throws Exception;
+
+
+    /**
+     * Liefert alle Personen fÃ¼r den Ã¼bergebenen Nachname und Vorname zurÃ¼ck, falls welche
      * vorhanden, sonst eine leere Liste.
-     * 
-     * @param vorname
+     *
+     * @param nachname, vorname
      * @return
      * @throws Exception
      */
-	
-	List<Person> findByNachnameUndVorname(String nachname, String vorname) throws Exception;
-	
-	/**
-     * Liefert alle Personen für den übergebenen Nachname und Vorname zurück, falls welche
+    List<Person> findByNachnameUndVorname(String nachname, String vorname) throws Exception;
+
+    /**
+     * Liefert alle Personen fÃ¼r den Ã¼bergebenen Username zurÃ¼ck, falls welche
      * vorhanden, sonst eine leere Liste.
-     * 
-     * @param vorname
+     *
+     * @param username
      * @return
      * @throws Exception
      */
-	
-	Person findByUsername(String username)throws Exception;
-	
-	/**
-     * Liefert alle Personen für den übergebenen Username zurück, falls welche
-     * vorhanden, sonst eine leere Liste.
-     * 
-     * @param vorname
-     * @return
-     * @throws Exception
-     */
-	
-	
-	
+
+    Person findByUsername(String username) throws Exception;
+
 
 }

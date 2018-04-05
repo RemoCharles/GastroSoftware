@@ -30,5 +30,5 @@ public interface KonsumartikelDAO extends GenericPersisterDAO<Konsumartikel> {
      * @return
      * @throws Exception
      */
-    List<Konsumartikel> showAll() throws Exception;
+    List<Konsumartikel> findAll() throws Exception;
 }

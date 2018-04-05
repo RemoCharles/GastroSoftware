@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e")})
 public class TischRechnung extends Rechnung{
 
     @OneToMany

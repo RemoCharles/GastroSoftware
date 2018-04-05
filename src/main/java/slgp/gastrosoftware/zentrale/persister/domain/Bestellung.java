@@ -9,7 +9,8 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-        @NamedQuery(name = "Bestellung.findByDatum", query = "SELECT e FROM Bestellung e WHERE e.datum=:datum")})
+        @NamedQuery(name = "Bestellung.findByDatum", query = "SELECT e FROM Bestellung e WHERE e.datum=:datum"),
+        @NamedQuery(name = "Bestellung.findAll", query = "SELECT e FROM Bestellung e")})
 public class Bestellung implements Serializable {
     @Id
     @GeneratedValue

@@ -1,11 +1,11 @@
 package slgp.gastrosoftware.zentrale.persister.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Kontakt.findAll", query = "SELECT e FROM Kontakt e")})
 public class Kontakt implements Serializable {
 
     @Id
@@ -41,6 +41,6 @@ public class Kontakt implements Serializable {
 
     @Override
     public String toString() {
-        return "Kontakt [email=" + email + ", telefon=" + telefon + "]";
+        return "KontaktDAO [email=" + email + ", telefon=" + telefon + "]";
     }
 }

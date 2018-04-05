@@ -28,7 +28,7 @@
 //    @OneToOne
 //    private static Tisch tisch;
 //    @OneToOne
-//    private static Kontakt kontakt;
+//    private static KontaktDAO kontakt;
 //    @OneToOne
 //    private static Adresse adr;
 //    @OneToOne

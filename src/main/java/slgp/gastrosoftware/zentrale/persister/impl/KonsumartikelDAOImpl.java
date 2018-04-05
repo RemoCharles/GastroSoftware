@@ -57,7 +57,7 @@ public class KonsumartikelDAOImpl extends GenericPersisterDAOImpl<Konsumartikel>
     }
 
     @Override
-    public List<Konsumartikel> showAll() throws Exception {
+    public List<Konsumartikel> findAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
 
         TypedQuery<Konsumartikel> query = em.createNamedQuery("Konsumartikel.findAll", Konsumartikel.class);
