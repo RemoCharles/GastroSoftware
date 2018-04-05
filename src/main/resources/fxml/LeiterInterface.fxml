@@ -9,7 +9,7 @@
       <Text layoutX="412.5" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administration" />
       <Button fx:id="leiMita" layoutX="375.0" layoutY="150.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Mitarbeiter" textAlignment="CENTER" />
       <Button fx:id="leiMenu" layoutX="375.0" layoutY="200.0" mnemonicParsing="false" onAction="#leimenuaction" prefHeight="28.0" prefWidth="150.0" text="Menu" textAlignment="CENTER" />
-      <Button fx:id="leiKons" layoutX="375.0" layoutY="250.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Konsumartikel" textAlignment="CENTER" />
+      <Button fx:id="leiKons" layoutX="375.0" layoutY="250.0" mnemonicParsing="false" onAction="#showKonsumartikel" prefHeight="28.0" prefWidth="150.0" text="Konsumartikel" textAlignment="CENTER" />
       <Button fx:id="leiAbre" layoutX="375.0" layoutY="300.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Abrechnung" textAlignment="CENTER" />
       <Button fx:id="leiTisc" layoutX="375.0" layoutY="350.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Tische" textAlignment="CENTER" />
       <Button fx:id="leilogo" layoutX="375.0" layoutY="400.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Logout" />
