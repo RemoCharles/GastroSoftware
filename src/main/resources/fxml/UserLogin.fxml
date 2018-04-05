@@ -10,7 +10,7 @@
 
 <AnchorPane id="genAnch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.ui.controller.Controller">
 	<children>
-		<TextField id="genBenu" layoutX="300.0" layoutY="127.0" />
+		<TextField id="genBenu" fx:id="genBenu" layoutX="300.0" layoutY="127.0" />
 		<Text layoutX="142.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzer ID:" />
 		<Text layoutX="142.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passwort:" />
 		<Text layoutX="223.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
@@ -19,7 +19,7 @@
          </font></Text>
 		<Button fx:id="genAbbr" layoutX="300.0" layoutY="237.0" mnemonicParsing="false" onAction="#exitaction" text="Abbrechen" />
 		<Button fx:id="genLogi" layoutX="206.0" layoutY="237.0" mnemonicParsing="false" onAction="#loginaction" text="Login" />
-      <PasswordField layoutX="300.0" layoutY="177.0" />
+      <PasswordField fx:id="genPass" layoutX="300.0" layoutY="177.0" />
       <Label fx:id="genPwEr" alignment="TOP_LEFT" layoutX="142.0" layoutY="283.0" prefHeight="25.0" prefWidth="354.0" text="Die BenutzerID oder das Passwort wurden Falsch eingegeben." textFill="RED" />
       <Label layoutX="142.0" layoutY="308.0" text="Diese Benutzer ID ist nicht verfügbar" textFill="RED" />
 	</children>
