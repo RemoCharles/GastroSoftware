@@ -33,6 +33,10 @@ public class RechnungDAOImpl extends GenericPersisterDAOImpl<Rechnung> implement
         super(type);
     }
 
+    public RechnungDAOImpl(){
+        super(Rechnung.class);
+    }
+
     @Override
     public Rechnung save(Rechnung entity) throws Exception {
         return super.save(entity);

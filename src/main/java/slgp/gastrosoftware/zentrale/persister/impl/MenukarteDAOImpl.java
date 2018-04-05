@@ -15,6 +15,10 @@ public class MenukarteDAOImpl extends GenericPersisterDAOImpl<Menukarte> impleme
         super(type);
     }
 
+    public MenukarteDAOImpl(){
+        super(Menukarte.class);
+    }
+
     public List<Menukarte> showAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
 

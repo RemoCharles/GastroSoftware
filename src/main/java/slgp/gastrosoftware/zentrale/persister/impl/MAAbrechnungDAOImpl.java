@@ -14,6 +14,9 @@ public class MAAbrechnungDAOImpl extends GenericPersisterDAOImpl<MAAbrechnung> i
     public MAAbrechnungDAOImpl(Class<MAAbrechnung> type) {
         super(type);
     }
+    public MAAbrechnungDAOImpl(){
+        super(MAAbrechnung.class);
+    }
 
     @Override
     public MAAbrechnung save(MAAbrechnung entity) throws Exception {

@@ -7,4 +7,7 @@ public class AdresseDAOImpl extends GenericPersisterDAOImpl<Adresse> implements 
     public AdresseDAOImpl(Class<Adresse> type) {
         super(type);
     }
+    public AdresseDAOImpl(){
+        super(Adresse.class);
+    }
 }

@@ -14,6 +14,10 @@ public class KontaktDAOImpl extends GenericPersisterDAOImpl<Kontakt> implements 
         super(type);
     }
 
+    public KontaktDAOImpl(){
+        super(Kontakt.class);
+    }
+
     @Override
     public List<Kontakt> findAll() throws Exception{
         EntityManager em = JpaUtil.createEntityManager();

@@ -14,6 +14,10 @@ public class TischDAOImpl extends GenericPersisterDAOImpl<Tisch> implements Tisc
         super(type);
     }
 
+    public TischDAOImpl(){
+        super(Tisch.class);
+    }
+
     @Override
     public Tisch save(Tisch entity) throws Exception {
         return super.save(entity);

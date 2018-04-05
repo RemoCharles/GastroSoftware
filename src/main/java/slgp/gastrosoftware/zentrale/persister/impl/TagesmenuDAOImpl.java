@@ -11,13 +11,14 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class TagesmenuDAOImpl extends GenericPersisterDAOImpl<Tagesmenu> implements TagesmenuDAO {
-//    public TagesmenuDAOImpl(Class<Tagesmenu> type) {
-//        super(type);
-//    }
+    public TagesmenuDAOImpl(Class<Tagesmenu> type) {
+        super(type);
+    }
 	
 	public TagesmenuDAOImpl() {
 		super(Tagesmenu.class);
 	}
+
 
     public List<Tagesmenu> findyByWochenTag(String wochenTag) throws Exception {
         EntityManager em = JpaUtil.createEntityManager();

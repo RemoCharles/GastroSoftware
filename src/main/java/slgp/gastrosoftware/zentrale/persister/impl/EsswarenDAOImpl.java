@@ -14,6 +14,10 @@ public class EsswarenDAOImpl extends GenericPersisterDAOImpl<Esswaren> implement
         super(type);
     }
 
+    public EsswarenDAOImpl() {
+        super(Esswaren.class);
+    }
+
     @Override
     public Esswaren save(Esswaren entity) throws Exception {
         return null;

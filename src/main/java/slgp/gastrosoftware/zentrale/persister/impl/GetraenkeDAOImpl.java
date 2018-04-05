@@ -16,6 +16,10 @@ public class GetraenkeDAOImpl extends GenericPersisterDAOImpl<Getraenke> impleme
         super(type);
     }
 
+    public GetraenkeDAOImpl() {
+        super(Getraenke.class);
+    }
+
     @Override
     public Getraenke save(Getraenke entity) throws Exception {
         return null;

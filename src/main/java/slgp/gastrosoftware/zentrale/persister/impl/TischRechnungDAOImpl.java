@@ -15,6 +15,10 @@ public class TischRechnungDAOImpl extends GenericPersisterDAOImpl<TischRechnung>
         super(type);
     }
 
+    public TischRechnungDAOImpl(){
+        super(TischRechnung.class);
+    }
+
     @Override
     public TischRechnung save(TischRechnung entity) throws Exception {
         return super.save(entity);
