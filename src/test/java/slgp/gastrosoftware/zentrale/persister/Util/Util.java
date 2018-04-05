@@ -72,7 +72,7 @@ public class Util {
     }
 
     public static void deleteAllGetraenke() throws Exception{
-        GetraenkeDAO pGetraenke = (GetraenkeDAO) new GetraenkeDAOImpl();
+        GetraenkeDAO pGetraenke = new GetraenkeDAOImpl();
         for (Getraenke g : pGetraenke.findAll()){
             pGetraenke.delete(g);
         }
@@ -89,7 +89,7 @@ public class Util {
     }
 
     public static void deleteAllKonsumartikel() throws Exception{
-        KonsumartikelDAO pKonsumartikel = (KonsumartikelDAO) new KonsumartikelDAOImpl();
+        KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
         for (Konsumartikel k : pKonsumartikel.findAll()){
             pKonsumartikel.delete(k);
         }
@@ -102,7 +102,7 @@ public class Util {
     }
 
     public static void deleteAllTagesmenu() throws Exception {
-        TagesmenuDAO pTagesmenu = (TagesmenuDAO) new TagesmenuDAOImpl();
+        TagesmenuDAO pTagesmenu = new TagesmenuDAOImpl();
         for (Tagesmenu t : pTagesmenu.findAll()){
             pTagesmenu.delete(t);
         }
@@ -143,7 +143,7 @@ public class Util {
     }
 
     public static void deleteAllBestellung() throws Exception {
-        BestellungDAO pBestellungListe = (BestellungDAO) new BestellungDAOImpl();
+        BestellungDAO pBestellungListe = new BestellungDAOImpl();
         for (Bestellung b : pBestellungListe.findAll()) {
             pBestellungListe.delete(b);
         }
