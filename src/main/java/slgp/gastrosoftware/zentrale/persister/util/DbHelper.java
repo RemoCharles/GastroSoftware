@@ -35,7 +35,7 @@ public class DbHelper {
 		try {
 			for (Person p: list) {
 				em.persist(p);
-				logger.info("Person gespeichert" + p.toString());
+				//logger.info("Person gespeichert" + p.toString());
 			}
 
 			em.getTransaction().commit();
