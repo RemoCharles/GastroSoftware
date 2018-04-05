@@ -16,6 +16,10 @@ public class BestellungDAOImpl extends GenericPersisterDAOImpl<Bestellung> imple
     public BestellungDAOImpl(Class<Bestellung> type) {
         super(type);
     }
+	
+	  public BestellungDAOImpl() {
+		  super(Bestellung.class);
+	  }
 
     public List<Bestellung> findByDatum(LocalDate datum) throws Exception {
         EntityManager em = JpaUtil.createEntityManager();

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 public class BestellungDAOTest {
 
-    private static BestellungDAO pBestellungDAO = (BestellungDAO) new BestellungDAOImpl();
+    private static BestellungDAO pBestellungDAO = new BestellungDAOImpl();
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
