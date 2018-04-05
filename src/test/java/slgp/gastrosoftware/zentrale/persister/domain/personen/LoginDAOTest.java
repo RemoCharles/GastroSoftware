@@ -23,7 +23,7 @@ public class LoginDAOTest {
 	
 	private static LoginDAO lLogin = new LoginDAOImpl();
 	
-	private static Logger logger = LogManager.getLogger(PersonDAOTest.class);
+	private static Logger logger = LogManager.getLogger(LoginDAOTest.class);
 	
 	private static List<Person> personen;
 	
@@ -52,6 +52,20 @@ public class LoginDAOTest {
 		boolean ergebnis = lLogin.pruefeLogin("mjana", "abeecde");
 		
 		assertTrue(ergebnis == false);
+	}
+	
+	@Test
+	public void getFunktionPerson() throws Exception{
+		String personFunktion = lLogin.getFunktionPerson("mjana", "abcde");
+		
+		assertTrue(personFunktion.equals("Servicepersonal"));
+	}
+	
+	@Test
+	public void getFunktionPersonNichtVorhanden() throws Exception {
+		String personFunktion = lLogin.getFunktionPerson("mjana", "abcde");
+		
+		assertTrue(!personFunktion.equals("Kuechenpersonal"));
 	}
 
 }
