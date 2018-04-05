@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="slgp.gastrosoftware.ui.controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.ui.controller.Controller">
    <children>
-      <Label fx:id="lbltis" layoutX="211.0" layoutY="75.0">
+      <Label fx:id="lbltis" layoutX="211.0" layoutY="75.0" text="ssdfj">
          <font>
             <Font size="25.0" />
          </font>

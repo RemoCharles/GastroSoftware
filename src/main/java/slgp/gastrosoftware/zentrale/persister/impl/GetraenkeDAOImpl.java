@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class GetrankeDAOImpl {
+public class GetraenkeDAOImpl {
 
     public List<Getraenke> showAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();

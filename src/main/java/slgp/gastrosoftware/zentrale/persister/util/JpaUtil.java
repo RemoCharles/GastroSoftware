@@ -3,6 +3,7 @@ package slgp.gastrosoftware.zentrale.persister.util;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.sql.PooledConnection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,10 @@ public class JpaUtil {
 
 	public static EntityManager createEntityManager() {
 		return entityManagerFactory.createEntityManager();
+	}
+
+	public static EntityManager createEntityManagerForDelition() {
+		return Persistence.createEntityManagerFactory("delete-JpaDemosPU").createEntityManager();
 	}
 }
 

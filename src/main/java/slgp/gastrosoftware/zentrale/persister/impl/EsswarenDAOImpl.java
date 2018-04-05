@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class EsswarenDAOImpl {
-    public List<Esswaren> showAll() throws Exception{
+    public List<Esswaren> findAll() throws Exception{
         EntityManager em = JpaUtil.createEntityManager();
 
         TypedQuery<Esswaren> query = em.createNamedQuery("Esswaren.findAll", Esswaren.class);

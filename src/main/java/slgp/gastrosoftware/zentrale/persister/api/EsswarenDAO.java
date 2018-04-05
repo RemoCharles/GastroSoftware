@@ -5,12 +5,12 @@ import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 
 import java.util.List;
 
-public interface EsswarenDAO {
+public interface EsswarenDAO extends GenericPersisterDAO<Esswaren>{
     /**
      * Liefert alle Esswaren zurück
      *
      * @return
      * @throws Exception
      */
-    List<Esswaren> showAll() throws Exception;
+    List<Esswaren> findAll() throws Exception;
 }

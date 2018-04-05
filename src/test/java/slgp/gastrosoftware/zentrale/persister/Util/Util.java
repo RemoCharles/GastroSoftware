@@ -1,17 +1,9 @@
 package slgp.gastrosoftware.zentrale.persister.Util;
 
-import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
-import slgp.gastrosoftware.zentrale.persister.domain.Tisch;
-import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
-import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
-import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
-import slgp.gastrosoftware.zentrale.persister.domain.Tagesmenu;
-import slgp.gastrosoftware.zentrale.persister.domain.Adresse;
-import slgp.gastrosoftware.zentrale.persister.domain.Kontakt;
-import slgp.gastrosoftware.zentrale.persister.domain.Login;
-import slgp.gastrosoftware.zentrale.persister.domain.Mitarbeiter;
-import slgp.gastrosoftware.zentrale.persister.domain.Person;
-import slgp.gastrosoftware.zentrale.persister.domain.TischRechnung;
+import slgp.gastrosoftware.zentrale.persister.api.*;
+import slgp.gastrosoftware.zentrale.persister.domain.*;
+import slgp.gastrosoftware.zentrale.persister.impl.*;
+import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,8 +24,7 @@ public class Util {
     public static final int INIT_SIZE_TISCH_RECHNUNG = 1;
 
 
-
-    public static List<Person> erstellePersonenListe() {
+    public static List<Person> erstellePersonenListe() throws Exception {
 
         List<Person> list = new ArrayList<Person>();
 
@@ -42,9 +33,16 @@ public class Util {
         list.add(new Person("Mohn", "Kevin", "Kuechenpersonal", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88")));
         return list;
     }
-    
 
-    public static List<Esswaren> createEsswarenListe() {
+    public static void deleteAllPersonen() throws Exception {
+        PersonDAO pPerson = (PersonDAO) new PersonDAOImpl();
+        for (Person p : pPerson.findAll()){
+            pPerson.delete(p);
+        }
+    }
+
+
+    public static List<Esswaren> createEsswarenListe() throws Exception {
 
         List<Esswaren> list = new ArrayList<Esswaren>();
 
@@ -55,7 +53,14 @@ public class Util {
         return list;
     }
 
-    public static List<Getraenke> createGetraenkeListe() {
+    public static void deleteAllEsswaren() throws Exception{
+        EsswarenDAO pEsswaren = (EsswarenDAO) new EsswarenDAOImpl();
+        for (Esswaren e : pEsswaren.findAll()){
+            pEsswaren.delete(e);
+        }
+    }
+
+    public static List<Getraenke> createGetraenkeListe() throws Exception {
 
         List<Getraenke> list = new ArrayList<Getraenke>();
 
@@ -66,7 +71,14 @@ public class Util {
         return list;
     }
 
-    public static List<Konsumartikel> createKonsumartikelListe() {
+    public static void deleteAllGetraenke() throws Exception{
+        GetraenkeDAO pGetraenke = (GetraenkeDAO) new GetraenkeDAOImpl();
+        for (Getraenke g : pGetraenke.findAll()){
+            pGetraenke.delete(g);
+        }
+    }
+
+    public static List<Konsumartikel> createKonsumartikelListe() throws Exception {
 
         List<Konsumartikel> list = new ArrayList<Konsumartikel>();
 
@@ -76,22 +88,39 @@ public class Util {
         return list;
     }
 
-    public static List<Tagesmenu> createTagesmenuListe() {
+    public static void deleteAllKonsumartikel() throws Exception{
+        KonsumartikelDAO pKonsumartikel = (KonsumartikelDAO) new KonsumartikelDAOImpl();
+        for (Konsumartikel k : pKonsumartikel.findAll()){
+            pKonsumartikel.delete(k);
+        }
+    }
+
+    public static List<Tagesmenu> createTagesmenuListe() throws Exception {
         List<Tagesmenu> list = new ArrayList<Tagesmenu>();
         list.add(new Tagesmenu("Montag", createEsswarenListe()));
         return list;
     }
 
-    public static List<Mitarbeiter> createMitarbeiter() {
+    public static void deleteAllTagesmenu() throws Exception {
+        TagesmenuDAO pTagesmenu = (TagesmenuDAO) new TagesmenuDAOImpl();
+        for (Tagesmenu t : pTagesmenu.findAll()){
+            pTagesmenu.delete(t);
+        }
+    }
+
+    public static List<Mitarbeiter> createMitarbeiter() throws Exception {
         List<Mitarbeiter> list = new ArrayList<>();
         list.add(new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22")));
         list.add(new Mitarbeiter("Burg", "Susann", "Servicepersonal", new Adresse("Mondweg 2", 6014, "Zuerich"), new Kontakt("hslu@hslu.ch", "079 234 56 32")));
-        list.add(new Mitarbeiter("Vogt", "Magdalena", "Barpersonal",  new Adresse("Baselstrasse 24", 6024, "Luzern"), new Kontakt("remog@glsmx.ch", "078 123 22 67")));
+        list.add(new Mitarbeiter("Vogt", "Magdalena", "Barpersonal", new Adresse("Baselstrasse 24", 6024, "Luzern"), new Kontakt("remog@glsmx.ch", "078 123 22 67")));
 
         return list;
     }
 
-    public static List<Tisch> createTisch() {
+    public static void deleteAllMitarbeiter() throws Exception {
+    }
+
+    public static List<Tisch> createTisch() throws Exception {
         ArrayList<Tisch> list = new ArrayList<Tisch>();
         list.add(new Tisch(6));
         list.add(new Tisch(4));
@@ -99,18 +128,28 @@ public class Util {
         return list;
     }
 
-    public static List<Bestellung> createBestellungListe() {
+    public static void deleteAllTisch() throws Exception {
+    }
+
+    public static List<Bestellung> createBestellungListe() throws Exception {
         List<Bestellung> list = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
 
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        list.add(new Bestellung(ma, new Tisch(6),konsumList, false, LocalDate.now()));
+        list.add(new Bestellung(ma, new Tisch(6), konsumList, false, LocalDate.now()));
         return list;
     }
 
-    public static List<TischRechnung> createTischRechnung() {
+    public static void deleteAllBestellung() throws Exception {
+        BestellungDAO pBestellungListe = (BestellungDAO) new BestellungDAOImpl();
+        for (Bestellung b : pBestellungListe.findAll()) {
+            pBestellungListe.delete(b);
+        }
+    }
+
+    public static List<TischRechnung> createTischRechnung() throws Exception {
         //LocalDate date, String restaurant, List<Bestellung> bestellungList
         List<TischRechnung> list = new ArrayList<>();
 
@@ -120,12 +159,19 @@ public class Util {
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
 
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        bestellungList.add(new Bestellung(ma, new Tisch(6),konsumList, false, LocalDate.now()));
-
+        bestellungList.add(new Bestellung(ma, new Tisch(6), konsumList, false, LocalDate.now()));
 
 
         list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
         return list;
+    }
+
+    public static void deleteAllTischRechnung() throws Exception {
+    }
+
+    public static void resetDb() throws Exception {
+        /* Schema wird angelegt, die vorhandenen Daten werden dabei gelöscht. */
+        JpaUtil.createEntityManagerForDelition().close();
     }
 }
 
