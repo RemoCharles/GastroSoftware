@@ -1,4 +1,4 @@
-package slgp.gastrosoftware.zentrale.persister.domain.personen;
+package slgp.gastrosoftware.zentrale.persister.impl;
 
 import static org.junit.Assert.*;
 
