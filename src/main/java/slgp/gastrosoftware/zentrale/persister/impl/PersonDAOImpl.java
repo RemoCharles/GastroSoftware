@@ -93,6 +93,19 @@ public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements Pe
 			throw new IllegalStateException(message);
 		}
 	}
+	
+	@Override
+	public List<Person> findAll() throws Exception {
+		EntityManager em = JpaUtil.createEntityManager();
+
+		TypedQuery<Person> query = em.createNamedQuery("Person.findAll", Person.class);
+
+		List<Person> liste = query.getResultList();
+
+		em.close();
+
+		return liste;
+	}
 
 	public PersonDAOImpl(Class<Person> type) {
 		super(type);
@@ -123,16 +136,5 @@ public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements Pe
 		return super.findById(id);
 	}
 
-	@Override
-	public List<Person> findAll() throws Exception {
-		EntityManager em = JpaUtil.createEntityManager();
-
-		TypedQuery<Person> query = em.createNamedQuery("Person.findAll", Person.class);
-
-		List<Person> liste = query.getResultList();
-
-		em.close();
-
-		return liste;
-	}
+	
 }

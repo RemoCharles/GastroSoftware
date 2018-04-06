@@ -27,114 +27,114 @@ import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 public class PersonDAOTest {
 
-    private static PersonDAO pPerson = new PersonDAOImpl();
+	private static PersonDAO pPerson = new PersonDAOImpl();
 
-    private static Logger logger = LogManager.getLogger(PersonDAOTest.class);
-
-
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        Util.resetDb();
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        Util.deleteAllPersonen();
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        Util.deleteAllPersonen();
-    }
-
-    @After
-    public void tearDown() throws Exception{
-
-    }
-
-    public void init() throws Exception {
-        Util.erstellePersonenListe();
-    }
-
-    @Test
-    public final void testSave() throws Exception {
-        init();
-        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-    }
-
-    @Test
-    public final void testUpdate() throws Exception {
-
-        init();
-
-        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-
-        int size = pPerson.findAll().size();
-
-        Person lastPerson = pPerson.findAll().get(size -1);
-
-        logger.info("Person vor Änderung: " + lastPerson.toString());
-
-        Kontakt kontaktAusDB = lastPerson.getKontakt();
-
-        Kontakt kontaktNeu = new Kontakt("test1@gmail.com", "078 546 93 93");
-
-        lastPerson.setKontakt(kontaktNeu);
-
-        // Person mit geändertem Kontakt abspeichern
-        pPerson.update(lastPerson);
-
-        logger.info("Person nach Änderung: " + lastPerson.toString());
-
-        // Person von der DB holen
-        Person personNeuAusDb = pPerson.findAll().get(size -1);
-
-        assertFalse(kontaktAusDB.equals(personNeuAusDb.getKontakt()));
-        assertTrue(kontaktNeu.getEmail().equals(personNeuAusDb.getKontakt().getEmail()));
-        assertTrue(kontaktNeu.getTelefon().equals(personNeuAusDb.getKontakt().getTelefon()));
-
-    }
-
-    @Test
-    public final void testDelete() throws Exception{
-
-        init();
-
-        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-
-        int size = pPerson.findAll().size();
-
-        Person lastPerson = pPerson.findAll().get(size -1);
-
-        pPerson.delete(lastPerson);
-
-        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN -1);
+	private static Logger logger = LogManager.getLogger(PersonDAOTest.class);
 
 
-    }
-    
-    @Test
-    public void testFindAll() throws Exception{
-    	
-    	init();
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		Util.resetDb();
+	}
 
-        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-        
-        // Liste ausgeben
-        
-        EntityManager em = JpaUtil.createEntityManager();
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		Util.deleteAllPersonen();
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		Util.deleteAllPersonen();
+	}
+
+	@After
+	public void tearDown() throws Exception{
+
+	}
+
+	public void init() throws Exception {
+		Util.erstellePersonenListe();
+	}
+
+	@Test
+	public final void testSave() throws Exception {
+		init();
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+	}
+
+	@Test
+	public final void testUpdate() throws Exception {
+
+		init();
+
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+		int size = pPerson.findAll().size();
+
+		Person lastPerson = pPerson.findAll().get(size -1);
+
+		logger.info("Person vor Änderung: " + lastPerson.toString());
+
+		Kontakt kontaktAusDB = lastPerson.getKontakt();
+
+		Kontakt kontaktNeu = new Kontakt("test1@gmail.com", "078 546 93 93");
+
+		lastPerson.setKontakt(kontaktNeu);
+
+		// Person mit geändertem Kontakt abspeichern
+		pPerson.update(lastPerson);
+
+		logger.info("Person nach Änderung: " + lastPerson.toString());
+
+		// Person von der DB holen
+		Person personNeuAusDb = pPerson.findAll().get(size -1);
+
+		assertFalse(kontaktAusDB.equals(personNeuAusDb.getKontakt()));
+		assertTrue(kontaktNeu.getEmail().equals(personNeuAusDb.getKontakt().getEmail()));
+		assertTrue(kontaktNeu.getTelefon().equals(personNeuAusDb.getKontakt().getTelefon()));
+
+	}
+
+	@Test
+	public final void testDelete() throws Exception{
+
+		init();
+
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+		int size = pPerson.findAll().size();
+
+		Person lastPerson = pPerson.findAll().get(size -1);
+
+		pPerson.delete(lastPerson);
+
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN -1);
+
+
+	}
+
+	@Test
+	public void testFindAll() throws Exception{
+
+		init();
+
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+		// Liste ausgeben
+
+		EntityManager em = JpaUtil.createEntityManager();
 
 		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
 
-        for (Person p : personenAusDbList) {
-        	logger.info(p.toString());
-        }
-    }
+		for (Person p : personenAusDbList) {
+			logger.info(p.toString());
+		}
+	}
 
-    @Test
-    public void testFindByNachname() throws Exception {
+	@Test
+	public void testFindByNachname() throws Exception {
 
-    	init();
+		init();
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
 
 		int size = pPerson.findAll().size();
@@ -142,49 +142,64 @@ public class PersonDAOTest {
 		Person lastPerson = pPerson.findAll().get(size - 1);
 
 		String nachname = lastPerson.getName();
-		
+
 		logger.info(nachname);
 
 		List <Person> personNachNachnameListe = pPerson.findByNachname(nachname);
-		
-//		for (Person p: personNachNachnameListe) {
-//			logger.info(p.toString());
-//		}
-		
+
+		//		for (Person p: personNachNachnameListe) {
+		//			logger.info(p.toString());
+		//		}
+
 		EntityManager em = JpaUtil.createEntityManager();
-		
+
 		List <Person> pListe = em.createNamedQuery("Person.findAll", Person.class).getResultList();
-		
+
 		System.out.println("Cor ausgabe" + lastPerson.toString());
-		
+
 		for (Person p: pListe ) {
 			System.out.println(p);
 		}
-		
+
 		System.out.println(pListe.contains(lastPerson));
+
+		// assertTrue(personNachNachnameListe.contains(lastPerson));
+
+	}
+
+	@Test
+	public void testFindByVorname() throws Exception {
+
+		init();
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+		int size = pPerson.findAll().size();
+
+		Person lastPerson = pPerson.findAll().get(size -1);
+
+		String vorname = lastPerson.getVorname();
+
+		List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
+
+		//assertTrue(personNachVornameListe.contains(lastPerson));
+
+	}
+
+	@Test
+	public void testFindByUsername()throws Exception{
+
+		init();
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+		int size = pPerson.findAll().size();
+
+		Person lastPerson = pPerson.findAll().get(size -1);
 		
-        // assertTrue(personNachNachnameListe.contains(lastPerson));
+		// String usernameAusDb = lastPerson.getLogin().getUsername();
+		
+        //Person personAusDbMitUsername = pPerson.findByUsername("mjana");
+		
 
-    }
-
-    @Test
-    public void testFindByVorname() throws Exception {
-    	
-    	init();
-    	assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-    	
-    	int size = pPerson.findAll().size();
-    	
-    	Person lastPerson = pPerson.findAll().get(size -1);
-    	
-    	String vorname = lastPerson.getVorname();
-    	
-    	List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
-    	
-    	//assertTrue(personNachVornameListe.contains(lastPerson));
-    	
-    	
-
-    }
+	}
 
 }
