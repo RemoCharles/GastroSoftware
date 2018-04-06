@@ -33,8 +33,8 @@ public class LoginDAOImpl extends GenericPersisterDAOImpl<Login> implements Logi
         em.close();
 
         if (liste.size() != 1) {
-            System.out.println("Es wurden mehrere Personen gefunden");
-            logger.info("Es wurden mehrere Personen gefunden");
+            System.out.println("Es wurden keine oder mehrere Personen gefunden");
+            logger.info("Es wurden keine oder mehrere Personen gefunden");
 
         }
 

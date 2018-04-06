@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+
 import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.LoginDAO;
 import slgp.gastrosoftware.zentrale.persister.api.PersonDAO;
@@ -40,7 +41,6 @@ public class LoginDAOTest {
 	public void pruefeLoginVorhanden() throws Exception {
 		init();
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
 		boolean ergebnis = lLogin.pruefeLogin("mjana", "abcde");
 		
 		assertTrue(ergebnis == true);
@@ -53,6 +53,7 @@ public class LoginDAOTest {
 		
 		assertTrue(ergebnis == false);
 	}
+	
 	
 	@Test
 	public void getFunktionPerson() throws Exception{
