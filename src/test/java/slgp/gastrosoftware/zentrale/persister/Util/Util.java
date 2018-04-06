@@ -28,9 +28,9 @@ public class Util {
         PersonDAO pPerson = new PersonDAOImpl();
         List<Person> list = new ArrayList<Person>();
 
-        list.add(new Person("Meier", "Marco", "Barpersonal", new Adresse("Kusterweg 4", 6004, "Luzern"), new Kontakt("mmarco@gmx.ch", "041 234 56 67")));
+        list.add(new Person("Meier", "Marco", "Barpersonal", new Adresse("Kusterweg 4", 6004, "Luzern"), new Kontakt("mmarco@gmx.ch", "041 234 56 67"), new Login("mmarco", "12345")));
         list.add(new Person("Mueller", "Jana", "Servicepersonal", new Adresse("Muellweg 8", 6008, "Luzern"), new Kontakt("mjana@gmx.ch", "041 234 56 67"), new Login("mjana", "abcde")));
-        list.add(new Person("Mohn", "Kevin", "Kuechenpersonal", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88")));
+        list.add(new Person("Mohn", "Kevin", "Leiter", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88"), new Login("mkevin", "xyz")));
         for (Person p : list){
             pPerson.save(p);
         }
