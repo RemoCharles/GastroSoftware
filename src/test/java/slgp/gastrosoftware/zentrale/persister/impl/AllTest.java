@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({RechnungDAOTest.class, RechnungDAOTest.class})
+@Suite.SuiteClasses({RechnungDAOTest.class, BestellungDAOTest.class, LoginDAOTest.class, PersonDAOTest.class })
 
 public class AllTest {
 

@@ -29,12 +29,12 @@ public class PersonDAOTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		personen = Util.erstellePersonenListe();
+		Util.deleteAllPersonen();
 	}
 
 	
 	public void init() throws Exception {
-		DbHelper.personenSpeichern(personen);
+		Util.erstellePersonenListe();
 	}
 	
 	@Test
