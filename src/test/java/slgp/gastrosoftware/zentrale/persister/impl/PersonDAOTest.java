@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,13 +28,26 @@ public class PersonDAOTest {
 	
 	private static Logger logger = LogManager.getLogger(PersonDAOTest.class);
 
-	private static List<Person> personen;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Util.deleteAllPersonen();
+		Util.resetDb();
 	}
 
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		Util.deleteAllPersonen();
+	}
+	
+	@Before
+	public void setUp() throws Exception {
+		Util.deleteAllPersonen();
+	}
+	
+	@After
+	public void tearDown() throws Exception{
+		
+	}
 	
 	public void init() throws Exception {
 		Util.erstellePersonenListe();
@@ -43,16 +59,16 @@ public class PersonDAOTest {
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
 	}
 	
-	@Test
-	public final void testUpdate() throws Exception {
-		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
-		int size = pPerson.findAll().size();
-		
-		Person lastPerson = pPerson.findAll().get(size -1);
-		
-		System.out.println(lastPerson.toString());
-	}
+//	@Test
+//	public final void testUpdate() throws Exception {
+//		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+//		
+//		int size = pPerson.findAll().size();
+//		
+//		Person lastPerson = pPerson.findAll().get(size -1);
+//		
+//		System.out.println(lastPerson.toString());
+//	}
 	
 	@Test
 	public void testFindByNachname() throws Exception {
