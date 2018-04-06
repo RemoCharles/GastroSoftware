@@ -29,13 +29,26 @@ public class PersonDAOTest {
 
     private static Logger logger = LogManager.getLogger(PersonDAOTest.class);
 
-    private static List<Person> personen;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+        Util.resetDb();
+    }
+
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
         Util.deleteAllPersonen();
     }
 
+    @Before
+    public void setUp() throws Exception {
+        Util.deleteAllPersonen();
+    }
+
+    @After
+    public void tearDown() throws Exception{
+
+    }
 
     public void init() throws Exception {
         Util.erstellePersonenListe();
@@ -49,13 +62,53 @@ public class PersonDAOTest {
 
     @Test
     public final void testUpdate() throws Exception {
+
+        init();
+
         assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
 
         int size = pPerson.findAll().size();
 
-        Person lastPerson = pPerson.findAll().get(size - 1);
+        Person lastPerson = pPerson.findAll().get(size -1);
 
-        System.out.println(lastPerson.toString());
+        // logger.info("Person vor Änderung: " + lastPerson.toString());
+
+        Kontakt kontaktAusDB = lastPerson.getKontakt();
+
+        Kontakt kontaktNeu = new Kontakt("test1@gmail.com", "078 546 93 93");
+
+        lastPerson.setKontakt(kontaktNeu);
+
+        // Person mit geändertem Kontakt abspeichern
+        pPerson.update(lastPerson);
+
+        // logger.info("Person nach Änderung: " + lastPerson.toString());
+
+        // Person von der DB holen
+        Person personNeuAusDb = pPerson.findAll().get(size -1);
+
+        assertFalse(kontaktAusDB.equals(personNeuAusDb.getKontakt()));
+        assertTrue(kontaktNeu.getEmail().equals(personNeuAusDb.getKontakt().getEmail()));
+        assertTrue(kontaktNeu.getTelefon().equals(personNeuAusDb.getKontakt().getTelefon()));
+
+    }
+
+    @Test
+    public final void testDelete() throws Exception{
+
+        init();
+
+        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+        int size = pPerson.findAll().size();
+
+        Person lastPerson = pPerson.findAll().get(size -1);
+
+        pPerson.delete(lastPerson);
+
+        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN -1);
+
+
     }
 
     @Test
@@ -66,12 +119,12 @@ public class PersonDAOTest {
 //		PersonDAOImpl test1 = new PersonDAOImpl();
 //		List<Person> ausgeben = new ArrayList<>();
 //		ausgeben = test1.findByNachname("Meier");
-//		
+//
 //		for(int i=0;i<ausgeben.size();i++){
 //
 //            System.out.print(ausgeben.get(i).toString());
 //            System.out.println("----------------------------");
-//            
+//
 //        }
     }
 
