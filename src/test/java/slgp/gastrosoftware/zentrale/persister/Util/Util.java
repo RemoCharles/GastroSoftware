@@ -93,8 +93,10 @@ public class Util {
         KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
         List<Konsumartikel> list = new ArrayList<Konsumartikel>();
 
-        list.add(new Esswaren("Pizza", "Hauptspeise", 500));
+        list.add(new Esswaren("Pizza", "Hauptspeise", 13));
         list.add(new Getraenke("Cola", "Softgetraenke", 5));
+        list.add(new Esswaren("Käsekuchen", "Hauptspeise", 12));
+        list.add(new Getraenke("Wasser", "Softgetränke", 0));
 
         for (Konsumartikel k : list) {
             pKonsumartikel.save(k);
