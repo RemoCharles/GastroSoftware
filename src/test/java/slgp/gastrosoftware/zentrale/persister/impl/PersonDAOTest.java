@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +72,7 @@ public class PersonDAOTest {
 
         Person lastPerson = pPerson.findAll().get(size -1);
 
-        // logger.info("Person vor Änderung: " + lastPerson.toString());
+        logger.info("Person vor Änderung: " + lastPerson.toString());
 
         Kontakt kontaktAusDB = lastPerson.getKontakt();
 
@@ -82,7 +83,7 @@ public class PersonDAOTest {
         // Person mit geändertem Kontakt abspeichern
         pPerson.update(lastPerson);
 
-        // logger.info("Person nach Änderung: " + lastPerson.toString());
+        logger.info("Person nach Änderung: " + lastPerson.toString());
 
         // Person von der DB holen
         Person personNeuAusDb = pPerson.findAll().get(size -1);
@@ -109,6 +110,24 @@ public class PersonDAOTest {
         assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN -1);
 
 
+    }
+    
+    @Test
+    public void testFindAll() throws Exception{
+    	
+    	init();
+
+        assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+        
+        // Liste ausgeben
+        
+        EntityManager em = JpaUtil.createEntityManager();
+
+		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
+
+        for (Person p : personenAusDbList) {
+        	logger.info(p.toString());
+        }
     }
 
     @Test
