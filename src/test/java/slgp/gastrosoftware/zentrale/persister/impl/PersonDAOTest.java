@@ -134,23 +134,56 @@ public class PersonDAOTest {
     @Test
     public void testFindByNachname() throws Exception {
 
+    	init();
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
 
-//    	init();
-//		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-//
-//		int size = pPerson.findAll().size();
-//
-//		Person lastPerson = pPerson.findAll().get(size - 1);
-//
-//		String vorname = lastPerson.getVorname();
-//
-//		List<Person> personNachNachnameListe = pPerson.findByVorname(vorname);
-//
-//		assertTrue(personNachNachnameListe.contains(lastPerson));
+		int size = pPerson.findAll().size();
+
+		Person lastPerson = pPerson.findAll().get(size - 1);
+
+		String nachname = lastPerson.getName();
+		
+		logger.info(nachname);
+
+		List <Person> personNachNachnameListe = pPerson.findByNachname(nachname);
+		
+//		for (Person p: personNachNachnameListe) {
+//			logger.info(p.toString());
+//		}
+		
+		EntityManager em = JpaUtil.createEntityManager();
+		
+		List <Person> pListe = em.createNamedQuery("Person.findAll", Person.class).getResultList();
+		
+		System.out.println("Cor ausgabe" + lastPerson.toString());
+		
+		for (Person p: pListe ) {
+			System.out.println(p);
+		}
+		
+		System.out.println(pListe.contains(lastPerson));
+		
+        // assertTrue(personNachNachnameListe.contains(lastPerson));
+
     }
 
     @Test
     public void testFindByVorname() throws Exception {
+    	
+    	init();
+    	assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+    	
+    	int size = pPerson.findAll().size();
+    	
+    	Person lastPerson = pPerson.findAll().get(size -1);
+    	
+    	String vorname = lastPerson.getVorname();
+    	
+    	List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
+    	
+    	//assertTrue(personNachVornameListe.contains(lastPerson));
+    	
+    	
 
     }
 
