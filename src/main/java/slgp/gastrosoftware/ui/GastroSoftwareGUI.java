@@ -11,7 +11,7 @@ import org.apache.logging.log4j.core.Logger;
 
 public class GastroSoftwareGUI extends Application {
     private static Logger logger = (Logger) LogManager.getLogger(GastroSoftwareGUI.class);
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
@@ -20,7 +20,7 @@ public class GastroSoftwareGUI extends Application {
         primaryStage.show();
     }
 
-
+ 
     public static void main(String[] args) {
         launch(args);
     }

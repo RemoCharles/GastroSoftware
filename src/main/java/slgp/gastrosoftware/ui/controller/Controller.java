@@ -17,13 +17,13 @@ public class Controller {
 	@FXML
 	// Variablen
 	Button genLogi;
-	
+
 	@FXML
 	private TextField genBenu;
-	
+
 	@FXML
 	private TextField genPass;
-	
+
 	@FXML
 	private Label genPwEr;
 
@@ -31,39 +31,41 @@ public class Controller {
 	// Userlogin Buttons
 	@FXML
 	private void loginaction(ActionEvent event) throws Exception {
-		
-	LoginDAOImpl login = new LoginDAOImpl();
-	
-	if(login.pruefeLogin(genBenu.getText(), genPass.getText())==true) {
-		if(login.getFunktionPerson(genBenu.getText(), genPass.getText())=="KuechenPersonal") {
-			Parent kueche_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
-			Scene kueche_interface_scene = new Scene(kueche_interface_parent);
-			Stage kueche_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-			kueche_stage.setScene(kueche_interface_scene);
-			kueche_stage.show();
-			
-		} else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="ServicePersonal") {
-			Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
-			Scene ma_interface_scene = new Scene(ma_interface_parent);
-			Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			ma_stage.setScene(ma_interface_scene);
-			ma_stage.show();
-			
-		}else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="BarPersonal") {
-			Parent bar_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/BarInterface.fxml"));
-			Scene bar_interface_scene = new Scene(bar_interface_parent);
-			Stage bar_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-			bar_stage.setScene(bar_interface_scene);
-			bar_stage.show();
-			
-		}else {
-			genPwEr.setText("PW falsch...");
+
+		LoginDAOImpl login = new LoginDAOImpl();
+
+		if(login.pruefeLogin(genBenu.getText(), genPass.getText())==true) {
+			if(login.getFunktionPerson(genBenu.getText(), genPass.getText())=="KuechenPersonal") {
+				Parent kueche_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
+				Scene kueche_interface_scene = new Scene(kueche_interface_parent);
+				Stage kueche_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+				kueche_stage.setScene(kueche_interface_scene);
+				kueche_stage.show();
+
+			} else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="ServicePersonal") {
+				Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
+				Scene ma_interface_scene = new Scene(ma_interface_parent);
+				Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				ma_stage.setScene(ma_interface_scene);
+				ma_stage.show();
+
+			}else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="BarPersonal") {
+				Parent bar_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/BarInterface.fxml"));
+				Scene bar_interface_scene = new Scene(bar_interface_parent);
+				Stage bar_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+				bar_stage.setScene(bar_interface_scene);
+				bar_stage.show();
+
+			}else {
+				genPwEr.setText("Bitte wenden Sie sich an den Administratior.");
+			}
+
+		} else {
+			genPwEr.setText("Benutzername oder Passwort falsch..");
 		}
 
-	}
-	
 
-		
+
 
 		/*
 
