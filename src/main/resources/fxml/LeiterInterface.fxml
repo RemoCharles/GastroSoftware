@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="leiAnch" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.ui.controller.Controller">
+<AnchorPane fx:id="leiAnch" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.ui.login.ControllerTest">
    <children>
       <Text layoutX="412.5" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administration" />
       <Button fx:id="leiMita" layoutX="375.0" layoutY="150.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" text="Mitarbeiter" textAlignment="CENTER" />
