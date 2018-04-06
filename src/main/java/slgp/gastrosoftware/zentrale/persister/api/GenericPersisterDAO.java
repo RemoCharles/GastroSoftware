@@ -61,5 +61,5 @@ public interface GenericPersisterDAO<T> {
      * @throws Exception
      */
     List<T> findAll() throws Exception;
-
+    
 }

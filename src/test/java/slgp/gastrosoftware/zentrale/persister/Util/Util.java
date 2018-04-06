@@ -31,6 +31,7 @@ public class Util {
         list.add(new Person("Meier", "Marco", "Barpersonal", new Adresse("Kusterweg 4", 6004, "Luzern"), new Kontakt("mmarco@gmx.ch", "041 234 56 67")));
         list.add(new Person("Mueller", "Jana", "Servicepersonal", new Adresse("Muellweg 8", 6008, "Luzern"), new Kontakt("mjana@gmx.ch", "041 234 56 67"), new Login("mjana", "abcde")));
         list.add(new Person("Mohn", "Kevin", "Kuechenpersonal", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88")));
+
         return list;
     }
 
@@ -43,12 +44,17 @@ public class Util {
 
 
     public static List<Esswaren> createEsswarenListe() throws Exception {
+        EsswarenDAO pEsswaren = new EsswarenDAOImpl();
 
         List<Esswaren> list = new ArrayList<Esswaren>();
 
         list.add(new Esswaren("Pizza", "Hauptspeise", 500));
         list.add(new Esswaren("Steak", "Hauptspeise", 20));
         list.add(new Esswaren("Salat", "Vorspeise", 30));
+
+        for (Esswaren e : list) {
+            pEsswaren.save(e);
+        }
 
         return list;
     }
@@ -79,7 +85,7 @@ public class Util {
     }
 
     public static List<Konsumartikel> createKonsumartikelListe() throws Exception {
-
+        KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
         List<Konsumartikel> list = new ArrayList<Konsumartikel>();
 
         list.add(new Esswaren("Pizza", "Hauptspeise", 500));
@@ -118,20 +124,34 @@ public class Util {
     }
 
     public static void deleteAllMitarbeiter() throws Exception {
+        PersonDAO pPerson = new PersonDAOImpl();
+        for (Person p : pPerson.findAll()){
+            pPerson.delete(p);
+        }
     }
 
     public static List<Tisch> createTisch() throws Exception {
+        TischDAO pTisch = new TischDAOImpl();
         ArrayList<Tisch> list = new ArrayList<Tisch>();
         list.add(new Tisch(6));
         list.add(new Tisch(4));
         list.add(new Tisch(10));
+
+        for (Tisch t : list) {
+            pTisch.save(t);
+        }
         return list;
     }
 
     public static void deleteAllTisch() throws Exception {
+        TischDAO pTisch = new TischDAOImpl();
+        for (Tisch t : pTisch.findAll()) {
+            pTisch.delete(t);
+        }
     }
 
     public static List<Bestellung> createBestellungListe() throws Exception {
+        BestellungDAO pBestellung = new BestellungDAOImpl();
         List<Bestellung> list = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
@@ -139,6 +159,10 @@ public class Util {
 
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
         list.add(new Bestellung(ma, new Tisch(6), konsumList, false, LocalDate.now()));
+
+        for (Bestellung b : list) {
+            pBestellung.save(b);
+        }
         return list;
     }
 
@@ -150,7 +174,7 @@ public class Util {
     }
 
     public static List<TischRechnung> createTischRechnung() throws Exception {
-        //LocalDate date, String restaurant, List<Bestellung> bestellungList
+        TischRechnungDAO pTischRechnung = new TischRechnungDAOImpl();
         List<TischRechnung> list = new ArrayList<>();
 
         List<Bestellung> bestellungList = new ArrayList<Bestellung>();
@@ -163,10 +187,17 @@ public class Util {
 
 
         list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
+        for (TischRechnung tr : list){
+            pTischRechnung.save(tr);
+        }
         return list;
     }
 
     public static void deleteAllTischRechnung() throws Exception {
+        TischRechnungDAO pTischRechnung = new TischRechnungDAOImpl();
+        for (TischRechnung t : pTischRechnung.findAll()){
+            pTischRechnung.delete(t);
+        }
     }
 
     public static void resetDb() throws Exception {
