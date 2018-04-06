@@ -183,7 +183,7 @@ public class Util {
         list.add(new Bestellung(ma, new Tisch(6), konsumList, false, LocalDate.now()));
 
         pMitarbeiter.save(ma);
-        pTisch.save()
+        //pTisch.save();
         for (Konsumartikel k : konsumList) {
             pKonsumartikel.save(k);
         }
