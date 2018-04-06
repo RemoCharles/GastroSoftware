@@ -20,7 +20,6 @@
 		<Button fx:id="genAbbr" layoutX="300.0" layoutY="237.0" mnemonicParsing="false" onAction="#exitaction" text="Abbrechen" />
 		<Button fx:id="genLogi" layoutX="206.0" layoutY="237.0" mnemonicParsing="false" onAction="#loginaction" text="Login" />
       <PasswordField fx:id="genPass" layoutX="300.0" layoutY="177.0" />
-      <Label fx:id="genPwEr" alignment="TOP_LEFT" layoutX="142.0" layoutY="283.0" prefHeight="25.0" prefWidth="354.0" text="Die BenutzerID oder das Passwort wurden Falsch eingegeben." textFill="RED" />
-      <Label layoutX="142.0" layoutY="308.0" text="Diese Benutzer ID ist nicht verfügbar" textFill="RED" />
+      <Label fx:id="genPwEr" alignment="TOP_LEFT" layoutX="142.0" layoutY="283.0" prefHeight="25.0" prefWidth="354.0" textFill="RED" />
 	</children>
 </AnchorPane>
