@@ -6,7 +6,6 @@ import org.junit.*;
 import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.EsswarenDAO;
 import slgp.gastrosoftware.zentrale.persister.api.GetraenkeDAO;
-import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
 import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
@@ -15,6 +14,8 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.assertFalse;
+
 
 public class KonsumartikelDAOTest {
     private static Logger logger = LogManager.getLogger(KonsumartikelDAOTest.class);
@@ -55,7 +56,7 @@ public class KonsumartikelDAOTest {
     @Test
     public void testEsswarenSave() throws Exception {
         init();
-        assertTrue(esswarenDAO.findAll().size() == 2);
+        assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
 
         EntityManager em = JpaUtil.createEntityManager();
         em = JpaUtil.createEntityManager();
@@ -67,18 +68,67 @@ public class KonsumartikelDAOTest {
     }
 
     @Test
+    public void testEsswarenDelete() throws Exception {
+        init();
+        assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
+        int size = esswarenDAO.findAll().size();
+        Esswaren lastEssware = esswarenDAO.findAll().get(size - 1);
+        esswarenDAO.delete(lastEssware);
+        Assert.assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_PERSONEN - 1);
+    }
+
+    @Test
     public void testGetraenkeSave() throws Exception {
         init();
         assertTrue(getraenkeDAO.findAll().size() == 2);
 
         EntityManager em = JpaUtil.createEntityManager();
         em = JpaUtil.createEntityManager();
-        List<Getraenke> bestellungList = em.createQuery("SELECT a FROM Getraenke a", Getraenke.class).getResultList();
+        List<Getraenke> bestellungList = em.createNamedQuery("Getraenke.findAll", Getraenke.class).getResultList();
+
         for (Getraenke g : bestellungList) {
             logger.info(g);
         }
         em.close();
     }
 
+    @Test
+    public void testGetraenkeDelete() throws Exception {
+        init();
+        assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
+        int size = getraenkeDAO.findAll().size();
+        Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
+        getraenkeDAO.delete(lastGetraenke);
+        Assert.assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_PERSONEN - 1);
+    }
 
+    @Test
+    public final void testGetraenkeUpdate() throws Exception {
+
+        init();
+
+        assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
+
+        int size = getraenkeDAO.findAll().size();
+
+        Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
+
+        lastGetraenke.setPreis(999);
+        
+        getraenkeDAO.update(lastGetraenke);
+
+        Getraenke getraenkeNeuAusDb = getraenkeDAO.findAll().get(size - 1);
+
+        assertFalse(lastGetraenke.getPreis() == getraenkeNeuAusDb.getPreis());
+        assertTrue(getraenkeNeuAusDb.getBezeichnung().equals(lastGetraenke.getBezeichnung()));
+
+        EntityManager em = JpaUtil.createEntityManager();
+        em = JpaUtil.createEntityManager();
+        List<Getraenke> bestellungList = em.createNamedQuery("Getraenke.findAll", Getraenke.class).getResultList();
+
+        for (Getraenke g : bestellungList) {
+            logger.info(g);
+        }
+        em.close();
+    }
 }

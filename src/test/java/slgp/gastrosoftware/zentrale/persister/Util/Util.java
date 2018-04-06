@@ -13,8 +13,8 @@ import java.util.List;
 public class Util {
 
     public static final int INIT_SIZE_PERSONEN = 3;
-    public static final int INIT_SIZE_ESSWAREN = 3;
-    public static final int INIT_SIZE_GETRAENKE = 3;
+    public static final int INIT_SIZE_ESSWAREN = 2;
+    public static final int INIT_SIZE_GETRAENKE = 2;
     public static final int INIT_SIZE_KONSUMARTIKEL = 2;
     public static final int INIT_SIZE_TAGESMENU = 1;
     public static final int INIT_SIZE_MITARBEITER = 3;
