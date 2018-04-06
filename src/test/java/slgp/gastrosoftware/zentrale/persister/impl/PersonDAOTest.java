@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+
 import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.PersonDAO;
 import slgp.gastrosoftware.zentrale.persister.domain.Kontakt;
@@ -134,17 +135,18 @@ public class PersonDAOTest {
     public void testFindByNachname() throws Exception {
 
 
-//		DbHelper.personenSpeichern(personen);
-//		PersonDAOImpl test1 = new PersonDAOImpl();
-//		List<Person> ausgeben = new ArrayList<>();
-//		ausgeben = test1.findByNachname("Meier");
+//    	init();
+//		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
 //
-//		for(int i=0;i<ausgeben.size();i++){
+//		int size = pPerson.findAll().size();
 //
-//            System.out.print(ausgeben.get(i).toString());
-//            System.out.println("----------------------------");
+//		Person lastPerson = pPerson.findAll().get(size - 1);
 //
-//        }
+//		String vorname = lastPerson.getVorname();
+//
+//		List<Person> personNachNachnameListe = pPerson.findByVorname(vorname);
+//
+//		assertTrue(personNachNachnameListe.contains(lastPerson));
     }
 
     @Test
