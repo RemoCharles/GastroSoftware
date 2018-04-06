@@ -29,56 +29,48 @@ public class Controller {
 
 
 	// Userlogin Buttons
-	@FXML
-	private void loginaction(ActionEvent event) throws Exception {
+		@FXML
+		private void loginaction(ActionEvent event) throws Exception {
 
-		LoginDAOImpl login = new LoginDAOImpl();
+			LoginDAOImpl login = new LoginDAOImpl();
 
-		if(login.pruefeLogin(genBenu.getText(), genPass.getText())==true) {
-			if(login.getFunktionPerson(genBenu.getText(), genPass.getText())=="KuechenPersonal") {
-				Parent kueche_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
-				Scene kueche_interface_scene = new Scene(kueche_interface_parent);
-				Stage kueche_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-				kueche_stage.setScene(kueche_interface_scene);
-				kueche_stage.show();
+			if(login.pruefeLogin(genBenu.getText(), genPass.getText())==true) {
 
-			} else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="ServicePersonal") {
-				Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
-				Scene ma_interface_scene = new Scene(ma_interface_parent);
-				Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				ma_stage.setScene(ma_interface_scene);
-				ma_stage.show();
+				if(login.getFunktionPerson(genBenu.getText(), genPass.getText())=="Kuechenpersonal") {
+					Parent kueche_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
+					Scene kueche_interface_scene = new Scene(kueche_interface_parent);
+					Stage kueche_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+					kueche_stage.setScene(kueche_interface_scene);
+					kueche_stage.show();
 
-			}else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="BarPersonal") {
-				Parent bar_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/BarInterface.fxml"));
-				Scene bar_interface_scene = new Scene(bar_interface_parent);
-				Stage bar_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-				bar_stage.setScene(bar_interface_scene);
-				bar_stage.show();
+				}else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="Servicepersonal") {
+					Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
+					Scene ma_interface_scene = new Scene(ma_interface_parent);
+					Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					ma_stage.setScene(ma_interface_scene);
+					ma_stage.show();
 
+				}else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="Barpersonal") {
+					Parent bar_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/BarInterface.fxml"));
+					Scene bar_interface_scene = new Scene(bar_interface_parent);
+					Stage bar_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+					bar_stage.setScene(bar_interface_scene);
+					bar_stage.show();
+
+				}else if (login.getFunktionPerson(genBenu.getText(), genPass.getText())=="Leiter"){
+					Parent leiter_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
+					Scene leiter_interface_scene = new Scene(leiter_interface_parent);
+					Stage leiter_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+					leiter_stage.setScene(leiter_interface_scene);
+					leiter_stage.show();
+
+				}else {
+					genPwEr.setText("Bitte wenden Sie sich an den Administrator...");
+				}
 			}else {
-				genPwEr.setText("Bitte wenden Sie sich an den Administratior.");
+				genPwEr.setText("Benutzername oder Passwort falsch..");
 			}
-
-		} else {
-			genPwEr.setText("Benutzername oder Passwort falsch..");
 		}
-
-
-
-
-		/*
-
-	Parent leiter_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
-	Scene leiter_interface_scene = new Scene(leiter_interface_parent);
-	Stage leiter_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-	leiter_stage.setScene(leiter_interface_scene);
-	leiter_stage.show();
-
-
-		 */
-
-	}
 
 
 	@FXML
@@ -109,5 +101,15 @@ public class Controller {
 		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		ma_stage.setScene(ma_interface_scene);
 		ma_stage.show();
+	}
+	
+	@FXML
+	private void leimenuaction() throws IOException{
+
+	}
+
+	@FXML
+	private void showKonsumartikel() throws IOException{
+
 	}
 }
