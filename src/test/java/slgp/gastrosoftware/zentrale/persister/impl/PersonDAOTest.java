@@ -73,7 +73,7 @@ public class PersonDAOTest {
 
 		Person lastPerson = pPerson.findAll().get(size -1);
 
-		logger.info("Person vor Änderung: " + lastPerson.toString());
+		// logger.info("Person vor Änderung: " + lastPerson.toString());
 
 		Kontakt kontaktAusDB = lastPerson.getKontakt();
 
@@ -84,7 +84,7 @@ public class PersonDAOTest {
 		// Person mit geändertem Kontakt abspeichern
 		pPerson.update(lastPerson);
 
-		logger.info("Person nach Änderung: " + lastPerson.toString());
+		// logger.info("Person nach Änderung: " + lastPerson.toString());
 
 		// Person von der DB holen
 		Person personNeuAusDb = pPerson.findAll().get(size -1);
@@ -122,13 +122,13 @@ public class PersonDAOTest {
 
 		// Liste ausgeben
 
-		EntityManager em = JpaUtil.createEntityManager();
-
-		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
-
-		for (Person p : personenAusDbList) {
-			logger.info(p.toString());
-		}
+//		EntityManager em = JpaUtil.createEntityManager();
+//
+//		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
+//
+//		for (Person p : personenAusDbList) {
+//			logger.info(p.toString());
+//		}
 	}
 
 	@Test
@@ -143,7 +143,7 @@ public class PersonDAOTest {
 
 		String nachname = lastPerson.getName();
 
-		logger.info(nachname);
+		// logger.info(nachname);
 
 		List <Person> personNachNachnameListe = pPerson.findByNachname(nachname);
 
@@ -155,13 +155,13 @@ public class PersonDAOTest {
 
 		List <Person> pListe = em.createNamedQuery("Person.findAll", Person.class).getResultList();
 
-		System.out.println("Cor ausgabe" + lastPerson.toString());
-
-		for (Person p: pListe ) {
-			System.out.println(p);
-		}
-
-		System.out.println(pListe.contains(lastPerson));
+//		System.out.println("Cor ausgabe" + lastPerson.toString());
+//
+//		for (Person p: pListe ) {
+//			System.out.println(p);
+//		}
+//
+//		System.out.println(pListe.contains(lastPerson));
 
 		// assertTrue(personNachNachnameListe.contains(lastPerson));
 
@@ -180,8 +180,12 @@ public class PersonDAOTest {
 		String vorname = lastPerson.getVorname();
 
 		List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
+		
+		for (Person p: personNachVornameListe) {
+			System.out.println(p);
+		}
 
-		//assertTrue(personNachVornameListe.contains(lastPerson));
+		// assertTrue(personNachVornameListe.contains(lastPerson));
 
 	}
 
@@ -195,11 +199,19 @@ public class PersonDAOTest {
 
 		Person lastPerson = pPerson.findAll().get(size -1);
 		
-		// String usernameAusDb = lastPerson.getLogin().getUsername();
+		String lastPersonUsername = lastPerson.getLogin().getUsername();
 		
-        //Person personAusDbMitUsername = pPerson.findByUsername("mjana");
+		// System.out.println(lastPersonUsername);
 		
-
+		Person personAusDbMitUsername = (Person) pPerson.findByUsername(lastPersonUsername);
+		
+        // System.out.println(personAusDbMitUsername.toString());
+        
+        assertTrue(personAusDbMitUsername.getLogin().getUsername().equals(lastPerson.getLogin().getUsername()));
+		assertTrue(personAusDbMitUsername.getLogin().eqauls(lastPerson.getLogin()));
+        
+		
+		
 	}
 
 }

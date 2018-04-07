@@ -59,7 +59,7 @@ public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements Pe
 
 		EntityManager em = JpaUtil.createEntityManager();
 
-		TypedQuery <Person> query = em.createQuery("Person.findByNachnameUndVorname", Person.class);
+		TypedQuery <Person> query = em.createNamedQuery("Person.findByNachnameUndVorname", Person.class);
 
 		query.setParameter("nachname", nachname);
 		query.setParameter("vorname", vorname);
@@ -75,13 +75,20 @@ public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements Pe
 
 		EntityManager em = JpaUtil.createEntityManager();
 
-		TypedQuery <Person> query = em.createQuery("Person.findByUsername", Person.class);
+		TypedQuery <Person> query = em.createNamedQuery("Person.findByUsername", Person.class);
 
 		query.setParameter("username", username);
 
 		List <Person> liste = query.getResultList();
+//		
+//		for (Person p : liste) {
+//			System.out.println(p);
+//			System.out.println("Person mit Username wurde in PersonDAOImpl gefunden");
+//		}
 
 		em.close();
+		
+		// return liste.get(0);
 
 		if (liste.isEmpty()) {
 			return null;
@@ -96,6 +103,7 @@ public class PersonDAOImpl extends GenericPersisterDAOImpl<Person> implements Pe
 	
 	@Override
 	public List<Person> findAll() throws Exception {
+		
 		EntityManager em = JpaUtil.createEntityManager();
 
 		TypedQuery<Person> query = em.createNamedQuery("Person.findAll", Person.class);

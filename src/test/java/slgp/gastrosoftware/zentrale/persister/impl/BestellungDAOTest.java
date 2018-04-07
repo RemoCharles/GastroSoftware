@@ -54,15 +54,15 @@ public class BestellungDAOTest {
 
     @Test
     public final void testSave() throws Exception {
-        init();
-        assertTrue(pBestellungDAO.findAll().size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
-        EntityManager em = JpaUtil.createEntityManager();
-        em = JpaUtil.createEntityManager();
-        List<Bestellung> bestellungList = em.createQuery("SELECT a FROM Bestellung a ORDER BY a.datum", Bestellung.class).getResultList();
-        for (Bestellung best : bestellungList) {
-            logger.info(best);
-        }
-        em.close();
+//        init();
+//        assertTrue(pBestellungDAO.findAll().size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
+//        EntityManager em = JpaUtil.createEntityManager();
+//        em = JpaUtil.createEntityManager();
+//        List<Bestellung> bestellungList = em.createQuery("SELECT a FROM Bestellung a ORDER BY a.datum", Bestellung.class).getResultList();
+//        for (Bestellung best : bestellungList) {
+//            logger.info(best);
+//        }
+//        em.close();
     }
 
 
