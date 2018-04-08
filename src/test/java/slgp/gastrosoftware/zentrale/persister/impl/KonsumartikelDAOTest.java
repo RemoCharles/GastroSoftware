@@ -13,9 +13,7 @@ import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
-import static junit.framework.TestCase.assertFalse;
-
+import static org.junit.Assert.assertTrue;
 
 public class KonsumartikelDAOTest {
     private static Logger logger = LogManager.getLogger(KonsumartikelDAOTest.class);
@@ -47,9 +45,7 @@ public class KonsumartikelDAOTest {
     }
 
     private void init() throws Exception {
-        Util.createEsswarenListe();
         Util.createKonsumartikelListe();
-        Util.createGetraenkeListe();
         logger.info("Initalisierung fertig!");
     }
 
@@ -59,7 +55,6 @@ public class KonsumartikelDAOTest {
         assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
 
         EntityManager em = JpaUtil.createEntityManager();
-        em = JpaUtil.createEntityManager();
         List<Esswaren> bestellungList = em.createQuery("SELECT a FROM Esswaren a", Esswaren.class).getResultList();
         for (Esswaren e : bestellungList) {
             logger.info(e);
@@ -75,6 +70,21 @@ public class KonsumartikelDAOTest {
         Esswaren lastEssware = esswarenDAO.findAll().get(size - 1);
         esswarenDAO.delete(lastEssware);
         Assert.assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_PERSONEN - 1);
+    }
+
+    @Test
+    public void testEsswarenUpdate() throws Exception {
+        init();
+
+        assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_KONSUMARTIKEL);
+        int size = esswarenDAO.findAll().size();
+        Esswaren lastEsswaren = esswarenDAO.findAll().get(size - 1);
+
+        esswarenDAO.update(lastEsswaren);
+
+        Esswaren lastEsswarenNachUpdate = esswarenDAO.findAll().get(size - 1);
+
+        assertTrue(lastEsswarenNachUpdate.getPreis() == lastEsswaren.getPreis());
     }
 
     @Test
@@ -104,31 +114,20 @@ public class KonsumartikelDAOTest {
 
     @Test
     public final void testGetraenkeUpdate() throws Exception {
-
         init();
-
         assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
-
         int size = getraenkeDAO.findAll().size();
 
         Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
 
         lastGetraenke.setPreis(999);
-        
+
         getraenkeDAO.update(lastGetraenke);
 
         Getraenke getraenkeNeuAusDb = getraenkeDAO.findAll().get(size - 1);
 
-        assertFalse(lastGetraenke.getPreis() == getraenkeNeuAusDb.getPreis());
+        assertTrue(lastGetraenke.getPreis() == getraenkeNeuAusDb.getPreis());
         assertTrue(getraenkeNeuAusDb.getBezeichnung().equals(lastGetraenke.getBezeichnung()));
 
-        EntityManager em = JpaUtil.createEntityManager();
-        em = JpaUtil.createEntityManager();
-        List<Getraenke> bestellungList = em.createNamedQuery("Getraenke.findAll", Getraenke.class).getResultList();
-
-        for (Getraenke g : bestellungList) {
-            logger.info(g);
-        }
-        em.close();
     }
 }

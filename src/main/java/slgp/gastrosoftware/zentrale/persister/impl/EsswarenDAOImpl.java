@@ -20,12 +20,12 @@ public class EsswarenDAOImpl extends GenericPersisterDAOImpl<Esswaren> implement
 
     @Override
     public Esswaren save(Esswaren entity) throws Exception {
-        return null;
+        return super.save(entity);
     }
 
     @Override
     public Esswaren update(Esswaren entity) throws Exception {
-        return null;
+        return super.update(entity);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class EsswarenDAOImpl extends GenericPersisterDAOImpl<Esswaren> implement
 
     @Override
     public Esswaren findById(long id) throws Exception {
-        return null;
+        return super.findById(id);
     }
 
     @Override

@@ -31,4 +31,34 @@ public class MenukarteDAOImpl extends GenericPersisterDAOImpl<Menukarte> impleme
         return liste;
 
     }
+
+    @Override
+    public Menukarte save(Menukarte entity) throws Exception {
+        return super.save(entity);
+    }
+
+    @Override
+    public Menukarte update(Menukarte entity) throws Exception {
+        return super.update(entity);
+    }
+
+    @Override
+    public void delete(Menukarte entity) throws Exception {
+        super.delete(entity);
+    }
+
+    @Override
+    public void deleteById(long id) throws Exception {
+        super.deleteById(id);
+    }
+
+    @Override
+    public Menukarte findById(long id) throws Exception {
+        return super.findById(id);
+    }
+
+    @Override
+    public List<Menukarte> findAll() throws Exception {
+        return super.findAll();
+    }
 }

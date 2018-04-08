@@ -37,27 +37,27 @@ public class BestellungDAOImpl extends GenericPersisterDAOImpl<Bestellung> imple
 
     @Override
     public Bestellung save(Bestellung entity) throws Exception {
-        return null;
+        return super.save(entity);
     }
 
     @Override
     public Bestellung update(Bestellung entity) throws Exception {
-        return null;
+        return super.update(entity);
     }
 
     @Override
     public void delete(Bestellung entity) throws Exception {
-
+        super.delete(entity);
     }
 
     @Override
     public void deleteById(long id) throws Exception {
-
+        super.deleteById(id);
     }
 
     @Override
     public Bestellung findById(long id) throws Exception {
-        return null;
+        return super.findById(id);
     }
 
     @Override

@@ -96,7 +96,7 @@ public class Util {
         list.add(new Esswaren("Pizza", "Hauptspeise", 13));
         list.add(new Getraenke("Cola", "Softgetraenke", 5));
         list.add(new Esswaren("Käsekuchen", "Hauptspeise", 12));
-        list.add(new Getraenke("Wasser", "Softgetränke", 0));
+        list.add(new Getraenke("Wasser", "Softgetränke", 2));
 
         for (Konsumartikel k : list) {
             pKonsumartikel.save(k);
@@ -170,7 +170,6 @@ public class Util {
     }
 
     public static List<Bestellung> createBestellungListe() throws Exception {
-        //Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, LocalDate datum) {
         MitarbeiterDAO pMitarbeiter = new MitarbeiterDAOImpl();
         BestellungDAO pBestellung = new BestellungDAOImpl();
         KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
@@ -181,11 +180,13 @@ public class Util {
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
 
+
+        Tisch tisch = new Tisch(6);
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        list.add(new Bestellung(ma, new Tisch(6), konsumList, false, LocalDate.now()));
+        list.add(new Bestellung(ma, tisch, konsumList, false, LocalDate.now()));
 
         pMitarbeiter.save(ma);
-        //pTisch.save();
+        pTisch.save(tisch);
         for (Konsumartikel k : konsumList) {
             pKonsumartikel.save(k);
         }

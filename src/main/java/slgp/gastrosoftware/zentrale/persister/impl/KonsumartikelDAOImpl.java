@@ -69,4 +69,29 @@ public class KonsumartikelDAOImpl extends GenericPersisterDAOImpl<Konsumartikel>
         return liste;
     }
 
+
+    @Override
+    public Konsumartikel save(Konsumartikel entity) throws Exception {
+        return super.save(entity);
+    }
+
+    @Override
+    public Konsumartikel update(Konsumartikel entity) throws Exception {
+        return super.update(entity);
+    }
+
+    @Override
+    public void delete(Konsumartikel entity) throws Exception {
+        super.delete(entity);
+    }
+
+    @Override
+    public void deleteById(long id) throws Exception {
+        super.deleteById(id);
+    }
+
+    @Override
+    public Konsumartikel findById(long id) throws Exception {
+        return super.findById(id);
+    }
 }

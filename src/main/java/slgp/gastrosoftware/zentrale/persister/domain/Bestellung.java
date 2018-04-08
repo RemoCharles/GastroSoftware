@@ -59,7 +59,7 @@ public class Bestellung implements Serializable {
         this.konsumartikel = konsumartikel;
     }
 
-    public boolean isZubereitet() {
+    public boolean getZubereitet() {
         return zubereitet;
     }
 

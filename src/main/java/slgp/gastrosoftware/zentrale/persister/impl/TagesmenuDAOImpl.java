@@ -34,32 +34,6 @@ public class TagesmenuDAOImpl extends GenericPersisterDAOImpl<Tagesmenu> impleme
         return liste;
     }
 
-
-    @Override
-    public Tagesmenu save(Tagesmenu entity) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Tagesmenu update(Tagesmenu entity) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void delete(Tagesmenu entity) throws Exception {
-
-    }
-
-    @Override
-    public void deleteById(long id) throws Exception {
-
-    }
-
-    @Override
-    public Tagesmenu findById(long id) throws Exception {
-        return null;
-    }
-
     @Override
     public List<Tagesmenu> findAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
@@ -71,5 +45,30 @@ public class TagesmenuDAOImpl extends GenericPersisterDAOImpl<Tagesmenu> impleme
         em.close();
 
         return liste;
+    }
+
+    @Override
+    public Tagesmenu save(Tagesmenu entity) throws Exception {
+        return super.save(entity);
+    }
+
+    @Override
+    public Tagesmenu update(Tagesmenu entity) throws Exception {
+        return super.update(entity);
+    }
+
+    @Override
+    public void delete(Tagesmenu entity) throws Exception {
+        super.delete(entity);
+    }
+
+    @Override
+    public void deleteById(long id) throws Exception {
+        super.deleteById(id);
+    }
+
+    @Override
+    public Tagesmenu findById(long id) throws Exception {
+        return super.findById(id);
     }
 }

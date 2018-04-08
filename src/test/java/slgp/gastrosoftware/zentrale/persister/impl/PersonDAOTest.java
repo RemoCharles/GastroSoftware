@@ -1,29 +1,19 @@
 package slgp.gastrosoftware.zentrale.persister.impl;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-
+import org.junit.*;
 import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.PersonDAO;
 import slgp.gastrosoftware.zentrale.persister.domain.Kontakt;
 import slgp.gastrosoftware.zentrale.persister.domain.Person;
-import slgp.gastrosoftware.zentrale.persister.impl.PersonDAOImpl;
-import slgp.gastrosoftware.zentrale.persister.util.DbHelper;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PersonDAOTest {
 
@@ -73,7 +63,9 @@ public class PersonDAOTest {
 
 		Person lastPerson = pPerson.findAll().get(size -1);
 
-		// logger.info("Person vor Änderung: " + lastPerson.toString());
+		logger.info("Person vor Änderung: " + lastPerson.toString());
+
+
 
 		Kontakt kontaktAusDB = lastPerson.getKontakt();
 
@@ -84,7 +76,7 @@ public class PersonDAOTest {
 		// Person mit geändertem Kontakt abspeichern
 		pPerson.update(lastPerson);
 
-		// logger.info("Person nach Änderung: " + lastPerson.toString());
+		logger.info("Person nach Änderung: " + lastPerson.toString());
 
 		// Person von der DB holen
 		Person personNeuAusDb = pPerson.findAll().get(size -1);
@@ -92,6 +84,17 @@ public class PersonDAOTest {
 		assertFalse(kontaktAusDB.equals(personNeuAusDb.getKontakt()));
 		assertTrue(kontaktNeu.getEmail().equals(personNeuAusDb.getKontakt().getEmail()));
 		assertTrue(kontaktNeu.getTelefon().equals(personNeuAusDb.getKontakt().getTelefon()));
+
+
+		EntityManager em = JpaUtil.createEntityManager();
+
+		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
+		logger.info("Personen nach Update --------------------------------------------------");
+		for (Person p : personenAusDbList) {
+			logger.info(p.toString());
+		}
+
+
 
 	}
 
@@ -122,13 +125,13 @@ public class PersonDAOTest {
 
 		// Liste ausgeben
 
-//		EntityManager em = JpaUtil.createEntityManager();
-//
-//		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
-//
-//		for (Person p : personenAusDbList) {
-//			logger.info(p.toString());
-//		}
+		//		EntityManager em = JpaUtil.createEntityManager();
+		//
+		//		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
+		//
+		//		for (Person p : personenAusDbList) {
+		//			logger.info(p.toString());
+		//		}
 	}
 
 	@Test
@@ -155,13 +158,13 @@ public class PersonDAOTest {
 
 		List <Person> pListe = em.createNamedQuery("Person.findAll", Person.class).getResultList();
 
-//		System.out.println("Cor ausgabe" + lastPerson.toString());
-//
-//		for (Person p: pListe ) {
-//			System.out.println(p);
-//		}
-//
-//		System.out.println(pListe.contains(lastPerson));
+		//		System.out.println("Cor ausgabe" + lastPerson.toString());
+		//
+		//		for (Person p: pListe ) {
+		//			System.out.println(p);
+		//		}
+		//
+		//		System.out.println(pListe.contains(lastPerson));
 
 		// assertTrue(personNachNachnameListe.contains(lastPerson));
 
@@ -180,7 +183,7 @@ public class PersonDAOTest {
 		String vorname = lastPerson.getVorname();
 
 		List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
-		
+
 		for (Person p: personNachVornameListe) {
 			System.out.println(p);
 		}
@@ -198,20 +201,20 @@ public class PersonDAOTest {
 		int size = pPerson.findAll().size();
 
 		Person lastPerson = pPerson.findAll().get(size -1);
-		
+
 		String lastPersonUsername = lastPerson.getLogin().getUsername();
-		
+
 		// System.out.println(lastPersonUsername);
-		
+
 		Person personAusDbMitUsername = (Person) pPerson.findByUsername(lastPersonUsername);
-		
-        // System.out.println(personAusDbMitUsername.toString());
-        
-        assertTrue(personAusDbMitUsername.getLogin().getUsername().equals(lastPerson.getLogin().getUsername()));
+
+		// System.out.println(personAusDbMitUsername.toString());
+
+		assertTrue(personAusDbMitUsername.getLogin().getUsername().equals(lastPerson.getLogin().getUsername()));
 		assertTrue(personAusDbMitUsername.getLogin().eqauls(lastPerson.getLogin()));
-        
-		
-		
+
+
+
 	}
 
 }

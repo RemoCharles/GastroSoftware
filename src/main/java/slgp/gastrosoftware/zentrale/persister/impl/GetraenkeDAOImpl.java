@@ -22,27 +22,27 @@ public class GetraenkeDAOImpl extends GenericPersisterDAOImpl<Getraenke> impleme
 
     @Override
     public Getraenke save(Getraenke entity) throws Exception {
-        return null;
+        return super.save(entity);
     }
 
     @Override
     public Getraenke update(Getraenke entity) throws Exception {
-        return null;
+        return super.update(entity);
     }
 
     @Override
     public void delete(Getraenke entity) throws Exception {
-
+        super.delete(entity);
     }
 
     @Override
     public void deleteById(long id) throws Exception {
-
+        super.deleteById(id);
     }
 
     @Override
     public Getraenke findById(long id) throws Exception {
-        return null;
+        return super.findById(id);
     }
 
 
