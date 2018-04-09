@@ -13,7 +13,8 @@ import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 
 public class KonsumartikelDAOTest {
     private static Logger logger = LogManager.getLogger(KonsumartikelDAOTest.class);
@@ -31,6 +32,7 @@ public class KonsumartikelDAOTest {
         Util.deleteAllEsswaren();
         Util.deleteAllGetraenke();
         Util.deleteAllKonsumartikel();
+        Util.deleteAllBestellung();
     }
 
     @Before
@@ -38,6 +40,7 @@ public class KonsumartikelDAOTest {
         Util.deleteAllEsswaren();
         Util.deleteAllGetraenke();
         Util.deleteAllKonsumartikel();
+        Util.deleteAllBestellung();
     }
 
     @After
@@ -105,29 +108,27 @@ public class KonsumartikelDAOTest {
     @Test
     public void testGetraenkeDelete() throws Exception {
         init();
-        assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
+        assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
         int size = getraenkeDAO.findAll().size();
         Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
         getraenkeDAO.delete(lastGetraenke);
-        Assert.assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_PERSONEN - 1);
+        Assert.assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE - 1);
+
+        for (Getraenke g : getraenkeDAO.findAll()) {
+            logger.info(g);
+        }
     }
 
     @Test
     public final void testGetraenkeUpdate() throws Exception {
         init();
         assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
-        int size = getraenkeDAO.findAll().size();
-
-        Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
-
-        lastGetraenke.setPreis(999);
-
-        getraenkeDAO.update(lastGetraenke);
-
-        Getraenke getraenkeNeuAusDb = getraenkeDAO.findAll().get(size - 1);
-
-        assertTrue(lastGetraenke.getPreis() == getraenkeNeuAusDb.getPreis());
-        assertTrue(getraenkeNeuAusDb.getBezeichnung().equals(lastGetraenke.getBezeichnung()));
-
+        Getraenke lastGetraenke = getraenkeDAO.findAll().get(getraenkeDAO.findAll().size() - 1);
+        Getraenke getraenkeAusDb = lastGetraenke;
+        getraenkeAusDb.setPreis(999);
+        getraenkeDAO.update(getraenkeAusDb);
+        Getraenke getraenkeNeuAusDb = getraenkeDAO.findAll().get(getraenkeDAO.findAll().size() - 1);
+        assertTrue(getraenkeAusDb.getPreis() == getraenkeNeuAusDb.getPreis());
+        assertTrue(getraenkeAusDb.getBezeichnung().equals(getraenkeNeuAusDb.getBezeichnung()));
     }
 }
