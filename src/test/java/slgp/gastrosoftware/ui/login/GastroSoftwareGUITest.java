@@ -34,7 +34,7 @@ public class GastroSoftwareGUITest extends Application {
 		List<Person> personen;
 		personen = Util.erstellePersonenListe();
 		DbHelper.personenSpeichern(personen);
-
+		Util.createKonsumartikelListe();
 		launch(args);
 	}
 }
