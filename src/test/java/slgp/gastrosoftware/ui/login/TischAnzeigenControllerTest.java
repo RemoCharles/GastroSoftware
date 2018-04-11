@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
 
@@ -29,8 +30,10 @@ public class TischAnzeigenControllerTest {
 	
 	@FXML
 	private TableView<Konsumartikel> tblKonsumartikel;
+	
 	@FXML
 	private TableColumn<Konsumartikel, String> konsKat;
+	
 	@FXML
 	private Button butAkt;
 	
@@ -39,9 +42,7 @@ public class TischAnzeigenControllerTest {
 	
 	@FXML
 	private TableColumn<Konsumartikel, Double> konsPr;
-	
-	
-	
+		
 	public void tblBefuellen(ActionEvent event) throws Exception {
 
 		try {	
@@ -71,7 +72,7 @@ public class TischAnzeigenControllerTest {
 			konsPr.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
 			
 			ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
-
+			konsumartikelListe.addAll(alleKonsumartikelListe);
 			tblKonsumartikel.setItems(konsumartikelListe);
 
 //			updateTable();
