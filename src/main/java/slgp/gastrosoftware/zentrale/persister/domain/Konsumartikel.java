@@ -19,7 +19,6 @@ public class Konsumartikel implements Serializable {
     private String kategorie;
 
     public Konsumartikel() {
-
     }
 
     public Konsumartikel(String bezeichnung, String kategorie, double preis) {

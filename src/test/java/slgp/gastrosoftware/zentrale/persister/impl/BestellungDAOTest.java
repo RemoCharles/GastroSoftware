@@ -51,7 +51,6 @@ public class BestellungDAOTest {
         Util.createMitarbeiter();
         Util.createTagesmenuListe();
         Util.createTisch();
-        Util.createTischRechnung();
         logger.info("Initalisierung fertig!");
     }
 

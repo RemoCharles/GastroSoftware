@@ -207,9 +207,13 @@ public class Util {
         TischRechnungDAO pTischRechnung = new TischRechnungDAOImpl();
         BestellungDAO pBestellung = new BestellungDAOImpl();
         MitarbeiterDAO pMitarbeiter = new MitarbeiterDAOImpl();
+        TischDAO tischDAO = new TischDAOImpl();
+        KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
 
         List<TischRechnung> list = new ArrayList<>();
 
+
+        Tisch tisch = new Tisch(6);
 
         List<Bestellung> bestellungList = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
@@ -217,18 +221,24 @@ public class Util {
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
 
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        bestellungList.add(new Bestellung(ma, new Tisch(6), konsumList, false, LocalDate.now()));
+        bestellungList.add(new Bestellung(ma, tisch, konsumList, false, LocalDate.now()));
 
 
         list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
 
-//        pMitarbeiter.save(ma);
-//        for (Bestellung b : bestellungList){
-//            pBestellung.save(b);
-//        }
-//        for (TischRechnung tr : list){
-//            pTischRechnung.save(tr);
-//        }
+        pMitarbeiter.save(ma);
+        tischDAO.save(tisch);
+
+        for(Konsumartikel k : konsumList){
+            konsumartikelDAO.save(k);
+        }
+
+        for (Bestellung b : bestellungList){
+            pBestellung.save(b);
+        }
+        for (TischRechnung tr : list){
+            pTischRechnung.save(tr);
+        }
         return list;
     }
 
@@ -238,6 +248,17 @@ public class Util {
             pTischRechnung.delete(t);
         }
     }
+
+//    public static List<MAAbrechnung> createMAAbrechnung() throws Exception{
+//        List<MAAbrechnung> maAbrechnungList = new ArrayList<>();
+//        List<TischRechnung> tischRechnungList = createTischRechnung();
+//        List<Mitarbeiter> mitarbeiterList = createMitarbeiter();
+//
+//        MAAbrechnung maAbrechnung = new MAAbrechnung(LocalDate.now(), "Test", tischRechnungList, mitarbeiterList.get(0));
+//        maAbrechnungList.add(maAbrechnung);
+//
+//        return maAbrechnungList;
+//    }
 
     public static void resetDb() throws Exception {
         /* Schema wird angelegt, die vorhandenen Daten werden dabei gelöscht. */

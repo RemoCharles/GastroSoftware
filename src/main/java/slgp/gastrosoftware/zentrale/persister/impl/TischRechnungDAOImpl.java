@@ -47,13 +47,9 @@ public class TischRechnungDAOImpl extends GenericPersisterDAOImpl<TischRechnung>
     @Override
     public List<TischRechnung> findAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
-
         TypedQuery<TischRechnung> query = em.createNamedQuery("TischRechnung.findAll", TischRechnung.class);
-
         List<TischRechnung> liste = query.getResultList();
-
         em.close();
-
         return liste;
     }
 }

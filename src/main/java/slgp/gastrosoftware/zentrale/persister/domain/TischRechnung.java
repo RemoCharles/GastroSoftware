@@ -2,6 +2,7 @@ package slgp.gastrosoftware.zentrale.persister.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,6 +23,7 @@ public class TischRechnung extends Rechnung{
         super(datum, nameRestaunt);
         this.bestellungList = bestellungList;
     }
+
 
     @Override
     public boolean equals(Object o) {
