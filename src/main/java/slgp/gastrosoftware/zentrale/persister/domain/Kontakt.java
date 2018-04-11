@@ -2,6 +2,7 @@ package slgp.gastrosoftware.zentrale.persister.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @NamedQueries({
@@ -37,6 +38,30 @@ public class Kontakt implements Serializable {
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hash(email, telefon);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (this == obj) {
+    		return true;
+    	}
+    	
+    	if (obj == null) {
+    		return false;
+    	}
+    	
+    	if (!(obj instanceof Kontakt)) {
+    		return false;
+    	}
+    	
+    	Kontakt kont = (Kontakt) obj;
+    	
+    	return this.email == kont.email && this.telefon == kont.telefon;
     }
 
     @Override

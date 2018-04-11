@@ -184,11 +184,16 @@ public class PersonDAOTest {
 
 		List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
 
-		for (Person p: personNachVornameListe) {
-			System.out.println(p);
-		}
-
+		
+//		for (Person p: personNachVornameListe) {
+//			System.out.println("-------------");
+//			System.out.println(p);
+//		}
+		
+		assertTrue(personNachVornameListe.get(0).getVorname().equals(vorname));
 		// assertTrue(personNachVornameListe.contains(lastPerson));
+		
+		
 
 	}
 
@@ -216,5 +221,30 @@ public class PersonDAOTest {
 
 
 	}
+	
+	@Test
+	public final void testFindByNachnameUndVorname() throws Exception {
+		init();
+		
+		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
+
+		int size = pPerson.findAll().size();
+
+		Person lastPerson = pPerson.findAll().get(size -1);
+		
+		String nachname = lastPerson.getName();
+		String vorname = lastPerson.getVorname();
+		
+		List <Person> personNachNachnameUndVornameListe = pPerson.findByNachnameUndVorname(nachname, vorname);
+		
+		for (Person p: personNachNachnameUndVornameListe) {
+			System.out.println("Person NachNachname und Vorname -------------");
+			System.out.println(p);
+		}
+		
+		// assertTrue(personNachNachnameUndVornameListe.contains(lastPerson));
+	}
+	
+	
 
 }
