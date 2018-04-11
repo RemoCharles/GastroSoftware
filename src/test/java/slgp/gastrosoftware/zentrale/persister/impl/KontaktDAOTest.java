@@ -55,12 +55,13 @@ public class KontaktDAOTest {
 		
 		assertTrue(kKontakt.findAll().size() == Util.INIT_SIZE_PERSONEN);
 		
+		// Ausgabe der Kontakte
 		EntityManager em = JpaUtil.createEntityManager();
 		
 		List <Kontakt> alleKontakte = em.createNamedQuery("Kontakt.findAll", Kontakt.class).getResultList();
 		
-		for (Kontakt p: alleKontakte) {
-			logger.info("Kontakt welcher gefunden wurden: " + p);
+		for (Kontakt k: alleKontakte) {
+			logger.info("Kontakt welcher gefunden wurden: " + k);
 		}
 	}
 

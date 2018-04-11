@@ -6,8 +6,12 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Adresse.findAll", query = "SELECT e FROM Adresse e")})
 public class Adresse implements Serializable {
 
     @Id
