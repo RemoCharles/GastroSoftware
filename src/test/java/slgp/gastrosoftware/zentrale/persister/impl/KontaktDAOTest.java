@@ -2,6 +2,10 @@ package slgp.gastrosoftware.zentrale.persister.impl;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -12,6 +16,8 @@ import org.junit.Test;
 
 import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.KontaktDAO;
+import slgp.gastrosoftware.zentrale.persister.domain.Kontakt;
+import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 public class KontaktDAOTest {
 	
@@ -44,8 +50,18 @@ public class KontaktDAOTest {
 	}
 	
 	@Test
-	public final void findAll() throws Exception  {
-		fail("Not yet implemented");
+	public final void testfindAll() throws Exception  {
+		init();
+		
+		assertTrue(kKontakt.findAll().size() == Util.INIT_SIZE_PERSONEN);
+		
+		EntityManager em = JpaUtil.createEntityManager();
+		
+		List <Kontakt> alleKontakte = em.createNamedQuery("Kontakt.findAll", Kontakt.class).getResultList();
+		
+		for (Kontakt p: alleKontakte) {
+			logger.info("Kontakt welcher gefunden wurden: " + p);
+		}
 	}
 
 }
