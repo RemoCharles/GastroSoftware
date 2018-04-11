@@ -50,7 +50,7 @@ public class KontaktDAOTest {
 	}
 	
 	@Test
-	public final void testfindAll() throws Exception  {
+	public void testfindAll() throws Exception  {
 		init();
 		
 		assertTrue(kKontakt.findAll().size() == Util.INIT_SIZE_PERSONEN);

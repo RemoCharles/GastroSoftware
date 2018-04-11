@@ -21,6 +21,14 @@ public interface LoginDAO extends GenericPersisterDAO<Login> {
       @throws Exception
      */
 	String getFunktionPerson(String username, String passwort) throws Exception;
+	 /**
+     * Liefert alle Kontakte zurück
+     *
+     * @return
+     * @throws Exception
+     */
+	List<Login> findAll() throws Exception;
+	
 	
 	
 }
