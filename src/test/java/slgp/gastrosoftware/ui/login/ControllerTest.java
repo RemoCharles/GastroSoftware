@@ -1,10 +1,16 @@
 package slgp.gastrosoftware.ui.login;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +18,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import slgp.gastrosoftware.zentrale.persister.impl.LoginDAOImpl;
 
-public class ControllerTest {
+public class ControllerTest implements Initializable{
 
 	@FXML
 	// Variablen
@@ -30,7 +36,11 @@ public class ControllerTest {
 	@FXML
 	private Button maiTisc1;
 
-
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
+	
 	// Userlogin Buttons
 	@FXML
 	private void loginaction(ActionEvent event) throws Exception {
@@ -95,6 +105,8 @@ public class ControllerTest {
 		tisch_stage.setScene(tisch_anzeigen_scene);
 		tisch_stage.show();
 		
+		
+		
 	}
 
 	@FXML
@@ -115,4 +127,7 @@ public class ControllerTest {
 	private void showKonsumartikel() throws IOException{
 
 	}
+
+
+	
 }

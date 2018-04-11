@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,8 +26,9 @@ import javafx.stage.Stage;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
 
-public class TischAnzeigenControllerTest {
-
+public class TischAnzeigenControllerTest implements Initializable {
+	 private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
+	 
 	@FXML
 	private ComboBox<String> cmbKat;
 	
@@ -42,8 +46,18 @@ public class TischAnzeigenControllerTest {
 	
 	@FXML
 	private TableColumn<Konsumartikel, Double> konsPr;
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
+			tblBefuellen();
+		} catch (Exception e) {
+			logger.error("Tabelle konnte nicht befüllt werden...");
+		}
 		
-	public void tblBefuellen(ActionEvent event) throws Exception {
+	}
+		
+	public void tblBefuellen() throws Exception {
 
 		try {	
 			
@@ -82,6 +96,8 @@ public class TischAnzeigenControllerTest {
 		}
 
 	}
+
+
 }
 
 //	@FXML
