@@ -38,6 +38,7 @@ public class BestellungDAOTest {
     public void setUp() throws Exception {
         Util.deleteAllBestellung();
         Util.deleteAllMitarbeiter();
+        Util.deleteAllPersonen();
         Util.deleteAllBestellung();
         Util.deleteAllEsswaren();
         Util.deleteAllGetraenke();

@@ -29,13 +29,15 @@ public class PersonDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		Util.deleteAllMitarbeiter();
 		Util.deleteAllPersonen();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		Util.deleteAllPersonen();
 		Util.deleteAllMitarbeiter();
+		Util.deleteAllPersonen();
+		
 	}
 
 	@After

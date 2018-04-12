@@ -42,11 +42,13 @@ public class LoginDAOTest {
 	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		Util.deleteAllMitarbeiter();
 		Util.deleteAllPersonen();
 	}
 	
 	@Before
 	public void setUp() throws Exception{
+		Util.deleteAllMitarbeiter();
 		Util.deleteAllPersonen();
 	}
 	
