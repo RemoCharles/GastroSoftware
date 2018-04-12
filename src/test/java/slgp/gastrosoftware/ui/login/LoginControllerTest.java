@@ -18,7 +18,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import slgp.gastrosoftware.zentrale.persister.impl.LoginDAOImpl;
 
-public class ControllerTest implements Initializable{
+public class LoginControllerTest implements Initializable{
 
 	@FXML
 	// Variablen
@@ -35,6 +35,9 @@ public class ControllerTest implements Initializable{
 	
 	@FXML
 	private Button maiTisc1;
+	
+	@FXML
+	private Button genAbbr;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,43 +94,5 @@ public class ControllerTest implements Initializable{
 
 		System.exit(0);
 	}
-
-	//MaInterface Variablen & Button
-	@FXML
-	private Label lbltis;
-
-
-	@FXML
-	private void tisch1action(ActionEvent event) throws Exception {
-		Parent tisch_anzeigen_parent = FXMLLoader.load(getClass().getResource("/fxml/TischAnzeigen.fxml"));
-		Scene tisch_anzeigen_scene = new Scene(tisch_anzeigen_parent);
-		Stage tisch_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		tisch_stage.setScene(tisch_anzeigen_scene);
-		tisch_stage.show();
-		
-		
-		
-	}
-
-	@FXML
-	private void tiszuruaction(ActionEvent event) throws IOException {
-		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
-		Scene ma_interface_scene = new Scene(ma_interface_parent);
-		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		ma_stage.setScene(ma_interface_scene);
-		ma_stage.show();
-	}
-
-	@FXML
-	private void leimenuaction() throws IOException{
-
-	}
-
-	@FXML
-	private void showKonsumartikel() throws IOException{
-
-	}
-
-
 	
 }
