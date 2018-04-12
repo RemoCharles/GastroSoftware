@@ -56,6 +56,15 @@ public class TischAnzeigenControllerTest implements Initializable {
 		}
 		
 	}
+	
+	@FXML
+	public void zurueck(ActionEvent event) throws Exception{
+		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
+		Scene ma_interface_scene = new Scene(ma_interface_parent);
+		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		ma_stage.setScene(ma_interface_scene);
+		ma_stage.show();
+	}
 		
 	public void tblBefuellen() throws Exception {
 

@@ -26,5 +26,6 @@
       </TableView>
       <ComboBox fx:id="cmbKat" layoutX="116.0" layoutY="138.0" prefHeight="25.0" prefWidth="263.0" AnchorPane.leftAnchor="116.0" />
       <Label layoutX="50.0" layoutY="142.0" prefHeight="17.0" prefWidth="66.0" text="Kategorie:" AnchorPane.leftAnchor="50.0" />
+      <Button layoutX="877.0" layoutY="37.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="25.0" prefWidth="81.0" text="zurück" />
    </children>
 </AnchorPane>
