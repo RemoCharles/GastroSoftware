@@ -35,6 +35,7 @@ public class PersonDAOTest {
 	@Before
 	public void setUp() throws Exception {
 		Util.deleteAllPersonen();
+		Util.deleteAllMitarbeiter();
 	}
 
 	@After
@@ -54,29 +55,26 @@ public class PersonDAOTest {
 
 	@Test
 	public final void testUpdate() throws Exception {
-
 		init();
 
+		logger.info("Personen nach Initialisierung --------------------------------------------------");
+		for (Person p : pPerson.findAll()) {
+			logger.info(p);
+		}
+		logger.info("--------------------------------");
+
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-
 		int size = pPerson.findAll().size();
-
 		Person lastPerson = pPerson.findAll().get(size -1);
-
 		logger.info("Person vor Änderung: " + lastPerson.toString());
-
-
-
+		logger.info("--------------------------------");
 		Kontakt kontaktAusDB = lastPerson.getKontakt();
-
 		Kontakt kontaktNeu = new Kontakt("test1@gmail.com", "078 546 93 93");
-
 		lastPerson.setKontakt(kontaktNeu);
-
 		// Person mit geändertem Kontakt abspeichern
 		pPerson.update(lastPerson);
-
 		logger.info("Person nach Änderung: " + lastPerson.toString());
+		logger.info("--------------------------------");
 
 		// Person von der DB holen
 		Person personNeuAusDb = pPerson.findAll().get(size -1);
@@ -85,17 +83,10 @@ public class PersonDAOTest {
 		assertTrue(kontaktNeu.getEmail().equals(personNeuAusDb.getKontakt().getEmail()));
 		assertTrue(kontaktNeu.getTelefon().equals(personNeuAusDb.getKontakt().getTelefon()));
 
-
-		EntityManager em = JpaUtil.createEntityManager();
-
-		List <Person> personenAusDbList = em.createNamedQuery("Person.findAll", Person.class).getResultList();
 		logger.info("Personen nach Update --------------------------------------------------");
-		for (Person p : personenAusDbList) {
-			logger.info(p.toString());
+		for (Person p : pPerson.findAll()) {
+			logger.info(p);
 		}
-
-
-
 	}
 
 	@Test
@@ -184,7 +175,7 @@ public class PersonDAOTest {
 
 		List<Person> personNachVornameListe = pPerson.findByVorname(vorname);
 
-		
+
 //		for (Person p: personNachVornameListe) {
 //			System.out.println("-------------");
 //			System.out.println(p);
@@ -224,30 +215,30 @@ public class PersonDAOTest {
 
 
 	}
-	
+
 	@Test
 	public final void testFindByNachnameUndVorname() throws Exception {
 		init();
-		
+
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
 
 		int size = pPerson.findAll().size();
 
 		Person lastPerson = pPerson.findAll().get(size -1);
-		
+
 		String nachname = lastPerson.getName();
 		String vorname = lastPerson.getVorname();
-		
+
 		List <Person> personNachNachnameUndVornameListe = pPerson.findByNachnameUndVorname(nachname, vorname);
-		
+
 		for (Person p: personNachNachnameUndVornameListe) {
 			System.out.println("Person NachNachname und Vorname -------------");
 			System.out.println(p);
 		}
-		
+
 		// assertTrue(personNachNachnameUndVornameListe.contains(lastPerson));
 	}
-	
+
 	
 
 }

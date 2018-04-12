@@ -37,6 +37,12 @@ public class BestellungDAOTest {
     @Before
     public void setUp() throws Exception {
         Util.deleteAllBestellung();
+        Util.deleteAllMitarbeiter();
+        Util.deleteAllBestellung();
+        Util.deleteAllEsswaren();
+        Util.deleteAllGetraenke();
+        Util.deleteAllKonsumartikel();
+        Util.deleteAllTisch();
     }
 
     @After
@@ -49,7 +55,6 @@ public class BestellungDAOTest {
         Util.createGetraenkeListe();
         Util.createKonsumartikelListe();
         Util.createMitarbeiter();
-        Util.createTagesmenuListe();
         Util.createTisch();
         logger.info("Initalisierung fertig!");
     }

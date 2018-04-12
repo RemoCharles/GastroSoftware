@@ -53,14 +53,14 @@ public class AdresseDAOTest {
 	@Test
 	public void testfindAll() throws Exception {
 		init();
-		
+
 		assertTrue(aAdresse.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
+
 		// Ausgabe der Adressen
 		EntityManager em = JpaUtil.createEntityManager();
-		
+
 		List <Adresse> alleAdressen = em.createNamedQuery("Adresse.findAll", Adresse.class).getResultList();
-		
+
 		for (Adresse a: alleAdressen) {
 			logger.info("Adresse welche gefunden wurden: " + a);
 		}

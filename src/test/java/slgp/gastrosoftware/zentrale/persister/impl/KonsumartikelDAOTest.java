@@ -56,13 +56,6 @@ public class KonsumartikelDAOTest {
     public void testEsswarenSave() throws Exception {
         init();
         assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
-
-        EntityManager em = JpaUtil.createEntityManager();
-        List<Esswaren> bestellungList = em.createQuery("SELECT a FROM Esswaren a", Esswaren.class).getResultList();
-        for (Esswaren e : bestellungList) {
-            logger.info(e);
-        }
-        em.close();
     }
 
     @Test
@@ -78,15 +71,11 @@ public class KonsumartikelDAOTest {
     @Test
     public void testEsswarenUpdate() throws Exception {
         init();
-
         assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_KONSUMARTIKEL);
         int size = esswarenDAO.findAll().size();
         Esswaren lastEsswaren = esswarenDAO.findAll().get(size - 1);
-
         esswarenDAO.update(lastEsswaren);
-
         Esswaren lastEsswarenNachUpdate = esswarenDAO.findAll().get(size - 1);
-
         assertTrue(lastEsswarenNachUpdate.getPreis() == lastEsswaren.getPreis());
     }
 
@@ -94,15 +83,6 @@ public class KonsumartikelDAOTest {
     public void testGetraenkeSave() throws Exception {
         init();
         assertTrue(getraenkeDAO.findAll().size() == 2);
-
-        EntityManager em = JpaUtil.createEntityManager();
-        em = JpaUtil.createEntityManager();
-        List<Getraenke> bestellungList = em.createNamedQuery("Getraenke.findAll", Getraenke.class).getResultList();
-
-        for (Getraenke g : bestellungList) {
-            logger.info(g);
-        }
-        em.close();
     }
 
     @Test

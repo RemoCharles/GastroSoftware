@@ -62,46 +62,46 @@ public class LoginDAOTest {
 	@Test
 	public void pruefeLoginVorhanden() throws Exception {
 		init();
-		
+
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
+
 		boolean ergebnis = lLogin.pruefeLogin("mjana", "abcde");
-		
+
 		assertTrue(ergebnis == true);
-		
+
 	}
-	
+
 	@Test
 	public void pruefeLoginNichtVorhanden() throws Exception{
 		init();
-		
+
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
+
 		boolean ergebnis = lLogin.pruefeLogin("mjana", "abeecde");
-		
+
 		assertTrue(ergebnis == false);
 	}
-	
-	
+
+
 	@Test
 	public void getFunktionPerson() throws Exception{
 		init();
-		
+
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
+
 		String personFunktion = lLogin.getFunktionPerson("mjana", "abcde");
-		
+
 		assertTrue(personFunktion.equals("Servicepersonal"));
 	}
-	
+
 	@Test
 	public void getFunktionPersonNichtVorhanden() throws Exception {
 		init();
-		
+
 		assertTrue(pPerson.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
+
 		String personFunktion = lLogin.getFunktionPerson("mjana", "abcde");
-		
+
 		assertTrue(!personFunktion.equals("Kuechenpersonal"));
 	}
 	

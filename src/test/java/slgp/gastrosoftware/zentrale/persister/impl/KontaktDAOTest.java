@@ -38,6 +38,7 @@ public class KontaktDAOTest {
 	@Before
 	public void setUp() throws Exception {
 		Util.deleteAllPersonen();
+		Util.deleteAllMitarbeiter();
 	}
 	
 	@After

@@ -7,7 +7,7 @@ import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 import slgp.gastrosoftware.zentrale.persister.domain.Tisch;
 import slgp.gastrosoftware.zentrale.persister.impl.BestellungDAOImpl;
-import slgp.gastrosoftware.zentrale.persister.impl.BestellungDAOTest;
+//import slgp.gastrosoftware.zentrale.persister.impl.BestellungDAOTest;
 import slgp.gastrosoftware.zentrale.persister.impl.TischDAOImpl;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class TischDAOTest {
-    private static Logger logger = LogManager.getLogger(BestellungDAOTest.class);
+    private static Logger logger = LogManager.getLogger(TischDAOTest.class);
 
     private static TischDAO pTischDAO = new TischDAOImpl();
 

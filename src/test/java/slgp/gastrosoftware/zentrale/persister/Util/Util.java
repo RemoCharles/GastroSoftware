@@ -7,7 +7,6 @@ import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Util {
