@@ -57,7 +57,7 @@ public class Login implements Serializable {
 
         Login logi = (Login) obj;
 
-        return this.getUsername() == logi.getUsername() && this.getPasswort() == logi.getPasswort();
+        return this.username.equals(logi.username) && this.passwort.equals(logi.passwort);
 
     }
 

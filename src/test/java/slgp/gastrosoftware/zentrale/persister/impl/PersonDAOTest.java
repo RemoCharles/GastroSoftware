@@ -159,7 +159,7 @@ public class PersonDAOTest {
 		//
 		//		System.out.println(pListe.contains(lastPerson));
 
-		// assertTrue(personNachNachnameListe.contains(lastPerson));
+		assertTrue(personNachNachnameListe.contains(lastPerson));
 
 	}
 
@@ -238,7 +238,7 @@ public class PersonDAOTest {
 			System.out.println(p);
 		}
 
-		// assertTrue(personNachNachnameUndVornameListe.contains(lastPerson));
+		assertTrue(personNachNachnameUndVornameListe.contains(lastPerson));
 	}
 
 	

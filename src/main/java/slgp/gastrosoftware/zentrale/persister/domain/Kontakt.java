@@ -61,7 +61,7 @@ public class Kontakt implements Serializable {
     	
     	Kontakt kont = (Kontakt) obj;
     	
-    	return this.email == kont.email && this.telefon == kont.telefon;
+    	return this.email.equals(kont.email) && this.telefon.equals(kont.telefon);
     }
 
     @Override
