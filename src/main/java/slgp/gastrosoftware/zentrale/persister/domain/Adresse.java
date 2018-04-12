@@ -75,7 +75,7 @@ public class Adresse implements Serializable {
     	
     	Adresse adr = (Adresse) obj;
     	
-    	return this.strasse == adr.strasse && this.plz == adr.plz;
+    	return this.strasse.equals(adr.strasse) && this.plz == adr.plz;
     }
 
     @Override

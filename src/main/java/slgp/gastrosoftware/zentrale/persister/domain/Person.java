@@ -124,7 +124,7 @@ public class Person implements Serializable {
 
         Person pers = (Person) obj;
 
-        return this.name == pers.name && this.adresse == pers.adresse;
+        return this.name.equals(pers.name) && this.adresse.equals(pers.adresse);
     }
 
 

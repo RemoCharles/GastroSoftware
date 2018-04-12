@@ -190,8 +190,11 @@ public class PersonDAOTest {
 //			System.out.println(p);
 //		}
 		
+		Person persFromDb = pPerson.findByVorname(vorname).get(0);
+		
+		
 		assertTrue(personNachVornameListe.get(0).getVorname().equals(vorname));
-		// assertTrue(personNachVornameListe.contains(lastPerson));
+		assertTrue(personNachVornameListe.contains(lastPerson));
 		
 		
 
