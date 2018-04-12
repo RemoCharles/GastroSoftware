@@ -19,7 +19,7 @@ import slgp.gastrosoftware.zentrale.persister.api.KontaktDAO;
 import slgp.gastrosoftware.zentrale.persister.domain.Kontakt;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
-public class KontaktDAOTest {
+public class s {
 	
 	private static KontaktDAO kKontakt = new KontaktDAOImpl();
 	
