@@ -4,12 +4,11 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutX="115.0" layoutY="104.0" prefHeight="365.0" prefWidth="532.0" vbarPolicy="ALWAYS" />
-      <Button layoutX="700.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" text="Zurück" />
-      <Button layoutX="700.0" layoutY="400.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" text="Löschen" />
-      <Button layoutX="700.0" layoutY="440.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" text="Hinzufügen" />
+      <Button layoutX="801.0" layoutY="17.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
+      <Button layoutX="801.0" layoutY="57.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Löschen" />
+      <Button layoutX="801.0" layoutY="97.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Hinzufügen" />
    </children>
 </AnchorPane>

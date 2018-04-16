@@ -58,8 +58,8 @@
             <Button id="usrTisc25" mnemonicParsing="false" onAction="#tischAction" text="50" />
         </buttons>
       </ButtonBar>
-      <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="63.0" text="Zurück" />
-      <Button layoutX="801.0" layoutY="57.0" mnemonicParsing="false" onAction="#lastSeite" prefHeight="28.0" prefWidth="63.0" text="Seite 1" />
+      <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
+      <Button layoutX="801.0" layoutY="57.0" mnemonicParsing="false" onAction="#lastSeite" prefHeight="28.0" prefWidth="80.0" text="Seite 1" />
   
    </children>
 </AnchorPane>
