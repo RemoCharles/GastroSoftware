@@ -10,18 +10,15 @@ import java.util.Objects;
         @NamedQuery(name = "MAAbrechnung.findAll", query = "SELECT e FROM MAAbrechnung e")})
 public class MAAbrechnung extends Rechnung {
 
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
     private List<TischRechnung> tischRechnungList;
-    @OneToOne
-    private Mitarbeiter mitarbeiter;
 
     public MAAbrechnung() {
     }
 
-    public MAAbrechnung(LocalDate datum, String nameRestaunt, List<TischRechnung> tischRechnungList, Mitarbeiter mitarbeiter){
+    public MAAbrechnung(LocalDate datum, String nameRestaunt, List<TischRechnung> tischRechnungList) {
         super(datum, nameRestaunt);
         this.tischRechnungList = tischRechnungList;
-        this.mitarbeiter = mitarbeiter;
     }
 
     public List<TischRechnung> getTischRechnungList() {
@@ -30,14 +27,6 @@ public class MAAbrechnung extends Rechnung {
 
     public void setTischRechnungList(List<TischRechnung> tischRechnungList) {
         this.tischRechnungList = tischRechnungList;
-    }
-
-    public Mitarbeiter getMitarbeiter() {
-        return mitarbeiter;
-    }
-
-    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
-        this.mitarbeiter = mitarbeiter;
     }
 
     public MAAbrechnung(LocalDate datum, String nameRestaunt) {
@@ -70,21 +59,18 @@ public class MAAbrechnung extends Rechnung {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MAAbrechnung that = (MAAbrechnung) o;
-        return Objects.equals(tischRechnungList, that.tischRechnungList) &&
-                Objects.equals(mitarbeiter, that.mitarbeiter);
+        return Objects.equals(tischRechnungList, that.tischRechnungList);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), tischRechnungList, mitarbeiter);
+        return Objects.hash(super.hashCode(), tischRechnungList);
     }
 
     @Override
     public String toString() {
         return "MAAbrechnung{" +
-                "tischRechnungList=" + tischRechnungList +
-                ", mitarbeiter=" + mitarbeiter +
-                '}';
+                "tischRechnungList=" + tischRechnungList +"}";
     }
 }

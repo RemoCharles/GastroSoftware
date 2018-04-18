@@ -11,7 +11,7 @@ import java.util.Objects;
         @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e")})
 public class TischRechnung extends Rechnung{
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Bestellung> bestellungList;
 
 
@@ -50,6 +50,8 @@ public class TischRechnung extends Rechnung{
 
     @Override
     public String toString() {
-        return super.toString();
+        return " TischRechnung{" + super.toString() +
+                "bestellungList=" + bestellungList +
+                '}';
     }
 }

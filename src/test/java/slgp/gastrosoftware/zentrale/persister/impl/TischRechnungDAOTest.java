@@ -7,12 +7,9 @@ import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.KonsumartikelDAO;
 import slgp.gastrosoftware.zentrale.persister.api.RechnungDAO;
 import slgp.gastrosoftware.zentrale.persister.api.TischRechnungDAO;
-import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
-import slgp.gastrosoftware.zentrale.persister.domain.Rechnung;
 import slgp.gastrosoftware.zentrale.persister.domain.TischRechnung;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -54,6 +51,9 @@ public class TischRechnungDAOTest {
     public void testTischrechnungSave() throws Exception{
         init();
         assertTrue(tischRechnungDAO.findAll().size() == Util.INIT_SIZE_TISCH_RECHNUNG);
+        for(TischRechnung tr : tischRechnungDAO.findAll()){
+            logger.info(tr);
+        }
     }
 
     @Test

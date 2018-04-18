@@ -23,5 +23,12 @@ public interface BestellungDAO extends GenericPersisterDAO<Bestellung> {
      * @throws Exception
      */
     List<Bestellung> findByDatum(LocalDate datum) throws Exception;
+
+    /**
+     * Liefert alle bezahlte Bestellungen zurück
+     */
+
+    List<Bestellung> findAllBezahlt(boolean bezahlt) throws Exception;
 }
+
 

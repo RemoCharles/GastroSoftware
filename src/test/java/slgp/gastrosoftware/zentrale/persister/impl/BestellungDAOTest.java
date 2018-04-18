@@ -11,6 +11,7 @@ import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
 
 import javax.persistence.EntityManager;
+import javax.validation.constraints.AssertTrue;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -109,5 +110,14 @@ public class BestellungDAOTest {
         //assertTrue(bestellung.equals(pBestellungDAO.findByDatum(datum).get(0)));
     }
 
+    @Test
+    public void testBestellungFindByBezahlt() throws Exception {
+        init();
+        assertTrue(pBestellungDAO.findAll().size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
+        List<Bestellung> listFalse = pBestellungDAO.findAllBezahlt(false);
+        List<Bestellung> listTrue = pBestellungDAO.findAllBezahlt(true);
+        assertTrue(listFalse.size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
+        assertTrue(listTrue.size() == 0);
+    }
 
 }

@@ -36,6 +36,16 @@ public class BestellungDAOImpl extends GenericPersisterDAOImpl<Bestellung> imple
     }
 
     @Override
+    public List<Bestellung> findAllBezahlt(boolean bezahlt) throws Exception {
+        EntityManager em = JpaUtil.createEntityManager();
+        TypedQuery<Bestellung> query = em.createNamedQuery("Bestellung.findBezahlt", Bestellung.class);
+        query.setParameter("bezahlt", bezahlt);
+        List<Bestellung> list = query.getResultList();
+        em.close();
+        return list;
+    }
+
+    @Override
     public Bestellung save(Bestellung entity) throws Exception {
         return super.save(entity);
     }

@@ -56,10 +56,7 @@ public class KontaktDAOTest {
 		init();
 		System.out.println("Kontrolle der Personen:  " + kKontakt.findAll().size());
 		System.out.println(Util.INIT_SIZE_PERSONEN);
-		
-		
 		// assertTrue(kKontakt.findAll().size() == Util.INIT_SIZE_PERSONEN);
-		
 		// Ausgabe der Kontakte
 		EntityManager em = JpaUtil.createEntityManager();
 		

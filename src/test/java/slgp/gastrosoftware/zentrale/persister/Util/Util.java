@@ -5,6 +5,7 @@ import slgp.gastrosoftware.zentrale.persister.domain.*;
 import slgp.gastrosoftware.zentrale.persister.impl.*;
 import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Util {
     public static final int INIT_SIZE_TISCH = 3;
     public static final int INIT_SIZE_BESTELLUNG_LISTE = 1;
     public static final int INIT_SIZE_TISCH_RECHNUNG = 1;
+    public static final int INIT_SIZE_MAAbrechnung = 1;
 
 
     public static List<Person> erstellePersonenListe() throws Exception {
@@ -182,7 +184,7 @@ public class Util {
 
         Tisch tisch = new Tisch(6);
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        list.add(new Bestellung(ma, tisch, konsumList, false, LocalDate.now()));
+        list.add(new Bestellung(ma, tisch, konsumList, false, false, LocalDate.now()));
 
         pMitarbeiter.save(ma);
         pTisch.save(tisch);
@@ -208,26 +210,17 @@ public class Util {
         MitarbeiterDAO pMitarbeiter = new MitarbeiterDAOImpl();
         TischDAO tischDAO = new TischDAOImpl();
         KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
-
         List<TischRechnung> list = new ArrayList<>();
-
-
         Tisch tisch = new Tisch(6);
-
         List<Bestellung> bestellungList = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
-
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        bestellungList.add(new Bestellung(ma, tisch, konsumList, false, LocalDate.now()));
-
-
+        bestellungList.add(new Bestellung(ma, tisch, konsumList, false, false, LocalDate.now()));
         list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
-
         pMitarbeiter.save(ma);
         tischDAO.save(tisch);
-
         for(Konsumartikel k : konsumList){
             konsumartikelDAO.save(k);
         }
@@ -248,16 +241,59 @@ public class Util {
         }
     }
 
-//    public static List<MAAbrechnung> createMAAbrechnung() throws Exception{
-//        List<MAAbrechnung> maAbrechnungList = new ArrayList<>();
-//        List<TischRechnung> tischRechnungList = createTischRechnung();
-//        List<Mitarbeiter> mitarbeiterList = createMitarbeiter();
-//
-//        MAAbrechnung maAbrechnung = new MAAbrechnung(LocalDate.now(), "Test", tischRechnungList, mitarbeiterList.get(0));
-//        maAbrechnungList.add(maAbrechnung);
-//
-//        return maAbrechnungList;
-//    }
+    public static List<MAAbrechnung> createMAAbrechnung() throws Exception{
+        List<MAAbrechnung> maAbrechnungList = new ArrayList<>();
+
+        MAAbrechnungDAO maAbrechnungDAO = new MAAbrechnungDAOImpl();
+
+        List<TischRechnung> tischRechnungList = createTischRechnung();
+
+        MAAbrechnung maAbrechnung = new MAAbrechnung(LocalDate.now(), "Test", tischRechnungList);
+        maAbrechnungList.add(maAbrechnung);
+
+        for (MAAbrechnung maAbrech : maAbrechnungList){
+            maAbrechnungDAO.save(maAbrech);
+        }
+
+        return maAbrechnungList;
+    }
+
+    public static void deleteAllMAAbrechnung() throws Exception {
+        MAAbrechnungDAO maAbrechnungDAO = new MAAbrechnungDAOImpl();
+        for (MAAbrechnung maAbrechnung : maAbrechnungDAO.findAll()){
+            maAbrechnungDAO.delete(maAbrechnung);
+        }
+    }
+
+    public static void deleteAllKontakt() throws Exception{
+        KontaktDAO kontaktDAO = new KontaktDAOImpl();
+        for (Kontakt kontakt : kontaktDAO.findAll()){
+            kontaktDAO.delete(kontakt);
+        }
+    }
+
+    public static void deleteAllAdresse() throws Exception {
+        AdresseDAO adresseDAO = new AdresseDAOImpl();
+        for(Adresse adresse :adresseDAO.findAll()){
+            adresseDAO.delete(adresse);
+        }
+    }
+
+    public static void deleteAllLogin() throws Exception {
+        LoginDAO loginDAO = new LoginDAOImpl();
+        for(Login login : loginDAO.findAll()){
+            loginDAO.delete(login);
+        }
+    }
+
+    public static void deleteAllRechnung() throws Exception{
+        RechnungDAO rechnungDAO = new RechnungDAOImpl();
+        for(Rechnung rechnung : rechnungDAO.findAll()){
+            rechnungDAO.delete(rechnung);
+        }
+    }
+
+
 
     public static void resetDb() throws Exception {
         /* Schema wird angelegt, die vorhandenen Daten werden dabei gelöscht. */

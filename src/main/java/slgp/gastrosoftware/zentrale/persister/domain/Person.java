@@ -117,13 +117,10 @@ public class Person implements Serializable {
         if (this == obj) {
             return true;
         }
-
         if (!(obj instanceof Person)) {
             return false;
         }
-
         Person pers = (Person) obj;
-
         return this.name.equals(pers.name) && this.adresse.equals(pers.adresse);
     }
 

@@ -213,9 +213,6 @@ public class PersonDAOTest {
 
 		assertTrue(personAusDbMitUsername.getLogin().getUsername().equals(lastPerson.getLogin().getUsername()));
 		assertTrue(personAusDbMitUsername.getLogin().eqauls(lastPerson.getLogin()));
-
-
-
 	}
 
 	@Test
@@ -240,7 +237,4 @@ public class PersonDAOTest {
 
 		assertTrue(personNachNachnameUndVornameListe.contains(lastPerson));
 	}
-
-	
-
 }
