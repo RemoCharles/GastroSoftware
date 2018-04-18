@@ -50,10 +50,7 @@ public class TischAnzeigenControllerTest implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-//			tblBefuellen();
-//			logger.info("Wurde initialisiert.");
 			/* Konsumartikel initialisieren */
-			
 			KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
 			List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll() ;
 
@@ -90,53 +87,6 @@ public class TischAnzeigenControllerTest implements Initializable {
 	}
 
 	@FXML
-	public void zurueck(ActionEvent event) throws Exception{
-		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
-		Scene ma_interface_scene = new Scene(ma_interface_parent);
-		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		ma_stage.setScene(ma_interface_scene);
-		ma_stage.show();
-	}
-
-	public void tblBefuellen() throws Exception {
-
-		try {	
-			/* Konsumartikel initialisieren */
-			KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
-			List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll() ;
-
-			TreeSet<String> konsumartikelKategorie = new TreeSet<>();
-
-			for (Konsumartikel kBez : alleKonsumartikelListe) {
-				konsumartikelKategorie.add(kBez.getKategorie());
-			}
-
-			ObservableList<String> konsumArtikelBezeichnungsListe = FXCollections.observableArrayList();
-			konsumArtikelBezeichnungsListe.addAll(konsumartikelKategorie);
-			cmbKat.setItems(konsumArtikelBezeichnungsListe);
-
-			if (konsumArtikelBezeichnungsListe.size() > 0) {
-				cmbKat.getSelectionModel().select(0);
-			}
-
-			/* TableView konfigurieren */
-			konsKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
-			konsBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
-			konsPr.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
-
-			ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
-			konsumartikelListe.addAll(alleKonsumartikelListe);
-			tblKonsumartikel.setItems(konsumartikelListe);
-
-			updateTable();
-
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-
-	}
-
-	@FXML
 	private void updateTable() {
 
 		try {
@@ -166,6 +116,15 @@ public class TischAnzeigenControllerTest implements Initializable {
 			throw new RuntimeException();
 		}
 
+	}
+	
+	@FXML
+	public void zurueck(ActionEvent event) throws Exception{
+		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
+		Scene ma_interface_scene = new Scene(ma_interface_parent);
+		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		ma_stage.setScene(ma_interface_scene);
+		ma_stage.show();
 	}
 
 }
