@@ -19,11 +19,48 @@ public class LeiterInterfaceControllerTest implements Initializable {
 
 	}
 	@FXML
-	private void menuOnAction(ActionEvent event) throws Exception {
+	private void menuAnzeigen(ActionEvent event) throws Exception {
 		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
 		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
 		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
 		saal1_stage.setScene(saal1_interface_scene);
 		saal1_stage.show();
+	}
+	
+	@FXML
+	private void mitarbeiterAnzeigen(ActionEvent event) throws Exception {
+		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterMitarbeiter.fxml"));
+		Scene ma_interface_scene = new Scene(ma_interface_parent);
+		Stage ma_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		ma_stage.setScene(ma_interface_scene);
+		ma_stage.show();
+	}
+	@FXML
+	private void konsumartikelAnzeigen(ActionEvent event) throws Exception {
+		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
+		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
+		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		saal1_stage.setScene(saal1_interface_scene);
+		saal1_stage.show();
+	}
+	@FXML
+	private void abrechnungAnzeigen(ActionEvent event) throws Exception {
+		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
+		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
+		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		saal1_stage.setScene(saal1_interface_scene);
+		saal1_stage.show();
+	}
+	@FXML
+	private void tischVerwaltungAnzeigen(ActionEvent event) throws Exception {
+		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
+		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
+		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		saal1_stage.setScene(saal1_interface_scene);
+		saal1_stage.show();
+	}
+	@FXML
+	private void logout(ActionEvent event) throws Exception {
+		System.exit(0);
 	}
 }

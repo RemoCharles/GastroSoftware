@@ -11,6 +11,12 @@
          <font>
             <Font size="30.0" />
          </font></Text>
-      <Button fx:id="leiMenu" layoutX="375.0" layoutY="200.0" mnemonicParsing="false" onAction="#menuOnAction" prefHeight="28.0" prefWidth="150.0" text="Menu" textAlignment="CENTER" />
+      <Button fx:id="leiMenu" layoutX="375.0" layoutY="200.0" mnemonicParsing="false" onAction="#menuAnzeigen" prefHeight="28.0" prefWidth="150.0" text="Menu" textAlignment="CENTER" />
+      <Button fx:id="leiMita" layoutX="375.0" layoutY="150.0" mnemonicParsing="false" onAction="#mitarbeiterAnzeigen" prefHeight="28.0" prefWidth="150.0" text="Mitarbeiter" textAlignment="CENTER" />
+  	  <Button fx:id="leiKons" layoutX="375.0" layoutY="250.0" mnemonicParsing="false" onAction="#konsumartikelAnzeigen" prefHeight="28.0" prefWidth="150.0" text="Konsumartikel" textAlignment="CENTER" />
+      <Button fx:id="leiAbre" layoutX="375.0" layoutY="300.0" mnemonicParsing="false" onAction="#abrechnungAnzeigen" prefHeight="28.0" prefWidth="150.0" text="Abrechnung" textAlignment="CENTER" />
+      <Button fx:id="leiTisc" layoutX="375.0" layoutY="350.0" mnemonicParsing="false" onAction="#tischVerwaltungAnzeigen" prefHeight="28.0" prefWidth="150.0" text="Tische" textAlignment="CENTER" />
+      <Button fx:id="leilogo" layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" prefHeight="28.0" prefWidth="75.0" text="Logout" />
+  
    </children>
 </AnchorPane>
