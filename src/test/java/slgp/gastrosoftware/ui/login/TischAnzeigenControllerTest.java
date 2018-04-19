@@ -27,105 +27,142 @@ import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
 
 public class TischAnzeigenControllerTest implements Initializable {
-	private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
+    private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
 
-	@FXML
-	private ComboBox<String> cmbKat;
+    @FXML
+    private ComboBox<String> cmbKat;
 
-	@FXML
-	private TableView<Konsumartikel> tblKonsumartikel;
+    @FXML
+    private TableView<Konsumartikel> tblKonsumartikel;
 
-	@FXML
-	private TableColumn<Konsumartikel, String> konsKat;
+    @FXML
+    private TableColumn<Konsumartikel, String> konsKat;
 
-	@FXML
-	private Button butAkt;
+    @FXML
+    private Button butAkt;
 
-	@FXML
-	private TableColumn<Konsumartikel, String> konsBez;
+    @FXML
+    private TableColumn<Konsumartikel, String> konsBez;
 
-	@FXML
-	private TableColumn<Konsumartikel, Double> konsPr;
+    @FXML
+    private TableColumn<Konsumartikel, Double> konsPr;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			/* Konsumartikel initialisieren */
-			KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
-			List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll() ;
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        try {
+            KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
+            List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll();
 
-			TreeSet<String> konsumartikelKategorie = new TreeSet<>();
+            TreeSet<String> konsumartikelKategorie = new TreeSet<>();
 
-			for (Konsumartikel kBez : alleKonsumartikelListe) {
-				konsumartikelKategorie.add(kBez.getKategorie());
-			}
+            for (Konsumartikel kBez : alleKonsumartikelListe) {
+                konsumartikelKategorie.add(kBez.getKategorie());
+            }
 
-			ObservableList<String> konsumArtikelBezeichnungsListe = FXCollections.observableArrayList();
-			konsumArtikelBezeichnungsListe.addAll(konsumartikelKategorie);
-			cmbKat.setItems(konsumArtikelBezeichnungsListe);
+            ObservableList<String> konsumArtikelBezeichnungsListe = FXCollections.observableArrayList();
+            konsumArtikelBezeichnungsListe.addAll(konsumartikelKategorie);
+            cmbKat.setItems(konsumArtikelBezeichnungsListe);
 
-			if (konsumArtikelBezeichnungsListe.size() > 0) {
-				cmbKat.getSelectionModel().select(0);
-			}
+            if (konsumArtikelBezeichnungsListe.size() > 0) {
+                cmbKat.getSelectionModel().select(0);
+            }
 
-			/* TableView konfigurieren */
-			konsKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
-			konsBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
-			konsPr.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
+            /* TableView konfigurieren */
+            konsKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
+            konsBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
+            konsPr.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
 
-			ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
-			konsumartikelListe.addAll(alleKonsumartikelListe);
-			tblKonsumartikel.setItems(konsumartikelListe);
+            ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
+            konsumartikelListe.addAll(alleKonsumartikelListe);
+            tblKonsumartikel.setItems(konsumartikelListe);
 
-			updateTable();
-			
-			
-		} catch (Exception e) {
-			logger.error("Tabelle konnte nicht befüllt werden...");
-		}
+            updateTable();
 
-	}
 
-	@FXML
-	private void updateTable() {
+        } catch (Exception e) {
+            logger.error("Tabelle konnte nicht befüllt werden...");
+        }
 
-		try {
+    }
 
-			/* cmbProduktTyp initialisieren */
-			KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
-			List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll();
+    @FXML
+    public void zurueck(ActionEvent event) throws Exception {
+        Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
+        Scene ma_interface_scene = new Scene(ma_interface_parent);
+        Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ma_stage.setScene(ma_interface_scene);
+        ma_stage.show();
+    }
 
-			if (cmbKat.getSelectionModel().getSelectedItem() != null) {
+    public void tblBefuellen() throws Exception {
 
-				List<Konsumartikel> tempListe = new ArrayList<>();
+        try {
+            /* Konsumartikel initialisieren */
+            KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
+            List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll();
 
-				/* Suche alle Konsumartikel-Objekte für den gewählten Namen */
-				for (Konsumartikel konsArt : alleKonsumartikelListe) {
+            TreeSet<String> konsumartikelKategorie = new TreeSet<>();
 
-					if (konsArt.getKategorie().equals(cmbKat.getSelectionModel().getSelectedItem())) {
-						tempListe.add(konsArt);
-					}
-				}
+            for (Konsumartikel kBez : alleKonsumartikelListe) {
+                konsumartikelKategorie.add(kBez.getKategorie());
+            }
 
-				ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
-				konsumartikelListe.addAll(tempListe);
-				tblKonsumartikel.setItems(konsumartikelListe);
-			}
-		} catch (Exception e) {
-			logger.error("Fehler beim Updaten der Tabelle: ", e);
-			throw new RuntimeException();
-		}
+            ObservableList<String> konsumArtikelBezeichnungsListe = FXCollections.observableArrayList();
+            konsumArtikelBezeichnungsListe.addAll(konsumartikelKategorie);
+            cmbKat.setItems(konsumArtikelBezeichnungsListe);
 
-	}
-	
-	@FXML
-	public void zurueck(ActionEvent event) throws Exception{
-		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
-		Scene ma_interface_scene = new Scene(ma_interface_parent);
-		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		ma_stage.setScene(ma_interface_scene);
-		ma_stage.show();
-	}
+            if (konsumArtikelBezeichnungsListe.size() > 0) {
+                cmbKat.getSelectionModel().select(0);
+            }
+
+            /* TableView konfigurieren */
+            konsKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
+            konsBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
+            konsPr.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
+
+            ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
+            konsumartikelListe.addAll(alleKonsumartikelListe);
+            tblKonsumartikel.setItems(konsumartikelListe);
+
+            updateTable();
+
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+
+    }
+
+    @FXML
+    private void updateTable() {
+
+        try {
+
+            /* cmbProduktTyp initialisieren */
+            KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
+            List<Konsumartikel> alleKonsumartikelListe = KonsDAOImpl.findAll();
+
+            if (cmbKat.getSelectionModel().getSelectedItem() != null) {
+
+                List<Konsumartikel> tempListe = new ArrayList<>();
+
+                /* Suche alle Konsumartikel-Objekte für den gewählten Namen */
+                for (Konsumartikel konsArt : alleKonsumartikelListe) {
+
+                    if (konsArt.getKategorie().equals(cmbKat.getSelectionModel().getSelectedItem())) {
+                        tempListe.add(konsArt);
+                    }
+                }
+
+                ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
+                konsumartikelListe.addAll(tempListe);
+                tblKonsumartikel.setItems(konsumartikelListe);
+            }
+        } catch (Exception e) {
+            logger.error("Fehler beim Updaten der Tabelle: ", e);
+            throw new RuntimeException();
+        }
+
+    }
 
 }
 
