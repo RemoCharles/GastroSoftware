@@ -64,6 +64,7 @@ public class BarInterfaceControllerTest implements Initializable{
 			}
 
 			/* TableView konfigurieren */
+			// Objekt welches in List enthalten ist in Tabelle schreiben
 			colKonsumart.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
 			ObservableList<Konsumartikel> bestellungenListe = FXCollections.observableArrayList();
 			bestellungenListe.addAll(tempKonsListe);
