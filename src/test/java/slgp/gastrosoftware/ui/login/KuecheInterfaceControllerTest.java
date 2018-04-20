@@ -20,14 +20,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import slgp.gastrosoftware.zentrale.persister.api.BestellungDAO;
+import slgp.gastrosoftware.zentrale.persister.domain.BestellPosition;
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
+import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.impl.BestellungDAOImpl;
 import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
 
 public class KuecheInterfaceControllerTest implements Initializable{
 	private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
+	private static 	BestellungDAO bestellungen = new BestellungDAOImpl();
 
 	@FXML
 	private Button btBereit;
@@ -42,7 +46,6 @@ public class KuecheInterfaceControllerTest implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			/* Bestellung initialisieren */
-			BestellungDAOImpl bestellungen = new BestellungDAOImpl();
 			List<Bestellung> alleBestellungenListe = bestellungen.findAll();
 			List<Bestellung> unzubereiteteBestellungenListe = new ArrayList<>();
 			for(Bestellung best : alleBestellungenListe) {
@@ -52,13 +55,13 @@ public class KuecheInterfaceControllerTest implements Initializable{
 			}
 			
 
-			List<Konsumartikel> tempKonsListe = new ArrayList<>();
-
+			List<Konsumartikel> tempKonsList = new ArrayList<>();
 
 			for(Bestellung b : unzubereiteteBestellungenListe) {
-				for(Konsumartikel konsumartikel : b.getKonsumartikel()) {
-					if(konsumartikel instanceof Esswaren) {
-						tempKonsListe.add(konsumartikel);
+				for(BestellPosition bP : b.getKonsumartikel()) {
+					if(bP.getKonsumartikel() instanceof Esswaren) {
+						Konsumartikel k = bP.getKonsumartikel();
+						tempKonsList.add(k);
 					}
 				}
 			}
@@ -67,7 +70,7 @@ public class KuecheInterfaceControllerTest implements Initializable{
 			// Objekt welches in List enthalten ist in Tabelle schreiben
 			colKonsumart.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
 			ObservableList<Konsumartikel> bestellungenListe = FXCollections.observableArrayList();
-			bestellungenListe.addAll(tempKonsListe);
+			bestellungenListe.addAll(tempKonsList);
 			tblOffeneBest.setItems(bestellungenListe);
 
 		} catch (Exception e) {

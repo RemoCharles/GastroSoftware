@@ -20,6 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import slgp.gastrosoftware.zentrale.persister.api.BestellungDAO;
+import slgp.gastrosoftware.zentrale.persister.domain.BestellPosition;
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
 import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
@@ -28,6 +30,7 @@ import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
 
 public class BarInterfaceControllerTest implements Initializable{
 	private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
+	private static BestellungDAO bestellungen = new BestellungDAOImpl();
 
 	@FXML
 	private Button btBereit;
@@ -42,7 +45,6 @@ public class BarInterfaceControllerTest implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			/* Bestellung initialisieren */
-			BestellungDAOImpl bestellungen = new BestellungDAOImpl();
 			List<Bestellung> alleBestellungenListe = bestellungen.findAll();
 			List<Bestellung> unzubereiteteBestellungenListe = new ArrayList<>();
 			for(Bestellung best : alleBestellungenListe) {
@@ -50,24 +52,27 @@ public class BarInterfaceControllerTest implements Initializable{
 					unzubereiteteBestellungenListe.add(best);
 				}
 			}
-			
-
-			List<Konsumartikel> tempKonsListe = new ArrayList<>();
 
 
-//			for(Bestellung b : unzubereiteteBestellungenListe) {
-//				for(Konsumartikel konsumartikel : b.getKonsumartikel()) {
-//					if(konsumartikel instanceof Getraenke) {
-//						tempKonsListe.add(konsumartikel);
-//					}
-//				}
-//			}
+			List<Konsumartikel> tempKonsList = new ArrayList<>();
+
+			for(Bestellung b : unzubereiteteBestellungenListe) {
+				for(BestellPosition bP : b.getKonsumartikel()) {
+					if(bP.getKonsumartikel() instanceof Getraenke) {
+						Konsumartikel k = bP.getKonsumartikel();
+						tempKonsList.add(k);
+					}
+				}
+			}
+
+
+
 
 			/* TableView konfigurieren */
 			// Objekt welches in List enthalten ist in Tabelle schreiben
 			colKonsumart.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
 			ObservableList<Konsumartikel> bestellungenListe = FXCollections.observableArrayList();
-			bestellungenListe.addAll(tempKonsListe);
+			bestellungenListe.addAll(tempKonsList);
 			tblOffeneBest.setItems(bestellungenListe);
 
 		} catch (Exception e) {
@@ -76,22 +81,23 @@ public class BarInterfaceControllerTest implements Initializable{
 	}
 
 
+
 	@FXML
 	private void artBereit(ActionEvent event) throws Exception{
-//		 if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
-//	            return;
-//	        }
-//
-//	        Konsumartikel getraenk = tblOffeneBest.getSelectionModel().getSelectedItem();
-//
-//	        if (getraenk != null) {
-//	            try {
-//	                Context.getInstance().getMoebelhausLagerService().lieferantenLoeschen(lieferant);
-//	                
-//	            } catch (Exception e) {
-//	                
-//	            }
-//	        }
+		//		 if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
+		//	            return;
+		//	        }
+		//
+		//	        Konsumartikel getraenk = tblOffeneBest.getSelectionModel().getSelectedItem();
+		//
+		//	        if (getraenk != null) {
+		//	            try {
+		//	                Context.getInstance().getMoebelhausLagerService().lieferantenLoeschen(lieferant);
+		//	                
+		//	            } catch (Exception e) {
+		//	                
+		//	            }
+		//	        }
 	}
 
 
@@ -101,3 +107,6 @@ public class BarInterfaceControllerTest implements Initializable{
 		System.exit(0);
 	}
 }
+
+
+
