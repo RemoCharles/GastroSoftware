@@ -86,40 +86,40 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	private TextField txtKennwort;
 
 	@FXML
-	private TableView<BenutzerWrapper> tblPerson;
+	private TableView<Person> tblPerson;
 	
 	@FXML
-	private TableColumn<BenutzerWrapper, Integer> colNummer;
+	private TableColumn<Person, Integer> colNummer;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colName;
+	private TableColumn<Person, String> colName;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colVorname;
+	private TableColumn<Person, String> colVorname;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colStrasse;
+	private TableColumn<Person, String> colStrasse;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, Integer> colPlz;
+	private TableColumn<Person, Integer> colPlz;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colOrt;
+	private TableColumn<Person, String> colOrt;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colEmail;
+	private TableColumn<Person, String> colEmail;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colTelefon;
+	private TableColumn<Person, String> colTelefon;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colUsername;
+	private TableColumn<Person, String> colUsername;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colKennwort;
+	private TableColumn<Person, String> colKennwort;
 
 	@FXML
-	private TableColumn<BenutzerWrapper, String> colFunktion;
+	private TableColumn<Person, String> colFunktion;
 
 	@FXML
 	private Button btnSpeichern;
@@ -156,40 +156,40 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			List <Person> allePersonenListe = PersDAOImpl.findAll();
 			// allePersonenListe.remove(0);
 		
-			List <BenutzerWrapper> wrapperListe = new ArrayList<>();
+			// List <Person> wrapperListe = new ArrayList<>();
 			
 			// System.out.println("---------------------Test 2");
-			int nummer = 1;
+			// int nummer = 1;
 			
-			for (Person person : allePersonenListe) {
-				wrapperListe.add(new BenutzerWrapper(nummer++, person));
-			}
+//			for (Person person : allePersonenListe) {
+//				wrapperListe.add(new Person(nummer++, person));
+//			}
 			// System.out.println("---------------------Test 3");
 			
 			// tblPerson.getItems().clear();
 			// tblPerson.getItems().addAll(wrapperListe);
 			
 			/* Tabelle konfigurieren */
-			colNummer.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, Integer>("nummer"));
+			colNummer.setCellValueFactory(new PropertyValueFactory<Person, Integer>("nummer"));
 			// System.out.println("---------------------Test 4");
-            colName.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("name"));
-            colVorname.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("vorname"));
-			colStrasse.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("strasse"));
+            colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
+            colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
+			colStrasse.setCellValueFactory(new PropertyValueFactory<Person, String>("strasse"));
 			// System.out.println("---------------------Test 5");
-			colPlz.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, Integer>("plz"));
-			colOrt.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("ort"));
-			colEmail.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("email"));
-			colTelefon.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("telefon"));
+			colPlz.setCellValueFactory(new PropertyValueFactory<Person, Integer>("plz"));
+			colOrt.setCellValueFactory(new PropertyValueFactory<Person, String>("ort"));
+			colEmail.setCellValueFactory(new PropertyValueFactory<Person, String>("email"));
+			colTelefon.setCellValueFactory(new PropertyValueFactory<Person, String>("telefon"));
 			// System.out.println("---------------------Test 6");
-			colUsername.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("username"));
+			colUsername.setCellValueFactory(new PropertyValueFactory<Person, String>("username"));
 			// System.out.println("---------------------Test 7");
-			colKennwort.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("passwort"));
+			colKennwort.setCellValueFactory(new PropertyValueFactory<Person, String>("passwort"));
 			// System.out.println("---------------------Test 8");
-			colFunktion.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("funktion"));
+			colFunktion.setCellValueFactory(new PropertyValueFactory<Person, String>("funktion"));
 			// System.out.println("---------------------Test 9");
 			
 			// System.out.println("---------------------Test 10");
-			ObservableList<BenutzerWrapper> wrapperPerson = FXCollections.observableArrayList(wrapperListe);
+			//ObservableList<Person> wrapperPerson = FXCollections.observableArrayList(wrapperListe);
 			
 			//wrapperPerson.addAll(wrapperListe);
 			
@@ -198,7 +198,8 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 //				System.out.println(w);
 //			}
 			
-			tblPerson.setItems(wrapperPerson);
+			ObservableList<Person> observPersonen = FXCollections.observableArrayList(allePersonenListe);
+			tblPerson.setItems(observPersonen);
 			// System.out.println("---------------------Test 12");
 			
 //			tblPerson.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BenutzerWrapper>() {
@@ -220,69 +221,69 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 		}
 	}
 	
-	private void updateTabelle() {
-		try {
-			
-			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
-			List <Person> allePersonenListe = PersDAOImpl.findAll();
-
-            if (allePersonenListe.size() > 0) {
-                List<BenutzerWrapper> wrapperListe = new ArrayList<>();
-
-                int nummer = 1;
-
-                for (Person person : allePersonenListe) {
-                    wrapperListe.add(new BenutzerWrapper(nummer++, person));
-                }
-
-                tblPerson.getItems().clear();
-                tblPerson.getItems().addAll(wrapperListe);
-
-                tblPerson.getSelectionModel().select(0);
-
-                updateView();
-            }
-			
-		}  catch (Exception e) {
-            logger.error("Fehler bei der Aktualisierung der Tabelle: ", e);
-            throw new RuntimeException(e);
-        }
-		
-	}
-	private void updateView() {
-		
-		lblError.setText("");
-
-        if (tblPerson.getSelectionModel().getSelectedItem() == null) {
-
-            // cmbRolle.getSelectionModel().clearSelection();
-            txtName.setText("");
-            txtVorname.setText("");
-            txtStrasse.setText("");
-            txtPlz.setText("");
-            txtOrt.setText("");
-            txtEmail.setText("");
-            txtTelefon.setText("");
-            txtUsername.setText("");
-            txtKennwort.setText("");
-
-        } else {
-
-            Person person = tblPerson.getSelectionModel().getSelectedItem().getPerson();
-
-            // cmbRolle.getSelectionModel().select(benutzer.getRolle());
-            txtName.setText(person.getName());
-            txtVorname.setText(person.getVorname());
-            txtStrasse.setText(person.getAdresse().getStrasse());
-            txtPlz.setText("" + person.getAdresse().getPlz());
-            txtOrt.setText(person.getAdresse().getOrt());
-            txtEmail.setText(person.getKontakt().getEmail());
-            txtTelefon.setText(person.getKontakt().getTelefon());
-            txtUsername.setText(person.getLogin().getUsername());
-            txtKennwort.setText(person.getLogin().getPasswort());
-        }
-
-	}
+//	private void updateTabelle() {
+//		try {
+//			
+//			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
+//			List <Person> allePersonenListe = PersDAOImpl.findAll();
+//
+//            if (allePersonenListe.size() > 0) {
+//                List<BenutzerWrapper> wrapperListe = new ArrayList<>();
+//
+//                int nummer = 1;
+//
+//                for (Person person : allePersonenListe) {
+//                    wrapperListe.add(new BenutzerWrapper(nummer++, person));
+//                }
+//
+//                tblPerson.getItems().clear();
+//                tblPerson.getItems().addAll(wrapperListe);
+//
+//                tblPerson.getSelectionModel().select(0);
+//
+//                updateView();
+//            }
+//			
+//		}  catch (Exception e) {
+//            logger.error("Fehler bei der Aktualisierung der Tabelle: ", e);
+//            throw new RuntimeException(e);
+//        }
+//		
+//	}
+//	private void updateView() {
+//		
+//		lblError.setText("");
+//
+//        if (tblPerson.getSelectionModel().getSelectedItem() == null) {
+//
+//            // cmbRolle.getSelectionModel().clearSelection();
+//            txtName.setText("");
+//            txtVorname.setText("");
+//            txtStrasse.setText("");
+//            txtPlz.setText("");
+//            txtOrt.setText("");
+//            txtEmail.setText("");
+//            txtTelefon.setText("");
+//            txtUsername.setText("");
+//            txtKennwort.setText("");
+//
+//        } else {
+//
+//            Person person = tblPerson.getSelectionModel().getSelectedItem().getPerson();
+//
+//            // cmbRolle.getSelectionModel().select(benutzer.getRolle());
+//            txtName.setText(person.getName());
+//            txtVorname.setText(person.getVorname());
+//            txtStrasse.setText(person.getAdresse().getStrasse());
+//            txtPlz.setText("" + person.getAdresse().getPlz());
+//            txtOrt.setText(person.getAdresse().getOrt());
+//            txtEmail.setText(person.getKontakt().getEmail());
+//            txtTelefon.setText(person.getKontakt().getTelefon());
+//            txtUsername.setText(person.getLogin().getUsername());
+//            txtKennwort.setText(person.getLogin().getPasswort());
+//        }
+//
+//	}
 	
 	
 	

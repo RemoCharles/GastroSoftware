@@ -106,6 +106,37 @@ public class Person implements Serializable {
     public void setVorname(String vorname) {
         this.vorname = vorname;
     }
+    
+    // Aus BenutzerWrapper
+    public String getStrasse() {
+    	return adresse.getStrasse();
+    }
+    
+    public String getOrt() {
+    	return adresse.getOrt();
+    }
+    
+    public String getEmail() {
+    	return kontakt.getEmail();
+    }
+    
+    public String getTelefon() {
+    	return kontakt.getTelefon();
+    }
+    
+    public String getUsername() {
+    	if (login == null) {
+    		return null;
+    	}
+    	return login.getUsername();
+    }
+    
+    public String getPasswort() {
+    	if (login == null) {
+    		return null;
+    	}
+    	return login.getPasswort();
+    }
 
     @Override
     public int hashCode() {
