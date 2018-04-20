@@ -272,8 +272,8 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			txtOrt.setText(person.getAdresse().getOrt());
 			txtEmail.setText(person.getKontakt().getEmail());
 			txtTelefon.setText(person.getKontakt().getTelefon());
-			txtUsername.setText(person.getLogin().getUsername());
-			txtKennwort.setText(person.getLogin().getPasswort());
+			txtUsername.setText(person.getUsername());
+			txtKennwort.setText(person.getPasswort());
 		}
 
 	}
