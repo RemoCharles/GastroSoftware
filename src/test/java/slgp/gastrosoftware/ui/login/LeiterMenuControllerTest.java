@@ -1,11 +1,16 @@
 package slgp.gastrosoftware.ui.login;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +43,8 @@ public class LeiterMenuControllerTest implements Initializable {
 	
 	@FXML
 	private TableColumn<Konsumartikel, Double> konsPr;
+
+	
 	
 	
 	
@@ -53,7 +60,18 @@ public class LeiterMenuControllerTest implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		List <String> wochenTage = new ArrayList<>();
+		wochenTage.add("Montag");
+		wochenTage.add("Dienstag");
+		wochenTage.add("Mittwoch");
+		wochenTage.add("Donnerstag");
+		wochenTage.add("Freitag");
+		wochenTage.add("Samstag");
+		wochenTage.add("Sonntag");
+				
+		ObservableList<String> observWochenTage = FXCollections.observableArrayList(wochenTage);
 		
+		cmbKat.setItems(observWochenTage);
 	}
 	
 	@FXML
@@ -61,5 +79,17 @@ public class LeiterMenuControllerTest implements Initializable {
 		
 	}
 	
+
+
+				
+		
+		
+
+
+	            
 	
-}
+	
+		
+	}
+	 
+
