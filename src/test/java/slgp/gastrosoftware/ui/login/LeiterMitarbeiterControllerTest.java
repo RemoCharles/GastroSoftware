@@ -151,39 +151,72 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
 			
+			// System.out.println("---------------------Test 1");
 			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
 			List <Person> allePersonenListe = PersDAOImpl.findAll();
+			// allePersonenListe.remove(0);
 		
+			List <BenutzerWrapper> wrapperListe = new ArrayList<>();
+			
+			// System.out.println("---------------------Test 2");
+			int nummer = 1;
+			
+			for (Person person : allePersonenListe) {
+				wrapperListe.add(new BenutzerWrapper(nummer++, person));
+			}
+			// System.out.println("---------------------Test 3");
+			
+			// tblPerson.getItems().clear();
+			// tblPerson.getItems().addAll(wrapperListe);
 			
 			/* Tabelle konfigurieren */
 			colNummer.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, Integer>("nummer"));
+			// System.out.println("---------------------Test 4");
             colName.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("name"));
             colVorname.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("vorname"));
 			colStrasse.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("strasse"));
+			// System.out.println("---------------------Test 5");
 			colPlz.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, Integer>("plz"));
 			colOrt.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("ort"));
 			colEmail.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("email"));
 			colTelefon.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("telefon"));
+			// System.out.println("---------------------Test 6");
 			colUsername.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("username"));
+			// System.out.println("---------------------Test 7");
 			colKennwort.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("passwort"));
+			// System.out.println("---------------------Test 8");
 			colFunktion.setCellValueFactory(new PropertyValueFactory<BenutzerWrapper, String>("funktion"));
+			// System.out.println("---------------------Test 9");
 			
-			tblPerson.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BenutzerWrapper>() {
-
-                @Override
-                public void changed(ObservableValue<? extends BenutzerWrapper> observable, BenutzerWrapper oldValue,
-                        BenutzerWrapper newValue) {
-                    if (newValue != null) {
-                        updateView();
-                    }
-                }
-            });
+			// System.out.println("---------------------Test 10");
+			ObservableList<BenutzerWrapper> wrapperPerson = FXCollections.observableArrayList(wrapperListe);
 			
-			updateTabelle();
+			//wrapperPerson.addAll(wrapperListe);
+			
+			// System.out.println("---------------------Test 11");
+//			for (BenutzerWrapper w: wrapperPerson) {
+//				System.out.println(w);
+//			}
+			
+			tblPerson.setItems(wrapperPerson);
+			// System.out.println("---------------------Test 12");
+			
+//			tblPerson.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BenutzerWrapper>() {
+//
+//                @Override
+//                public void changed(ObservableValue<? extends BenutzerWrapper> observable, BenutzerWrapper oldValue,
+//                        BenutzerWrapper newValue) {
+//                    if (newValue != null) {
+//                        updateView();
+//                    }
+//                }
+//            });
+//			
+//			updateTabelle();
 			
 			
 		} catch (Exception e) {
-			logger.error("Tabelle konnte nicht befüllt werden...");
+			logger.error("Tabelle konnte nicht befüllt werden...", e);
 		}
 	}
 	

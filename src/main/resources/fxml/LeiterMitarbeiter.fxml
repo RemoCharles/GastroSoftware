@@ -54,7 +54,7 @@
 		<Button layoutX="91.0" layoutY="141.0" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="79.0" text="Reset" />
 
 		<Label layoutX="10.0" layoutY="195.0" text="Benutzer:" />
-		<TableView fx:id="tblBenutzer" layoutX="10.0" layoutY="210.0" prefHeight="280.0" prefWidth="1118.0">
+		<TableView fx:id="tblPerson" layoutX="10.0" layoutY="210.0" prefHeight="280.0" prefWidth="1118.0">
 			<columns>
 				<TableColumn fx:id="colNummer" prefWidth="40.0" text="Nr." />
 				<TableColumn fx:id="colName" prefWidth="100.0" text="Name" />
@@ -74,7 +74,7 @@
 				</TableColumn>
 				<TableColumn text="Credentials">
 					<columns>
-						<TableColumn fx:id="colusername" prefWidth="100.0" text="Username" />
+						<TableColumn fx:id="colUsername" prefWidth="100.0" text="Username" />
 						<TableColumn fx:id="colKennwort" prefWidth="100.0" text="Kennwort" />
 					</columns>
 				</TableColumn>

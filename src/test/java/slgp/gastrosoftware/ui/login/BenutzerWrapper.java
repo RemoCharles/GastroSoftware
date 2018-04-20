@@ -41,10 +41,16 @@ public class BenutzerWrapper {
 	}
 	
 	public String getUsername() {
+		if (person.getLogin() == null) {
+			return null;
+		}
 		return person.getLogin().getUsername();
 	}
 	
 	public String getPasswort() {
+		if (person.getLogin() == null) {
+			return null;
+		}
 		return person.getLogin().getPasswort();
 	}
 	
@@ -67,5 +73,12 @@ public class BenutzerWrapper {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
+
+	@Override
+	public String toString() {
+		return "BenutzerWrapper [nummer=" + nummer + ", person=" + person + "]";
+	}
+	
+	
 
 }
