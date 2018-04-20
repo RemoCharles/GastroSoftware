@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.persistence.sessions.Login;
 
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -87,7 +86,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 
 	@FXML
 	private TableView<Person> tblPerson;
-	
+
 	@FXML
 	private TableColumn<Person, Integer> colNummer;
 
@@ -136,44 +135,44 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	public void neuenBenutzerErfassen(ActionEvent event) throws Exception{
 
 	}
-	
+
 	@FXML
 	public void reset(ActionEvent event) throws Exception{
 
 	}
-	
+
 	@FXML
 	public void loeschen(ActionEvent event) throws Exception{
 
 	}
-	
+
 
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
-			
+
 			// System.out.println("---------------------Test 1");
 			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
 			List <Person> allePersonenListe = PersDAOImpl.findAll();
 			// allePersonenListe.remove(0);
-		
+
 			// List <Person> wrapperListe = new ArrayList<>();
-			
+
 			// System.out.println("---------------------Test 2");
 			// int nummer = 1;
-			
-//			for (Person person : allePersonenListe) {
-//				wrapperListe.add(new Person(nummer++, person));
-//			}
+
+			//			for (Person person : allePersonenListe) {
+			//				wrapperListe.add(new Person(nummer++, person));
+			//			}
 			// System.out.println("---------------------Test 3");
-			
+
 			// tblPerson.getItems().clear();
 			// tblPerson.getItems().addAll(wrapperListe);
-			
+
 			/* Tabelle konfigurieren */
 			colNummer.setCellValueFactory(new PropertyValueFactory<Person, Integer>("nummer"));
 			// System.out.println("---------------------Test 4");
-            colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
-            colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
+			colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
+			colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
 			colStrasse.setCellValueFactory(new PropertyValueFactory<Person, String>("strasse"));
 			// System.out.println("---------------------Test 5");
 			colPlz.setCellValueFactory(new PropertyValueFactory<Person, Integer>("plz"));
@@ -187,113 +186,107 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			// System.out.println("---------------------Test 8");
 			colFunktion.setCellValueFactory(new PropertyValueFactory<Person, String>("funktion"));
 			// System.out.println("---------------------Test 9");
-			
+
 			// System.out.println("---------------------Test 10");
 			//ObservableList<Person> wrapperPerson = FXCollections.observableArrayList(wrapperListe);
-			
+
 			//wrapperPerson.addAll(wrapperListe);
-			
+
 			// System.out.println("---------------------Test 11");
-//			for (BenutzerWrapper w: wrapperPerson) {
-//				System.out.println(w);
-//			}
-			
+			//			for (BenutzerWrapper w: wrapperPerson) {
+			//				System.out.println(w);
+			//			}
+
 			ObservableList<Person> observPersonen = FXCollections.observableArrayList(allePersonenListe);
 			tblPerson.setItems(observPersonen);
-			// System.out.println("---------------------Test 12");
-			
-//			tblPerson.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BenutzerWrapper>() {
-//
-//                @Override
-//                public void changed(ObservableValue<? extends BenutzerWrapper> observable, BenutzerWrapper oldValue,
-//                        BenutzerWrapper newValue) {
-//                    if (newValue != null) {
-//                        updateView();
-//                    }
-//                }
-//            });
-//			
-//			updateTabelle();
-			
-			
+
+			//Listener
+			tblPerson.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Person>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Person> observable, Person oldValue,
+						Person newValue) {
+					if (newValue != null) {
+						updateView();
+					}
+				}
+			});
+
+			updateTabelle();
+
+
 		} catch (Exception e) {
 			logger.error("Tabelle konnte nicht befüllt werden...", e);
 		}
 	}
-	
-//	private void updateTabelle() {
-//		try {
-//			
-//			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
-//			List <Person> allePersonenListe = PersDAOImpl.findAll();
-//
-//            if (allePersonenListe.size() > 0) {
-//                List<BenutzerWrapper> wrapperListe = new ArrayList<>();
-//
-//                int nummer = 1;
-//
-//                for (Person person : allePersonenListe) {
-//                    wrapperListe.add(new BenutzerWrapper(nummer++, person));
-//                }
-//
-//                tblPerson.getItems().clear();
-//                tblPerson.getItems().addAll(wrapperListe);
-//
-//                tblPerson.getSelectionModel().select(0);
-//
-//                updateView();
-//            }
-//			
-//		}  catch (Exception e) {
-//            logger.error("Fehler bei der Aktualisierung der Tabelle: ", e);
-//            throw new RuntimeException(e);
-//        }
-//		
-//	}
-//	private void updateView() {
-//		
-//		lblError.setText("");
-//
-//        if (tblPerson.getSelectionModel().getSelectedItem() == null) {
-//
-//            // cmbRolle.getSelectionModel().clearSelection();
-//            txtName.setText("");
-//            txtVorname.setText("");
-//            txtStrasse.setText("");
-//            txtPlz.setText("");
-//            txtOrt.setText("");
-//            txtEmail.setText("");
-//            txtTelefon.setText("");
-//            txtUsername.setText("");
-//            txtKennwort.setText("");
-//
-//        } else {
-//
-//            Person person = tblPerson.getSelectionModel().getSelectedItem().getPerson();
-//
-//            // cmbRolle.getSelectionModel().select(benutzer.getRolle());
-//            txtName.setText(person.getName());
-//            txtVorname.setText(person.getVorname());
-//            txtStrasse.setText(person.getAdresse().getStrasse());
-//            txtPlz.setText("" + person.getAdresse().getPlz());
-//            txtOrt.setText(person.getAdresse().getOrt());
-//            txtEmail.setText(person.getKontakt().getEmail());
-//            txtTelefon.setText(person.getKontakt().getTelefon());
-//            txtUsername.setText(person.getLogin().getUsername());
-//            txtKennwort.setText(person.getLogin().getPasswort());
-//        }
-//
-//	}
-	
-	
-	
+
+	private void updateTabelle() {
+		try {
+
+			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
+			List <Person> allePersonenListe = PersDAOImpl.findAll();
+
+
+			tblPerson.getItems().clear();
+			tblPerson.getItems().addAll(allePersonenListe);
+
+			tblPerson.getSelectionModel().select(0);
+
+
+			updateView();
+
+
+		}  catch (Exception e) {
+			logger.error("Fehler bei der Aktualisierung der Tabelle: ", e);
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	private void updateView() {
+
+		lblError.setText("");
+
+		if (tblPerson.getSelectionModel().getSelectedItem() == null) {
+
+			// cmbRolle.getSelectionModel().clearSelection();
+			txtName.setText("");
+			txtVorname.setText("");
+			txtStrasse.setText("");
+			txtPlz.setText("");
+			txtOrt.setText("");
+			txtEmail.setText("");
+			txtTelefon.setText("");
+			txtUsername.setText("");
+			txtKennwort.setText("");
+
+		} else {
+
+			Person person = tblPerson.getSelectionModel().getSelectedItem();
+
+			// cmbRolle.getSelectionModel().select(benutzer.getRolle());
+			txtName.setText(person.getName());
+			txtVorname.setText(person.getVorname());
+			txtStrasse.setText(person.getAdresse().getStrasse());
+			txtPlz.setText("" + person.getAdresse().getPlz());
+			txtOrt.setText(person.getAdresse().getOrt());
+			txtEmail.setText(person.getKontakt().getEmail());
+			txtTelefon.setText(person.getKontakt().getTelefon());
+			txtUsername.setText(person.getLogin().getUsername());
+			txtKennwort.setText(person.getLogin().getPasswort());
+		}
+
+	}
+
+
+
 	@FXML
 	public void zurueck(ActionEvent event) throws Exception {
-		 Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
-	        Scene ma_interface_scene = new Scene(ma_interface_parent);
-	        Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        ma_stage.setScene(ma_interface_scene);
-	        ma_stage.show();
+		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
+		Scene ma_interface_scene = new Scene(ma_interface_parent);
+		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		ma_stage.setScene(ma_interface_scene);
+		ma_stage.show();
 	}
 
 
