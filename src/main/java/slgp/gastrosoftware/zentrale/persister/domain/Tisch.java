@@ -11,28 +11,29 @@ public class Tisch implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private int anzahlSitzplaetze;
+    private int tischNummer;
+
 
     public Tisch () {
 
     }
 
     public Tisch(int anzahlSitzplaetze) {
-        this.anzahlSitzplaetze = anzahlSitzplaetze;
+        this.tischNummer = anzahlSitzplaetze;
     }
 
-    public int getAnzahlSitzplaetze() {
-        return anzahlSitzplaetze;
+    public int getTischNummer() {
+        return tischNummer;
     }
 
-    public void setAnzahlSitzplaetze(int anzahlSitzplaetze) {
-        this.anzahlSitzplaetze = anzahlSitzplaetze;
+    public void setTischNummer(int anzahlSitzplaetze) {
+        this.tischNummer = anzahlSitzplaetze;
     }
 
     @Override
     public String toString() {
         return "Tisch{" +
-                " AnzahlSitzplaetze=" + anzahlSitzplaetze +
+                " Tischnummer=" + tischNummer +
                 '}';
     }
 
@@ -41,12 +42,12 @@ public class Tisch implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tisch tisch = (Tisch) o;
-        return anzahlSitzplaetze == tisch.anzahlSitzplaetze;
+        return tischNummer == tisch.tischNummer;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(anzahlSitzplaetze);
+        return Objects.hash(tischNummer);
     }
 }

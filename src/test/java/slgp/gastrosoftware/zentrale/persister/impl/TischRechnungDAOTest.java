@@ -65,23 +65,4 @@ public class TischRechnungDAOTest {
         tischRechnungDAO.delete(lastTischRechnung);
         assertTrue(tischRechnungDAO.findAll().size() == Util.INIT_SIZE_TISCH_RECHNUNG -1);
     }
-
-    @Test
-    public void testTischRechnungUpdate() throws Exception{
-        init();
-        assertTrue(tischRechnungDAO.findAll().size() == Util.INIT_SIZE_TISCH_RECHNUNG);
-        int size = tischRechnungDAO.findAll().size();
-        TischRechnung lastTischRechnung = tischRechnungDAO.findAll().get(size -1);
-        List<Konsumartikel> konsumartikelListeDB;
-        konsumartikelListeDB = lastTischRechnung.getBestellungList().get(0).getKonsumartikel();
-        for (Konsumartikel k : konsumartikelListeDB){
-            logger.info(k);
-        }
-        Konsumartikel neuerKonsumartikel = konsumartikelListeDB.get(0);
-        neuerKonsumartikel.setBezeichnung("Test");
-        konsumartikelDAO.update(neuerKonsumartikel);
-        for (Konsumartikel k : konsumartikelListeDB){
-            logger.info(k);
-        }
-    }
 }

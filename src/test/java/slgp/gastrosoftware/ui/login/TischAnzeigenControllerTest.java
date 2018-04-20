@@ -1,15 +1,6 @@
 package slgp.gastrosoftware.ui.login;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.TreeSet;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,9 +13,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
+import javafx.util.Callback;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 public class TischAnzeigenControllerTest implements Initializable {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
@@ -39,7 +38,13 @@ public class TischAnzeigenControllerTest implements Initializable {
     private TableColumn<Konsumartikel, String> konsKat;
 
     @FXML
+    private TableColumn konsAnzahl;
+
+    @FXML
     private Button butAkt;
+
+    @FXML
+    private Spinner spnAnzahl;
 
     @FXML
     private TableColumn<Konsumartikel, String> konsBez;
@@ -71,13 +76,13 @@ public class TischAnzeigenControllerTest implements Initializable {
             konsKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
             konsBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
             konsPr.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
+            //konsAnzahl.setCellValueFactory();
 
             ObservableList<Konsumartikel> konsumartikelListe = FXCollections.observableArrayList();
             konsumartikelListe.addAll(alleKonsumartikelListe);
             tblKonsumartikel.setItems(konsumartikelListe);
 
             updateTable();
-
 
         } catch (Exception e) {
             logger.error("Tabelle konnte nicht befüllt werden...");

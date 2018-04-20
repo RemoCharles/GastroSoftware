@@ -176,6 +176,7 @@ public class Util {
         KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
         TischDAO pTisch = new TischDAOImpl();
 
+        List<BestellPosition> bestellPositionList = createBestellPosition();
         List<Bestellung> list = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
@@ -184,7 +185,7 @@ public class Util {
 
         Tisch tisch = new Tisch(6);
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        list.add(new Bestellung(ma, tisch, konsumList, false, false, LocalDate.now()));
+        list.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
 
         pMitarbeiter.save(ma);
         pTisch.save(tisch);
@@ -204,6 +205,32 @@ public class Util {
         }
     }
 
+    public static List<BestellPosition> createBestellPosition() throws Exception {
+        BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+        List<BestellPosition> bestellPositionList = new ArrayList<>();
+        Konsumartikel k1 = Util.createKonsumartikelListe().get(0);
+        Konsumartikel k2 = Util.createKonsumartikelListe().get(1);
+
+        BestellPosition bP1 = new BestellPosition(k1, 12);
+        BestellPosition bP2 = new BestellPosition(k2, 1);
+
+        bestellPositionList.add(bP1);
+        bestellPositionList.add(bP2);
+
+        for(BestellPosition bestellPosition : bestellPositionList){
+            bestellPositionDAO.save(bestellPosition);
+        }
+
+        return bestellPositionList;
+    }
+
+    public static void deleteAllBestellPosition() throws Exception{
+        BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+        for(BestellPosition bestellPosition : bestellPositionDAO.findAll()){
+            bestellPositionDAO.delete(bestellPosition);
+        }
+    }
+
     public static List<TischRechnung> createTischRechnung() throws Exception {
         TischRechnungDAO pTischRechnung = new TischRechnungDAOImpl();
         BestellungDAO pBestellung = new BestellungDAOImpl();
@@ -211,13 +238,14 @@ public class Util {
         TischDAO tischDAO = new TischDAOImpl();
         KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
         List<TischRechnung> list = new ArrayList<>();
+        List<BestellPosition> bestellPositionList = Util.createBestellPosition();
         Tisch tisch = new Tisch(6);
         List<Bestellung> bestellungList = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        bestellungList.add(new Bestellung(ma, tisch, konsumList, false, false, LocalDate.now()));
+        bestellungList.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
         list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
         pMitarbeiter.save(ma);
         tischDAO.save(tisch);

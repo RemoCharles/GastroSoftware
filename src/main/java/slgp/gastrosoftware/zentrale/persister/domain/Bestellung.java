@@ -22,15 +22,15 @@ public class Bestellung implements Serializable {
     @ManyToOne
     private Tisch tisch;
     @OneToMany(fetch = FetchType.EAGER)
-    private List<Konsumartikel> konsumartikel;
+    private List<BestellPosition> bestellPositionList;
     private boolean zubereitet;
     private LocalDate datum;
     private boolean bezahlt;
 
-    public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<Konsumartikel> konsumartikel, boolean zubereitet, boolean bezahlt, LocalDate datum) {
+    public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<BestellPosition> bestellPositionList, boolean zubereitet, boolean bezahlt, LocalDate datum) {
         this.mitarbeiter = mitarbeiter;
         this.tisch = tisch;
-        this.konsumartikel = konsumartikel;
+        this.bestellPositionList = bestellPositionList;
         this.zubereitet = zubereitet;
         this.datum = datum;
         this.bezahlt = bezahlt;
@@ -55,12 +55,12 @@ public class Bestellung implements Serializable {
         this.tisch = tisch;
     }
 
-    public List<Konsumartikel> getKonsumartikel() {
-        return konsumartikel;
+    public List<BestellPosition> getKonsumartikel() {
+        return bestellPositionList;
     }
 
-    public void setKonsumartikel(List<Konsumartikel> konsumartikel) {
-        this.konsumartikel = konsumartikel;
+    public void setKonsumartikel(List<BestellPosition> bestellPositionList) {
+        this.bestellPositionList = bestellPositionList;
     }
 
     public boolean getZubereitet() {
@@ -92,7 +92,7 @@ public class Bestellung implements Serializable {
         return "Bestellung{" +
                 ", mitarbeiter=" + mitarbeiter +
                 ", tisch=" + tisch +
-                ", konsumartikel=" + konsumartikel +
+                ", BestellPositionList=" + bestellPositionList +
                 ", zubereitet=" + zubereitet +
                 ", datum=" + datum +
                 ", bezahlt=" + bezahlt +
@@ -107,12 +107,12 @@ public class Bestellung implements Serializable {
         return zubereitet == that.zubereitet && bezahlt == that.bezahlt &&
                 Objects.equals(mitarbeiter, that.mitarbeiter) &&
                 Objects.equals(tisch, that.tisch) &&
-                Objects.equals(konsumartikel, that.konsumartikel) &&
+                Objects.equals(bestellPositionList, that.bestellPositionList) &&
                 Objects.equals(datum, that.datum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mitarbeiter, tisch, konsumartikel, zubereitet, datum, bezahlt);
+        return Objects.hash(mitarbeiter, tisch, bestellPositionList, zubereitet, datum, bezahlt);
     }
 }

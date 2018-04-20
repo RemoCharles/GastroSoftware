@@ -55,13 +55,13 @@ public class BarInterfaceControllerTest implements Initializable{
 			List<Konsumartikel> tempKonsListe = new ArrayList<>();
 
 
-			for(Bestellung b : unzubereiteteBestellungenListe) {
-				for(Konsumartikel konsumartikel : b.getKonsumartikel()) {
-					if(konsumartikel instanceof Getraenke) {
-						tempKonsListe.add(konsumartikel);
-					}
-				}
-			}
+//			for(Bestellung b : unzubereiteteBestellungenListe) {
+//				for(Konsumartikel konsumartikel : b.getKonsumartikel()) {
+//					if(konsumartikel instanceof Getraenke) {
+//						tempKonsListe.add(konsumartikel);
+//					}
+//				}
+//			}
 
 			/* TableView konfigurieren */
 			// Objekt welches in List enthalten ist in Tabelle schreiben

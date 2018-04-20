@@ -6,18 +6,12 @@ import org.junit.*;
 import slgp.gastrosoftware.zentrale.persister.Util.Util;
 import slgp.gastrosoftware.zentrale.persister.api.BestellungDAO;
 import slgp.gastrosoftware.zentrale.persister.domain.Bestellung;
-import slgp.gastrosoftware.zentrale.persister.domain.Tisch;
-import slgp.gastrosoftware.zentrale.persister.util.JpaUtil;
-
-
-import javax.persistence.EntityManager;
-import javax.validation.constraints.AssertTrue;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BestellungDAOTest {
 
@@ -33,6 +27,7 @@ public class BestellungDAOTest {
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
         Util.deleteAllBestellung();
+        Util.deleteAllBestellPosition();
     }
 
     @Before
@@ -41,10 +36,8 @@ public class BestellungDAOTest {
         Util.deleteAllMitarbeiter();
         Util.deleteAllPersonen();
         Util.deleteAllBestellung();
-        Util.deleteAllEsswaren();
-        Util.deleteAllGetraenke();
-        Util.deleteAllKonsumartikel();
         Util.deleteAllTisch();
+        Util.deleteAllBestellPosition();
     }
 
     @After
@@ -53,9 +46,6 @@ public class BestellungDAOTest {
 
     private void init() throws Exception {
         Util.createBestellungListe();
-        Util.createEsswarenListe();
-        Util.createGetraenkeListe();
-        Util.createKonsumartikelListe();
         Util.createMitarbeiter();
         Util.createTisch();
         logger.info("Initalisierung fertig!");
