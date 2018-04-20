@@ -36,10 +36,13 @@ public class BarInterfaceControllerTest implements Initializable{
 	private Button btBereit;
 
 	@FXML
-	private TableView<Konsumartikel> tblOffeneBest;
+	private TableView<BestellPosition> tblOffeneBest;
 
 	@FXML
-	private TableColumn<Konsumartikel, String> colKonsumart;
+	private TableColumn<BestellPosition, String> colKonsumart;
+	
+	@FXML
+	private TableColumn<BestellPosition, Integer> colAnz;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -54,13 +57,13 @@ public class BarInterfaceControllerTest implements Initializable{
 			}
 
 
-			List<Konsumartikel> tempKonsList = new ArrayList<>();
+			List<BestellPosition> tempKonsList = new ArrayList<>();
 
 			for(Bestellung b : unzubereiteteBestellungenListe) {
 				for(BestellPosition bP : b.getKonsumartikel()) {
 					if(bP.getKonsumartikel() instanceof Getraenke) {
 						Konsumartikel k = bP.getKonsumartikel();
-						tempKonsList.add(k);
+						tempKonsList.add(bP);
 					}
 				}
 			}
@@ -70,8 +73,9 @@ public class BarInterfaceControllerTest implements Initializable{
 
 			/* TableView konfigurieren */
 			// Objekt welches in List enthalten ist in Tabelle schreiben
-			colKonsumart.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
-			ObservableList<Konsumartikel> bestellungenListe = FXCollections.observableArrayList();
+			colKonsumart.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
+			colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
+			ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList();
 			bestellungenListe.addAll(tempKonsList);
 			tblOffeneBest.setItems(bestellungenListe);
 
