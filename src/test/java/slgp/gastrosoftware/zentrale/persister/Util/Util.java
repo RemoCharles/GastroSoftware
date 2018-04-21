@@ -13,9 +13,10 @@ import java.util.List;
 public class Util {
 
     public static final int INIT_SIZE_PERSONEN = 3;
-    public static final int INIT_SIZE_ESSWAREN = 2;
-    public static final int INIT_SIZE_GETRAENKE = 2;
-    public static final int INIT_SIZE_KONSUMARTIKEL = 2;
+    public static final int INIT_SIZE_ESSWAREN = 3;
+    public static final int INIT_SIZE_GETRAENKE = 3;
+    public static final int INIT_SIZE_BESTELLPOSITION = 2;
+    public static final int INIT_SIZE_KONSUMARTIKEL = 5;
     public static final int INIT_SIZE_TAGESMENU = 1;
     public static final int INIT_SIZE_MITARBEITER = 3;
     public static final int INIT_SIZE_LIEFERANT = 3;
@@ -51,7 +52,7 @@ public class Util {
 
         List<Esswaren> list = new ArrayList<Esswaren>();
 
-        list.add(new Esswaren("Pizza", "Hauptspeise", 500));
+        list.add(new Esswaren("Pasta", "Hauptspeise", 500));
         list.add(new Esswaren("Steak", "Hauptspeise", 20));
         list.add(new Esswaren("Salat", "Vorspeise", 30));
 
@@ -95,9 +96,11 @@ public class Util {
         List<Konsumartikel> list = new ArrayList<Konsumartikel>();
 
         list.add(new Esswaren("Pizza", "Hauptspeise", 13));
-        list.add(new Getraenke("Cola", "Softgetraenke", 5));
+        list.add(new Getraenke("Cola", "Softgetränke", 5));
         list.add(new Esswaren("Käsekuchen", "Hauptspeise", 12));
         list.add(new Getraenke("Wasser", "Softgetränke", 2));
+        list.add(new Getraenke("Eichhof", "Bier", 17));
+        list.add(new Esswaren("Salat", "Vorspeise", 1));
 
         for (Konsumartikel k : list) {
             pKonsumartikel.save(k);
@@ -180,7 +183,7 @@ public class Util {
         List<Bestellung> list = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
-        konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
+        konsumList.add(new Getraenke("Eichhof", "Bier", 5));
 
 
         Tisch tisch = new Tisch(6);
@@ -242,7 +245,7 @@ public class Util {
         Tisch tisch = new Tisch(6);
         List<Bestellung> bestellungList = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
-        konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
+        konsumList.add(new Esswaren("Pasta", "Hauptspeise", 500));
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
         bestellungList.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));

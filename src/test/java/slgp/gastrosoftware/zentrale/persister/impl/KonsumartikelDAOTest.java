@@ -55,25 +55,37 @@ public class KonsumartikelDAOTest {
     @Test
     public void testEsswarenSave() throws Exception {
         init();
+        logger.info(esswarenDAO.findAll().size());
         assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
     }
 
     @Test
     public void testEsswarenDelete() throws Exception {
         init();
+        for(Esswaren esswaren : esswarenDAO.findAll()){
+            logger.info(esswaren);
+        }
+        logger.info(esswarenDAO.findAll().size());
         assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
         int size = esswarenDAO.findAll().size();
         Esswaren lastEssware = esswarenDAO.findAll().get(size - 1);
         esswarenDAO.delete(lastEssware);
-        Assert.assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_PERSONEN - 1);
+        logger.info(esswarenDAO.findAll().size());
+        for(Esswaren esswaren : esswarenDAO.findAll()){
+            logger.info(esswaren);
+        }
+        Assert.assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN - 1);
     }
 
     @Test
     public void testEsswarenUpdate() throws Exception {
         init();
-        assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_KONSUMARTIKEL);
+
+        logger.info(esswarenDAO.findAll().size());
+        assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
         int size = esswarenDAO.findAll().size();
         Esswaren lastEsswaren = esswarenDAO.findAll().get(size - 1);
+
         esswarenDAO.update(lastEsswaren);
         Esswaren lastEsswarenNachUpdate = esswarenDAO.findAll().get(size - 1);
         assertTrue(lastEsswarenNachUpdate.getPreis() == lastEsswaren.getPreis());
@@ -82,12 +94,14 @@ public class KonsumartikelDAOTest {
     @Test
     public void testGetraenkeSave() throws Exception {
         init();
-        assertTrue(getraenkeDAO.findAll().size() == 2);
+        logger.info(getraenkeDAO.findAll().size());
+        assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
     }
 
     @Test
     public void testGetraenkeDelete() throws Exception {
         init();
+        logger.info(getraenkeDAO.findAll().size());
         assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
         int size = getraenkeDAO.findAll().size();
         Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
@@ -102,6 +116,7 @@ public class KonsumartikelDAOTest {
     @Test
     public final void testGetraenkeUpdate() throws Exception {
         init();
+        logger.info(getraenkeDAO.findAll().size());
         assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE);
         Getraenke lastGetraenke = getraenkeDAO.findAll().get(getraenkeDAO.findAll().size() - 1);
         Getraenke getraenkeAusDb = lastGetraenke;

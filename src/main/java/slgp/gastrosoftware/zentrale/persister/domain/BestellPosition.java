@@ -26,24 +26,23 @@ public class BestellPosition implements Serializable {
         this.anzahl = anzahl;
     }
 
+    public String getBezeichnung(){
+        return konsumartikel.getBezeichnung();
+    }
+
+    public double getPreis(){
+        return konsumartikel.getPreis();
+    }
+
+    public String getKategorie(){
+        return konsumartikel.getKategorie();
+    }
     public Konsumartikel getKonsumartikel() {
         return konsumartikel;
     }
 
     public void setKonsumartikel(Konsumartikel konsumartikel) {
         this.konsumartikel = konsumartikel;
-    }
-    
-    public String getBezeichnung() {
-    	return konsumartikel.getBezeichnung();
-    }
-    
-    public String getKategorie() {
-    	return konsumartikel.getKategorie();
-    }
-    
-    public double getPreis() {
-    	return konsumartikel.getPreis();
     }
 
     public int getAnzahl() {

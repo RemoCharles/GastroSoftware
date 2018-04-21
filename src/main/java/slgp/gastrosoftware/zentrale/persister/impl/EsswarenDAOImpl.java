@@ -30,7 +30,7 @@ public class EsswarenDAOImpl extends GenericPersisterDAOImpl<Esswaren> implement
 
     @Override
     public void delete(Esswaren entity) throws Exception {
-
+        super.delete(entity);
     }
 
     @Override
