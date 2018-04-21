@@ -23,7 +23,7 @@ public class GastroSoftwareGUITest extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		Util.resetDb();
+//		Util.resetDb();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
 		primaryStage.setTitle("Gastro Software");
 		primaryStage.setScene(new Scene(root, 600, 400));
@@ -32,10 +32,8 @@ public class GastroSoftwareGUITest extends Application {
 
 
 	public static void main(String[] args) throws Exception {
-		Util.resetDb();
-		List<Person> personen;
-		personen = Util.erstellePersonenListe();
-		DbHelper.personenSpeichern(personen);
+//		Util.resetDb();
+		List<Person> personen = Util.erstellePersonenListe();
 		Util.createKonsumartikelListe();
 		Util.createBestellungListe();
 		launch(args);
