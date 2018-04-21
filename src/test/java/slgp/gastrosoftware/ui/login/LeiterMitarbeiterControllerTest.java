@@ -2,12 +2,12 @@ package slgp.gastrosoftware.ui.login;
 
 import java.util.ResourceBundle;
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.eclipse.persistence.sessions.Login;
+
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,22 +30,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import slgp.gastrosoftware.zentrale.persister.domain.Adresse;
 import slgp.gastrosoftware.zentrale.persister.domain.Kontakt;
+import slgp.gastrosoftware.zentrale.persister.domain.Login;
 import slgp.gastrosoftware.zentrale.persister.domain.Person;
 import slgp.gastrosoftware.zentrale.persister.impl.PersonDAOImpl;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 
 public class LeiterMitarbeiterControllerTest implements Initializable {
 
@@ -54,8 +42,6 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	@FXML
 	private Label lblError;
 
-	@FXML
-	private ComboBox cmbRolle;
 
 	@FXML
 	private TextField txtName;
@@ -128,45 +114,111 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 
 	@FXML
 	public void speichern(ActionEvent event) throws Exception{
-
+		// Kontrolle ob dies funktioniert!
+		if (eingabeValid()) {
+			
+			if (tblPerson.getSelectionModel().getSelectedItem() == null) {
+				
+				// Neue Person anlegen
+				String name = txtName.getText();
+				String vorname = txtVorname.getText();
+				String strasse = txtStrasse.getText();
+				int plz = Integer.parseInt(txtPlz.getText());
+				String ort = txtOrt.getText();
+				String email = txtEmail.getText();
+				String telefon = txtTelefon.getText();
+				String username = txtUsername.getText();
+				String passwort = txtKennwort.getText();
+				
+				// Person personSpeichern = new Person(name, vorname, funktion, new Adresse(strasse, plz, ort), new Kontakt(email, telefon), new Login(username, passwort));
+			}
+		}
 	}
 
 	@FXML
 	public void neuenBenutzerErfassen(ActionEvent event) throws Exception{
-
+		
+		reset();
 	}
 
 	@FXML
-	public void reset(ActionEvent event) throws Exception{
+	public void eingabeReset(ActionEvent event) throws Exception{
 
+		reset();
+	        
 	}
+	
+	
+	@FXML
+	private void reset() {
+		 txtName.setText("");
+	        txtVorname.setText("");
+	        txtStrasse.setText("");
+	        txtPlz.setText("");
+	        txtOrt.setText("");
+	        txtEmail.setText("");
+	        txtTelefon.setText("");
+	        txtUsername.setText("");
+	        txtKennwort.setText("");
+	}
+	
+	
 
 	@FXML
 	public void loeschen(ActionEvent event) throws Exception{
-
+		
+		PersonDAOImpl persDAOImpl = new PersonDAOImpl(); 
+		
+		if(tblPerson.getSelectionModel().getSelectedItem() == null) {
+			return;
+		}
+		
+		Person person = tblPerson.getSelectionModel().getSelectedItem();
+		
+		// System.out.println(person);
+		
+		if (person != null) {
+			try {
+				persDAOImpl.delete(person);
+				updateTabelle();
+			} catch (Exception e) {
+				logger.error("Fehler beim Löschen der Person: ", e);
+			}
+		}
 	}
 
-
+	// Ueberpruefung ob die Textfelder ausgefüllt sind
+	private boolean eingabeValid() {
+		lblError.setText("");
+		if (isValid(txtName.getText()) && isValid(txtVorname.getText()) && isValid(txtStrasse.getText()) 
+				&& isValid(txtPlz.getText()) && isValid(txtOrt.getText()) && isValid(txtEmail.getText()) 
+				&& isValid(txtTelefon.getText()) && isValid(txtEmail.getText()) && isValid(txtKennwort.getText())
+				&& isValid(txtUsername.getText())) {
+			
+			// PLZ Kontrolle
+			try {
+				Integer.parseInt(txtPlz.getText());
+				return true;
+			} catch (NumberFormatException e) {
+				lblError.setText("PLZ nicht korrekt eingegeben");
+				return false;
+			}
+		} else {
+			lblError.setText("Eingabe nicht korrekt");
+			return false;
+		}
+	}
+	
+	// Funktion zur Pruefung
+	private boolean isValid(String str) {
+		return str != null && str.trim().length() > 0;
+	}
+	
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
 
-			// System.out.println("---------------------Test 1");
-			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
-			List <Person> allePersonenListe = PersDAOImpl.findAll();
-			// allePersonenListe.remove(0);
-
-			// List <Person> wrapperListe = new ArrayList<>();
-
-			// System.out.println("---------------------Test 2");
-			// int nummer = 1;
-
-			//			for (Person person : allePersonenListe) {
-			//				wrapperListe.add(new Person(nummer++, person));
-			//			}
-			// System.out.println("---------------------Test 3");
-
-			// tblPerson.getItems().clear();
-			// tblPerson.getItems().addAll(wrapperListe);
+			PersonDAOImpl persDAOImpl = new PersonDAOImpl();
+			List <Person> allePersonenListe = persDAOImpl.findAll();
 
 			/* Tabelle konfigurieren */
 			colNummer.setCellValueFactory(new PropertyValueFactory<Person, Integer>("nummer"));
@@ -174,28 +226,17 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
 			colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
 			colStrasse.setCellValueFactory(new PropertyValueFactory<Person, String>("strasse"));
-			// System.out.println("---------------------Test 5");
+			
 			colPlz.setCellValueFactory(new PropertyValueFactory<Person, Integer>("plz"));
 			colOrt.setCellValueFactory(new PropertyValueFactory<Person, String>("ort"));
 			colEmail.setCellValueFactory(new PropertyValueFactory<Person, String>("email"));
 			colTelefon.setCellValueFactory(new PropertyValueFactory<Person, String>("telefon"));
-			// System.out.println("---------------------Test 6");
+			
 			colUsername.setCellValueFactory(new PropertyValueFactory<Person, String>("username"));
-			// System.out.println("---------------------Test 7");
+			
 			colKennwort.setCellValueFactory(new PropertyValueFactory<Person, String>("passwort"));
-			// System.out.println("---------------------Test 8");
+			
 			colFunktion.setCellValueFactory(new PropertyValueFactory<Person, String>("funktion"));
-			// System.out.println("---------------------Test 9");
-
-			// System.out.println("---------------------Test 10");
-			//ObservableList<Person> wrapperPerson = FXCollections.observableArrayList(wrapperListe);
-
-			//wrapperPerson.addAll(wrapperListe);
-
-			// System.out.println("---------------------Test 11");
-			//			for (BenutzerWrapper w: wrapperPerson) {
-			//				System.out.println(w);
-			//			}
 
 			ObservableList<Person> observPersonen = FXCollections.observableArrayList(allePersonenListe);
 			tblPerson.setItems(observPersonen);
@@ -277,7 +318,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 		}
 
 	}
-
+	
 
 
 	@FXML
