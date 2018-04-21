@@ -35,77 +35,94 @@ public class TischAnzeigenControllerTest implements Initializable {
     private ComboBox<String> cmbKat;
 
     @FXML
+    private ComboBox<String> cmbKategorie;
+
+    @FXML
     private TableView<BestellPosition> tblBestellPosition;
 
     @FXML
-    private TableColumn<BestellPosition, String> konsKat;
+    private TableColumn<BestellPosition, String> bPKat;
 
     @FXML
-    private TableColumn<BestellPosition, Integer> konsAnzahl;
-
-    @FXML
-    private Button butAkt;
+    private TableColumn<BestellPosition, Integer> bPAnzahl;
 
     @FXML
     private Spinner spnAnzahl;
 
     @FXML
-    private TableColumn<BestellPosition, String> konsBez;
+    private TableColumn<BestellPosition, String> bPBez;
 
     @FXML
-    private TableColumn<BestellPosition, Double> konsPr;
+    private TableColumn<BestellPosition, Double> bPPreis;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
+            kategorienAuswahlLaden();
+            List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
 
-            List<Konsumartikel> alleKonsumartikelListe = konsumartikelDAO.findAll();
-            List<BestellPosition> alleBestellPositionListe = new ArrayList<>();
+            ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableList(bestellPositionList);
 
-            for (Konsumartikel konsumartikel : alleKonsumartikelListe) {
-                BestellPosition bestellPosition = new BestellPosition(konsumartikel, 0);
-                alleBestellPositionListe.add(bestellPosition);
-            }
-
-            for (BestellPosition bestellPosition : alleBestellPositionListe) {
+            for (BestellPosition bestellPosition : bestellPositionObservableList) {
                 logger.info(bestellPosition);
             }
-            TreeSet<String> konsumartikelKategorie = new TreeSet<>();
 
-            for (Konsumartikel kBez : alleKonsumartikelListe) {
-                konsumartikelKategorie.add(kBez.getKategorie());
-            }
+            bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
+            bPKat.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("kategorie"));
+            bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
+            bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
 
-            ObservableList<String> konsumArtikelBezeichnungsListe = FXCollections.observableArrayList();
-            konsumArtikelBezeichnungsListe.addAll(konsumartikelKategorie);
-            cmbKat.setItems(konsumArtikelBezeichnungsListe);
-
-            if (konsumArtikelBezeichnungsListe.size() > 0) {
-                cmbKat.getSelectionModel().select(0);
-            }
-
-            logger.info("Konsumartikelbezeichnung liste länge: " + konsumArtikelBezeichnungsListe.size());
-            logger.info("KonsumartikelKategorieListe" + konsumartikelKategorie.size());
-            logger.info("Alle KonsumartikelListe" +alleKonsumartikelListe.size());
-            logger.info("Alle BestellPositionen: " + alleBestellPositionListe);
-
-            /* TableView konfigurieren */
-            konsKat.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("kategorie"));
-            konsBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
-            konsPr.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
-            konsAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
-
-            ObservableList<BestellPosition> bestellPositionListe = FXCollections.observableArrayList();
-            bestellPositionListe.addAll(alleBestellPositionListe);
-            logger.info("bestellPositionListe länge:" + bestellPositionListe.size());
-
-            tblBestellPosition.setItems(bestellPositionListe);
+            tblBestellPosition.setItems(bestellPositionObservableList);
 
             updateTable();
-
         } catch (Exception e) {
             logger.error("Tabelle konnte nicht befüllt werden...", e);
         }
+
+    }
+
+    @FXML
+    private void updateTable() {
+
+        try {
+
+        } catch (Exception e) {
+            logger.error("Fehler beim Updaten der Tabelle: ", e);
+            throw new RuntimeException();
+        }
+
+    }
+
+    @FXML
+    private void kategorienAuswahlLaden() throws Exception {
+        BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+
+        //Klassen Kategorie ComboBox füllen
+        TreeSet<String> bestellPositionKlasse = new TreeSet<>();
+        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
+            bestellPositionKlasse.add(bestellPosition.getKonsumartikel().getClass().getSimpleName());
+        }
+        ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(bestellPositionKlasse);
+        cmbKat.setItems(konsumArtikelBezeichnungList);
+        if(konsumArtikelBezeichnungList.size() > 0){
+            cmbKat.getSelectionModel().select(0);
+        }
+
+        //Kategorie ComboBox füllen
+        TreeSet<String> bestellPositionKategorie = new TreeSet<>();
+        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
+            bestellPositionKategorie.add(bestellPosition.getKategorie());
+        }
+        ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(bestellPositionKategorie);
+        cmbKategorie.setItems(konsumArtikelKategorieListe);
+        if (konsumArtikelKategorieListe.size() > 0){
+            cmbKategorie.getSelectionModel().select(0);
+        }
+
+
+
+
+
 
     }
 
@@ -118,37 +135,6 @@ public class TischAnzeigenControllerTest implements Initializable {
         ma_stage.show();
     }
 
-
-    @FXML
-    private void updateTable() {
-        try {
-            /* cmbProduktTyp initialisieren */
-            KonsumartikelDAOImpl KonsDAOImpl = new KonsumartikelDAOImpl();
-            List<BestellPosition> alleBestellPosition = bestellPositionDAO.findAll();
-
-            if (cmbKat.getSelectionModel().getSelectedItem() != null) {
-
-                List<BestellPosition> tempListe = new ArrayList<>();
-
-                /* Suche alle Konsumartikel-Objekte für den gewählten Namen */
-                for (BestellPosition bestellPosition : alleBestellPosition) {
-
-//                    if ( bestellPosition.getKonsumartikel().getKategorie().equals(cmbKat.getSelectionModel().getSelectedItem())) {
-//                        tempListe.add(bestellPosition);
-//                    }
-                    tempListe.add(bestellPosition);
-                }
-
-                ObservableList<BestellPosition> bestellPositionListe = FXCollections.observableArrayList();
-                bestellPositionListe.addAll(tempListe);
-                tblBestellPosition.setItems(bestellPositionListe);
-            }
-        } catch (Exception e) {
-            logger.error("Fehler beim Updaten der Tabelle: ", e);
-            throw new RuntimeException();
-        }
-
-    }
-
 }
+
 

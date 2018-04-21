@@ -26,6 +26,11 @@ public class BestellPosition implements Serializable {
         this.anzahl = anzahl;
     }
 
+    public BestellPosition(Konsumartikel konsumartikel) {
+        this.konsumartikel = konsumartikel;
+        anzahl = 0;
+    }
+
     public String getBezeichnung(){
         return konsumartikel.getBezeichnung();
     }
@@ -37,6 +42,7 @@ public class BestellPosition implements Serializable {
     public String getKategorie(){
         return konsumartikel.getKategorie();
     }
+
     public Konsumartikel getKonsumartikel() {
         return konsumartikel;
     }

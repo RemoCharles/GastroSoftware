@@ -33,7 +33,7 @@ public class Util {
         list.add(new Person("Meier", "Marco", "Barpersonal", new Adresse("Kusterweg 4", 6004, "Luzern"), new Kontakt("mmarco@gmx.ch", "041 234 56 67"), new Login("mmarco", "12345")));
         list.add(new Person("Mueller", "Jana", "Servicepersonal", new Adresse("Muellweg 8", 6008, "Luzern"), new Kontakt("mjana@gmx.ch", "041 234 56 67"), new Login("mjana", "abcde")));
         list.add(new Person("Mohn", "Kevin", "Leiter", new Adresse("Hohlweg 8", 6003, "Luzern"), new Kontakt("mkevin@gmx.ch", "078 435 66 88"), new Login("mkevin", "xyz")));
-        for (Person p : list){
+        for (Person p : list) {
             pPerson.save(p);
         }
         return list;
@@ -41,7 +41,7 @@ public class Util {
 
     public static void deleteAllPersonen() throws Exception {
         PersonDAO pPerson = (PersonDAO) new PersonDAOImpl();
-        for (Person p : pPerson.findAll()){
+        for (Person p : pPerson.findAll()) {
             pPerson.delete(p);
         }
     }
@@ -63,9 +63,9 @@ public class Util {
         return list;
     }
 
-    public static void deleteAllEsswaren() throws Exception{
+    public static void deleteAllEsswaren() throws Exception {
         EsswarenDAO pEsswaren = (EsswarenDAO) new EsswarenDAOImpl();
-        for (Esswaren e : pEsswaren.findAll()){
+        for (Esswaren e : pEsswaren.findAll()) {
             pEsswaren.delete(e);
         }
     }
@@ -78,15 +78,15 @@ public class Util {
         list.add(new Getraenke("Porto", "Wein", 50));
         list.add(new Getraenke("Cola", "Softgetraenke", 5));
 
-        for (Getraenke g : list){
+        for (Getraenke g : list) {
             pGetraenke.save(g);
         }
         return list;
     }
 
-    public static void deleteAllGetraenke() throws Exception{
+    public static void deleteAllGetraenke() throws Exception {
         GetraenkeDAO pGetraenke = new GetraenkeDAOImpl();
-        for (Getraenke g : pGetraenke.findAll()){
+        for (Getraenke g : pGetraenke.findAll()) {
             pGetraenke.delete(g);
         }
     }
@@ -109,9 +109,9 @@ public class Util {
         return list;
     }
 
-    public static void deleteAllKonsumartikel() throws Exception{
+    public static void deleteAllKonsumartikel() throws Exception {
         KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
-        for (Konsumartikel k : pKonsumartikel.findAll()){
+        for (Konsumartikel k : pKonsumartikel.findAll()) {
             pKonsumartikel.delete(k);
         }
     }
@@ -120,7 +120,7 @@ public class Util {
         TagesmenuDAO pTagesmenu = new TagesmenuDAOImpl();
         List<Tagesmenu> list = new ArrayList<Tagesmenu>();
         list.add(new Tagesmenu("Montag", createEsswarenListe()));
-        for (Tagesmenu t : list ){
+        for (Tagesmenu t : list) {
             pTagesmenu.save(t);
         }
         return list;
@@ -128,7 +128,7 @@ public class Util {
 
     public static void deleteAllTagesmenu() throws Exception {
         TagesmenuDAO pTagesmenu = new TagesmenuDAOImpl();
-        for (Tagesmenu t : pTagesmenu.findAll()){
+        for (Tagesmenu t : pTagesmenu.findAll()) {
             pTagesmenu.delete(t);
         }
     }
@@ -148,7 +148,7 @@ public class Util {
 
     public static void deleteAllMitarbeiter() throws Exception {
         PersonDAO pPerson = new PersonDAOImpl();
-        for (Person p : pPerson.findAll()){
+        for (Person p : pPerson.findAll()) {
             pPerson.delete(p);
         }
     }
@@ -220,16 +220,16 @@ public class Util {
         bestellPositionList.add(bP1);
         bestellPositionList.add(bP2);
 
-        for(BestellPosition bestellPosition : bestellPositionList){
+        for (BestellPosition bestellPosition : bestellPositionList) {
             bestellPositionDAO.save(bestellPosition);
         }
 
         return bestellPositionList;
     }
 
-    public static void deleteAllBestellPosition() throws Exception{
+    public static void deleteAllBestellPosition() throws Exception {
         BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
-        for(BestellPosition bestellPosition : bestellPositionDAO.findAll()){
+        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
             bestellPositionDAO.delete(bestellPosition);
         }
     }
@@ -252,14 +252,14 @@ public class Util {
         list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
         pMitarbeiter.save(ma);
         tischDAO.save(tisch);
-        for(Konsumartikel k : konsumList){
+        for (Konsumartikel k : konsumList) {
             konsumartikelDAO.save(k);
         }
 
-        for (Bestellung b : bestellungList){
+        for (Bestellung b : bestellungList) {
             pBestellung.save(b);
         }
-        for (TischRechnung tr : list){
+        for (TischRechnung tr : list) {
             pTischRechnung.save(tr);
         }
         return list;
@@ -267,12 +267,12 @@ public class Util {
 
     public static void deleteAllTischRechnung() throws Exception {
         TischRechnungDAO pTischRechnung = new TischRechnungDAOImpl();
-        for (TischRechnung t : pTischRechnung.findAll()){
+        for (TischRechnung t : pTischRechnung.findAll()) {
             pTischRechnung.delete(t);
         }
     }
 
-    public static List<MAAbrechnung> createMAAbrechnung() throws Exception{
+    public static List<MAAbrechnung> createMAAbrechnung() throws Exception {
         List<MAAbrechnung> maAbrechnungList = new ArrayList<>();
 
         MAAbrechnungDAO maAbrechnungDAO = new MAAbrechnungDAOImpl();
@@ -282,7 +282,7 @@ public class Util {
         MAAbrechnung maAbrechnung = new MAAbrechnung(LocalDate.now(), "Test", tischRechnungList);
         maAbrechnungList.add(maAbrechnung);
 
-        for (MAAbrechnung maAbrech : maAbrechnungList){
+        for (MAAbrechnung maAbrech : maAbrechnungList) {
             maAbrechnungDAO.save(maAbrech);
         }
 
@@ -291,39 +291,53 @@ public class Util {
 
     public static void deleteAllMAAbrechnung() throws Exception {
         MAAbrechnungDAO maAbrechnungDAO = new MAAbrechnungDAOImpl();
-        for (MAAbrechnung maAbrechnung : maAbrechnungDAO.findAll()){
+        for (MAAbrechnung maAbrechnung : maAbrechnungDAO.findAll()) {
             maAbrechnungDAO.delete(maAbrechnung);
         }
     }
 
-    public static void deleteAllKontakt() throws Exception{
+    public static void deleteAllKontakt() throws Exception {
         KontaktDAO kontaktDAO = new KontaktDAOImpl();
-        for (Kontakt kontakt : kontaktDAO.findAll()){
+        for (Kontakt kontakt : kontaktDAO.findAll()) {
             kontaktDAO.delete(kontakt);
         }
     }
 
     public static void deleteAllAdresse() throws Exception {
         AdresseDAO adresseDAO = new AdresseDAOImpl();
-        for(Adresse adresse :adresseDAO.findAll()){
+        for (Adresse adresse : adresseDAO.findAll()) {
             adresseDAO.delete(adresse);
         }
     }
 
     public static void deleteAllLogin() throws Exception {
         LoginDAO loginDAO = new LoginDAOImpl();
-        for(Login login : loginDAO.findAll()){
+        for (Login login : loginDAO.findAll()) {
             loginDAO.delete(login);
         }
     }
 
-    public static void deleteAllRechnung() throws Exception{
+    public static void deleteAllRechnung() throws Exception {
         RechnungDAO rechnungDAO = new RechnungDAOImpl();
-        for(Rechnung rechnung : rechnungDAO.findAll()){
+        for (Rechnung rechnung : rechnungDAO.findAll()) {
             rechnungDAO.delete(rechnung);
         }
     }
 
+    public static List<BestellPosition> createBestellPositionAlleKonsumartikel() throws Exception {
+        KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
+        BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+        List<BestellPosition> bestellPositionList = new ArrayList<>();
+        for (Konsumartikel konsumartikel : konsumartikelDAO.findAll()) {
+            BestellPosition bestellPosition = new BestellPosition(konsumartikel, 0);
+            bestellPositionList.add(bestellPosition);
+        }
+
+        for (BestellPosition bestellPosition : bestellPositionList) {
+            bestellPositionDAO.save(bestellPosition);
+        }
+        return bestellPositionList;
+    }
 
 
     public static void resetDb() throws Exception {

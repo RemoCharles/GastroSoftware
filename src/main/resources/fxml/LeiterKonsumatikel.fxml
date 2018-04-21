@@ -21,9 +21,9 @@
       <Button layoutX="801.0" layoutY="528.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Hinzufügen" />
       <TableView fx:id="tblBestellPosition" layoutX="50.0" layoutY="111.0" prefHeight="264.0" prefWidth="721.0" AnchorPane.bottomAnchor="225.0" AnchorPane.leftAnchor="50.0">
         <columns>
-          <TableColumn fx:id="konsKat" prefWidth="120.0" text="Kategorie" />
-          <TableColumn fx:id="konsBez" minWidth="1.0" prefWidth="355.0" text="Bezeichnung" />
-            <TableColumn fx:id="konsPr" prefWidth="120.0" text="Preis" />
+          <TableColumn fx:id="bPKat" prefWidth="120.0" text="Kategorie" />
+          <TableColumn fx:id="bPBez" minWidth="1.0" prefWidth="355.0" text="Bezeichnung" />
+            <TableColumn fx:id="bPPreis" prefWidth="120.0" text="Preis" />
         </columns>
       </TableView>
       <ComboBox fx:id="cmbKat" layoutX="116.0" layoutY="71.0" onAction="#updateTable" prefHeight="25.0" prefWidth="263.0" AnchorPane.leftAnchor="116.0" />
