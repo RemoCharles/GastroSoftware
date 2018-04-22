@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="JpaDemosPU" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <class>slgp.gastrosoftware.model.Esswaren</class>
+        <class>slgp.gastrosoftware.model.Konsumartikel</class>
+        <class>slgp.gastrosoftware.model.Getraenke</class>
+        <class>slgp.gastrosoftware.model.Tagesmenu</class>
+        <class>slgp.gastrosoftware.model.Person</class>
+        <class>slgp.gastrosoftware.model.Adresse</class>
+        <class>slgp.gastrosoftware.model.Kontakt</class>
+        <class>slgp.gastrosoftware.model.Mitarbeiter</class>
+        <class>slgp.gastrosoftware.model.Login</class>
+        <class>slgp.gastrosoftware.model.Leiter</class>
+        <class>slgp.gastrosoftware.model.Menukarte</class>
+        <class>slgp.gastrosoftware.model.MAAbrechnung</class>
+        <class>slgp.gastrosoftware.model.Rechnung</class>
+        <class>slgp.gastrosoftware.model.TischRechnung</class>
+        <class>slgp.gastrosoftware.model.Bestellung</class>
+        <class>slgp.gastrosoftware.model.Tisch</class>
+        <class>slgp.gastrosoftware.model.BestellPosition</class>
+
+        <validation-mode>AUTO</validation-mode>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url"
+
+                      value="jdbc:postgresql://localhost:5432/GastroSoftware"/>
+
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
+
+            <property name="eclipselink.ddl-generation.output-mode"
+                      value="database"/>
+
+            <!-- SQL-Statements nicht ausgeben -->
+            <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
+
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+        </properties>
+    </persistence-unit>
+
+
+
+    <!-- DB Schema löschen und neu anlegen -->
+    <persistence-unit name="delete-JpaDemosPU"
+                      transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <class>slgp.gastrosoftware.model.Esswaren</class>
+        <class>slgp.gastrosoftware.model.Konsumartikel</class>
+        <class>slgp.gastrosoftware.model.Getraenke</class>
+        <class>slgp.gastrosoftware.model.Tagesmenu</class>
+        <class>slgp.gastrosoftware.model.Person</class>
+        <class>slgp.gastrosoftware.model.Adresse</class>
+        <class>slgp.gastrosoftware.model.Kontakt</class>
+        <class>slgp.gastrosoftware.model.Mitarbeiter</class>
+        <class>slgp.gastrosoftware.model.Login</class>
+        <class>slgp.gastrosoftware.model.Leiter</class>
+        <class>slgp.gastrosoftware.model.Menukarte</class>
+        <class>slgp.gastrosoftware.model.MAAbrechnung</class>
+        <class>slgp.gastrosoftware.model.Rechnung</class>
+        <class>slgp.gastrosoftware.model.TischRechnung</class>
+        <class>slgp.gastrosoftware.model.Bestellung</class>
+        <class>slgp.gastrosoftware.model.Tisch</class>
+        <class>slgp.gastrosoftware.model.BestellPosition</class>
+
+        <validation-mode>AUTO</validation-mode>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:postgresql://localhost:5432/GastroSoftware" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="postgres" />
+
+            <property name="eclipselink.ddl-generation.output-mode"
+                      value="database" />
+
+            <!-- SQL-Statements nicht ausgeben -->
+            <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
+
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+        </properties>
+    </persistence-unit>
+
+</persistence>

@@ -6,11 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="GastroSoftware" />
+        <module name="gastrosoftware-business" />
+        <module name="gastrosoftware-business-initializer" />
+        <module name="gastrosoftware-gui" />
+        <module name="gastrosoftware-model" />
+        <module name="gastrosoftware-persister" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="GastroSoftware" target="1.8" />
+      <module name="gastrosoftware-business" target="1.8" />
+      <module name="gastrosoftware-business-initializer" target="1.8" />
+      <module name="gastrosoftware-gui" target="1.8" />
+      <module name="gastrosoftware-model" target="1.8" />
+      <module name="gastrosoftware-persister" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
