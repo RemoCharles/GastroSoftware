@@ -15,7 +15,10 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.zentrale.persister.api.BestellPositionDAO;
+import slgp.gastrosoftware.zentrale.persister.api.KonsumartikelDAO;
 import slgp.gastrosoftware.zentrale.persister.domain.BestellPosition;
+import slgp.gastrosoftware.zentrale.persister.domain.Esswaren;
+import slgp.gastrosoftware.zentrale.persister.domain.Getraenke;
 import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 import slgp.gastrosoftware.zentrale.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.zentrale.persister.impl.KonsumartikelDAOImpl;
@@ -96,6 +99,7 @@ public class TischAnzeigenControllerTest implements Initializable {
     @FXML
     private void kategorienAuswahlLaden() throws Exception {
         BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+        KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
 
         //Klassen Kategorie ComboBox füllen
         TreeSet<String> bestellPositionKlasse = new TreeSet<>();
@@ -104,26 +108,39 @@ public class TischAnzeigenControllerTest implements Initializable {
         }
         ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(bestellPositionKlasse);
         cmbKat.setItems(konsumArtikelBezeichnungList);
-        if(konsumArtikelBezeichnungList.size() > 0){
+        if (konsumArtikelBezeichnungList.size() > 0) {
             cmbKat.getSelectionModel().select(0);
         }
 
         //Kategorie ComboBox füllen
         TreeSet<String> bestellPositionKategorie = new TreeSet<>();
+        List<BestellPosition> bestellPositionListGetraenke = new ArrayList<>();
+        List<BestellPosition> bestellPositionListEsswaren = new ArrayList<>();
         for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
-            bestellPositionKategorie.add(bestellPosition.getKategorie());
+            if (bestellPosition.getKonsumartikel().getClass().equals(Esswaren.class)) {
+                bestellPositionListEsswaren.add(bestellPosition);
+                logger.info("Alle Esswaren gefilter");
+            } else if (bestellPosition.getKonsumartikel().getClass().equals(Getraenke.class)) {
+                bestellPositionListGetraenke.add(bestellPosition);
+                logger.info("Alle Getraenke gefilter");
+            }
         }
-        ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(bestellPositionKategorie);
-        cmbKategorie.setItems(konsumArtikelKategorieListe);
-        if (konsumArtikelKategorieListe.size() > 0){
-            cmbKategorie.getSelectionModel().select(0);
+
+        if (cmbKat.getSelectionModel().getSelectedItem().getClass().equals(Esswaren.class)) {
+            for (BestellPosition bestellPosition : bestellPositionListEsswaren) {
+                bestellPositionKategorie.add(bestellPosition.getKategorie());
+            }
+        } else {
+            for (BestellPosition bestellPosition : bestellPositionListGetraenke) {
+                bestellPositionKategorie.add(bestellPosition.getKategorie());
+            }
+
+            ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(bestellPositionKategorie);
+            cmbKategorie.setItems(konsumArtikelKategorieListe);
+            if (konsumArtikelKategorieListe.size() > 0) {
+                cmbKategorie.getSelectionModel().select(0);
+            }
         }
-
-
-
-
-
-
     }
 
     @FXML
