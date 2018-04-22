@@ -80,10 +80,12 @@
 		</TableView>
 		<Button fx:id="btnLoeschen" layoutX="1048.0" layoutY="500.0" mnemonicParsing="false" onAction="#loeschen" prefWidth="80.0" text="Löschen" />
       <Button layoutX="1063.0" layoutY="20.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="25.0" prefWidth="80.0" text="Zurück" />
-      <Label layoutX="12.0" layoutY="50.0" text="Person:">
+      <Label layoutX="14.0" layoutY="24.0" text="Person:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Label layoutX="10.0" layoutY="50.0" text="Funktion" />
+      <TextField fx:id="txtFunktion" layoutX="80.0" layoutY="46.0" prefWidth="200.0" />
 	</children>
 </AnchorPane>

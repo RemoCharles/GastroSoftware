@@ -28,35 +28,34 @@ import slgp.gastrosoftware.zentrale.persister.domain.Konsumartikel;
 public class LeiterMenuControllerTest implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(LeiterMenuControllerTest.class);
-	
+
 	@FXML
 	private ComboBox<String> cmbKat;
-	
+
 	@FXML
 	private TableView<Konsumartikel> tblKonsumartikel;
-	
+
 	@FXML
 	private TableColumn<Konsumartikel, String> konsKat;
-	
+
 	@FXML
 	private TableColumn<Konsumartikel, String> konsBez;
-	
+
 	@FXML
 	private TableColumn<Konsumartikel, Double> konsPr;
 
-	
-	
-	
-	
-	 @FXML
-	    public void zurueck(ActionEvent event) throws Exception {
-	        Parent leiter_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
-	        Scene leiter_interface_scene = new Scene(leiter_interface_parent);
-	        Stage leiter_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        leiter_stage.setScene(leiter_interface_scene);
-	        leiter_stage.show();
-	    }
-	
+
+
+
+	@FXML
+	public void zurueck(ActionEvent event) throws Exception {
+		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
+		Scene ma_interface_scene = new Scene(ma_interface_parent);
+		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		ma_stage.setScene(ma_interface_scene);
+		ma_stage.show();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -68,28 +67,28 @@ public class LeiterMenuControllerTest implements Initializable {
 		wochenTage.add("Freitag");
 		wochenTage.add("Samstag");
 		wochenTage.add("Sonntag");
-				
+
 		ObservableList<String> observWochenTage = FXCollections.observableArrayList(wochenTage);
-		
+
 		cmbKat.setItems(observWochenTage);
 	}
-	
+
 	@FXML
 	public void updateTable(ActionEvent event) throws Exception{
-		
+
 	}
-	
 
 
-				
-		
-		
 
 
-	            
-	
-	
-		
-	}
-	 
+
+
+
+
+
+
+
+
+}
+
 

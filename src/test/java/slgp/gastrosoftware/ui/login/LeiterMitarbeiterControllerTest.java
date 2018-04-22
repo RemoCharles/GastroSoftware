@@ -50,6 +50,9 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	private TextField txtVorname;
 
 	@FXML
+	private TextField txtFunktion;
+
+	@FXML
 	private TextField txtStrasse;
 
 	@FXML
@@ -116,12 +119,13 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	public void speichern(ActionEvent event) throws Exception{
 		// Kontrolle ob dies funktioniert!
 		if (eingabeValid()) {
-			
+
 			if (tblPerson.getSelectionModel().getSelectedItem() == null) {
-				
+
 				// Neue Person anlegen
 				String name = txtName.getText();
 				String vorname = txtVorname.getText();
+				String funktion = txtFunktion.getText();
 				String strasse = txtStrasse.getText();
 				int plz = Integer.parseInt(txtPlz.getText());
 				String ort = txtOrt.getText();
@@ -129,15 +133,26 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 				String telefon = txtTelefon.getText();
 				String username = txtUsername.getText();
 				String passwort = txtKennwort.getText();
+
+				Person personSpeichern = new Person(name, vorname, funktion, new Adresse(strasse, plz, ort), new Kontakt(email, telefon), new Login(username, passwort));
+				System.out.println(personSpeichern.toString());
 				
-				// Person personSpeichern = new Person(name, vorname, funktion, new Adresse(strasse, plz, ort), new Kontakt(email, telefon), new Login(username, passwort));
+				
+				try {
+					
+					PersonDAOImpl persDAOImpl = new PersonDAOImpl(); 
+					persDAOImpl.save(personSpeichern);
+			
+				} catch (Exception e) {
+					logger.error("Fehler beim Speichern der Person: ", e);
+				}
 			}
 		}
 	}
 
 	@FXML
 	public void neuenBenutzerErfassen(ActionEvent event) throws Exception{
-		
+
 		reset();
 	}
 
@@ -145,38 +160,39 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	public void eingabeReset(ActionEvent event) throws Exception{
 
 		reset();
-	        
+
 	}
-	
-	
+
+
 	@FXML
 	private void reset() {
-		 txtName.setText("");
-	        txtVorname.setText("");
-	        txtStrasse.setText("");
-	        txtPlz.setText("");
-	        txtOrt.setText("");
-	        txtEmail.setText("");
-	        txtTelefon.setText("");
-	        txtUsername.setText("");
-	        txtKennwort.setText("");
+		txtName.setText("");
+		txtVorname.setText("");
+		txtFunktion.setText("");
+		txtStrasse.setText("");
+		txtPlz.setText("");
+		txtOrt.setText("");
+		txtEmail.setText("");
+		txtTelefon.setText("");
+		txtUsername.setText("");
+		txtKennwort.setText("");
 	}
-	
-	
+
+
 
 	@FXML
 	public void loeschen(ActionEvent event) throws Exception{
-		
+
 		PersonDAOImpl persDAOImpl = new PersonDAOImpl(); 
-		
+
 		if(tblPerson.getSelectionModel().getSelectedItem() == null) {
 			return;
 		}
-		
+
 		Person person = tblPerson.getSelectionModel().getSelectedItem();
-		
+
 		// System.out.println(person);
-		
+
 		if (person != null) {
 			try {
 				persDAOImpl.delete(person);
@@ -190,11 +206,11 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	// Ueberpruefung ob die Textfelder ausgefüllt sind
 	private boolean eingabeValid() {
 		lblError.setText("");
-		if (isValid(txtName.getText()) && isValid(txtVorname.getText()) && isValid(txtStrasse.getText()) 
+		if (isValid(txtName.getText()) && isValid(txtVorname.getText()) && isValid(txtFunktion.getText()) && isValid(txtStrasse.getText()) 
 				&& isValid(txtPlz.getText()) && isValid(txtOrt.getText()) && isValid(txtEmail.getText()) 
 				&& isValid(txtTelefon.getText()) && isValid(txtEmail.getText()) && isValid(txtKennwort.getText())
 				&& isValid(txtUsername.getText())) {
-			
+
 			// PLZ Kontrolle
 			try {
 				Integer.parseInt(txtPlz.getText());
@@ -208,12 +224,12 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			return false;
 		}
 	}
-	
+
 	// Funktion zur Pruefung
 	private boolean isValid(String str) {
 		return str != null && str.trim().length() > 0;
 	}
-	
+
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
 
@@ -226,16 +242,16 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
 			colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
 			colStrasse.setCellValueFactory(new PropertyValueFactory<Person, String>("strasse"));
-			
+
 			colPlz.setCellValueFactory(new PropertyValueFactory<Person, Integer>("plz"));
 			colOrt.setCellValueFactory(new PropertyValueFactory<Person, String>("ort"));
 			colEmail.setCellValueFactory(new PropertyValueFactory<Person, String>("email"));
 			colTelefon.setCellValueFactory(new PropertyValueFactory<Person, String>("telefon"));
-			
+
 			colUsername.setCellValueFactory(new PropertyValueFactory<Person, String>("username"));
-			
+
 			colKennwort.setCellValueFactory(new PropertyValueFactory<Person, String>("passwort"));
-			
+
 			colFunktion.setCellValueFactory(new PropertyValueFactory<Person, String>("funktion"));
 
 			ObservableList<Person> observPersonen = FXCollections.observableArrayList(allePersonenListe);
@@ -293,6 +309,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			// cmbRolle.getSelectionModel().clearSelection();
 			txtName.setText("");
 			txtVorname.setText("");
+			txtFunktion.setText("");
 			txtStrasse.setText("");
 			txtPlz.setText("");
 			txtOrt.setText("");
@@ -308,6 +325,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			// cmbRolle.getSelectionModel().select(benutzer.getRolle());
 			txtName.setText(person.getName());
 			txtVorname.setText(person.getVorname());
+			txtFunktion.setText(person.getFunktion());
 			txtStrasse.setText(person.getAdresse().getStrasse());
 			txtPlz.setText("" + person.getAdresse().getPlz());
 			txtOrt.setText(person.getAdresse().getOrt());
@@ -318,7 +336,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 		}
 
 	}
-	
+
 
 
 	@FXML
