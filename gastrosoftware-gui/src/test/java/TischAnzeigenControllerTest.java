@@ -152,6 +152,9 @@ public class TischAnzeigenControllerTest implements Initializable {
         ma_stage.show();
     }
 
+    public void setTischNummer(int tischNummer) {
+        System.out.println(tischNummer);
+    }
 }
 
 

@@ -15,8 +15,8 @@
       </Text>
       <ButtonBar layoutX="211.0" layoutY="133.0" prefHeight="35.0" prefWidth="435.0" scaleX="2.0" scaleY="2.0" snapToPixel="false">
         <buttons>
-            <Button id="tisch" mnemonicParsing="false" onAction="#tischAction" text="1" />
-          <Button id="tisch" mnemonicParsing="false" onAction="#tischAction" text="2" />
+            <Button id="1" mnemonicParsing="false" onAction="#tischAction" text="1" />
+          <Button id="2" mnemonicParsing="false" onAction="#tischAction" text="2" />
             <Button id="tisch" mnemonicParsing="false" onAction="#tischAction" text="3" />
             <Button id="usrTisc4" mnemonicParsing="false" onAction="#tischAction" text="4" />
             <Button id="usrTisc5" mnemonicParsing="false" onAction="#tischAction" text="5" />
