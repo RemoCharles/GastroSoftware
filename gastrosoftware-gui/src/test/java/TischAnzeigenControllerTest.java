@@ -58,6 +58,8 @@ public class TischAnzeigenControllerTest implements Initializable {
     @FXML
     private TableColumn<BestellPosition, Double> bPPreis;
 
+    private List<BestellPosition> bestellPositionList;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
@@ -86,20 +88,37 @@ public class TischAnzeigenControllerTest implements Initializable {
 
     @FXML
     private void updateTable() {
-
         try {
+            List<BestellPosition> alleBestellPositionLoste = bestellPositionDAO.findAll();
+            if (cmbKategorie.getSelectionModel().getSelectedItem() != null) {
+                List<BestellPosition> tempListe = new ArrayList<>();
 
+                for (BestellPosition bestellPosition : alleBestellPositionLoste) {
+                    if (bestellPosition.getKategorie().equals(cmbKategorie.getSelectionModel().getSelectedItem())) {
+                        tempListe.add(bestellPosition);
+                    }
+                }
+                ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableArrayList(tempListe);
+                tblBestellPosition.setItems(bestellPositionObservableList);
+            }
         } catch (Exception e) {
             logger.error("Fehler beim Updaten der Tabelle: ", e);
             throw new RuntimeException();
         }
+    }
 
+    @FXML
+    private void updateKategorieAuswahl() throws Exception{
+        TreeSet<String> bestellPositionKategorie = new TreeSet<>();
+        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
+            bestellPositionKategorie.add(bestellPosition.getKonsumartikel().getKategorie());
+        }
+        cmbKat.getSelectionModel().getSelectedItem().startsWith("E");
     }
 
     @FXML
     private void kategorienAuswahlLaden() throws Exception {
         BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
-        KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
 
         //Klassen Kategorie ComboBox füllen
         TreeSet<String> bestellPositionKlasse = new TreeSet<>();
@@ -126,20 +145,24 @@ public class TischAnzeigenControllerTest implements Initializable {
             }
         }
 
-        if (cmbKat.getSelectionModel().getSelectedItem().getClass().equals(Esswaren.class)) {
+        if (cmbKat.getSelectionModel().getSelectedItem().startsWith("E")) {
             for (BestellPosition bestellPosition : bestellPositionListEsswaren) {
                 bestellPositionKategorie.add(bestellPosition.getKategorie());
+                logger.info("Bestellposition Esswaren: " + bestellPosition);
             }
         } else {
             for (BestellPosition bestellPosition : bestellPositionListGetraenke) {
                 bestellPositionKategorie.add(bestellPosition.getKategorie());
+                logger.info("Bestellposition Getränke: " + bestellPosition);
             }
+        }
 
-            ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(bestellPositionKategorie);
-            cmbKategorie.setItems(konsumArtikelKategorieListe);
-            if (konsumArtikelKategorieListe.size() > 0) {
-                cmbKategorie.getSelectionModel().select(0);
-            }
+        logger.info("Bestellposition nach Filterung: " + bestellPositionKategorie);
+
+        ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(bestellPositionKategorie);
+        cmbKategorie.setItems(konsumArtikelKategorieListe);
+        if (konsumArtikelKategorieListe.size() > 0) {
+            cmbKategorie.getSelectionModel().select(0);
         }
     }
 

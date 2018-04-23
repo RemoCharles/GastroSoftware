@@ -17,7 +17,6 @@ public class GastroSoftwareGUITest extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, 600, 400));
 		primaryStage.show();
-
 	}
 
 	public static void main(String[] args) throws Exception {
