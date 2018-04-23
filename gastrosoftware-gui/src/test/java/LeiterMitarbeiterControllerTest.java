@@ -108,9 +108,11 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	@FXML
 	public void speichern(ActionEvent event) throws Exception{
 		// Kontrolle ob dies funktioniert!
+
+		System.out.println("FUnktion wird aufgerfufen");
 		if (eingabeValid()) {
 
-			if (tblPerson.getSelectionModel().getSelectedItem() == null) {
+
 
 				// Neue Person anlegen
 				String name = txtName.getText();
@@ -132,11 +134,13 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 					
 					PersonDAOImpl persDAOImpl = new PersonDAOImpl();
 					persDAOImpl.save(personSpeichern);
+					updateTabelle();
+
 			
 				} catch (Exception e) {
 					logger.error("Fehler beim Speichern der Person: ", e);
 				}
-			}
+
 		}
 	}
 
