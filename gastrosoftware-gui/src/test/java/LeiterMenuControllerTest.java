@@ -25,7 +25,7 @@ public class LeiterMenuControllerTest implements Initializable {
 	private static Logger logger = LogManager.getLogger(LeiterMenuControllerTest.class);
 
 	@FXML
-	private ComboBox<String> cmbKat;
+	private ComboBox<String> cmbWochentage;
 
 	@FXML
 	private TableView<Konsumartikel> tblKonsumartikel;
@@ -39,22 +39,19 @@ public class LeiterMenuControllerTest implements Initializable {
 	@FXML
 	private TableColumn<Konsumartikel, Double> konsPr;
 
-
-
-
 	@FXML
 	public void zurueck(ActionEvent event) throws Exception {
-		Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
-		Scene ma_interface_scene = new Scene(ma_interface_parent);
-		Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		ma_stage.setScene(ma_interface_scene);
-		ma_stage.show();
+		Parent leiter_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
+		Scene leiter_interface_scene = new Scene(leiter_interface_parent);
+		Stage leiter_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		leiter_stage.setScene(leiter_interface_scene);
+		leiter_stage.show();
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		List <String> wochenTage = new ArrayList<>();
+		List<String> wochenTage = new ArrayList<>();
 		wochenTage.add("Montag");
 		wochenTage.add("Dienstag");
 		wochenTage.add("Mittwoch");
@@ -65,25 +62,12 @@ public class LeiterMenuControllerTest implements Initializable {
 
 		ObservableList<String> observWochenTage = FXCollections.observableArrayList(wochenTage);
 
-		cmbKat.setItems(observWochenTage);
+		cmbWochentage.setItems(observWochenTage);
 	}
 
 	@FXML
-	public void updateTable(ActionEvent event) throws Exception{
+	public void updateTable(ActionEvent event) throws Exception {
 
 	}
 
-
-
-
-
-
-
-
-
-
-
-
 }
-
-

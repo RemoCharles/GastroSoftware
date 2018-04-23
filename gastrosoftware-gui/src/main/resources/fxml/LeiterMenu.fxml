@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TischAnzeigenControllerTest">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LeiterMenuControllerTest">
    <children>
       <Label fx:id="lbltis" layoutX="50.0" layoutY="24.0" prefHeight="36.0" prefWidth="169.0" text="Menu erstellen">
          <font>
@@ -24,7 +24,7 @@
             <TableColumn fx:id="bPPreis" prefWidth="104.5" text="Preis" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cmbKat" layoutX="116.0" layoutY="71.0" onAction="#updateTable" prefHeight="25.0" prefWidth="169.0" AnchorPane.leftAnchor="116.0" />
+      <ComboBox fx:id="cmbWochentage" layoutX="116.0" layoutY="71.0" onAction="#updateTable" prefHeight="25.0" prefWidth="169.0" AnchorPane.leftAnchor="116.0" />
       <Label fx:id="lblWochentag" layoutX="50.0" layoutY="75.0" prefHeight="17.0" prefWidth="66.0" text="Wochentag:" AnchorPane.leftAnchor="50.0" />
       <Button fx:id="butZur" layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
       <TableView fx:id="tblMenu" layoutX="50.0" layoutY="442.0" prefHeight="118.0" prefWidth="721.0">
