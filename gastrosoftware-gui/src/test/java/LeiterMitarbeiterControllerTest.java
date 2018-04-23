@@ -109,9 +109,11 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	public void speichern(ActionEvent event) throws Exception{
 		// Kontrolle ob dies funktioniert!
 
-		System.out.println("FUnktion wird aufgerfufen");
+		
 		if (eingabeValid()) {
 
+
+				if (tblPerson.getSelectionModel().getSelectedItem() == null){
 
 
 				// Neue Person anlegen
@@ -139,6 +141,36 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			
 				} catch (Exception e) {
 					logger.error("Fehler beim Speichern der Person: ", e);
+				}
+				} else {
+					String name = txtName.getText();
+					String vorname = txtVorname.getText();
+					String funktion = txtFunktion.getText();
+					String strasse = txtStrasse.getText();
+					int plz = Integer.parseInt(txtPlz.getText());
+					String ort = txtOrt.getText();
+					String email = txtEmail.getText();
+					String telefon = txtTelefon.getText();
+					String username = txtUsername.getText();
+					String passwort = txtKennwort.getText();
+
+					Person person = tblPerson.getSelectionModel().getSelectedItem();
+
+					person.setName(name);
+					person.setVorname(vorname);
+					person.setFunktion(funktion);
+					person.setAdresse(new Adresse(strasse, plz, ort));
+					person.setKontakt(new Kontakt(email, telefon));
+					person.setLogin(new Login (username, passwort));
+
+					try {
+						PersonDAOImpl persDAOImpl = new PersonDAOImpl();
+						persDAOImpl.update(person);
+						updateTabelle();
+
+					} catch (Exception e){
+						logger.error("Fehlre beim Updaten de Person: ", e);
+					}
 				}
 
 		}

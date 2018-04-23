@@ -91,6 +91,8 @@ public class Person implements Serializable {
         this.kontakt = kontakt;
     }
 
+    public void setLogin(Login login) {this.login = login;}
+
     public String getName() {
         return name;
     }
