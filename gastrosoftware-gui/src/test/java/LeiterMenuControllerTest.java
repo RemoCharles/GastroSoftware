@@ -10,10 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Konsumartikel;
+import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,21 +27,25 @@ import java.util.ResourceBundle;
 public class LeiterMenuControllerTest implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(LeiterMenuControllerTest.class);
+	private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
 
 	@FXML
 	private ComboBox<String> cmbWochentage;
 
 	@FXML
 	private TableView<Konsumartikel> tblKonsumartikel;
+	
+	@FXML
+	private TableView<Konsumartikel> tblMenu;
 
 	@FXML
-	private TableColumn<Konsumartikel, String> konsKat;
+	private TableColumn<Konsumartikel, String> bPKat;
 
 	@FXML
-	private TableColumn<Konsumartikel, String> konsBez;
+	private TableColumn<Konsumartikel, String> bPBez;
 
 	@FXML
-	private TableColumn<Konsumartikel, Double> konsPr;
+	private TableColumn<Konsumartikel, Double> bPPreis;
 
 	@FXML
 	public void zurueck(ActionEvent event) throws Exception {
@@ -51,6 +59,31 @@ public class LeiterMenuControllerTest implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		try {
+			List<Konsumartikel> konsumartikelList = konsumartikelDAO.findAll();
+
+//			ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections
+//					.observableList(konsumartikelList);
+
+//			for ( Konsumartikel konsumartikel : konsumartikelObservableList) {
+//				logger.info(konsumartikel);
+//				System.out.println(konsumartikel + "-------------------------------");
+//			}
+
+			bPBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
+			bPKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
+			bPPreis.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
+
+			ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections
+			.observableArrayList(konsumartikelList);
+			
+			tblKonsumartikel.setItems(konsumartikelObservableList);
+
+			
+		} catch (Exception e) {
+			logger.error("Tabelle konnte nicht befüllt werden...", e);
+		}
+
 		List<String> wochenTage = new ArrayList<>();
 		wochenTage.add("Montag");
 		wochenTage.add("Dienstag");
@@ -63,10 +96,18 @@ public class LeiterMenuControllerTest implements Initializable {
 		ObservableList<String> observWochenTage = FXCollections.observableArrayList(wochenTage);
 
 		cmbWochentage.setItems(observWochenTage);
+
+		
 	}
 
 	@FXML
 	public void updateTable(ActionEvent event) throws Exception {
+		try {
+
+		} catch (Exception e) {
+			logger.error("Fehler beim Updaten der Tabelle: ", e);
+			throw new RuntimeException();
+		}
 
 	}
 
