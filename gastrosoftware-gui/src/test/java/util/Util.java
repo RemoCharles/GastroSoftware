@@ -331,10 +331,12 @@ public class Util {
             BestellPosition bestellPosition = new BestellPosition(konsumartikel, 0);
             bestellPositionList.add(bestellPosition);
         }
+        bestellPositionList.get(0).setAnzahl(3);
 
         for (BestellPosition bestellPosition : bestellPositionList) {
             bestellPositionDAO.save(bestellPosition);
         }
+
         return bestellPositionList;
     }
 
