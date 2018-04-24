@@ -26,13 +26,17 @@ public class TerrasseControllerTest implements Initializable{
 	
 	@FXML
 	private void tischAction(ActionEvent event) throws Exception {
-		Parent tisch_anzeigen_parent = FXMLLoader.load(getClass().getResource("/fxml/TischAnzeigen.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TischAnzeigen.fxml"));
+		Parent tisch_anzeigen_parent = loader.load();
+
+		//		Handschuh Master-Update!
+		TischAnzeigenControllerTest controller =  loader.getController();
+		controller.setTischNummer(Integer.parseInt(((Button)event.getSource()).getId()));
+
 		Scene tisch_anzeigen_scene = new Scene(tisch_anzeigen_parent);
 		Stage tisch_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		tisch_stage.setScene(tisch_anzeigen_scene);
 		tisch_stage.show();
-		
-		
 		
 	}
 

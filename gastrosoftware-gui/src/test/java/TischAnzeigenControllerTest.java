@@ -176,6 +176,7 @@ public class TischAnzeigenControllerTest implements Initializable {
     }
 
     public void setTischNummer(int tischNummer) {
+
         System.out.println(tischNummer);
     }
 }
