@@ -24,7 +24,7 @@ public class GastroSoftwareGUITest extends Application {
 		Util.erstellePersonenListe();
 		Util.createKonsumartikelListe();
 		Util.createBestellPositionAlleKonsumartikel();
-		// util.createBestellungListe();
+		Util.createBestellungListe();
 		launch(args);
 	}
 }

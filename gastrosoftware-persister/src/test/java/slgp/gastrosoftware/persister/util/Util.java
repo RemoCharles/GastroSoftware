@@ -186,7 +186,12 @@ public class Util {
 
         Tisch tisch = new Tisch(6);
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
+        Mitarbeiter maA = new Mitarbeiter("Janas", "Hans", "Kuechnenpersonal", new Adresse("Lochterasse 4", 6045, "Luzern"), new Kontakt("jkulturhaus@gmx.ch", "044 500 33 33"));
+        Mitarbeiter maB = new Mitarbeiter("Hemmerli", "Beat", "Servicepersonal", new Adresse("Molchweg 8", 6044, "Luzern"), new Kontakt("bhemmerli@gmx.ch", "043 400 34 33"));
         list.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
+        list.add(new Bestellung(maA, tisch, bestellPositionList, false, false, LocalDate.now()));
+        list.add(new Bestellung(maB, tisch, bestellPositionList, false, false, LocalDate.now()));
+
 
         pMitarbeiter.save(ma);
         pTisch.save(tisch);
