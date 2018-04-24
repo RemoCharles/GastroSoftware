@@ -109,7 +109,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	public void speichern(ActionEvent event) throws Exception{
 		// Kontrolle ob dies funktioniert!
 
-		
+
 		if (eingabeValid()) {
 
 

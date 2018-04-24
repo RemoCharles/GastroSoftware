@@ -43,7 +43,7 @@ public class LeiterInterfaceControllerTest implements Initializable {
 	}
 	@FXML
 	private void abrechnungAnzeigen(ActionEvent event) throws Exception {
-		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
+		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterAbrechnung.fxml"));
 		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
 		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
 		saal1_stage.setScene(saal1_interface_scene);
