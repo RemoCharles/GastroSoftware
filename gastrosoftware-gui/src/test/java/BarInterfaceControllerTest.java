@@ -37,6 +37,9 @@ public class BarInterfaceControllerTest implements Initializable{
 	@FXML
 	private TableColumn<BestellPosition, Integer> colAnz;
 
+	@FXML
+	private TableColumn<Bestellung, Integer> colTischNr;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
@@ -55,7 +58,6 @@ public class BarInterfaceControllerTest implements Initializable{
 			for(Bestellung b : unzubereiteteBestellungenListe) {
 				for(BestellPosition bP : b.getKonsumartikel()) {
 					if(bP.getKonsumartikel() instanceof Getraenke) {
-						Konsumartikel k = bP.getKonsumartikel();
 						tempKonsList.add(bP);
 					}
 				}
@@ -81,20 +83,20 @@ public class BarInterfaceControllerTest implements Initializable{
 
 	@FXML
 	private void artBereit(ActionEvent event) throws Exception{
-		//		 if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
-		//	            return;
-		//	        }
-		//
-		//	        Konsumartikel getraenk = tblOffeneBest.getSelectionModel().getSelectedItem();
-		//
-		//	        if (getraenk != null) {
-		//	            try {
-		//	                Context.getInstance().getMoebelhausLagerService().lieferantenLoeschen(lieferant);
-		//	                
-		//	            } catch (Exception e) {
-		//	                
-		//	            }
-		//	        }
+//				 if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
+//			            return;
+//			        }
+//
+//			        BestellPosition bP = tblOffeneBest.getSelectionModel().getSelectedItem();
+//
+//			        if (bP != null) {
+//			            try {
+//							(Bestellung)bP ;
+//
+//			            } catch (Exception e) {
+//
+//			            }
+//			        }
 	}
 
 

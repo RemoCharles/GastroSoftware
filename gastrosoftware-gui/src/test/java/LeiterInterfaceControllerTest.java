@@ -35,11 +35,11 @@ public class LeiterInterfaceControllerTest implements Initializable {
 	}
 	@FXML
 	private void konsumartikelAnzeigen(ActionEvent event) throws Exception {
-		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
-		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
-		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-		saal1_stage.setScene(saal1_interface_scene);
-		saal1_stage.show();
+		Parent kArtikel_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterKonsumartikel.fxml"));
+		Scene kArtikel_interface_scene = new Scene(kArtikel_interface_parent);
+		Stage kArtikel_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		kArtikel_stage.setScene(kArtikel_interface_scene);
+		kArtikel_stage.show();
 	}
 	@FXML
 	private void abrechnungAnzeigen(ActionEvent event) throws Exception {

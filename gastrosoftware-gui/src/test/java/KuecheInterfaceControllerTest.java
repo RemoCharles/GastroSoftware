@@ -56,7 +56,6 @@ public class KuecheInterfaceControllerTest implements Initializable{
 			for(Bestellung b : unzubereiteteBestellungenListe) {
 				for(BestellPosition bP : b.getKonsumartikel()) {
 					if(bP.getKonsumartikel() instanceof Esswaren) {
-						Konsumartikel k = bP.getKonsumartikel();
 						tempKonsList.add(bP);
 					}
 				}
