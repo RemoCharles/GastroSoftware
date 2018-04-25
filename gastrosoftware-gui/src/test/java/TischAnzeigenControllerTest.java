@@ -185,6 +185,15 @@ public class TischAnzeigenControllerTest implements Initializable {
         }
     }
 
+    public void TischRechnungAnzeigen(ActionEvent event) throws Exception {
+        Parent tisch_rechnung_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/TischRechnungInterface.fxml"));
+        Scene tisch_rechnung_interface_scene = new Scene(tisch_rechnung_interface_parent);
+        Stage tisch_rechnung_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        tisch_rechnung_stage.setScene(tisch_rechnung_interface_scene);
+        tisch_rechnung_stage.show();
+    }
+
+
 
 }
 
