@@ -252,6 +252,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 	}
 
 	// Funktion zur Pruefung
+
 	private boolean isValid(String str) {
 		return str != null && str.trim().length() > 0;
 	}

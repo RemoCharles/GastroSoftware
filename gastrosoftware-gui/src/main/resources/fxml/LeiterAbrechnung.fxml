@@ -14,13 +14,13 @@
    <children>
       <Button layoutX="760.0" layoutY="43.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="25.0" prefWidth="80.0" text="Zurück" />
       <Text layoutX="24.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mitarbeiter" />
-      <ComboBox layoutX="24.0" layoutY="85.0" onAction="#mitarbeiterAuswahl" prefWidth="150.0" />
-      <TableView layoutX="24.0" layoutY="129.0" prefHeight="371.0" prefWidth="834.0">
+      <ComboBox fx:id="cmbMitarbeiter" layoutX="24.0" layoutY="85.0" onAction="#mitarbeiterAuswahl" prefWidth="150.0" />
+      <TableView fx:id="tblAbrechnung" layoutX="24.0" layoutY="129.0" prefHeight="371.0" prefWidth="834.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Tisch" />
-          <TableColumn prefWidth="167.66668701171875" text="Bezahle Bestellung" />
-            <TableColumn prefWidth="167.66668701171875" text="Datum" />
-            <TableColumn prefWidth="167.66668701171875" text="Summe" />
+          <TableColumn fx:id="colTisch" prefWidth="75.0" text="Tisch" />
+          <TableColumn fx:id="colBestellung" prefWidth="167.66668701171875" text="Bezahle Bestellung" />
+            <TableColumn fx:id="colDatum" prefWidth="167.66668701171875" text="Datum" />
+            <TableColumn fx:id="colSumme" prefWidth="167.66668701171875" text="Summe" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="36.0" prefWidth="372.0" text="Abrechnung Mitarbeiter Service">
