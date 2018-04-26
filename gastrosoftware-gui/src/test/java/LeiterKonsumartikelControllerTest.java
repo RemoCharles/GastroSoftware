@@ -21,6 +21,7 @@ import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
 import slgp.gastrosoftware.persister.impl.PersonDAOImpl;
 
+import javax.xml.bind.annotation.XmlList;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,30 +64,25 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
     private TextField lblPreis;
 
     @FXML
-    private Label lblError;
+    private CheckBox cbVerfuegbarkeit; //googlen mit Listener
 
-// TODO: Beim speichern und updaten von Konsumartikeln --> Comboboxen funktionieren noch nicht...
-    // TODO: LÖSCHEN GIBT db ERROR.... DA NOCH IN BESTELLPOSITION GEBRAUCHT WIRD....
+    @FXML
+    private Button btReActivate;
+
+    @FXML
+    private Label lblError;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     try{
         kategorienAuswahlLaden();
         lblError.setText("");
-
-        List<Konsumartikel> konsumartikelList   = konsumartikelDAO.findAll();
-
-        ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections.observableList(konsumartikelList);
-
-        for (Konsumartikel kA : konsumartikelObservableList) {
-            logger.info(kA);
-        }
+        cbVerfuegbarkeit.setSelected(true);
+        tabelleBefuellen();
 
         bPBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
         bPKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
         bPPreis.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
-
-        tblKonsumartikel.setItems(konsumartikelObservableList);
 
         tblKonsumartikel.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Konsumartikel>() {
 
@@ -99,6 +95,7 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
             }
         });
 
+        //cbVerfuegbarkeit.selectedProperty().addListener((v, oldValue, newValue) -> verfuegbarkeitFiltern());
     }
 
      catch (Exception e) {
@@ -109,12 +106,21 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
     @FXML
     public void updateTable() throws Exception {
         try {
-            List<Konsumartikel> alleKonsumartikelList = konsumartikelDAO.findAll();
+            List<Konsumartikel> alleKonsumartikelList = new ArrayList<>();
+            List<Konsumartikel> tempList = konsumartikelDAO.findAll();
+            for(Konsumartikel kA : tempList){
+                if(kA.getVerfuegbar()==true){
+                    alleKonsumartikelList.add(kA);
+                }
+            }
+
             if (cmbKat.getSelectionModel().getSelectedItem() != null) {
                 List<Konsumartikel> tempListe = new ArrayList<>();
 
                 for (Konsumartikel kA : alleKonsumartikelList) {
                     if (kA.getKategorie().equals(cmbKat.getSelectionModel().getSelectedItem())) {
+                        tempListe.add(kA);
+                    } else if (cmbKat.getSelectionModel().getSelectedItem()=="Alle"){
                         tempListe.add(kA);
                     }
                 }
@@ -137,7 +143,6 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
             lblPreis.setText("");
         } else {
             Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
-            ObservableList<String> katBarList = FXCollections.observableArrayList();
             if(kA instanceof Esswaren){
                 cmbKategorieKuecheBar.getSelectionModel().select(0);
             } else{
@@ -166,12 +171,14 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
     }
 
     private void kategorienAuswahlLaden() throws Exception {
-        KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
 
     //Klassen Kategorie ComboBox füllen
     TreeSet<String> konsumartikelKategorie = new TreeSet<>();
         for (Konsumartikel kA : konsumartikelDAO.findAll()) {
-        konsumartikelKategorie.add(kA.getKategorie());
+            if(kA.getVerfuegbar()==true) {
+                konsumartikelKategorie.add(kA.getKategorie());
+            }
+            konsumartikelKategorie.add("Alle");
     }
 
     ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(konsumartikelKategorie);
@@ -195,8 +202,6 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
 
     @FXML
     public void loeschen(ActionEvent event) throws Exception{
-        KonsumartikelDAO konsumartikelDAOImpl = new KonsumartikelDAOImpl();
-
         if(tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
             return;
         }
@@ -206,8 +211,11 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
 
         if (kA != null) {
             try {
-                konsumartikelDAOImpl.delete(kA);
-                updateTable();
+                kA.setVerfuegbar(false);
+                konsumartikelDAO.update(kA);
+                kategorienAuswahlLaden();
+                tabelleBefuellen();
+                System.out.println(kA.toString());
             } catch (Exception e) {
                 logger.error("Fehler beim Löschen des Konsumartikels: ", e);
             }
@@ -234,8 +242,8 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
                 double preis = Double.parseDouble(lblPreis.getText());
                 String kategorie = cmbKat2.getSelectionModel().getSelectedItem().toString();
                 String kuecheBarKategorie = cmbKategorieKuecheBar.getSelectionModel().getSelectedItem();
+                System.out.println(bez + " " + preis + " "+ kategorie + " " + kuecheBarKategorie);
               try{
-                  KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
 
                 if(kuecheBarKategorie == "Esswaren"){
                     Konsumartikel konsumartikelSpeichern = new Esswaren(bez, kategorie, preis);
@@ -246,38 +254,67 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
                     System.out.println(konsumartikelSpeichern.toString());
                     konsumartikelDAO.save(konsumartikelSpeichern);
                 }
-                  updateTable();
-                  kategorienAuswahlLaden();
+                kategorienAuswahlLaden();
+                tabelleBefuellen();
 
               } catch (Exception e) {
                     logger.error("Fehler beim Speichern des Konsumartikels: ", e);
                 }
             } else {
-                //todo: comboboxen beim updaten von konsumartikeln funktionstüchtig machen
+                Konsumartikel  kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
                 String bez = lblBez.getText();
                 String kategorie = cmbKat2.getSelectionModel().getSelectedItem().toString();
                 String kuecheBarKategorie = cmbKategorieKuecheBar.getSelectionModel().getSelectedItem();
+
                 double preis = Double.parseDouble(lblPreis.getText());
-                Konsumartikel  kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
+
+                //Ausgabe vom geänderter Artikel
+                System.out.println(bez + " " + preis + " "+ kategorie + " " + kuecheBarKategorie);
+
                 kA.setBezeichnung(bez);
                 kA.setKategorie(kategorie);
                 kA.setPreis(preis);
 
-
-
-
                 try {
                     KonsumartikelDAO konsumartikelDAOImpl = new KonsumartikelDAOImpl();
                     konsumartikelDAOImpl.update(kA);
-                    updateTable();
                     kategorienAuswahlLaden();
+                    tabelleBefuellen();
 
                 } catch (Exception e){
-                    logger.error("Fehlre beim Updaten des Konsumartikels: ", e);
+                    logger.error("Fehler beim Updaten des Konsumartikels: ", e);
                 }
             }
 
         }
+    }
+    //Todo: funktioniert nicht
+    @FXML
+    public void verfuegbarkeitFiltern() {
+        try {
+            if (cbVerfuegbarkeit.isDisable()) {
+                List<Konsumartikel> kAListDisabled = new ArrayList<>();
+                List<Konsumartikel> tempList = konsumartikelDAO.findAll();
+                for (Konsumartikel kA : tempList) {
+                    if (kA.getVerfuegbar() == false) {
+                        kAListDisabled.add(kA);
+                    }
+                }
+                ObservableList<Konsumartikel> konsumartikelDisabledObservableList = FXCollections.observableList(kAListDisabled);
+                tblKonsumartikel.setItems(konsumartikelDisabledObservableList);
+            } else {
+                tabelleBefuellen();
+            }
+        }catch (Exception e){
+            logger.info("Es konnte nicht gefiltert werden...");
+     }
+    }
+
+    @FXML
+    public void reActivate() throws Exception{
+        Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
+        kA.setVerfuegbar(true);
+        konsumartikelDAO.update(kA);
     }
 
 
@@ -315,5 +352,23 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
     // Funktion zur Pruefung
     private boolean isValid(String str) {
         return str != null && str.trim().length() > 0;
+    }
+
+    public void tabelleBefuellen() throws Exception {
+        List<Konsumartikel> konsumartikelList = new ArrayList<>();
+        List<Konsumartikel> tempList = konsumartikelDAO.findAll();
+        for (Konsumartikel kA : tempList) {
+            if (kA.getVerfuegbar() == (true)) {
+                konsumartikelList.add(kA);
+            }
+        }
+
+
+        ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections.observableList(konsumartikelList);
+
+        for (Konsumartikel kA : konsumartikelObservableList) {
+            logger.info(kA);
+        }
+        tblKonsumartikel.setItems(konsumartikelObservableList);
     }
 }
