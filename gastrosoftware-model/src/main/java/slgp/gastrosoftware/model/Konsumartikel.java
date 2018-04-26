@@ -17,6 +17,7 @@ public class Konsumartikel implements Serializable {
     private double preis;
     private String bezeichnung;
     private String kategorie;
+    private boolean verfuegbar = true;
 
     public Konsumartikel() {
     }
@@ -51,6 +52,10 @@ public class Konsumartikel implements Serializable {
         this.kategorie = kategorie;
     }
 
+    public boolean getVerfuegbar(){return verfuegbar;}
+
+    public void setVerfuegbar(boolean verfuegbar) { this.verfuegbar = verfuegbar;}
+
     public int getId() {
         return id;
     }
@@ -62,6 +67,7 @@ public class Konsumartikel implements Serializable {
                 "Bezeichnung='" + bezeichnung + '\'' +
                 ", Kategorie='" + kategorie + '\'' +
                 ", Preis=" + preis +
+                ", Verfügbarkeit=" + verfuegbar +
                 '}';
     }
 }
