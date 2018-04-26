@@ -15,9 +15,7 @@ import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.model.Getraenke;
-import slgp.gastrosoftware.model.Konsumartikel;
 import slgp.gastrosoftware.persister.BestellPositionDAO;
-import slgp.gastrosoftware.persister.KonsumartikelDAO;
 import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
 
@@ -60,6 +58,8 @@ public class TischAnzeigenControllerTest implements Initializable {
     private List<BestellPosition> bestellPositionListEsswaren = new ArrayList<>();
     private TreeSet<String> bestellPositionKlasse = new TreeSet<>();
 
+    private BestellPosition selectedBestellPosition = null;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
@@ -84,6 +84,9 @@ public class TischAnzeigenControllerTest implements Initializable {
 
             tblBestellPosition.setItems(bestellPositionObservableList);
 
+
+
+
             updateTable();
         } catch (Exception e) {
             logger.error("Tabelle konnte nicht befüllt werden...", e);
@@ -92,11 +95,19 @@ public class TischAnzeigenControllerTest implements Initializable {
     }
 
     @FXML
-    private void updateSpinner() throws Exception {
-        TablePosition position = tblBestellPosition.getSelectionModel().getSelectedCells().get(0);
-        BestellPosition cell = tblBestellPosition.getItems().get(position.getRow());
+    private void updateAnzahl() throws Exception {
+        if (selectedBestellPosition != null) {
+            logger.info(selectedBestellPosition);
+        }
+        spnAnzahl.valueProperty().addListener((obs, oldValue, newValue) ->
+                selectedBestellPosition.setAnzahl((Integer) newValue));
+        updateTable();
+    }
 
-        spnAnzahl.getValueFactory().setValue(cell.getAnzahl());
+    @FXML
+    private void updateSpinner() throws Exception {
+        selectedBestellPosition = tblBestellPosition.getSelectionModel().getSelectedItem();
+        spnAnzahl.getValueFactory().setValue(selectedBestellPosition.getAnzahl());
         updateTable();
     }
 
@@ -106,11 +117,9 @@ public class TischAnzeigenControllerTest implements Initializable {
         try {
             BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
             List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
-
+            List<BestellPosition> tempListe = new ArrayList<>();
 
             if (cmbKategorie.getSelectionModel().getSelectedItem() != null) {
-
-                List<BestellPosition> tempListe = new ArrayList<>();
 
                 for (BestellPosition bestellPosition : bestellPositionList) {
                     if (bestellPosition.getKategorie().equals(cmbKategorie.getSelectionModel().getSelectedItem())) {
@@ -121,8 +130,6 @@ public class TischAnzeigenControllerTest implements Initializable {
                 bestellPositionObservableList.addAll(tempListe);
                 tblBestellPosition.setItems(bestellPositionObservableList);
             }
-
-
         } catch (Exception e) {
             logger.error("Fehler beim Updaten der Tabelle: ", e);
             throw new RuntimeException();
@@ -133,7 +140,6 @@ public class TischAnzeigenControllerTest implements Initializable {
     @FXML
     private void kategorienAuswahlLaden() throws Exception {
         TreeSet<String> bestellPositionKategorie = new TreeSet<>();
-
         if (cmbKat.getSelectionModel().getSelectedItem().startsWith("E")) {
             for (BestellPosition bestellPosition : bestellPositionListEsswaren) {
                 bestellPositionKategorie.add(bestellPosition.getKategorie());
@@ -192,9 +198,6 @@ public class TischAnzeigenControllerTest implements Initializable {
         tisch_rechnung_stage.setScene(tisch_rechnung_interface_scene);
         tisch_rechnung_stage.show();
     }
-
-
-
 }
 
 

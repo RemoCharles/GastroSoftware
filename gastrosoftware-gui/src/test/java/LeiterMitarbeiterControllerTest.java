@@ -274,9 +274,7 @@ public class LeiterMitarbeiterControllerTest implements Initializable {
 			colOrt.setCellValueFactory(new PropertyValueFactory<Person, String>("ort"));
 			colEmail.setCellValueFactory(new PropertyValueFactory<Person, String>("email"));
 			colTelefon.setCellValueFactory(new PropertyValueFactory<Person, String>("telefon"));
-
 			colUsername.setCellValueFactory(new PropertyValueFactory<Person, String>("username"));
-
 			colKennwort.setCellValueFactory(new PropertyValueFactory<Person, String>("passwort"));
 
 			colFunktion.setCellValueFactory(new PropertyValueFactory<Person, String>("funktion"));

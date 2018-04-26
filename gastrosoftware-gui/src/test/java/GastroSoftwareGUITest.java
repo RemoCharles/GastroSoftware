@@ -5,9 +5,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
+import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import util.Util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GastroSoftwareGUITest extends Application {
@@ -27,8 +29,13 @@ public class GastroSoftwareGUITest extends Application {
 		Util.erstellePersonenListe();
 		Util.createKonsumartikelListe();
 		Util.createBestellPositionAlleKonsumartikel();
-		Util.createBestellungListe();
+		//Util.createBestellungListe();
 
+		List<Bestellung> liste = Util.createBestellungListe();
+		for(Bestellung b : liste) {
+			logger.info(b);
+		}
 		launch(args);
+
 	}
 }
