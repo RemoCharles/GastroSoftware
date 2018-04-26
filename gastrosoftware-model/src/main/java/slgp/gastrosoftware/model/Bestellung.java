@@ -59,6 +59,24 @@ public class Bestellung implements Serializable {
         return bestellPositionList;
     }
 
+    //Rückgabe für DB
+    public int getAnzahlKonsumartikel (){
+        int anz = getKonsumartikel().size();
+        return anz;
+    }
+
+    public double getSummePreisKonsumartikel (){
+        List <BestellPosition> tempListKonsumartikel = getKonsumartikel();
+
+        double summeKonsumartikel = 0;
+
+        for (BestellPosition b : tempListKonsumartikel){
+            summeKonsumartikel = b.getKonsumartikel().getPreis();
+        }
+        return summeKonsumartikel;
+    }
+
+
     public void setKonsumartikel(List<BestellPosition> bestellPositionList) {
         this.bestellPositionList = bestellPositionList;
     }

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.Bestellung;
+import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 
 import java.net.URL;
@@ -35,25 +36,21 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     private TableColumn<Bestellung, String> colTisch;
 
     @FXML
-    private TableColumn<Bestellung, String> colBestellung;
+    private TableColumn<Bestellung, Integer> colBestellung;
 
     @FXML
     private TableColumn<Bestellung, String> colDatum;
 
     @FXML
-    private TableColumn<Bestellung, String> colSumme;
+    private TableColumn<Bestellung, Double> colSumme;
 
 
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        BestellungDAOImpl bestellungDaoTemp = new BestellungDAOImpl();
+        BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
         try {
             List<Bestellung> bestellungList = bestellungDaoTemp.findAllBezahlt(true);
-            logger.info("Test funktioniert");
-            for (Bestellung b : bestellungList){
-                logger.info(b);
-            }
 
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
@@ -61,9 +58,12 @@ public class LeiterAbrechnungControllerTest implements Initializable {
                 logger.info(Bes);
             }
 
+
+
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
-            colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("bestellung"));
+            colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
             colDatum.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("datum"));
+            colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("SummePreisKonsumartikel"));
 
             tblAbrechnung.setItems(bestellungObservableList);
 
@@ -74,8 +74,10 @@ public class LeiterAbrechnungControllerTest implements Initializable {
         }
 
 
+    }
 
-
+    private void mitarbeiterAuswahlLaden() throws Exception {
+        
     }
 
 

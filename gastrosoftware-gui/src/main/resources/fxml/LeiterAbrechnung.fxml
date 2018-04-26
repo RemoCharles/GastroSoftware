@@ -17,10 +17,10 @@
       <ComboBox fx:id="cmbMitarbeiter" layoutX="24.0" layoutY="85.0" onAction="#mitarbeiterAuswahl" prefWidth="150.0" />
       <TableView fx:id="tblAbrechnung" layoutX="24.0" layoutY="129.0" prefHeight="371.0" prefWidth="834.0">
         <columns>
-          <TableColumn fx:id="colTisch" prefWidth="75.0" text="Tisch" />
-          <TableColumn fx:id="colBestellung" prefWidth="167.66668701171875" text="Bezahle Bestellung" />
-            <TableColumn fx:id="colDatum" prefWidth="167.66668701171875" text="Datum" />
-            <TableColumn fx:id="colSumme" prefWidth="167.66668701171875" text="Summe" />
+          <TableColumn fx:id="colTisch" prefWidth="191.0" text="Tisch" />
+          <TableColumn fx:id="colBestellung" prefWidth="165.33331298828125" text="Bezahle Bestellung" />
+            <TableColumn fx:id="colDatum" prefWidth="175.66668701171875" text="Datum" />
+            <TableColumn fx:id="colSumme" prefWidth="184.3333740234375" text="Summe" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="36.0" prefWidth="372.0" text="Abrechnung Mitarbeiter Service">
