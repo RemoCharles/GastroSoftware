@@ -74,31 +74,40 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    try{
-        kategorienAuswahlLaden();
-        lblError.setText("");
-        cbVerfuegbarkeit.setSelected(true);
-        tabelleBefuellen();
+        try {
+            kategorienAuswahlLaden();
+            lblError.setText("");
+            cbVerfuegbarkeit.setSelected(true);
+            tabelleBefuellen();
 
-        bPBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
-        bPKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
-        bPPreis.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
+            bPBez.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("bezeichnung"));
+            bPKat.setCellValueFactory(new PropertyValueFactory<Konsumartikel, String>("kategorie"));
+            bPPreis.setCellValueFactory(new PropertyValueFactory<Konsumartikel, Double>("preis"));
 
-        tblKonsumartikel.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Konsumartikel>() {
+            tblKonsumartikel.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Konsumartikel>() {
 
-            @Override
-            public void changed(ObservableValue<? extends Konsumartikel> observable, Konsumartikel oldValue,
-                                Konsumartikel newValue) {
-                if (newValue != null) {
-                    updateView();
+                @Override
+                public void changed(ObservableValue<? extends Konsumartikel> observable, Konsumartikel oldValue,
+                                    Konsumartikel newValue) {
+                    if (newValue != null) {
+                        updateView();
+                    }
                 }
-            }
-        });
+            });
 
-        //cbVerfuegbarkeit.selectedProperty().addListener((v, oldValue, newValue) -> verfuegbarkeitFiltern());
-    }
+            cbVerfuegbarkeit.selectedProperty().addListener(new ChangeListener<Boolean>() {
 
-     catch (Exception e) {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if (newValue == false) {
+                        verfuegbarkeitFiltern();
+                    } else {
+                        tabelleBefuellen();
+                        kategorienAuswahlLaden();
+                    }
+                }
+            });
+        } catch (Exception e) {
             logger.error("Tabelle konnte nicht befüllt werden...", e);
         }
     }
@@ -108,8 +117,8 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
         try {
             List<Konsumartikel> alleKonsumartikelList = new ArrayList<>();
             List<Konsumartikel> tempList = konsumartikelDAO.findAll();
-            for(Konsumartikel kA : tempList){
-                if(kA.getVerfuegbar()==true){
+            for (Konsumartikel kA : tempList) {
+                if (kA.getVerfuegbar() == true) {
                     alleKonsumartikelList.add(kA);
                 }
             }
@@ -120,7 +129,7 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
                 for (Konsumartikel kA : alleKonsumartikelList) {
                     if (kA.getKategorie().equals(cmbKat.getSelectionModel().getSelectedItem())) {
                         tempListe.add(kA);
-                    } else if (cmbKat.getSelectionModel().getSelectedItem()=="Alle"){
+                    } else if (cmbKat.getSelectionModel().getSelectedItem() == "Alle") {
                         tempListe.add(kA);
                     }
                 }
@@ -134,6 +143,7 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
             throw new RuntimeException();
         }
     }
+
     @FXML
     private void updateView() {
         if (tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
@@ -143,14 +153,14 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
             lblPreis.setText("");
         } else {
             Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
-            if(kA instanceof Esswaren){
+            if (kA instanceof Esswaren) {
                 cmbKategorieKuecheBar.getSelectionModel().select(0);
-            } else{
+            } else {
                 cmbKategorieKuecheBar.getSelectionModel().select(1);
-                }
+            }
 
-            for(String s : getKategorienListe()){
-                if(kA.getKategorie().equals(s)){
+            for (String s : getKategorienListe()) {
+                if (kA.getKategorie().equals(s)) {
                     cmbKat2.getSelectionModel().select(kA.getKategorie());
                 }
             }
@@ -170,39 +180,41 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
         leiter_stage.show();
     }
 
-    private void kategorienAuswahlLaden() throws Exception {
-
-    //Klassen Kategorie ComboBox füllen
-    TreeSet<String> konsumartikelKategorie = new TreeSet<>();
-        for (Konsumartikel kA : konsumartikelDAO.findAll()) {
-            if(kA.getVerfuegbar()==true) {
-                konsumartikelKategorie.add(kA.getKategorie());
+    private void kategorienAuswahlLaden() {
+        try {
+            //Klassen Kategorie ComboBox füllen
+            TreeSet<String> konsumartikelKategorie = new TreeSet<>();
+            for (Konsumartikel kA : konsumartikelDAO.findAll()) {
+                if (kA.getVerfuegbar() == true) {
+                    konsumartikelKategorie.add(kA.getKategorie());
+                }
+                konsumartikelKategorie.add("Alle");
             }
-            konsumartikelKategorie.add("Alle");
-    }
 
-    ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(konsumartikelKategorie);
-        cmbKat.setItems(konsumArtikelBezeichnungList);
-        if (konsumArtikelBezeichnungList.size() > 0) {
-        cmbKat.getSelectionModel().select(0);
-    }
+            ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(konsumartikelKategorie);
+            cmbKat.setItems(konsumArtikelBezeichnungList);
+            if (konsumArtikelBezeichnungList.size() > 0) {
+                cmbKat.getSelectionModel().select(0);
+            }
 
-        cmbKat2.setItems(getKategorienListe());
-        cmbKat2.getSelectionModel().select(0);
+            cmbKat2.setItems(getKategorienListe());
+            cmbKat2.getSelectionModel().select(0);
 
 
-
-        ObservableList<String> katKuecheBarList = FXCollections.observableArrayList();
-        katKuecheBarList.add("Esswaren");
-        katKuecheBarList.add("Getraenke");
-        cmbKategorieKuecheBar.setItems(katKuecheBarList);
-        cmbKategorieKuecheBar.getSelectionModel().select(0);
+            ObservableList<String> katKuecheBarList = FXCollections.observableArrayList();
+            katKuecheBarList.add("Esswaren");
+            katKuecheBarList.add("Getraenke");
+            cmbKategorieKuecheBar.setItems(katKuecheBarList);
+            cmbKategorieKuecheBar.getSelectionModel().select(0);
+        }catch(Exception e){
+            logger.info("Kategorienauswahl konnte nicht geladen werden.");
+        }
 
     }
 
     @FXML
-    public void loeschen(ActionEvent event) throws Exception{
-        if(tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
+    public void loeschen(ActionEvent event) throws Exception {
+        if (tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
             return;
         }
 
@@ -221,47 +233,48 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
             }
         }
     }
+
     @FXML
-    public void neuHinzufuegen(ActionEvent event) throws Exception{
+    public void neuHinzufuegen(ActionEvent event) throws Exception {
         lblBez.setText("");
         lblPreis.setText("");
 
     }
 
     @FXML
-    public void speichern(ActionEvent event) throws Exception{
+    public void speichern(ActionEvent event) throws Exception {
         // Kontrolle ob dies funktioniert!
 
         if (eingabeValid()) {
 
 
-            if (tblKonsumartikel.getSelectionModel().getSelectedItem() == null){
+            if (tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
 
                 // Neuer Konsumartikel anlegen
                 String bez = lblBez.getText();
                 double preis = Double.parseDouble(lblPreis.getText());
                 String kategorie = cmbKat2.getSelectionModel().getSelectedItem().toString();
                 String kuecheBarKategorie = cmbKategorieKuecheBar.getSelectionModel().getSelectedItem();
-                System.out.println(bez + " " + preis + " "+ kategorie + " " + kuecheBarKategorie);
-              try{
+                System.out.println(bez + " " + preis + " " + kategorie + " " + kuecheBarKategorie);
+                try {
 
-                if(kuecheBarKategorie == "Esswaren"){
-                    Konsumartikel konsumartikelSpeichern = new Esswaren(bez, kategorie, preis);
-                    System.out.println(konsumartikelSpeichern.toString());
-                    konsumartikelDAO.save(konsumartikelSpeichern);
-                } else {
-                    Konsumartikel konsumartikelSpeichern = new Getraenke(bez, kategorie, preis);
-                    System.out.println(konsumartikelSpeichern.toString());
-                    konsumartikelDAO.save(konsumartikelSpeichern);
-                }
-                kategorienAuswahlLaden();
-                tabelleBefuellen();
+                    if (kuecheBarKategorie == "Esswaren") {
+                        Konsumartikel konsumartikelSpeichern = new Esswaren(bez, kategorie, preis);
+                        System.out.println(konsumartikelSpeichern.toString());
+                        konsumartikelDAO.save(konsumartikelSpeichern);
+                    } else {
+                        Konsumartikel konsumartikelSpeichern = new Getraenke(bez, kategorie, preis);
+                        System.out.println(konsumartikelSpeichern.toString());
+                        konsumartikelDAO.save(konsumartikelSpeichern);
+                    }
+                    kategorienAuswahlLaden();
+                    tabelleBefuellen();
 
-              } catch (Exception e) {
+                } catch (Exception e) {
                     logger.error("Fehler beim Speichern des Konsumartikels: ", e);
                 }
             } else {
-                Konsumartikel  kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
+                Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
                 String bez = lblBez.getText();
                 String kategorie = cmbKat2.getSelectionModel().getSelectedItem().toString();
                 String kuecheBarKategorie = cmbKategorieKuecheBar.getSelectionModel().getSelectedItem();
@@ -269,7 +282,7 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
                 double preis = Double.parseDouble(lblPreis.getText());
 
                 //Ausgabe vom geänderter Artikel
-                System.out.println(bez + " " + preis + " "+ kategorie + " " + kuecheBarKategorie);
+                System.out.println(bez + " " + preis + " " + kategorie + " " + kuecheBarKategorie);
 
                 kA.setBezeichnung(bez);
                 kA.setKategorie(kategorie);
@@ -281,44 +294,42 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
                     kategorienAuswahlLaden();
                     tabelleBefuellen();
 
-                } catch (Exception e){
+                } catch (Exception e) {
                     logger.error("Fehler beim Updaten des Konsumartikels: ", e);
                 }
             }
 
         }
     }
+
     //Todo: funktioniert nicht
-    @FXML
     public void verfuegbarkeitFiltern() {
         try {
-            if (cbVerfuegbarkeit.isDisable()) {
-                List<Konsumartikel> kAListDisabled = new ArrayList<>();
-                List<Konsumartikel> tempList = konsumartikelDAO.findAll();
-                for (Konsumartikel kA : tempList) {
-                    if (kA.getVerfuegbar() == false) {
-                        kAListDisabled.add(kA);
-                    }
+            List<Konsumartikel> kAListDisabled = new ArrayList<>();
+            List<Konsumartikel> tempList = konsumartikelDAO.findAll();
+            for (Konsumartikel kA : tempList) {
+                if (kA.getVerfuegbar() == false) {
+                    kAListDisabled.add(kA);
                 }
-                ObservableList<Konsumartikel> konsumartikelDisabledObservableList = FXCollections.observableList(kAListDisabled);
-                tblKonsumartikel.setItems(konsumartikelDisabledObservableList);
-            } else {
-                tabelleBefuellen();
             }
-        }catch (Exception e){
+            ObservableList<Konsumartikel> konsumartikelDisabledObservableList = FXCollections.observableList(kAListDisabled);
+            tblKonsumartikel.setItems(konsumartikelDisabledObservableList);
+
+        } catch (Exception e) {
             logger.info("Es konnte nicht gefiltert werden...");
-     }
+        }
     }
 
     @FXML
-    public void reActivate() throws Exception{
+    public void reActivate() throws Exception {
         Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
         kA.setVerfuegbar(true);
         konsumartikelDAO.update(kA);
+        verfuegbarkeitFiltern();
     }
 
 
-    private static ObservableList<String> getKategorienListe(){
+    private static ObservableList<String> getKategorienListe() {
         ObservableList<String> kategorienListe = FXCollections.observableArrayList();
         kategorienListe.add("Vorspeise");
         kategorienListe.add("Hauptspeise");
@@ -354,21 +365,26 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
         return str != null && str.trim().length() > 0;
     }
 
-    public void tabelleBefuellen() throws Exception {
-        List<Konsumartikel> konsumartikelList = new ArrayList<>();
-        List<Konsumartikel> tempList = konsumartikelDAO.findAll();
-        for (Konsumartikel kA : tempList) {
-            if (kA.getVerfuegbar() == (true)) {
-                konsumartikelList.add(kA);
+    public void tabelleBefuellen() {
+        try {
+            List<Konsumartikel> konsumartikelList = new ArrayList<>();
+
+            List<Konsumartikel> tempList = konsumartikelDAO.findAll();
+            for (Konsumartikel kA : tempList) {
+                if (kA.getVerfuegbar() == (true)) {
+                    konsumartikelList.add(kA);
+                }
             }
+
+
+            ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections.observableList(konsumartikelList);
+
+            for (Konsumartikel kA : konsumartikelObservableList) {
+                logger.info(kA);
+            }
+            tblKonsumartikel.setItems(konsumartikelObservableList);
+        } catch (Exception e){
+            logger.info("Tabelle konnte nicht befüllt werden.");
         }
-
-
-        ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections.observableList(konsumartikelList);
-
-        for (Konsumartikel kA : konsumartikelObservableList) {
-            logger.info(kA);
-        }
-        tblKonsumartikel.setItems(konsumartikelObservableList);
     }
 }
