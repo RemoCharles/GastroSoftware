@@ -1,3 +1,5 @@
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +17,17 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.Bestellung;
+import slgp.gastrosoftware.model.Esswaren;
+import slgp.gastrosoftware.model.Konsumartikel;
+import slgp.gastrosoftware.model.Person;
 import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 public class LeiterAbrechnungControllerTest implements Initializable {
 
@@ -49,14 +56,28 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+
         try {
+            mitarbeiterAuswahlLaden();
             List<Bestellung> bestellungList = bestellungDaoTemp.findAllBezahlt(true);
 
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
-            for (Bestellung Bes : bestellungObservableList) {
-                logger.info(Bes);
-            }
+            //for (Bestellung Bes : bestellungObservableList) {
+              //  logger.info(Bes);
+            //}
+
+            //Listener
+            tblAbrechnung.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Bestellung>() {
+
+                @Override
+                public void changed(ObservableValue<? extends Bestellung> observable, Bestellung oldValue,
+                                    Bestellung newValue) {
+                    if (newValue != null) {
+                        updateView();
+                    }
+                }
+            });
 
 
 
@@ -76,8 +97,30 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     }
 
+    @FXML
+    private void updateView() {
+       
+
+    }
+
     private void mitarbeiterAuswahlLaden() throws Exception {
-        
+        BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+
+        TreeSet <String> personAuswahl = new TreeSet<>();
+
+        for (Bestellung b : bestellungDaoTemp.findAllBezahlt(true)){
+            personAuswahl.add(b.getMitarbeiter().getName());
+            personAuswahl.add("Alle");
+        }
+
+
+        ObservableList <String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
+        cmbMitarbeiter.setItems(mitarbeiterListe);
+
+
+
+
+
     }
 
 
