@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -81,6 +82,7 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
 
 
+
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
             colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
             colDatum.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("datum"));
@@ -98,10 +100,40 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     }
 
     @FXML
+    private void updateTabelle() {
+            try {
+                System.out.println("Funktion wird aufgerufen");
+                BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+                //String nameFinden = cmbMitarbeiter.getSelectionModel().getSelectedItem();
+                List <Bestellung> tempList = new ArrayList<>();
+                List <Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
+
+                for (Bestellung b : alleBestellungList){
+                    if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())){
+                        System.out.println("Name gefunden");
+                        tempList.add(b);
+                    } else if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle"){
+                        tempList.add(b);
+                    }
+                }
+
+                ObservableList<Bestellung> bestellungObservableList = FXCollections.observableArrayList(tempList);
+                tblAbrechnung.setItems(bestellungObservableList);
+
+
+
+            } catch (Exception e){
+                System.out.println("Ein Fehler beim Updaten ist aufgetreten" + e);
+            }
+
+
+        }
+
+    @FXML
     private void updateView() {
-       
 
     }
+
 
     private void mitarbeiterAuswahlLaden() throws Exception {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
@@ -116,6 +148,7 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
         ObservableList <String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
         cmbMitarbeiter.setItems(mitarbeiterListe);
+        cmbMitarbeiter.getSelectionModel().select(0);
 
 
 
