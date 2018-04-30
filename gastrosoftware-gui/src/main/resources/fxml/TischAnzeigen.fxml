@@ -30,7 +30,7 @@
         <ComboBox fx:id="cmbKategorie" layoutX="116.0" layoutY="71.0" onAction="#updateTable" prefHeight="25.0" prefWidth="120" AnchorPane.leftAnchor="250.0" />
         <Label layoutX="50.0" layoutY="75.0" prefHeight="17.0" prefWidth="66.0" text="Kategorie:" AnchorPane.leftAnchor="50.0" />
         <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
-        <Spinner fx:id="spnAnzahl" layoutX="494.0" layoutY="33.0" onMouseClicked="#updateAnzahl" styleClass="split-arrows-vertical">
+        <Spinner fx:id="spnAnzahl" layoutX="494.0" layoutY="33.0" styleClass="split-arrows-vertical">
         </Spinner>
     </children>
 </AnchorPane>

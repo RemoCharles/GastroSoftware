@@ -1,3 +1,5 @@
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
-public class TischAnzeigenControllerTest implements Initializable {
+public class TischAnzeigenControllerTest /*implements Initializable*/ {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
     private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
     private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
@@ -46,7 +48,7 @@ public class TischAnzeigenControllerTest implements Initializable {
     private TableColumn<BestellPosition, Integer> bPAnzahl;
 
     @FXML
-    private Spinner spnAnzahl;
+    private Spinner<Integer> spnAnzahl;
 
     @FXML
     private TableColumn<BestellPosition, String> bPBez;
@@ -60,12 +62,10 @@ public class TischAnzeigenControllerTest implements Initializable {
 
     private BestellPosition selectedBestellPosition = null;
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize() {
         try {
             listenLaden();
             kategorienAuswahlLaden();
-
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0);
 
             spnAnzahl.setValueFactory(valueFactory);
@@ -77,16 +77,27 @@ public class TischAnzeigenControllerTest implements Initializable {
                 logger.info(bestellPosition);
             }
 
+            if (bestellPositionObservableList.size() > 0) {
+                selectedBestellPosition = bestellPositionObservableList.get(0);
+            }
+
             bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
             bPKat.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("kategorie"));
             bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
             bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
-
             tblBestellPosition.setItems(bestellPositionObservableList);
+            spnAnzahl.valueProperty().addListener(new ChangeListener<Integer>() {
 
-
-
-
+                @Override
+                public void changed(ObservableValue<? extends Integer> observable,
+                                    Integer oldValue, Integer newValue) {
+                    if (selectedBestellPosition != null) {
+                        selectedBestellPosition.setAnzahl(newValue);
+                    }
+                    tblBestellPosition.refresh();
+                }
+            });
+            
             updateTable();
         } catch (Exception e) {
             logger.error("Tabelle konnte nicht befüllt werden...", e);
@@ -94,26 +105,15 @@ public class TischAnzeigenControllerTest implements Initializable {
 
     }
 
-    @FXML
-    private void updateAnzahl() throws Exception {
-        if (selectedBestellPosition != null) {
-            logger.info(selectedBestellPosition);
-        }
-        spnAnzahl.valueProperty().addListener((obs, oldValue, newValue) ->
-                selectedBestellPosition.setAnzahl((Integer) newValue));
-        updateTable();
-    }
 
     @FXML
     private void updateSpinner() throws Exception {
         selectedBestellPosition = tblBestellPosition.getSelectionModel().getSelectedItem();
         spnAnzahl.getValueFactory().setValue(selectedBestellPosition.getAnzahl());
-        updateTable();
     }
 
     @FXML
     private void updateTable() throws Exception {
-
         try {
             BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
             List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
