@@ -26,9 +26,10 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 public class TischRechnungControllerTest implements Initializable {
-    private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
+    private static final Logger logger = LogManager.getLogger(TischRechnungControllerTest.class);
     private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
     private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
+    private static BestellungDAOImpl bestellungDAO = new BestellungDAOImpl();
 
     @FXML
     private ComboBox<String> cmbKat;
@@ -40,16 +41,13 @@ public class TischRechnungControllerTest implements Initializable {
     private TableView<BestellPosition> tblBestellPosition;
 
     @FXML
-    private TableColumn<BestellPosition, String> bPKat;
-
-    @FXML
     private TableColumn<BestellPosition, Integer> bPAnzahl;
 
     @FXML
-    private Spinner spnAnzahl;
+    private TableColumn<BestellPosition, String> bPBez;
 
     @FXML
-    private TableColumn<BestellPosition, String> bPBez;
+    private TableColumn<BestellPosition, Double> bPEinzelPreis;
 
     @FXML
     private TableColumn<BestellPosition, Double> bPPreis;
@@ -57,9 +55,13 @@ public class TischRechnungControllerTest implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            kategorienAuswahlLaden();
+            List<Bestellung> bestellungList = bestellungDAO.findAll();
+            
             List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
-
+            for(BestellPosition bp : bestellPositionList){
+                if
+                        System.out.println(bp.getBerechneterPreis());
+                }
             ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableList(bestellPositionList);
 
             for (BestellPosition bestellPosition : bestellPositionObservableList) {
@@ -67,9 +69,10 @@ public class TischRechnungControllerTest implements Initializable {
             }
 
             bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
-            bPKat.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("kategorie"));
             bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
-            bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
+            bPEinzelPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
+            bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("berechneterPreis"));
+
 
             tblBestellPosition.setItems(bestellPositionObservableList);
 
