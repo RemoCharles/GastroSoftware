@@ -35,6 +35,7 @@ public class GastroSoftwareGUITest extends Application {
 		for(Bestellung b : liste) {
 			logger.info(b);
 		}
+		Util.createTischRechnung();
 		launch(args);
 
 	}

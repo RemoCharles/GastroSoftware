@@ -80,4 +80,9 @@ public class BestellPosition implements Serializable {
                 ", anzahl=" + anzahl +
                 '}';
     }
+
+    public double getBerechneterPreis(){
+        double kumulierterPreis = this.anzahl * this.konsumartikel.getPreis();
+        return kumulierterPreis;
+    }
 }

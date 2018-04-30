@@ -59,7 +59,7 @@ public class TischRechnungControllerTest implements Initializable {
             
             List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
             for(BestellPosition bp : bestellPositionList){
-                if
+                //if{
                         System.out.println(bp.getBerechneterPreis());
                 }
             ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableList(bestellPositionList);
