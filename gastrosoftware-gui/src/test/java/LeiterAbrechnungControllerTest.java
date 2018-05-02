@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -52,6 +49,9 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     @FXML
     private TableColumn<Bestellung, Double> colSumme;
 
+    @FXML
+    private TextField txtUmsatz;
+
 
 
     @Override
@@ -64,11 +64,6 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
-            //for (Bestellung Bes : bestellungObservableList) {
-              //  logger.info(Bes);
-            //}
-
-            //Listener
             tblAbrechnung.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Bestellung>() {
 
                 @Override
@@ -102,24 +97,33 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     @FXML
     private void updateTabelle() {
             try {
-                System.out.println("Funktion wird aufgerufen");
                 BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
-                //String nameFinden = cmbMitarbeiter.getSelectionModel().getSelectedItem();
                 List <Bestellung> tempList = new ArrayList<>();
                 List <Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
 
+                Double summeUmsatz = null;
+
                 for (Bestellung b : alleBestellungList){
                     if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())){
-                        System.out.println("Name gefunden");
                         tempList.add(b);
                     } else if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle"){
                         tempList.add(b);
                     }
                 }
 
+                if (tempList.size() != 0){
+                    Double summeBestellung = 0.00;
+                    for (Bestellung b : tempList){
+                        summeBestellung = summeBestellung + b.getSummePreisKonsumartikel();
+                    }
+                    String txtUmsatzSumme = String.valueOf(summeBestellung);
+                    txtUmsatz.setText(txtUmsatzSumme);
+                } else {
+                    txtUmsatz.setText("0");
+                }
+
                 ObservableList<Bestellung> bestellungObservableList = FXCollections.observableArrayList(tempList);
                 tblAbrechnung.setItems(bestellungObservableList);
-
 
 
             } catch (Exception e){
@@ -166,8 +170,7 @@ public class LeiterAbrechnungControllerTest implements Initializable {
         ma_stage.show();
     }
 
-    public void mitarbeiterAuswahl(ActionEvent actionEvent) {
-    }
+
 }
 
 
