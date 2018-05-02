@@ -21,6 +21,7 @@ import slgp.gastrosoftware.model.Person;
 import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,9 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     @FXML
     private TextField txtUmsatz;
+
+    @FXML
+    private Button btnSpeichern;
 
 
 
@@ -138,6 +142,17 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     }
 
+    @FXML
+    public void speichern(ActionEvent event) throws Exception {
+        
+        try {
+            System.out.println("Speichern");
+
+        } catch (Exception e) {
+            logger.error("Fehler beim Speichern der Abrechnung: ", e);
+        }
+
+    }
 
     private void mitarbeiterAuswahlLaden() throws Exception {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();

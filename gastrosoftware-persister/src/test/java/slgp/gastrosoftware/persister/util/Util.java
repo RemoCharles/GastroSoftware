@@ -280,9 +280,11 @@ public class Util {
 
         MAAbrechnungDAO maAbrechnungDAO = new MAAbrechnungDAOImpl();
 
-        List<TischRechnung> tischRechnungList = createTischRechnung();
+        //List<TischRechnung> tischRechnungList = createTischRechnung();
 
-        MAAbrechnung maAbrechnung = new MAAbrechnung(LocalDate.now(), "Test", tischRechnungList);
+        List<Bestellung> bestellungList = createBestellungListe();
+
+        MAAbrechnung maAbrechnung = new MAAbrechnung(LocalDate.now(), bestellungList);
         maAbrechnungList.add(maAbrechnung);
 
         for (MAAbrechnung maAbrech : maAbrechnungList) {
