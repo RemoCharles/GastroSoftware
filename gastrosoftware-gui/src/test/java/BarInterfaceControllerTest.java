@@ -63,22 +63,19 @@ public class BarInterfaceControllerTest implements Initializable{
 				}
 			}
 
-
-
-
 			/* TableView konfigurieren */
 			// Objekt welches in List enthalten ist in Tabelle schreiben
 			colKonsumart.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
 			colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
+//			colTischNr.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("tischNummer"));
 			ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList();
-			bestellungenListe.addAll(tempKonsList);
 			tblOffeneBest.setItems(bestellungenListe);
+
 
 		} catch (Exception e) {
 			logger.error("Tabelle konnte nicht befüllt werden...");
 		}
 	}
-
 
 
 	@FXML

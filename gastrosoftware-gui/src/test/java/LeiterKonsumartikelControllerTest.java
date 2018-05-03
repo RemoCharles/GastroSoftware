@@ -64,7 +64,7 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
     private TextField lblPreis;
 
     @FXML
-    private CheckBox cbVerfuegbarkeit; //googlen mit Listener
+    private CheckBox cbVerfuegbarkeit;
 
     @FXML
     private Button btReActivate;
@@ -113,7 +113,7 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
     }
 
     @FXML
-    public void updateTable() throws Exception {
+    public void updateTable() {
         try {
             List<Konsumartikel> alleKonsumartikelList = new ArrayList<>();
             List<Konsumartikel> tempList = konsumartikelDAO.findAll();
@@ -227,7 +227,6 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
                 konsumartikelDAO.update(kA);
                 kategorienAuswahlLaden();
                 tabelleBefuellen();
-                System.out.println(kA.toString());
             } catch (Exception e) {
                 logger.error("Fehler beim Löschen des Konsumartikels: ", e);
             }
@@ -302,7 +301,6 @@ public class LeiterKonsumartikelControllerTest implements Initializable {
         }
     }
 
-    //Todo: funktioniert nicht
     public void verfuegbarkeitFiltern() {
         try {
             List<Konsumartikel> kAListDisabled = new ArrayList<>();
