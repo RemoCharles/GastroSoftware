@@ -61,6 +61,7 @@ public class TischAnzeigenControllerTest /*implements Initializable*/ {
     private TreeSet<String> bestellPositionKlasse = new TreeSet<>();
 
     private BestellPosition selectedBestellPosition = null;
+    private int tischNummer;
 
     public void initialize() {
         try {
@@ -168,7 +169,11 @@ public class TischAnzeigenControllerTest /*implements Initializable*/ {
     }
 
     public void setTischNummer(int tischNummer) {
+        this.tischNummer = tischNummer;
         System.out.println(tischNummer);
+    }
+    public int getTischNummer(){
+        return tischNummer;
     }
 
     public void listenLaden() throws Exception {

@@ -16,6 +16,8 @@ public class BestellPosition implements Serializable {
     @OneToOne
     private Konsumartikel konsumartikel;
     private int anzahl;
+    //TEST
+    private int tischNummer;
 
     public BestellPosition() {
     }
@@ -57,6 +59,10 @@ public class BestellPosition implements Serializable {
     public void setAnzahl(int anzahl) {
         this.anzahl = anzahl;
     }
+
+    public int getTischNummer() { return tischNummer;}
+
+    public void setTischNummer(int tischNummer) { this.tischNummer = tischNummer;}
 
     @Override
     public boolean equals(Object o) {
