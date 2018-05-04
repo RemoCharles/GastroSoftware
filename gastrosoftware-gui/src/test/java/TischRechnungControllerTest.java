@@ -56,10 +56,15 @@ public class TischRechnungControllerTest implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
             List<Bestellung> bestellungList = bestellungDAO.findAll();
-            
+
             List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
+
+//            for(Bestellung bp1 : bestellungList){
+//                if ( bp1.getTisch() ==  TischAnzeigenControllerTest. )
+//            }
+
             for(BestellPosition bp : bestellPositionList){
-                //if{
+
                         System.out.println(bp.getBerechneterPreis());
                 }
             ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableList(bestellPositionList);
