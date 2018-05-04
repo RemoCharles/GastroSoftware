@@ -24,22 +24,23 @@ public class KonsumartikelDAOTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        Util.deleteAllEsswaren();
-        Util.deleteAllGetraenke();
         Util.deleteAllKonsumartikel();
-        Util.deleteAllBestellung();
+        Util.deleteAllGetraenke();
+        Util.deleteAllEsswaren();
     }
 
     @Before
     public void setUp() throws Exception {
-        Util.deleteAllEsswaren();
-        Util.deleteAllGetraenke();
         Util.deleteAllKonsumartikel();
-        Util.deleteAllBestellung();
+        Util.deleteAllGetraenke();
+        Util.deleteAllEsswaren();
     }
 
     @After
     public void tearDown() throws Exception {
+        Util.deleteAllKonsumartikel();
+        Util.deleteAllGetraenke();
+        Util.deleteAllEsswaren();
     }
 
     private void init() throws Exception {

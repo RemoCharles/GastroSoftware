@@ -16,10 +16,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
-import slgp.gastrosoftware.persister.BestellPositionDAO;
-import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
-import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
-import slgp.gastrosoftware.persister.impl.TischDAOImpl;
+import slgp.gastrosoftware.persister.*;
+import slgp.gastrosoftware.persister.impl.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,8 +27,11 @@ import java.util.TreeSet;
 public class TischAnzeigenController /*implements Initializable*/ {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
     private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
-    private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
+    private static KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
+    private static EsswarenDAO esswarenDAO = new EsswarenDAOImpl();
+    private static GetraenkeDAO getraenkeDAO = new GetraenkeDAOImpl();
     private static TischDAOImpl tischDAO = new TischDAOImpl();
+    private static BestellungDAO bestellungDAO = new BestellungDAOImpl();
 
     @FXML
     private ComboBox<String> cmbKat;
@@ -68,9 +69,9 @@ public class TischAnzeigenController /*implements Initializable*/ {
     @FXML
     TableColumn<Konsumartikel, Integer> konsPreis;
 
-    private List<BestellPosition> bestellPositionListGetraenke = new ArrayList<>();
-    private List<BestellPosition> bestellPositionListEsswaren = new ArrayList<>();
-    private TreeSet<String> bestellPositionKlasse = new TreeSet<>();
+    private List<Getraenke> getraenkeList = new ArrayList<>();
+    private List<Esswaren> esswarenList = new ArrayList<>();
+    private TreeSet<String> konsumartikelKlasse = new TreeSet<>();
 
     private ObservableList<BestellPosition> bestellPositionObservableList;
     private BestellPosition selectedBestellPosition = null;
@@ -169,9 +170,15 @@ public class TischAnzeigenController /*implements Initializable*/ {
                 bestellPositionList.add(bestellPosition);
             }
             Tisch tisch = tischDAO.findByTischNummer(tischNummer);
-
             Mitarbeiter mitarbeiter = Context.getInstance().getMitarbeiter();
+
+            for (BestellPosition bestellPosition : bestellPositionList){
+                bestellPositionDAO.save(bestellPosition);
+            }
+
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
+            bestellungDAO.save(bestellung);
+            logger.info(bestellung);
         }
 
         //Mitarbeiter mitarbeiter, Tisch tisch, List<BestellPosition> bestellPositionList, boolean zubereitet, boolean bezahlt, LocalDate datum
@@ -183,19 +190,19 @@ public class TischAnzeigenController /*implements Initializable*/ {
     @FXML
 
     private void kategorienAuswahlLaden() throws Exception {
-        TreeSet<String> bestellPositionKategorie = new TreeSet<>();
+        TreeSet<String> konsumartikelKategorie = new TreeSet<>();
         if (cmbKat.getSelectionModel().getSelectedItem().startsWith("E")) {
-            for (BestellPosition bestellPosition : bestellPositionListEsswaren) {
-                bestellPositionKategorie.add(bestellPosition.getKategorie());
-                logger.info("Bestellposition Essware: " + bestellPosition);
+            for (Esswaren esswaren : esswarenList) {
+                konsumartikelKategorie.add(esswaren.getKategorie());
+                logger.info("Bestellposition Essware: " + esswaren);
             }
         } else {
-            for (BestellPosition bestellPosition : bestellPositionListGetraenke) {
-                bestellPositionKategorie.add(bestellPosition.getKategorie());
-                logger.info("Bestellposition Getränke: " + bestellPosition);
+            for (Getraenke getraenke : getraenkeList) {
+                konsumartikelKategorie.add(getraenke.getKategorie());
+                logger.info("Bestellposition Getränke: " + getraenke);
             }
         }
-        ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(bestellPositionKategorie);
+        ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(konsumartikelKategorie);
         cmbKategorie.setItems(konsumArtikelKategorieListe);
         if (konsumArtikelKategorieListe.size() > 0) {
             cmbKategorie.getSelectionModel().select(0);
@@ -220,19 +227,19 @@ public class TischAnzeigenController /*implements Initializable*/ {
 
 
     public void listenLaden() throws Exception {
-        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
-            if (bestellPosition.getKonsumartikel().getClass().equals(Esswaren.class)) {
-                bestellPositionListEsswaren.add(bestellPosition);
-                logger.info("Alle Esswaren gefiltert");
-            } else if (bestellPosition.getKonsumartikel().getClass().equals(Getraenke.class)) {
-                bestellPositionListGetraenke.add(bestellPosition);
-                logger.info("Alle Getraenke gefiltert");
-            }
+        for(Esswaren esswaren : esswarenDAO.findAll()){
+            esswarenList.add(esswaren);
+            konsumartikelKlasse.add(esswaren.getClass().getSimpleName());
         }
-        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
-            bestellPositionKlasse.add(bestellPosition.getKonsumartikel().getClass().getSimpleName());
+        for (Getraenke getraenke : getraenkeDAO.findAll()){
+            getraenkeList.add(getraenke);
+            konsumartikelKlasse.add(getraenke.getClass().getSimpleName());
         }
-        ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(bestellPositionKlasse);
+
+        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
+            konsumartikelKlasse.add(bestellPosition.getKonsumartikel().getClass().getSimpleName());
+        }
+        ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(konsumartikelKlasse);
         cmbKat.setItems(konsumArtikelBezeichnungList);
         if (konsumArtikelBezeichnungList.size() > 0) {
             cmbKat.getSelectionModel().select(0);

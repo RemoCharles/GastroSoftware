@@ -47,9 +47,6 @@ public class ServiceLeiterApplication extends javafx.application.Application {
         for (Mitarbeiter mitarbeiter : mitarbeiterDAO.findAll()) {
             logger.info(mitarbeiter);
         }
-        LoginDAO loginDAO = new LoginDAOImpl();
-        String maTest = loginDAO.getFunktionPerson("josh", "abc");
-        logger.info(maTest);
         launch(args);
 
 

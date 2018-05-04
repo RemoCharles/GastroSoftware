@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.*;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
+import slgp.gastrosoftware.persister.util.JpaUtil;
 import slgp.gastrosoftware.persister.util.Util;
 
 import java.time.LocalDate;
@@ -26,28 +27,21 @@ public class BestellungDAOTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        Util.deleteAllBestellung();
-        Util.deleteAllBestellPosition();
     }
 
     @Before
     public void setUp() throws Exception {
-        Util.deleteAllBestellung();
-        Util.deleteAllMitarbeiter();
-        Util.deleteAllPersonen();
-        Util.deleteAllBestellung();
-        Util.deleteAllTisch();
-        Util.deleteAllBestellPosition();
+
     }
 
     @After
     public void tearDown() throws Exception {
+        Util.deleteAllBestellung();
     }
 
     private void init() throws Exception {
+        JpaUtil.createEntityManagerForDelition().close();
         Util.createBestellungListe();
-        Util.createMitarbeiter();
-        Util.createTisch();
         logger.info("Initalisierung fertig!");
     }
 
@@ -61,6 +55,7 @@ public class BestellungDAOTest {
     @Test
     public void testBestellungDelete() throws Exception {
         init();
+        logger.info(pBestellungDAO.findAll().size());
         assertTrue(pBestellungDAO.findAll().size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
         int size = pBestellungDAO.findAll().size();
         Bestellung lastBestellung = pBestellungDAO.findAll().get(size - 1);

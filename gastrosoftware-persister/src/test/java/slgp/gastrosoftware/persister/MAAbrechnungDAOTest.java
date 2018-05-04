@@ -50,10 +50,7 @@ public class MAAbrechnungDAOTest {
     @Test
     public void testMAAbrechnungSave() throws Exception {
         init();
-       assertTrue(tischRechnungDAO.findAll().size() == Util.INIT_SIZE_TISCH_RECHNUNG);
-        for (MAAbrechnung maAbrechnung : maAbrechnungDAO.findAll()){
-            logger.info(maAbrechnung);
-        }
+       assertTrue(maAbrechnungDAO.findAll().size() == Util.INIT_SIZE_MAAbrechnung);
     }
 
     @Test
