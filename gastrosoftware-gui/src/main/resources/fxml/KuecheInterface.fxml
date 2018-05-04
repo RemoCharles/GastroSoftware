@@ -18,6 +18,8 @@
         <columns>
           <TableColumn fx:id="colKonsumart" prefWidth="333.0" text="Konsumartikel" />
           <TableColumn fx:id="colAnz" prefWidth="66.0" text="Anzahl" />
+           <TableColumn fx:id="colTischNr" prefWidth="117.0" text="Tischnummer" />
+
         </columns>
       </TableView>
       <Button fx:id="btBereit" layoutX="462.0" layoutY="81.0" mnemonicParsing="false" onAction="#artBereit" prefHeight="67.0" prefWidth="78.0" text="Bereit" AnchorPane.leftAnchor="462.0" AnchorPane.topAnchor="81.0" />

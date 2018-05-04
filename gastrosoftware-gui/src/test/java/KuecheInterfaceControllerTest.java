@@ -9,21 +9,26 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.model.BestellPosition;
-import slgp.gastrosoftware.model.Bestellung;
-import slgp.gastrosoftware.model.Esswaren;
-import slgp.gastrosoftware.model.Konsumartikel;
+import slgp.gastrosoftware.model.*;
+import slgp.gastrosoftware.persister.BestellPositionDAO;
 import slgp.gastrosoftware.persister.BestellungDAO;
+import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class KuecheInterfaceControllerTest implements Initializable{
 	private static final Logger logger = LogManager.getLogger(TischAnzeigenControllerTest.class);
 	private static BestellungDAO bestellungen = new BestellungDAOImpl();
+	private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
 
 	@FXML
 	private Button btBereit;
@@ -37,40 +42,14 @@ public class KuecheInterfaceControllerTest implements Initializable{
 	@FXML
 	private TableColumn<BestellPosition, Integer> colAnz;
 
+	@FXML
+	private TableColumn<BestellPosition, Integer> colTischNr;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			
-			/* Bestellung initialisieren */
-			List<Bestellung> alleBestellungenListe = bestellungen.findAll();
-			List<Bestellung> unzubereiteteBestellungenListe = new ArrayList<>();
-			for(Bestellung best : alleBestellungenListe) {
-				if(best.getZubereitet()==(false)) {
-					unzubereiteteBestellungenListe.add(best);
-				}
-			}
-
-
-			List<BestellPosition> tempKonsList = new ArrayList<>();
-
-			for(Bestellung b : unzubereiteteBestellungenListe) {
-				for(BestellPosition bP : b.getKonsumartikel()) {
-					if(bP.getKonsumartikel() instanceof Esswaren) {
-						tempKonsList.add(bP);
-					}
-				}
-			}
-
-
-
-
-			/* TableView konfigurieren */
-			// Objekt welches in List enthalten ist in Tabelle schreiben
-			colKonsumart.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
-			colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
-			ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList();
-			bestellungenListe.addAll(tempKonsList);
-			tblOffeneBest.setItems(bestellungenListe);
+			tabelleBefuellen();
+			tabelleAktualisieren();
 
 		} catch (Exception e) {
 			logger.error("Tabelle konnte nicht befüllt werden...");
@@ -80,20 +59,21 @@ public class KuecheInterfaceControllerTest implements Initializable{
 
 	@FXML
 	private void artBereit(ActionEvent event) throws Exception{
-//		 if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
-//	            return;
-//	        }
-//
-//	        Konsumartikel esswaren = tblOffeneBest.getSelectionModel().getSelectedItem();
-//
-//	        if (Esswaren != null) {
-//	            try {
-//	                Context.getInstance().getMoebelhausLagerService().lieferantenLoeschen(lieferant);
-//	                
-//	            } catch (Exception e) {
-//	                
-//	            }
-//	        }
+		if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
+			return;
+		}
+		BestellPosition bP = tblOffeneBest.getSelectionModel().getSelectedItem();
+
+		if (bP != null) {
+			try {
+				bP.setZubereitet(true);
+				bestellPositionDAO.update(bP);
+				tabelleBefuellen();
+
+			} catch (Exception e) {
+				logger.info("Bestellposition konnte nicht aktualisiert werden...");
+			}
+		}
 	}
 
 
@@ -101,5 +81,43 @@ public class KuecheInterfaceControllerTest implements Initializable{
 	@FXML
 	private void logout(ActionEvent event) throws Exception {
 		System.exit(0);
+	}
+
+	private void tabelleBefuellen() throws Exception{
+		/* Bestellung initialisieren */
+		List<Bestellung> alleBestellungenListe = bestellungen.findAll();
+		List<BestellPosition> tempKonsList = new ArrayList<>();
+
+		for(Bestellung b : alleBestellungenListe) {
+			for(BestellPosition bP : b.getKonsumartikel()) {
+				if(bP.getKonsumartikel() instanceof Esswaren && bP.getZubereitet()==false) {
+					tempKonsList.add(bP);
+				}
+			}
+		}
+		/* TableView konfigurieren */
+		// Objekt welches in List enthalten ist in Tabelle schreiben
+		colKonsumart.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
+		colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
+		colTischNr.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("tischNummer"));
+		ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList(tempKonsList);
+		tblOffeneBest.setItems(bestellungenListe);
+	}
+
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+	public void tabelleAktualisieren() {
+		final Runnable aktualisieren = new Runnable() {
+			public void run() {
+				try {
+					tabelleBefuellen();
+					System.out.println("aktualisiert");
+				} catch (Exception e) {
+					logger.info("Tabelle konnte nicht befüllt werden...");
+				}
+			}
+		};
+		final ScheduledFuture<?> aktualisierungsHandle = scheduler.scheduleAtFixedRate(aktualisieren, 5, 5, SECONDS);
+
 	}
 }
