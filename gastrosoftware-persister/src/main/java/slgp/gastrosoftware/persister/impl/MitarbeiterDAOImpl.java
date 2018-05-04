@@ -41,15 +41,10 @@ public class MitarbeiterDAOImpl extends GenericPersisterDAOImpl<Mitarbeiter> imp
     @Override
     public List<Mitarbeiter> findByVorname(String vorname) throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
-
         TypedQuery<Mitarbeiter> query = em.createNamedQuery("Mitarbeiter.findByVorname", Mitarbeiter.class);
-
         query.setParameter("vorname", vorname);
-
         List<Mitarbeiter> liste = query.getResultList();
-
         em.close();
-
         return liste != null ? liste : new ArrayList <Mitarbeiter>();
     }
 
@@ -61,13 +56,9 @@ public class MitarbeiterDAOImpl extends GenericPersisterDAOImpl<Mitarbeiter> imp
     @Override
     public Mitarbeiter findByUsername(String username) throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
-
-        TypedQuery <Mitarbeiter> query = em.createQuery("Mitarbeiter.findByUsername", Mitarbeiter.class);
-
+        TypedQuery <Mitarbeiter> query = em.createNamedQuery("Mitarbeiter.findByUsername", Mitarbeiter.class);
         query.setParameter("username", username);
-
         List <Mitarbeiter> liste = query.getResultList();
-
         em.close();
 
         if (liste.isEmpty()) {
@@ -84,13 +75,9 @@ public class MitarbeiterDAOImpl extends GenericPersisterDAOImpl<Mitarbeiter> imp
     @Override
     public List<Mitarbeiter> findAll() throws Exception {
         EntityManager em = JpaUtil.createEntityManager();
-
         TypedQuery<Mitarbeiter> query = em.createNamedQuery("Mitarbeiter.findAll", Mitarbeiter.class);
-
         List<Mitarbeiter> liste = query.getResultList();
-
         em.close();
-
         return liste;
     }
 }

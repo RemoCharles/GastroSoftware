@@ -13,4 +13,6 @@ public interface TischDAO extends GenericPersisterDAO<Tisch> {
      */
 
     List<Tisch> findAll() throws Exception;
+
+    Tisch findByTischNummer(int tischNummer) throws Exception;
 }

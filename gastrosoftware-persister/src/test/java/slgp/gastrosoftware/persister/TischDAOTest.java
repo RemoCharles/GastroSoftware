@@ -3,9 +3,13 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
+import slgp.gastrosoftware.model.Tisch;
 import slgp.gastrosoftware.persister.impl.TischDAOImpl;
 import slgp.gastrosoftware.persister.util.Util;
 
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class TischDAOTest {
@@ -42,6 +46,15 @@ public class TischDAOTest {
     public final void testSave() throws Exception {
         init();
         assertTrue(pTischDAO.findAll().size() == Util.INIT_SIZE_TISCH);
+    }
+
+    @Test
+    public final void testFindByTischNummer() throws Exception{
+        init();
+        assertTrue(pTischDAO.findAll().size() == Util.INIT_SIZE_TISCH);
+        Tisch tisch = pTischDAO.findByTischNummer(2);
+        assertNotNull(tisch);
+
     }
 
 }

@@ -6,15 +6,18 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-       @NamedQuery(name = "Tisch.findAll", query = "SELECT e FROM Tisch e")})
+        @NamedQuery(name = "Tisch.findAll", query = "SELECT e FROM Tisch e"),
+        @NamedQuery(name = "Tisch.findByTischNummer", query = "SELECT e FROM Tisch e WHERE e.tischNummer=:tischNummer")})
+
 public class Tisch implements Serializable {
     @Id
     @GeneratedValue
     private int id;
+    //TODO: @Column(unique = true)
     private int tischNummer;
 
 
-    public Tisch () {
+    public Tisch() {
 
     }
 

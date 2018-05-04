@@ -154,8 +154,8 @@ public class Util {
     public static List<Tisch> createTisch() throws Exception {
         TischDAO pTisch = new TischDAOImpl();
         ArrayList<Tisch> list = new ArrayList<Tisch>();
-        list.add(new Tisch(6));
-        list.add(new Tisch(4));
+        list.add(new Tisch(1));
+        list.add(new Tisch(2));
         list.add(new Tisch(10));
 
         for (Tisch t : list) {

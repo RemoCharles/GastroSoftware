@@ -13,7 +13,7 @@ public class TischDAOImpl extends GenericPersisterDAOImpl<Tisch> implements Tisc
         super(type);
     }
 
-    public TischDAOImpl(){
+    public TischDAOImpl() {
         super(Tisch.class);
     }
 
@@ -50,4 +50,20 @@ public class TischDAOImpl extends GenericPersisterDAOImpl<Tisch> implements Tisc
         em.close();
         return liste;
     }
+
+    @Override
+    public Tisch findByTischNummer(int tischNummer) throws Exception {
+        EntityManager em = JpaUtil.createEntityManager();
+        TypedQuery<Tisch> query = em.createNamedQuery("Tisch.findByTischNummer", Tisch.class);
+        query.setParameter("tischNummer", tischNummer);
+        List<Tisch> list = query.getResultList();
+        em.close();
+        if(list.size() > 0) {
+            return list.get(0);
+        } else {
+            return null;
+        }
+    }
+
+
 }
