@@ -23,9 +23,11 @@
     <modules>
         <module>gastrosoftware-business</module>
         <module>gastrosoftware-business-initializer</module>
-        <module>gastrosoftware-gui</module>
+        <module>gastrosoftware-gui-service-leiter</module>
         <module>gastrosoftware-model</module>
         <module>gastrosoftware-persister</module>
+        <module>gastrosoftware-gui-kueche</module>
+        <module>gastrosoftware-gui-bar</module>
     </modules>
     <dependencies>
         <dependency>

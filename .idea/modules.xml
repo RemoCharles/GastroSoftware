@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/GastroSoftware.iml" filepath="$PROJECT_DIR$/GastroSoftware.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business/gastrosoftware-business.iml" filepath="$PROJECT_DIR$/gastrosoftware-business/gastrosoftware-business.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-initializer/gastrosoftware-business-initializer.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-initializer/gastrosoftware-business-initializer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui/gastrosoftware-gui.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui/gastrosoftware-gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-bar/gastrosoftware-gui-bar.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-bar/gastrosoftware-gui-bar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-kueche/gastrosoftware-gui-kueche.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-kueche/gastrosoftware-gui-kueche.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-service-leiter/gastrosoftware-gui-service-leiter.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-service-leiter/gastrosoftware-gui-service-leiter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" filepath="$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" filepath="$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" />
     </modules>
