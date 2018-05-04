@@ -181,8 +181,11 @@ public class Util {
         List<BestellPosition> bestellPositionList = createBestellPosition();
         List<Bestellung> list = new ArrayList<Bestellung>();
         List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
+        List <Konsumartikel> konsumListB = new ArrayList<>();
         konsumList.add(new Esswaren("Pizza", "Hauptspeise", 500));
         konsumList.add(new Getraenke("Eichhof", "Bier", 5));
+        konsumListB.add(new Esswaren("Pudding", "Dessert", 4));
+        konsumListB.add(new Getraenke("ViviCola", "Wasser", 4));
 
 
         Tisch tisch = new Tisch(6);

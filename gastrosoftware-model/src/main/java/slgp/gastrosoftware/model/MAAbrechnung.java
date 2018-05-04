@@ -50,7 +50,7 @@ public class MAAbrechnung extends Rechnung {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MAAbrechnung that = (MAAbrechnung) o;
-        return Objects.equals(mitarbeiterBestellungList, this.mitarbeiterBestellungList);
+        return Objects.equals(mitarbeiterBestellungList, that.mitarbeiterBestellungList);
     }
 
     @Override

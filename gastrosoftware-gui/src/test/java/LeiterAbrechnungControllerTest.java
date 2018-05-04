@@ -11,18 +11,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.model.Bestellung;
-import slgp.gastrosoftware.model.Esswaren;
-import slgp.gastrosoftware.model.Konsumartikel;
-import slgp.gastrosoftware.model.Person;
+import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.BestellungDAO;
+import slgp.gastrosoftware.persister.MAAbrechnungDAO;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
+import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
 
 import javax.swing.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -55,6 +56,9 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     @FXML
     private Button btnSpeichern;
+
+    @FXML
+    private Label lblError;
 
 
 
@@ -144,15 +148,44 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     @FXML
     public void speichern(ActionEvent event) throws Exception {
-        
+        BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
+        MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
+        List <Bestellung> bestellungTemp = new ArrayList<>();
+        MAAbrechnung maAbrTemp = new MAAbrechnung();
+
         try {
-            System.out.println("Speichern");
+
+            if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle"){
+
+                lblError.setTextFill(Color.RED);
+                lblError.setText("Bitte Person auswählen");
+
+            } else {
+
+                for (Bestellung b : bestellungDAOTemp.findAllBezahlt(true)) {
+                    if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())) {
+                        bestellungTemp.add(b);
+
+                    }
+
+                    maAbrTemp = new MAAbrechnung(LocalDate.now(), bestellungTemp);
+                    // Infoausgabe zur Kontrolle
+                    System.out.println("MAAbrechnung wurde angestellt" + maAbrTemp.toString());
+
+                    maAbrechnungDaoTemp.save(maAbrTemp);
+                    lblError.setTextFill(Color.GREEN);
+                    lblError.setText("Mitarbeiter Abrechnung wurde gespeichert");
+
+                }
+
+            }
 
         } catch (Exception e) {
-            logger.error("Fehler beim Speichern der Abrechnung: ", e);
+            logger.error("Fehler beim Erstellen der Mitarbeiter Abrechnung", e);
         }
 
     }
+
 
     private void mitarbeiterAuswahlLaden() throws Exception {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
@@ -168,9 +201,6 @@ public class LeiterAbrechnungControllerTest implements Initializable {
         ObservableList <String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
         cmbMitarbeiter.setItems(mitarbeiterListe);
         cmbMitarbeiter.getSelectionModel().select(0);
-
-
-
 
 
     }
