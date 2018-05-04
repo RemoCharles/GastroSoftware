@@ -18,16 +18,16 @@ public class Tisch implements Serializable {
 
     }
 
-    public Tisch(int anzahlSitzplaetze) {
-        this.tischNummer = anzahlSitzplaetze;
+    public Tisch(int tischNummer) {
+        this.tischNummer = tischNummer;
     }
 
     public int getTischNummer() {
         return tischNummer;
     }
 
-    public void setTischNummer(int anzahlSitzplaetze) {
-        this.tischNummer = anzahlSitzplaetze;
+    public void setTischNummer(int tischNummer) {
+        this.tischNummer = tischNummer;
     }
 
     @Override
