@@ -21,6 +21,10 @@ public class Tisch implements Serializable {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Tisch(int tischNummer) {
         this.tischNummer = tischNummer;
     }

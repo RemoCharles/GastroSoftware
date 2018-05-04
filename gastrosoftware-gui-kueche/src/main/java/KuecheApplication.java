@@ -9,8 +9,8 @@ import slgp.gastrosoftware.model.Bestellung;
 
 import java.util.List;
 
-public class Application extends javafx.application.Application {
-    private static Logger logger = (Logger) LogManager.getLogger(Application.class);
+public class KuecheApplication extends javafx.application.Application {
+    private static Logger logger = (Logger) LogManager.getLogger(KuecheApplication.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,17 +22,17 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) throws Exception {
-        Util.resetDb();
-        Util.erstellePersonenListe();
-        Util.createKonsumartikelListe();
-        Util.createBestellPositionAlleKonsumartikel();
-        //Util.createBestellungListe();
-
-        List<Bestellung> liste = Util.createBestellungListe();
-        for (Bestellung b : liste) {
-            logger.info(b);
-        }
-        Util.createTischRechnung();
+//        Util.resetDb();
+////        Util.erstellePersonenListe();
+////        Util.createKonsumartikelListe();
+////        Util.createBestellPositionAlleKonsumartikel();
+////        //Util.createBestellungListe();
+////
+////        List<Bestellung> liste = Util.createBestellungListe();
+////        for (Bestellung b : liste) {
+////            logger.info(b);
+////        }
+////        Util.createTischRechnung();
         launch(args);
     }
 

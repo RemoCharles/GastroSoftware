@@ -25,6 +25,11 @@ public class Mitarbeiter extends Person {
     public Mitarbeiter() {
     }
 
+    @Override
+    public String toString() {
+        return "Mitarbeiter [name=" + getName() + ", vorname=" + getVorname() + ", funktion=" + getFunktion() + ", adresse=" + getAdresse() + ", kontakt=" + getKontakt() + ", login=" + getLogin() + "]";
+    }
+
 
 
 }

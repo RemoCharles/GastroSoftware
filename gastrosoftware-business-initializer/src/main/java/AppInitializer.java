@@ -26,9 +26,11 @@ import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.EsswarenDAO;
 import slgp.gastrosoftware.persister.GetraenkeDAO;
 import slgp.gastrosoftware.persister.MitarbeiterDAO;
+import slgp.gastrosoftware.persister.TischDAO;
 import slgp.gastrosoftware.persister.impl.EsswarenDAOImpl;
 import slgp.gastrosoftware.persister.impl.GetraenkeDAOImpl;
 import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
+import slgp.gastrosoftware.persister.impl.TischDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 
 
@@ -143,11 +145,9 @@ public class AppInitializer {
 
     private static void initTestdata() {
         try {
-//            initRegal();1
             initEsswaren();
             initGetraenke();
-//            initProduktTyp();
-//            initProdukt();
+            initTisch();
             initBenutzer();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -155,47 +155,18 @@ public class AppInitializer {
 
     }
 
-    //    private static void initRegal() throws Exception {
-//
-//        int anzahl = 20;
-//
-//        Lager lager = null;
-//        LagerDAO lagerDao = new LagerDAOImpl();
-//        RegalDAO regalDao = new RegalDAOImpl();
-//        TablarDAO tablarDao = new TablarDAOImpl();
-//
-//        for (int i = 0; i < anzahl; i++) {
-//
-//            Regal r = new Regal(i + 1);
-//            lager = lagerDao.findAll().get(0);
-//
-//            r.setBezeichnung("R" + r.getNummer());
-//
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TA0"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TB0"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TC0"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TD0"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TA1"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TB1"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TC1"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TD1"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TA2"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TB2"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TC2"));
-//            r.getTablarListe().add(new Tablar(r.getBezeichnung() + "-" + "TD2"));
-//
-//            for (Tablar t : r.getTablarListe()) {
-//                tablarDao.save(t);
-//            }
-//
-//            regalDao.save(r);
-//            lager.getRegalListe().add(r);
-//        }
-//
-//        lagerDao.update(lager);
-//
-//    }
-//
+    private static void initTisch() throws Exception {
+        TischDAO tischDAO = new TischDAOImpl();
+        for (int i = 1; i<101; i++) {
+            Tisch tisch = new Tisch(i);
+            tischDAO.save(tisch);
+        }
+
+        for (Tisch tisch : tischDAO.findAll()) {
+            logger.info(">> Tisch mit Id-Nr. " + tisch.getId() + " wurde in die Datebank gespeichert.");
+        }
+    }
+
     private static void initEsswaren() throws Exception {
 
         String xmlDateiName = "/esswarenInit.xml";
@@ -320,102 +291,6 @@ public class AppInitializer {
         }
     }
 
-    //
-//    private static void initProduktTyp() throws Exception {
-//
-//        String xmlDateiName = "/produktTypInit.xml";
-//        String schemaDateiName = "/produktTypInitSchema.xsd";
-//
-//        List<ProduktTyp> produktTypListe = new ArrayList<ProduktTyp>();
-//
-//        try {
-//
-//            /* Laden und Validieren der XML-Datei */
-//
-//            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//
-//            URL xsdURL = AppInitializer.class.getResource(schemaDateiName).toURI().toURL();
-//            Schema schema = schemaFactory.newSchema(xsdURL);
-//
-//            XMLReaderJDOMFactory factory = new XMLReaderSchemaFactory(schema);
-//
-//            SAXBuilder sb = new SAXBuilder(factory);
-//
-//            URL xmlURL = AppInitializer.class.getResource(xmlDateiName).toURI().toURL();
-//            Document doc = sb.build(xmlURL);
-//
-//            Element hersteller = doc.getRootElement();
-//
-//            List<Element> produktTypElementliste = hersteller.getChildren("produktTyp");
-//
-//            int index = 0;
-//
-//            logger.info(">> Erzeugung von ProduktTypen gestartet.");
-//
-//            List<Lieferant> lieferantenListe = new LieferantDAOImpl().findAll();
-//
-//            for (Element element : produktTypElementliste) {
-//
-//                element = produktTypElementliste.get(index++);
-//
-//                Double preis = Double.parseDouble(element.getChildText("preis"));
-//                ProduktTyp pTyp = new ProduktTyp(element.getChildText("name"), element.getChildText("beschreibung"),
-//                        preis, element.getChildText("code"), lieferantenMap.get(element.getChildText("lieferant")));
-//                pTyp.setMinimalerBestand(Integer.parseInt(element.getChildText("min-bestand")));
-//                produktTypListe.add(pTyp);
-//
-//                logger.info("    >> ProduktTyp mit Code " + pTyp.getTypCode() + " erzeugt.");
-//
-//            }
-//
-//            logger.info(">> Erzeugung von ProduktTypen beendet.");
-//
-//            TablarDAO tablarDAO = new TablarDAOImpl();
-//            ProduktTypDAO produktTypDAO = new ProduktTypDAOImpl();
-//            index = 0;
-//
-//            for (ProduktTyp pTyp : produktTypListe) {
-//                pTyp.setMaximalerBestand(50);
-//                pTyp.setAblageTablar(tablarDAO.findAll().get(index++));
-//                produktTypDAO.save(pTyp);
-//                logger.info(">> ProduktTyp mit Id-Nr. " + pTyp.getId() + " wurde in die Datebank gespeichert.");
-//            }
-//
-//        } catch (JDOMException e) {
-//            logger.error("Fehler bei der Validierung von " + xmlDateiName, e);
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            logger.error("Fehler beim Lesen der XML-Datei: " + xmlDateiName + ".", e);
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
-//
-//    private static void initProdukt() throws Exception {
-//
-//        List<ProduktTyp> produktTypListe = new ProduktTypDAOImpl().findAll();
-//
-//        ProduktDAO dao = new ProduktDAOImpl();
-//
-//        logger.info(">> Erzeugung von Produkte gestartet.");
-//
-//        for (ProduktTyp pTyp : produktTypListe) {
-//
-//            int anzahlProdukte = ThreadLocalRandom.current().nextInt(pTyp.getMinimalerBestand(),
-//                    pTyp.getMaximalerBestand());
-//
-//            for (int i = 1; i <= anzahlProdukte; i++) {
-//                Produkt p = new Produkt(pTyp, getProduktCode());
-//                dao.save(p);
-//                logger.info("        >> Produkt vom Typ " + pTyp.getTypCode() + " mit Id-Nr. " + p.getId()
-//                        + " wurde in die Datebank gespeichert.");
-//            }
-//            logger.info("   >> " + anzahlProdukte + " Produkt(e) von Typ " + pTyp.getTypCode() + " erzeugt.");
-//        }
-//
-//        logger.info(">> Erzeugung von Produkte beendet.");
-//    }
-//
     private static void initBenutzer() throws Exception {
 
         String xmlDateiName = "/benutzerInit.xml";
@@ -480,16 +355,4 @@ public class AppInitializer {
             throw new RuntimeException(e);
         }
     }
-//
-//    /* Helper-Methode */
-//    private static long getProduktCode() {
-//
-//        try {
-//            Thread.sleep(5);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        return new GregorianCalendar().getTimeInMillis();
-//    }
 }

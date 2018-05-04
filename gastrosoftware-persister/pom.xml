@@ -16,6 +16,7 @@
             <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-model</artifactId>
             <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
