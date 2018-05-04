@@ -190,12 +190,15 @@ public class Util {
 
         Tisch tisch = new Tisch(6);
         Tisch tischA = new Tisch(7);
+        Tisch tischB = new Tisch(8);
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
         Mitarbeiter maA = new Mitarbeiter("Müller", "Kurt", "Servicepersonal", new Adresse("Kappelstrasse", 6003, "Luzern"), new Kontakt("kmueller@gmail.com", "041 233 55 32"));
 
         list.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
         list.add(new Bestellung(ma, tisch, bestellPositionList, false, true, LocalDate.now()));
         list.add(new Bestellung(maA, tischA, bestellPositionList, false, true, LocalDate.now()));
+        list.add(new Bestellung(maA, tisch, bestellPositionList, false, true, LocalDate.now()));
+        list.add(new Bestellung(maA, tischB, bestellPositionList, false, true, LocalDate.now()));
 
 
 
@@ -203,6 +206,7 @@ public class Util {
         pMitarbeiter.save(maA);
         pTisch.save(tisch);
         pTisch.save(tischA);
+        pTisch.save(tischB);
         for (Konsumartikel k : konsumList) {
             pKonsumartikel.save(k);
         }

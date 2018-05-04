@@ -36,6 +36,9 @@ public class LeiterAbrechnungControllerTest implements Initializable {
    @FXML
    private ComboBox<String> cmbMitarbeiter;
 
+   @FXML
+   private ComboBox<String> cmbAnzeigen;
+
     @FXML
     private TableView<Bestellung> tblAbrechnung;
 
@@ -147,6 +150,12 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     }
 
     @FXML
+    private void anzeigen (ActionEvent event) throws Exception {
+
+    }
+
+
+    @FXML
     public void speichern(ActionEvent event) throws Exception {
         BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
         MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
@@ -162,20 +171,41 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
             } else {
 
+                Mitarbeiter mitarbeiterA = new Mitarbeiter();
+                double summeUmsatz = 0;
+
                 for (Bestellung b : bestellungDAOTemp.findAllBezahlt(true)) {
                     if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())) {
                         bestellungTemp.add(b);
-
+                        mitarbeiterA = b.getMitarbeiter();
+                        summeUmsatz = summeUmsatz + b.getSummePreisKonsumartikel();
                     }
 
-                    maAbrTemp = new MAAbrechnung(LocalDate.now(), bestellungTemp);
-                    // Infoausgabe zur Kontrolle
-                    System.out.println("MAAbrechnung wurde angestellt" + maAbrTemp.toString());
+                }
 
+                System.out.println("Test----------");
+                System.out.println(summeUmsatz);
+                System.out.println(mitarbeiterA.toString());
+
+                maAbrTemp = new MAAbrechnung(LocalDate.now(), summeUmsatz, mitarbeiterA);
+
+
+                List <MAAbrechnung> tempAb = maAbrechnungDaoTemp.findAll();
+                int count = 0;
+
+                for (MAAbrechnung m : tempAb){
+                    if (m.getDatum().equals(maAbrTemp.getDatum()) && m.getMitarbeiter().equals(maAbrTemp.getMitarbeiter())){
+                        lblError.setTextFill(Color.RED);
+                        lblError.setText("Mitarbeiterabrechnung bereits vorhanden");
+                        count = 1;
+
+                    }
+                }
+
+                if (count == 0){
                     maAbrechnungDaoTemp.save(maAbrTemp);
                     lblError.setTextFill(Color.GREEN);
                     lblError.setText("Mitarbeiter Abrechnung wurde gespeichert");
-
                 }
 
             }
@@ -201,6 +231,8 @@ public class LeiterAbrechnungControllerTest implements Initializable {
         ObservableList <String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
         cmbMitarbeiter.setItems(mitarbeiterListe);
         cmbMitarbeiter.getSelectionModel().select(0);
+        cmbAnzeigen.setItems(mitarbeiterListe);
+        cmbAnzeigen.getSelectionModel().select(0);
 
 
     }
