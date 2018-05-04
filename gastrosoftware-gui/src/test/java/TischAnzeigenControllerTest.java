@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,19 +13,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.model.BestellPosition;
-import slgp.gastrosoftware.model.Esswaren;
-import slgp.gastrosoftware.model.Getraenke;
+import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.BestellPositionDAO;
 import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
 import slgp.gastrosoftware.persister.impl.TischDAOImpl;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 public class TischAnzeigenControllerTest /*implements Initializable*/ {
@@ -34,7 +29,6 @@ public class TischAnzeigenControllerTest /*implements Initializable*/ {
     private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
     private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
     private static TischDAOImpl tischDAO = new TischDAOImpl();
-    private int tischNummer;
 
     @FXML
     private ComboBox<String> cmbKat;
@@ -217,7 +211,6 @@ public class TischAnzeigenControllerTest /*implements Initializable*/ {
 
     public void setTischNummer(int tischNummer) {
         this.tischNummer = tischNummer;
-        System.out.println(tischNummer);
     }
     public int getTischNummer(){
         return tischNummer;
