@@ -18,6 +18,7 @@ public class BestellPosition implements Serializable {
     private int anzahl;
     //TEST
     private int tischNummer;
+    private boolean zubereitet = false;
 
     public BestellPosition() {
     }
@@ -63,6 +64,10 @@ public class BestellPosition implements Serializable {
     public int getTischNummer() { return tischNummer;}
 
     public void setTischNummer(int tischNummer) { this.tischNummer = tischNummer;}
+
+    public boolean getZubereitet() {return zubereitet;}
+
+    public void setZubereitet(boolean zubereitet) {this.zubereitet = zubereitet;}
 
     @Override
     public boolean equals(Object o) {
