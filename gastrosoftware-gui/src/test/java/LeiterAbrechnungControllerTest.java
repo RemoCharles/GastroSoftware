@@ -249,7 +249,14 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     @FXML
     private void abrechnungAnz (ActionEvent event) throws Exception {
-        //Mitarbeiter ermitteln zum übergeben in LeiterAbrechnungAnzeigen
+
+        if (cmbAnzeigen.getSelectionModel().getSelectedItem() == "Alle"){
+
+            lblError.setTextFill(Color.RED);
+            lblError.setText("Bitte Person auswählen");
+
+        } else {
+            //Mitarbeiter ermitteln zum übergeben in LeiterAbrechnungAnzeigen
         /*String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
 
         System.out.println(nameSuche);
@@ -269,18 +276,19 @@ public class LeiterAbrechnungControllerTest implements Initializable {
         }
 */
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
-        Parent ma_interface_parent =  loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
+            Parent ma_interface_parent = loader.load();
 
-        //Mitarbeiter Übergabe
+            //Mitarbeiter Übergabe
         /*LeiterAbrechnungAnzeigenControllerTest controller = loader.getController();
         controller.setMitarbeiter(maController);
         System.out.println(maController.toString());
 */
-        Scene ma_interface_scene = new Scene(ma_interface_parent);
-        Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        ma_stage.setScene(ma_interface_scene);
-        ma_stage.show();
+            Scene ma_interface_scene = new Scene(ma_interface_parent);
+            Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ma_stage.setScene(ma_interface_scene);
+            ma_stage.show();
+        }
     }
 
 
