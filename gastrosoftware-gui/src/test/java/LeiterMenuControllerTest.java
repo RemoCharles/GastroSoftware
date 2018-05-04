@@ -58,18 +58,13 @@ public class LeiterMenuControllerTest implements Initializable {
 	private TableView<Esswaren> tblKonsumartikel;
 
 	@FXML
-	private TableColumn<Esswaren, String> bPKat;
+	private TableColumn<Esswaren, String> colKat;
 
 	@FXML
-	private TableColumn<Esswaren, String> bPBez;
+	private TableColumn<Esswaren, String> colBez;
 
 	@FXML
-	private TableColumn<Esswaren, Double> bPPreis;
-
-	@FXML
-	private void menuErstellen(ActionEvent event) throws Exception {
-
-	}
+	private TableColumn<Esswaren, Double> colPreis;
 
 	@FXML
 	private Button btnErstellen;
@@ -94,18 +89,46 @@ public class LeiterMenuControllerTest implements Initializable {
 
 	@FXML
 	private void loeschen(ActionEvent event) {
+		final int selectedIdx = tblMenu.getSelectionModel().getSelectedIndex();
+		if (selectedIdx != -1) {
+			Konsumartikel itemToRemove = tblMenu.getSelectionModel().getSelectedItem();
 
+			final int newSelectedIdx = (selectedIdx == tblMenu.getItems().size() - 1) ? selectedIdx - 1
+					: selectedIdx;
+			tblMenu.getSelectionModel().select(newSelectedIdx);
+			tblMenu.getItems().remove(selectedIdx);
+			// removes the item from the array
+			System.out.println("selectIdx: " + selectedIdx);
+			System.out.println("item: " + itemToRemove);
+			menu.remove(selectedIdx);
+
+		}
 	}
+
+	ObservableList<Esswaren> esswarenObservableList = FXCollections.observableArrayList();
 
 	@FXML
 	private void hinzufuegen(ActionEvent event) {
-
+		Esswaren essware = tblKonsumartikel.getSelectionModel().getSelectedItem();
+		konsMenuBez.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("bezeichnung"));
+		konsMenuKat.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("kategorie"));
+		konsMenuPr.setCellValueFactory(new PropertyValueFactory<Esswaren, Double>("preis"));
+		esswarenObservableList.add(essware);
+		tblMenu.setItems(esswarenObservableList);
 	}
 
 	@FXML
 	private void erstellen(ActionEvent event) {
+		try {
+					List<Esswaren> tagesMenuList = tblMenu.getItems();
+					Tagesmenu tagesmenu = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), tagesMenuList);
+					System.out.println(tagesmenu);
+					tagesmenuDAO.save(tagesmenu);
+				} catch (Exception e) {
+					logger.error("Fehler beim Speichern des Tagesmenu: ", e);
+				}
+			}
 
-	}
 
 	@FXML
 	public void zurueck(ActionEvent event) throws Exception {
@@ -131,9 +154,7 @@ public class LeiterMenuControllerTest implements Initializable {
 
 			ObservableList<String> wochenTagObservableList = FXCollections.observableArrayList(wochenTag);
 			cmbWochentage.setItems(wochenTagObservableList);
-			if (wochenTagObservableList.size() > 0) {
-				cmbWochentage.getSelectionModel().select(0);
-			}
+			cmbWochentage.getSelectionModel().select(0);
 		} catch (Exception e) {
 			logger.info("Kategorienauswahl konnte nicht geladen werden.");
 		}
@@ -144,19 +165,6 @@ public class LeiterMenuControllerTest implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
-		try {
-			List<Tagesmenu> tagesmenuMontag = tagesmenuDAO.findyByWochenTag("Montag");
-			List<Tagesmenu> tagesmenuDienstag = tagesmenuDAO.findyByWochenTag("Dienstag");
-			List<Tagesmenu> tagesmenuMittwoch = tagesmenuDAO.findyByWochenTag("Mittwoch");
-			List<Tagesmenu> tagesmenuDonnerstag = tagesmenuDAO.findyByWochenTag("Donnerstag");
-			List<Tagesmenu> tagesmenuFreitag = tagesmenuDAO.findyByWochenTag("Freitag");
-			List<Tagesmenu> tagesmenuSamstag = tagesmenuDAO.findyByWochenTag("Samstag");
-			List<Tagesmenu> tagesmenuSonntag = tagesmenuDAO.findyByWochenTag("Sonntag");
-
-		} catch (Exception e) {
-			logger.error("Fehler beim Laden der Tabelle: ", e);
-			throw new RuntimeException();
-		}
 		try {
 			wochentagAuswaehlen();
 			tabelleLaden();
@@ -173,64 +181,64 @@ public class LeiterMenuControllerTest implements Initializable {
 			}
 		});
 
-		btnLoeschen.setOnAction(new EventHandler<ActionEvent>() {
-			// Löschen von ausgwählten Esswaren aus tblMenu
-			@Override
-			public void handle(ActionEvent event) {
-				final int selectedIdx = tblMenu.getSelectionModel().getSelectedIndex();
-				if (selectedIdx != -1) {
-					Konsumartikel itemToRemove = tblMenu.getSelectionModel().getSelectedItem();
-
-					final int newSelectedIdx = (selectedIdx == tblMenu.getItems().size() - 1) ? selectedIdx - 1
-							: selectedIdx;
-					tblMenu.getSelectionModel().select(newSelectedIdx);
-					tblMenu.getItems().remove(selectedIdx);
-					// removes the item from the array
-					System.out.println("selectIdx: " + selectedIdx);
-					System.out.println("item: " + itemToRemove);
-					menu.remove(selectedIdx);
-
-				}
-			}
-		});
-		btnHinzufuegen.setOnAction(new EventHandler<ActionEvent>() {
-			// Hinzufügen von ausgwählten Esswaren aus tblKonsumartikel in tblMenu
-			@Override
-			public void handle(ActionEvent event) {
-				menu.addAll(tblKonsumartikel.getSelectionModel().getSelectedItems());
-				konsMenuBez.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("bezeichnung"));
-				konsMenuKat.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("kategorie"));
-				konsMenuPr.setCellValueFactory(new PropertyValueFactory<Esswaren, Double>("preis"));
-
-				ObservableList<Esswaren> esswarenObservableList = FXCollections.observableArrayList(menu);
-				tblMenu.setItems(esswarenObservableList);
-
-			}
-
-		});
-		btnErstellen.setOnAction(new EventHandler<ActionEvent>() {
-			// Speichern von ausgewählten Esswaren in tblMenu
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					List<Esswaren> tagesMenuList = tblMenu.getItems();
-					Tagesmenu tagesmenu = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), tagesMenuList);
-					System.out.println(tagesmenu);
-					tagesmenuDAO.save(tagesmenu);
-				} catch (Exception e) {
-					logger.error("Fehler beim Speichern des Tagesmenu: ", e);
-				}
-			}
-		});
+//		btnLoeschen.setOnAction(new EventHandler<ActionEvent>() {
+//			// Löschen von ausgwählten Esswaren aus tblMenu
+//			@Override
+//			public void handle(ActionEvent event) {
+//				final int selectedIdx = tblMenu.getSelectionModel().getSelectedIndex();
+//				if (selectedIdx != -1) {
+//					Konsumartikel itemToRemove = tblMenu.getSelectionModel().getSelectedItem();
+//
+//					final int newSelectedIdx = (selectedIdx == tblMenu.getItems().size() - 1) ? selectedIdx - 1
+//							: selectedIdx;
+//					tblMenu.getSelectionModel().select(newSelectedIdx);
+//					tblMenu.getItems().remove(selectedIdx);
+//					// removes the item from the array
+//					System.out.println("selectIdx: " + selectedIdx);
+//					System.out.println("item: " + itemToRemove);
+//					menu.remove(selectedIdx);
+//
+//				}
+//			}
+//		});
+//		btnHinzufuegen.setOnAction(new EventHandler<ActionEvent>() {
+//			// Hinzufügen von ausgwählten Esswaren aus tblKonsumartikel in tblMenu
+//			@Override
+//			public void handle(ActionEvent event) {
+//				menu.addAll(tblKonsumartikel.getSelectionModel().getSelectedItems());
+//				konsMenuBez.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("bezeichnung"));
+//				konsMenuKat.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("kategorie"));
+//				konsMenuPr.setCellValueFactory(new PropertyValueFactory<Esswaren, Double>("preis"));
+//
+//				ObservableList<Esswaren> esswarenObservableList = FXCollections.observableArrayList(menu);
+//				tblMenu.setItems(esswarenObservableList);
+//
+//			}
+//
+//		});
+//		btnErstellen.setOnAction(new EventHandler<ActionEvent>() {
+//			// Speichern von ausgewählten Esswaren in tblMenu
+//			@Override
+//			public void handle(ActionEvent event) {
+//				try {
+//					List<Esswaren> tagesMenuList = tblMenu.getItems();
+//					Tagesmenu tagesmenu = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), tagesMenuList);
+//					System.out.println(tagesmenu);
+//					tagesmenuDAO.save(tagesmenu);
+//				} catch (Exception e) {
+//					logger.error("Fehler beim Speichern des Tagesmenu: ", e);
+//				}
+//			}
+//		});
 	}
 
 	public void tabelleLaden() throws Exception {
 
 		List<Esswaren> esswarenList = esswarenDAO.findAll();
 
-		bPBez.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("bezeichnung"));
-		bPKat.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("kategorie"));
-		bPPreis.setCellValueFactory(new PropertyValueFactory<Esswaren, Double>("preis"));
+		colBez.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("bezeichnung"));
+		colKat.setCellValueFactory(new PropertyValueFactory<Esswaren, String>("kategorie"));
+		colPreis.setCellValueFactory(new PropertyValueFactory<Esswaren, Double>("preis"));
 
 		ObservableList<Esswaren> esswarenObservableList = FXCollections.observableArrayList(esswarenList);
 
@@ -242,24 +250,19 @@ public class LeiterMenuControllerTest implements Initializable {
 	public void tagesmenuLaden() throws Exception {
 		try {
 			tblMenu.getItems().clear();
-			List<Tagesmenu> tagesmenuList = tagesmenuDAO.findAll();
-			ObservableList<Esswaren> tagesMenuList = FXCollections.observableArrayList();
+			List<Tagesmenu> tagesMenuList = tagesmenuDAO.findAll();
+			ObservableList<Esswaren> tagesMenuListObsv = FXCollections.observableArrayList();
 
 			String wochenTag = cmbWochentage.getSelectionModel().getSelectedItem();
-			for (Tagesmenu tagM : tagesmenuList) {
+			for (Tagesmenu tagM : tagesMenuList) {
 				if (tagM.getWochenTag().equals(wochenTag)) {
-					tagesMenuList.addAll(tagM.getListeKonsumartikel());
+					tagesMenuListObsv.addAll(tagM.getListeKonsumartikel());
 				}
 			}
-			tblMenu.setItems(tagesMenuList);
-
-			// tblMenu.getItems().add(tagesmenuList);
-
-			// tblMenu.getSelectionModel().select(0);
+			tblMenu.setItems(tagesMenuListObsv);
 
 		} catch (Exception e) {
 			logger.error("Fehler bei der Aktualisierung der Tabelle: ", e);
-			throw new RuntimeException(e);
 		}
 
 	}
