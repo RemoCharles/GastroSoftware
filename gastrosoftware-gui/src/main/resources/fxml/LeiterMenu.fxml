@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Button fx:id="btnLoeschen" layoutX="801.0" layoutY="480.0" mnemonicParsing="false" onAction="#loeschen" prefHeight="28.0" prefWidth="80.0" text="Löschen" />
-      <Button layoutX="801.0" layoutY="440.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" text="Erstellen" />
+      <Button fx:id="btnErstellen" layoutX="801.0" layoutY="440.0" mnemonicParsing="false" onAction="#erstellen" prefHeight="28.0" prefWidth="80.0" text="Erstellen" />
       <TableView fx:id="tblKonsumartikel" layoutX="50.0" layoutY="112.0" prefHeight="314.0" prefWidth="721.0" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="50.0">
         <columns>
           <TableColumn fx:id="bPKat" prefWidth="120.5" text="Kategorie" />
@@ -24,7 +24,7 @@
             <TableColumn fx:id="bPPreis" prefWidth="104.5" text="Preis" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cmbWochentage" layoutX="116.0" layoutY="71.0" prefHeight="25.0" prefWidth="169.0" AnchorPane.leftAnchor="116.0" />
+      <ComboBox fx:id="cmbWochentage" layoutX="116.0" layoutY="71.0" onAction="#tagesmenuLaden" prefHeight="25.0" prefWidth="169.0" AnchorPane.leftAnchor="116.0" />
       <Label fx:id="lblWochentag" layoutX="50.0" layoutY="75.0" prefHeight="17.0" prefWidth="66.0" text="Wochentag:" AnchorPane.leftAnchor="50.0" />
       <Button fx:id="btnHinzufuegen" layoutX="801.0" layoutY="112.0" mnemonicParsing="false" onAction="#hinzufuegen" prefHeight="28.0" prefWidth="80.0" text="Hinzufügen" />
       <Button fx:id="butZur" layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
