@@ -7,7 +7,7 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "Adresse.findAll", query = "SELECT e FROM Adresse e")})
-public class Adresse implements Serializable {
+public class    Adresse implements Serializable {
 
     @Id
     @GeneratedValue
