@@ -18,8 +18,10 @@ import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.MAAbrechnungDAO;
+import slgp.gastrosoftware.persister.MitarbeiterDAO;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
+import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
 
 import javax.swing.*;
 import java.net.URL;
@@ -62,6 +64,12 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
     @FXML
     private Label lblError;
+
+    @FXML
+    private Button btnAbrechnungAnz;
+
+    @FXML
+    private Button btnZurueck;
 
 
 
@@ -152,7 +160,9 @@ public class LeiterAbrechnungControllerTest implements Initializable {
     @FXML
     private void anzeigen (ActionEvent event) throws Exception {
 
+
     }
+
 
 
     @FXML
@@ -183,9 +193,9 @@ public class LeiterAbrechnungControllerTest implements Initializable {
 
                 }
 
-                System.out.println("Test----------");
+               /*System.out.println("Test----------");
                 System.out.println(summeUmsatz);
-                System.out.println(mitarbeiterA.toString());
+                System.out.println(mitarbeiterA.toString()); */
 
                 maAbrTemp = new MAAbrechnung(LocalDate.now(), summeUmsatz, mitarbeiterA);
 
@@ -235,6 +245,42 @@ public class LeiterAbrechnungControllerTest implements Initializable {
         cmbAnzeigen.getSelectionModel().select(0);
 
 
+    }
+
+    @FXML
+    private void abrechnungAnz (ActionEvent event) throws Exception {
+        //Mitarbeiter ermitteln zum übergeben in LeiterAbrechnungAnzeigen
+        /*String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
+
+        System.out.println(nameSuche);
+
+        MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
+
+        List <Mitarbeiter>  mitarbeiterList =mitarbeiterDAOTemp.findAll();
+
+        Mitarbeiter maController = new Mitarbeiter();
+
+        for (Mitarbeiter m : mitarbeiterList){
+            System.out.println(m + " Ausgabe ");
+            if (m.getName().equals(nameSuche)){
+               maController = m;
+               System.out.println("Name gefunden" + maController);
+            }
+        }
+*/
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
+        Parent ma_interface_parent =  loader.load();
+
+        //Mitarbeiter Übergabe
+        /*LeiterAbrechnungAnzeigenControllerTest controller = loader.getController();
+        controller.setMitarbeiter(maController);
+        System.out.println(maController.toString());
+*/
+        Scene ma_interface_scene = new Scene(ma_interface_parent);
+        Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ma_stage.setScene(ma_interface_scene);
+        ma_stage.show();
     }
 
 
