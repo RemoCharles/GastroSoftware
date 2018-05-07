@@ -186,7 +186,7 @@ public class LeiterKonsumartikelController implements Initializable {
             ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(konsumartikelKategorie);
             cmbKat.setItems(konsumArtikelBezeichnungList);
             if (konsumArtikelBezeichnungList.size() > 0) {
-                cmbKat.getSelectionModel().select(0);
+                cmbKat.getSelectionModel().select("Alle");
             }
 
             cmbKat2.setItems(getKategorienListe());
@@ -321,13 +321,14 @@ public class LeiterKonsumartikelController implements Initializable {
 
     private static ObservableList<String> getKategorienListe() {
         ObservableList<String> kategorienListe = FXCollections.observableArrayList();
-        kategorienListe.add("Vorspeise");
+        kategorienListe.add("Alkohol ab 18");
+        kategorienListe.add("Alkoholfrei");
+        kategorienListe.add("Bier");
         kategorienListe.add("Hauptspeise");
         kategorienListe.add("Nachspeise");
         kategorienListe.add("Softgetränke");
-        kategorienListe.add("Bier");
-        kategorienListe.add("Wasser");
-        kategorienListe.add("Alkohol ab 18");
+        kategorienListe.add("Vorspeise");
+        kategorienListe.add("Wein");
         return kategorienListe;
     }
 
