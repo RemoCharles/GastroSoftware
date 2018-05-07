@@ -61,6 +61,10 @@ public class LeiterInterfaceController implements Initializable {
 	}
 	@FXML
 	private void logout(ActionEvent event) throws Exception {
-		System.exit(0);
+		Parent login_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
+		Scene login_interface_scene = new Scene(login_interface_parent);
+		Stage login_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		login_stage.setScene(login_interface_scene);
+		login_stage.show();
 	}
 }
