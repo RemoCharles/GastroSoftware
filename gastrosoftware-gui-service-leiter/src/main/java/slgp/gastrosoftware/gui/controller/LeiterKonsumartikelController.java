@@ -41,9 +41,6 @@ public class LeiterKonsumartikelController implements Initializable {
     private TableColumn<Konsumartikel, String> bPKat;
 
     @FXML
-    private Spinner spnAnzahl;
-
-    @FXML
     private TableColumn<Konsumartikel, String> bPBez;
 
     @FXML
@@ -63,9 +60,6 @@ public class LeiterKonsumartikelController implements Initializable {
 
     @FXML
     private CheckBox cbVerfuegbarkeit;
-
-    @FXML
-    private Button btReActivate;
 
     @FXML
     private Label lblError;
