@@ -3,6 +3,7 @@ package slgp.gastrosoftware.model;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import java.util.Objects;
 
 @Entity
 @NamedQueries({
@@ -23,6 +24,23 @@ public class Mitarbeiter extends Person {
     }
 
     public Mitarbeiter() {
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAdresse());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Person)) {
+            return false;
+        }
+        Person pers = (Person) obj;
+        return this.getName().equals(pers.getName()) && this.getAdresse().equals(pers.getAdresse());
     }
 
     @Override

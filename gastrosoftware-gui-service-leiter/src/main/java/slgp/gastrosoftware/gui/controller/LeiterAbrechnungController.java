@@ -287,8 +287,10 @@ public class LeiterAbrechnungController implements Initializable {
             lblError.setText("Bitte Person auswählen");
 
         } else {
+
             //Mitarbeiter ermitteln zum übergeben in LeiterAbrechnungAnzeigen
-        /*String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
+
+        String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
 
         System.out.println(nameSuche);
 
@@ -305,20 +307,20 @@ public class LeiterAbrechnungController implements Initializable {
                System.out.println("Name gefunden" + maController);
             }
         }
-*/
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
-            Parent ma_interface_parent = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
+        Parent ma_interface_parent = loader.load();
 
             //Mitarbeiter Übergabe
-        /*slgp.gastrosoftware.gui.controller.LeiterAbrechnungAnzeigenController controller = loader.getController();
+        LeiterAbrechnungAnzeigenController controller = loader.getController();
         controller.setMitarbeiter(maController);
-        System.out.println(maController.toString());
-*/
-            Scene ma_interface_scene = new Scene(ma_interface_parent);
-            Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            ma_stage.setScene(ma_interface_scene);
-            ma_stage.show();
+
+
+        Scene ma_interface_scene = new Scene(ma_interface_parent);
+        Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ma_stage.setScene(ma_interface_scene);
+        ma_stage.show();
+
         }
     }
 

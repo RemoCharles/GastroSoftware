@@ -49,24 +49,32 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*System.out.print(mitarbeiterSuche.toString());
+
+
         try {
             mitarbeiterAbrechnungLaden();
+
         } catch (Exception e) {
             logger.error("Fehler beim Abruf der BestellungsListe ", e);
-        }*/
+        }
     }
 
 
     private void mitarbeiterAbrechnungLaden() throws Exception {
+        logger.info("Methode wurde geladen");
         MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
 
         List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
         List <MAAbrechnung> mabPerson = new ArrayList<>();
 
+
+
         for (MAAbrechnung m : mabTemp){
             if (m.getMitarbeiter().equals(mitarbeiterSuche)){
                 mabPerson.add(m);
+                logger.info(m + "---------------");
+            } else {
+                System.out.println("Methode wurde nicht aufgerufen");
             }
         }
 
