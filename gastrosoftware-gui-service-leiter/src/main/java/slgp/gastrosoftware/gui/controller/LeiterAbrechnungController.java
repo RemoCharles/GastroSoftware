@@ -288,11 +288,7 @@ public class LeiterAbrechnungController implements Initializable {
 
         } else {
 
-            //Mitarbeiter ermitteln zum übergeben in LeiterAbrechnungAnzeigen
-
         String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
-
-        System.out.println(nameSuche);
 
         MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
 
@@ -301,20 +297,22 @@ public class LeiterAbrechnungController implements Initializable {
         Mitarbeiter maController = new Mitarbeiter();
 
         for (Mitarbeiter m : mitarbeiterList){
-            System.out.println(m + " Ausgabe ");
             if (m.getName().equals(nameSuche)){
                maController = m;
-               System.out.println("Name gefunden" + maController);
+               logger.info(m);
             }
         }
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
         Parent ma_interface_parent = loader.load();
 
-            //Mitarbeiter Übergabe
+       // LeiterAbrechnungAnzeigenController controller = loader.getController();
         LeiterAbrechnungAnzeigenController controller = loader.getController();
-        controller.setMitarbeiter(maController);
-
+        /*    controller.setMitarbeiter(maController);
+        System.out.println("A----------------------------------------------"+controller.getMitarbeiter().toString());
+*/
+        ContextMitarbeiter.getInstance().setMitarbeiter(maController);
 
         Scene ma_interface_scene = new Scene(ma_interface_parent);
         Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

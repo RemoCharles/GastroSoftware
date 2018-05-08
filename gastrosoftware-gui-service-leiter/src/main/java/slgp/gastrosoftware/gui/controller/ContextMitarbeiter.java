@@ -2,12 +2,12 @@ package slgp.gastrosoftware.gui.controller;
 
 import slgp.gastrosoftware.model.Mitarbeiter;
 
-public class Context {
-    private static final Context INSTANCE = new Context();
+public class ContextMitarbeiter {
+    private static final ContextMitarbeiter INSTANCE = new ContextMitarbeiter();
 
     private Mitarbeiter mitarbeiter;
 
-    private Context() {}
+    private ContextMitarbeiter() {}
 
     public Mitarbeiter getMitarbeiter() {
         return mitarbeiter;
@@ -17,7 +17,9 @@ public class Context {
         this.mitarbeiter = mitarbeiter;
     }
 
-    public static Context getInstance() {
+    public static ContextMitarbeiter getInstance() {
         return INSTANCE;
     }
 }
+
+

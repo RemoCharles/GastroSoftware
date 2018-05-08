@@ -25,6 +25,7 @@ import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,10 +33,13 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     private static Logger logger = LogManager.getLogger(LeiterAbrechnungAnzeigenController.class);
 
-    private Mitarbeiter mitarbeiterSuche;
+    //private Mitarbeiter mitarbeiterSuche = new Mitarbeiter();
 
     @FXML
     private Button btnZurueck;
+
+    @FXML
+    private Button btnLaden;
 
     @FXML
     private TableView<MAAbrechnung> tblAbrechnungAnzeigen;
@@ -59,9 +63,9 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
         }
     }
 
-
+    @FXML
     private void mitarbeiterAbrechnungLaden() throws Exception {
-        logger.info("Methode wurde geladen");
+        System.out.println("Methode wird gelade");
         MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
 
         List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
@@ -70,11 +74,13 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
 
         for (MAAbrechnung m : mabTemp){
+            Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
+
             if (m.getMitarbeiter().equals(mitarbeiterSuche)){
                 mabPerson.add(m);
                 logger.info(m + "---------------");
             } else {
-                System.out.println("Methode wurde nicht aufgerufen");
+                System.out.println("Mitarbeiter wurde nicht verglichen");
             }
         }
 
@@ -87,9 +93,16 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     }
 
-    public void setMitarbeiter(Mitarbeiter mitarbeiterSuche) {
-        this.mitarbeiterSuche = mitarbeiterSuche;;
+    public void laden(ActionEvent event) throws Exception {
+        mitarbeiterAbrechnungLaden();
     }
+
+    /*public void setMitarbeiter(Mitarbeiter mitarbeiterSuche) {
+        this.mitarbeiterSuche = mitarbeiterSuche;
+    }
+    public Mitarbeiter getMitarbeiter(){
+        return mitarbeiterSuche;
+    }*/
 
 
 
@@ -99,5 +112,12 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
         Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ma_stage.setScene(ma_interface_scene);
         ma_stage.show();
+    }
+
+    private static void delay(int t){
+        long ende = (new Date().getTime() + t);
+        while(new Date().getTime() < ende){
+
+        }
     }
 }

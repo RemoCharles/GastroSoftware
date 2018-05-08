@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
                 Mitarbeiter mitarbeiter = mitarbeiterDAO.findByUsername(genBenu.getText());
                 //controller.setMitarbeiter(mitarbeiter);
 
-                Context.getInstance().setMitarbeiter(mitarbeiter);
+                ContextMitarbeiter.getInstance().setMitarbeiter(mitarbeiter);
 
                 ma_stage.setScene(ma_interface_scene);
                 ma_stage.show();

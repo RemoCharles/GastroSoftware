@@ -170,7 +170,7 @@ public class TischAnzeigenController /*implements Initializable*/ {
                 bestellPositionList.add(bestellPosition);
             }
             Tisch tisch = tischDAO.findByTischNummer(tischNummer);
-            Mitarbeiter mitarbeiter = Context.getInstance().getMitarbeiter();
+            Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
 
             for (BestellPosition bestellPosition : bestellPositionList){
                 bestellPositionDAO.save(bestellPosition);

@@ -34,7 +34,7 @@
 		<telefon>041 100 00 00</telefon>
 		<benutzername>bineichen</benutzername>
 		<passwort>geheim</passwort>
-		<funktion>Servicemitarbeiter</funktion>
+		<funktion>Servicepersonal</funktion>
 	</benutzer>
 	<benutzer>
 		<vorname>David</vorname>
@@ -70,7 +70,7 @@
 		<telefon>041 555 55 55</telefon>
 		<benutzername>rportmann</benutzername>
 		<passwort>geheim</passwort>
-		<funktion>Servicemitarbeiter</funktion>
+		<funktion>Servicepersonal</funktion>
 	</benutzer>
 	<benutzer>
 		<vorname>Adrian</vorname>
@@ -82,6 +82,6 @@
 		<telefon>041 666 66 66</telefon>
 		<benutzername>alindauer</benutzername>
 		<passwort>geheim</passwort>
-		<funktion>Servicemitarbeiter</funktion>
+		<funktion>Servicepersonal</funktion>
 	</benutzer>
 </users>

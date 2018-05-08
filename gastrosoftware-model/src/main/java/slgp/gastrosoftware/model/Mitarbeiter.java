@@ -43,6 +43,8 @@ public class Mitarbeiter extends Person {
         return this.getName().equals(pers.getName()) && this.getAdresse().equals(pers.getAdresse());
     }
 
+
+
     @Override
     public String toString() {
         return "Mitarbeiter [name=" + getName() + ", vorname=" + getVorname() + ", funktion=" + getFunktion() + ", adresse=" + getAdresse() + ", kontakt=" + getKontakt() + ", login=" + getLogin() + "]";
