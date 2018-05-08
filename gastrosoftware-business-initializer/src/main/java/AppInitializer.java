@@ -167,6 +167,7 @@ public class AppInitializer {
         }
     }
 
+
     private static void initEsswaren() throws Exception {
 
         String xmlDateiName = "/esswarenInit.xml";

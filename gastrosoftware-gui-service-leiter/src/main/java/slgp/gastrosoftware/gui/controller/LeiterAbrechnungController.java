@@ -20,8 +20,12 @@ import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.MAAbrechnungDAO;
+import slgp.gastrosoftware.persister.MitarbeiterDAO;
+import slgp.gastrosoftware.persister.TischDAO;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
+import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
+import slgp.gastrosoftware.persister.impl.TischDAOImpl;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -75,6 +79,7 @@ public class LeiterAbrechnungController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+        initBestellungen();
 
         try {
             mitarbeiterAuswahlLaden();
@@ -109,6 +114,33 @@ public class LeiterAbrechnungController implements Initializable {
             logger.error("Fehler beim Abruf der BestellungsListe ", e);
         }
 
+
+    }
+
+    private void initBestellungen(){
+       /* MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
+        Mitarbeiter mA = new Mitarbeiter();
+        List <Mitarbeiter> maTempList = mitarbeiterDAOTemp.findAll();
+        mA = maTempList.get(0);
+
+        TischDAO tischDAOTemp = new TischDAOImpl();
+        List <Tisch> tiTempList = tischDAOTemp.findAll();
+        Tisch tA = new Tisch();
+        tA = tiTempList.get(0); */
+
+        try {
+            BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
+            List <Bestellung> beTempList = bestellungDAOTemp.findAll();
+
+            for (Bestellung b : beTempList){
+                b.setBezahlt(true);
+                bestellungDAOTemp.update(b);
+            }
+
+
+        } catch (Exception e){
+            logger.error("Fehler beim Initialisieren der Bestellungen aufgetreten", e);
+        }
 
     }
 
