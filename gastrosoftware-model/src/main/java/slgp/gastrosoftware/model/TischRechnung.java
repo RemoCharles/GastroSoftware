@@ -8,7 +8,7 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e")})
-public class TischRechnung extends Rechnung{
+public class TischRechnung extends Rechnung {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Bestellung> bestellungList;
@@ -23,6 +23,9 @@ public class TischRechnung extends Rechnung{
         this.bestellungList = bestellungList;
     }
 
+    public int getId() {
+        return super.getId();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -53,4 +56,6 @@ public class TischRechnung extends Rechnung{
                 "bestellungList=" + bestellungList +
                 '}';
     }
+
+
 }

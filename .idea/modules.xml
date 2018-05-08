@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-kueche/gastrosoftware-gui-kueche.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-kueche/gastrosoftware-gui-kueche.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-service-leiter/gastrosoftware-gui-service-leiter.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-service-leiter/gastrosoftware-gui-service-leiter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" filepath="$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-pdfprinter/gastrosoftware-pdfprinter.iml" filepath="$PROJECT_DIR$/gastrosoftware-pdfprinter/gastrosoftware-pdfprinter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" filepath="$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" />
     </modules>
   </component>

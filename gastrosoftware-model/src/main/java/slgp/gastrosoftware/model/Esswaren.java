@@ -18,4 +18,5 @@ public class Esswaren extends Konsumartikel{
     public String toString() {
         return super.toString();
     }
+
 }

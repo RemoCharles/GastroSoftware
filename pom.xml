@@ -28,6 +28,7 @@
         <module>gastrosoftware-persister</module>
         <module>gastrosoftware-gui-kueche</module>
         <module>gastrosoftware-gui-bar</module>
+        <module>gastrosoftware-pdfprinter</module>
     </modules>
     <dependencies>
         <dependency>

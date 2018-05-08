@@ -22,7 +22,7 @@ public class Rechnung implements Serializable {
 
     }
 
-    public Rechnung(LocalDate datum){
+    public Rechnung(LocalDate datum) {
         this.datum = datum;
     }
 
@@ -46,6 +46,10 @@ public class Rechnung implements Serializable {
 
     public void setNameRestaurant(String nameRestaunt) {
         this.nameRestaurant = nameRestaunt;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
