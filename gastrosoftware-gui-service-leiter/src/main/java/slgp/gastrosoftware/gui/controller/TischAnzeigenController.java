@@ -167,6 +167,7 @@ public class TischAnzeigenController /*implements Initializable*/ {
         if (bestellPositionObservableList.size() > 0) {
             List<BestellPosition> bestellPositionList = new ArrayList<>();
             for (BestellPosition bestellPosition : bestellPositionObservableList) {
+                bestellPosition.setTischNummer(tischNummer);
                 bestellPositionList.add(bestellPosition);
             }
             Tisch tisch = tischDAO.findByTischNummer(tischNummer);

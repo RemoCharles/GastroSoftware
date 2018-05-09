@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -101,7 +102,13 @@ public class BarInterfaceController implements Initializable {
         colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
         colTischNr.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("tischNummer"));
         ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList(tempKonsList);
-        tblOffeneBest.setItems(bestellungenListe);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                tblOffeneBest.setItems(bestellungenListe);
+
+            }
+        });
     }
 
 

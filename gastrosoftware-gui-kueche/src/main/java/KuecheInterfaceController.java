@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,7 +51,6 @@ public class KuecheInterfaceController implements Initializable{
         try {
             tabelleBefuellen();
             tabelleAktualisieren();
-
         } catch (Exception e) {
             logger.error("Tabelle konnte nicht befüllt werden...");
         }
@@ -83,27 +83,39 @@ public class KuecheInterfaceController implements Initializable{
         System.exit(0);
     }
 
-    private void tabelleBefuellen() throws Exception{
+    private void tabelleBefuellen() {
         /* Bestellung initialisieren */
-        List<Bestellung> alleBestellungenListe = bestellungen.findAll();
-        List<BestellPosition> tempKonsList = new ArrayList<>();
+        try {
+            List<Bestellung> alleBestellungenListe = bestellungen.findAll();
+            List<BestellPosition> tempKonsList = new ArrayList<>();
 
-        for(Bestellung b : alleBestellungenListe) {
-            for(BestellPosition bP : b.getKonsumartikel()) {
-                if(bP.getKonsumartikel() instanceof Esswaren && bP.getZubereitet()==false) {
-                    tempKonsList.add(bP);
+            for (Bestellung b : alleBestellungenListe) {
+                for (BestellPosition bP : b.getKonsumartikel()) {
+                    if (bP.getKonsumartikel() instanceof Esswaren && bP.getZubereitet() == false) {
+                        tempKonsList.add(bP);
+                    }
                 }
             }
-        }
-        /* TableView konfigurieren */
-        // Objekt welches in List enthalten ist in Tabelle schreiben
-        colKonsumart.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
-        colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
-        colTischNr.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("tischNummer"));
-        ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList(tempKonsList);
-        tblOffeneBest.setItems(bestellungenListe);
-    }
 
+
+            /* TableView konfigurieren */
+            // Objekt welches in List enthalten ist in Tabelle schreiben
+            colKonsumart.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
+            colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
+            colTischNr.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("tischNummer"));
+            ObservableList<BestellPosition> bestellungenListe = FXCollections.observableArrayList(tempKonsList);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    tblOffeneBest.setItems(bestellungenListe);
+                }
+            });
+
+        } catch (Exception e) {
+            logger.info("Tabelle konnte nicht befüllt werden..");
+        }
+    }
+//TODO Thread Fehler
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public void tabelleAktualisieren() {
@@ -118,6 +130,6 @@ public class KuecheInterfaceController implements Initializable{
             }
         };
         final ScheduledFuture<?> aktualisierungsHandle = scheduler.scheduleAtFixedRate(aktualisieren, 5, 5, SECONDS);
-
     }
 }
+
