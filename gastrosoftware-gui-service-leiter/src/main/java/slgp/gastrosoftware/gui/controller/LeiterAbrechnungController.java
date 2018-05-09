@@ -38,11 +38,11 @@ public class LeiterAbrechnungController implements Initializable {
 
     private static Logger logger = LogManager.getLogger(LeiterMitarbeiterController.class);
 
-   @FXML
-   private ComboBox<String> cmbMitarbeiter;
+    @FXML
+    private ComboBox<String> cmbMitarbeiter;
 
-   @FXML
-   private ComboBox<String> cmbAnzeigen;
+    @FXML
+    private ComboBox<String> cmbAnzeigen;
 
     @FXML
     private TableView<Bestellung> tblAbrechnung;
@@ -75,7 +75,6 @@ public class LeiterAbrechnungController implements Initializable {
     private Button btnZurueck;
 
 
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
@@ -99,15 +98,12 @@ public class LeiterAbrechnungController implements Initializable {
             });
 
 
-
-
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
             colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
             colDatum.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("datum"));
             colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("SummePreisKonsumartikel"));
 
             tblAbrechnung.setItems(bestellungObservableList);
-
 
 
         } catch (Exception e) {
@@ -117,7 +113,7 @@ public class LeiterAbrechnungController implements Initializable {
 
     }
 
-    private void initBestellungen(){
+    private void initBestellungen() {
        /* MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
         Mitarbeiter mA = new Mitarbeiter();
         List <Mitarbeiter> maTempList = mitarbeiterDAOTemp.findAll();
@@ -130,15 +126,15 @@ public class LeiterAbrechnungController implements Initializable {
 
         try {
             BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
-            List <Bestellung> beTempList = bestellungDAOTemp.findAll();
+            List<Bestellung> beTempList = bestellungDAOTemp.findAll();
 
-            for (Bestellung b : beTempList){
+            for (Bestellung b : beTempList) {
                 b.setBezahlt(true);
                 bestellungDAOTemp.update(b);
             }
 
 
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("Fehler beim Initialisieren der Bestellungen aufgetreten", e);
         }
 
@@ -146,42 +142,42 @@ public class LeiterAbrechnungController implements Initializable {
 
     @FXML
     private void updateTabelle() {
-            try {
-                BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
-                List <Bestellung> tempList = new ArrayList<>();
-                List <Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
+        try {
+            BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+            List<Bestellung> tempList = new ArrayList<>();
+            List<Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
 
-                Double summeUmsatz = null;
+            Double summeUmsatz = null;
 
-                for (Bestellung b : alleBestellungList){
-                    if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())){
-                        tempList.add(b);
-                    } else if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle"){
-                        tempList.add(b);
-                    }
+            for (Bestellung b : alleBestellungList) {
+                if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())) {
+                    tempList.add(b);
+                } else if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle") {
+                    tempList.add(b);
                 }
-
-                if (tempList.size() != 0){
-                    Double summeBestellung = 0.00;
-                    for (Bestellung b : tempList){
-                        summeBestellung = summeBestellung + b.getSummePreisKonsumartikel();
-                    }
-                    String txtUmsatzSumme = String.valueOf(summeBestellung);
-                    txtUmsatz.setText(txtUmsatzSumme);
-                } else {
-                    txtUmsatz.setText("0");
-                }
-
-                ObservableList<Bestellung> bestellungObservableList = FXCollections.observableArrayList(tempList);
-                tblAbrechnung.setItems(bestellungObservableList);
-
-
-            } catch (Exception e){
-                System.out.println("Ein Fehler beim Updaten ist aufgetreten" + e);
             }
 
+            if (tempList.size() != 0) {
+                Double summeBestellung = 0.00;
+                for (Bestellung b : tempList) {
+                    summeBestellung = summeBestellung + b.getSummePreisKonsumartikel();
+                }
+                String txtUmsatzSumme = String.valueOf(summeBestellung);
+                txtUmsatz.setText(txtUmsatzSumme);
+            } else {
+                txtUmsatz.setText("0");
+            }
 
+            ObservableList<Bestellung> bestellungObservableList = FXCollections.observableArrayList(tempList);
+            tblAbrechnung.setItems(bestellungObservableList);
+
+
+        } catch (Exception e) {
+            System.out.println("Ein Fehler beim Updaten ist aufgetreten" + e);
         }
+
+
+    }
 
     @FXML
     private void updateView() {
@@ -189,23 +185,22 @@ public class LeiterAbrechnungController implements Initializable {
     }
 
     @FXML
-    private void anzeigen (ActionEvent event) throws Exception {
+    private void anzeigen(ActionEvent event) throws Exception {
 
 
     }
-
 
 
     @FXML
     public void speichern(ActionEvent event) throws Exception {
         BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
         MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
-        List <Bestellung> bestellungTemp = new ArrayList<>();
+        List<Bestellung> bestellungTemp = new ArrayList<>();
         MAAbrechnung maAbrTemp = new MAAbrechnung();
 
         try {
 
-            if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle"){
+            if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle") {
 
                 lblError.setTextFill(Color.RED);
                 lblError.setText("Bitte Person auswählen");
@@ -231,11 +226,11 @@ public class LeiterAbrechnungController implements Initializable {
                 maAbrTemp = new MAAbrechnung(LocalDate.now(), summeUmsatz, mitarbeiterA);
 
 
-                List <MAAbrechnung> tempAb = maAbrechnungDaoTemp.findAll();
+                List<MAAbrechnung> tempAb = maAbrechnungDaoTemp.findAll();
                 int count = 0;
 
-                for (MAAbrechnung m : tempAb){
-                    if (m.getDatum().equals(maAbrTemp.getDatum()) && m.getMitarbeiter().equals(maAbrTemp.getMitarbeiter())){
+                for (MAAbrechnung m : tempAb) {
+                    if (m.getDatum().equals(maAbrTemp.getDatum()) && m.getMitarbeiter().equals(maAbrTemp.getMitarbeiter())) {
                         lblError.setTextFill(Color.RED);
                         lblError.setText("Mitarbeiterabrechnung bereits vorhanden");
                         count = 1;
@@ -243,7 +238,7 @@ public class LeiterAbrechnungController implements Initializable {
                     }
                 }
 
-                if (count == 0){
+                if (count == 0) {
                     maAbrechnungDaoTemp.save(maAbrTemp);
                     lblError.setTextFill(Color.GREEN);
                     lblError.setText("Mitarbeiter Abrechnung wurde gespeichert");
@@ -261,15 +256,16 @@ public class LeiterAbrechnungController implements Initializable {
     private void mitarbeiterAuswahlLaden() throws Exception {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
 
-        TreeSet <String> personAuswahl = new TreeSet<>();
+        TreeSet<String> personAuswahl = new TreeSet<>();
 
-        for (Bestellung b : bestellungDaoTemp.findAllBezahlt(true)){
+       // for (Bestellung b : bestellungDaoTemp.findAllBezahlt(true)) {
+        for(Bestellung b : bestellungDaoTemp.findAll()){
             personAuswahl.add(b.getMitarbeiter().getName());
             personAuswahl.add("Alle");
         }
 
 
-        ObservableList <String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
+        ObservableList<String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
         cmbMitarbeiter.setItems(mitarbeiterListe);
         cmbMitarbeiter.getSelectionModel().select(0);
         cmbAnzeigen.setItems(mitarbeiterListe);
@@ -279,45 +275,38 @@ public class LeiterAbrechnungController implements Initializable {
     }
 
     @FXML
-    private void abrechnungAnz (ActionEvent event) throws Exception {
+    private void abrechnungAnz(ActionEvent event) throws Exception {
 
-        if (cmbAnzeigen.getSelectionModel().getSelectedItem() == "Alle"){
+        if (cmbAnzeigen.getSelectionModel().getSelectedItem() == "Alle") {
 
             lblError.setTextFill(Color.RED);
             lblError.setText("Bitte Person auswählen");
 
         } else {
 
-        String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
+            String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
 
-        MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
+            MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
 
-        List <Mitarbeiter>  mitarbeiterList =mitarbeiterDAOTemp.findAll();
+            List<Mitarbeiter> mitarbeiterList = mitarbeiterDAOTemp.findAll();
 
-        Mitarbeiter maController = new Mitarbeiter();
+            Mitarbeiter maController = new Mitarbeiter();
 
-        for (Mitarbeiter m : mitarbeiterList){
-            if (m.getName().equals(nameSuche)){
-               maController = m;
-               logger.info(m);
+            for (Mitarbeiter m : mitarbeiterList) {
+                if (m.getName().equals(nameSuche)) {
+                    maController = m;
+                    logger.info(m);
+                }
             }
-        }
 
+            ContextMitarbeiter.getInstance().setMitarbeiter(maController);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
-        Parent ma_interface_parent = loader.load();
-
-       // LeiterAbrechnungAnzeigenController controller = loader.getController();
-        LeiterAbrechnungAnzeigenController controller = loader.getController();
-        /*    controller.setMitarbeiter(maController);
-        System.out.println("A----------------------------------------------"+controller.getMitarbeiter().toString());
-*/
-        ContextMitarbeiter.getInstance().setMitarbeiter(maController);
-
-        Scene ma_interface_scene = new Scene(ma_interface_parent);
-        Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        ma_stage.setScene(ma_interface_scene);
-        ma_stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LeiterAbrechnungAnzeigen.fxml"));
+            Parent ma_interface_parent = loader.load();
+            Scene ma_interface_scene = new Scene(ma_interface_parent);
+            Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ma_stage.setScene(ma_interface_scene);
+            ma_stage.show();
 
         }
     }

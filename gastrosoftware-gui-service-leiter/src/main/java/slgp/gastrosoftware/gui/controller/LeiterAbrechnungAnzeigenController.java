@@ -53,8 +53,6 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
         try {
             mitarbeiterAbrechnungLaden();
 
@@ -65,13 +63,12 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     @FXML
     private void mitarbeiterAbrechnungLaden() throws Exception {
-        System.out.println("Methode wird gelade");
+        System.out.println("Methode wird geladen");
         MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
 
+        //Wann wird eine Rechnung als Mitarbeiterabrechnung persistiert?
         List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
         List <MAAbrechnung> mabPerson = new ArrayList<>();
-
-
 
         for (MAAbrechnung m : mabTemp){
             Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
@@ -85,26 +82,10 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
         }
 
         ObservableList<MAAbrechnung> maAbrechnungListe = FXCollections.observableList(mabPerson);
-
         colDatum.setCellValueFactory(new PropertyValueFactory<MAAbrechnung, String>("datum"));
         colUmsatz.setCellValueFactory(new PropertyValueFactory<MAAbrechnung, Double>("umsatz"));
         tblAbrechnungAnzeigen.setItems(maAbrechnungListe);
-
-
     }
-
-    public void laden(ActionEvent event) throws Exception {
-        mitarbeiterAbrechnungLaden();
-    }
-
-    /*public void setMitarbeiter(Mitarbeiter mitarbeiterSuche) {
-        this.mitarbeiterSuche = mitarbeiterSuche;
-    }
-    public Mitarbeiter getMitarbeiter(){
-        return mitarbeiterSuche;
-    }*/
-
-
 
     public void zurueck(ActionEvent event) throws Exception{
         Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterAbrechnung.fxml"));
@@ -112,12 +93,5 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
         Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ma_stage.setScene(ma_interface_scene);
         ma_stage.show();
-    }
-
-    private static void delay(int t){
-        long ende = (new Date().getTime() + t);
-        while(new Date().getTime() < ende){
-
-        }
     }
 }
