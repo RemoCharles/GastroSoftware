@@ -11,7 +11,8 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "Bestellung.findByDatum", query = "SELECT e FROM Bestellung e WHERE e.datum=:datum"),
         @NamedQuery(name = "Bestellung.findAll", query = "SELECT e FROM Bestellung e"),
-        @NamedQuery(name = "Bestellung.findBezahlt", query = "SELECT e from Bestellung e WHERE e.bezahlt=:bezahlt"),})
+        @NamedQuery(name = "Bestellung.findBezahlt", query = "SELECT e from Bestellung e WHERE e.bezahlt=:bezahlt"),
+        @NamedQuery(name = "Bestellung.findByTischNummer", query = "SELECT e FROM Bestellung e WHERE e.tisch.tischNummer=:tischNummer")})
 
 public class Bestellung implements Serializable {
     @Id

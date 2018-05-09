@@ -3,6 +3,7 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
+import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
@@ -103,6 +104,14 @@ public class BestellungDAOTest {
         List<Bestellung> listTrue = pBestellungDAO.findAllBezahlt(true);
         assertTrue(listFalse.size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
         assertTrue(listTrue.size() == 0);
+    }
+
+    @Test
+    public void testBsetellungFindByTischNummer() throws Exception{
+        init();
+        assertTrue(pBestellungDAO.findAll().size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
+        List<Bestellung> liste = pBestellungDAO.findByTischNummer(1);
+        assertTrue(pBestellungDAO.findByTischNummer(1).size() == 1);
     }
 
 }
