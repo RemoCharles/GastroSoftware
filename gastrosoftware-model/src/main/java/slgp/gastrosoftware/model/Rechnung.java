@@ -16,7 +16,6 @@ public class Rechnung implements Serializable {
     @GeneratedValue
     private int id;
     private LocalDate datum;
-    private String nameRestaurant;
 
     public Rechnung() {
 
@@ -29,7 +28,6 @@ public class Rechnung implements Serializable {
 
     public Rechnung(LocalDate datum, String nameRestaunt) {
         this.datum = datum;
-        this.nameRestaurant = nameRestaunt;
     }
 
     public LocalDate getDatum() {
@@ -40,14 +38,6 @@ public class Rechnung implements Serializable {
         this.datum = datum;
     }
 
-    public String getNameRestaurant() {
-        return nameRestaurant;
-    }
-
-    public void setNameRestaurant(String nameRestaunt) {
-        this.nameRestaurant = nameRestaunt;
-    }
-
     public int getId() {
         return id;
     }
@@ -56,7 +46,6 @@ public class Rechnung implements Serializable {
     public String toString() {
         return "Rechnung{" +
                 "datum=" + datum +
-                ", nameRestaunt='" + nameRestaurant + '\'' +
                 '}';
     }
 
@@ -65,13 +54,12 @@ public class Rechnung implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rechnung rechnung = (Rechnung) o;
-        return Objects.equals(datum, rechnung.datum) &&
-                Objects.equals(nameRestaurant, rechnung.nameRestaurant);
+        return Objects.equals(datum, rechnung.datum);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(datum, nameRestaurant);
+        return Objects.hash(datum);
     }
 }

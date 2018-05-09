@@ -17,9 +17,9 @@ public class TischRechnung extends Rechnung {
     public TischRechnung() {
     }
 
-    public TischRechnung(LocalDate datum, String nameRestaunt, List<Bestellung> bestellungList) {
+    public TischRechnung(LocalDate datum, List<Bestellung> bestellungList) {
 
-        super(datum, nameRestaunt);
+        super(datum);
         this.bestellungList = bestellungList;
     }
 
