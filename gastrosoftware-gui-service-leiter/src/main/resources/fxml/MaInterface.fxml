@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -12,8 +14,15 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <Button layoutX="392.0" layoutY="187.0" mnemonicParsing="false" onAction="#saal1Action" prefHeight="69.0" prefWidth="117.0" text="Saal 1" />
-      <Button layoutX="392.0" layoutY="300.0" mnemonicParsing="false" onAction="#terrasseAction" prefHeight="69.0" prefWidth="117.0" text="Terrasse" />
+      <Button layoutX="210.0" layoutY="416.0" mnemonicParsing="false" onAction="#saal1Action" prefHeight="69.0" prefWidth="117.0" text="Saal 1" />
+      <Button layoutX="574.0" layoutY="416.0" mnemonicParsing="false" onAction="#terrasseAction" prefHeight="69.0" prefWidth="117.0" text="Terrasse" />
       <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" prefHeight="28.0" prefWidth="80.0" text="Logout" />
+      <TableView fx:id="tblBestellungen" layoutX="209.0" layoutY="147.0" prefHeight="249.0" prefWidth="482.0">
+        <columns>
+          <TableColumn fx:id="colBez" prefWidth="401.5" text="Bezeichnung" />
+          <TableColumn fx:id="colTisch" prefWidth="79.5" text="Tisch" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnServiert" layoutX="706.0" layoutY="147.0" mnemonicParsing="false" onAction="#serviert" prefHeight="249.0" prefWidth="80.0" text="serviert" />
    </children>
 </AnchorPane>
