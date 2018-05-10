@@ -265,7 +265,7 @@ public class Util {
         konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
         Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
         bestellungList.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
-        list.add(new TischRechnung(LocalDate.now(), "Chochichaeschtli", bestellungList));
+        list.add(new TischRechnung(LocalDate.now(), bestellungList));
         pMitarbeiter.save(ma);
         tischDAO.save(tisch);
         for (Konsumartikel k : konsumList) {

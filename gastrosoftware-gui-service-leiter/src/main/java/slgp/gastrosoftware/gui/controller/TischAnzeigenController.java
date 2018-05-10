@@ -248,7 +248,13 @@ public class TischAnzeigenController /*implements Initializable*/ {
     }
 
     public void TischRechnungAnzeigen(ActionEvent event) throws Exception {
-        Parent tisch_rechnung_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/TischRechnungInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TischRechnungInterface.fxml"));
+        Parent tisch_rechnung_interface_parent = loader.load();
+
+        TischRechnungController controllerRechnung = loader.getController();
+        controllerRechnung.setTischNummer(tischNummer);
+
+
         Scene tisch_rechnung_interface_scene = new Scene(tisch_rechnung_interface_parent);
         Stage tisch_rechnung_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         tisch_rechnung_stage.setScene(tisch_rechnung_interface_scene);
