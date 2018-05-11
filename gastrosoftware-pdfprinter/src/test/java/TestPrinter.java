@@ -1,13 +1,15 @@
+import javafx.print.Printer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestPrinter {
-    public static void main (String[] args){
+    public static void main (String[] args) throws RemoteException {
         Logger logger = LogManager.getLogger(TestPrinter.class);
 
         List<Konsumartikel> konsumartikelList = new ArrayList<>();
@@ -28,10 +30,10 @@ public class TestPrinter {
 
         TischRechnung tischRechnung = new TischRechnung(LocalDate.now(), bestellungList);
 
-        PDFPrinter pdfPrinter = new PDFPrinter();
+        PrinterService printerService = new PDFPrinter();
         try {
             logger.info("Starting PDF Print");
-            pdfPrinter.printTischRechnungAlsPdf(tischRechnung);
+            printerService.printTischRechnungAlsPdf(tischRechnung);
             logger.info("DONE!");
         } catch (Exception e) {
             e.printStackTrace();

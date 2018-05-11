@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileOutputStream;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,15 +23,21 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import slgp.gastrosoftware.model.*;
 
-public class PDFPrinter implements PrinterService {
+public class PDFPrinter extends UnicastRemoteObject implements PrinterService {
 
     private static Logger logger = LogManager.getLogger(PDFPrinter.class);
+
+
+    protected PDFPrinter() throws RemoteException {
+    }
+
 
     /**
      * Erstellt die Rechnung als PDF.
      *
      * @param tischRechnung
      */
+
 
     @Override
     public void printTischRechnungAlsPdf(TischRechnung tischRechnung) throws Exception {
@@ -177,10 +186,6 @@ public class PDFPrinter implements PrinterService {
         }
     }
 
-    @Override
-    public void printMAAbrechnungAlsPdf(MAAbrechnung maAbrechnung) throws Exception {
-
-    }
 
     /**
      * Helper-Methode

@@ -15,6 +15,8 @@
         <module name="gastrosoftware-model" />
         <module name="gastrosoftware-pdfprinter" />
         <module name="gastrosoftware-persister" />
+        <module name="gastrosoftware-rmi-server" />
+        <module name="rmi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +30,8 @@
       <module name="gastrosoftware-model" target="1.8" />
       <module name="gastrosoftware-pdfprinter" target="1.8" />
       <module name="gastrosoftware-persister" target="1.8" />
+      <module name="gastrosoftware-rmi-server" target="1.8" />
+      <module name="rmi" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

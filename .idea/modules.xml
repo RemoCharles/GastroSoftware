@@ -12,6 +12,8 @@
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" filepath="$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-pdfprinter/gastrosoftware-pdfprinter.iml" filepath="$PROJECT_DIR$/gastrosoftware-pdfprinter/gastrosoftware-pdfprinter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" filepath="$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-rmi-server/gastrosoftware-rmi-server.iml" filepath="$PROJECT_DIR$/gastrosoftware-rmi-server/gastrosoftware-rmi-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rmi/rmi.iml" filepath="$PROJECT_DIR$/rmi/rmi.iml" />
     </modules>
   </component>
 </project>
