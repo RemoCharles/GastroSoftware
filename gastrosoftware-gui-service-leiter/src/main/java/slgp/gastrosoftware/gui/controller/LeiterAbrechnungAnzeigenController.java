@@ -32,9 +32,7 @@ import java.util.ResourceBundle;
 public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     private static Logger logger = LogManager.getLogger(LeiterAbrechnungAnzeigenController.class);
-
-    //private Mitarbeiter mitarbeiterSuche = new Mitarbeiter();
-
+    
     @FXML
     private Button btnZurueck;
 
@@ -54,22 +52,11 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            fuckthispieceofshit();
+
             mitarbeiterAbrechnungLaden();
 
         } catch (Exception e) {
             logger.error("Fehler beim Abruf der BestellungsListe ", e);
-        }
-    }
-
-    @FXML
-    private void fuckthispieceofshit() throws Exception{
-        System.out.println("FUCK THIS PIECE OF SHIT");
-        MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
-        List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
-
-        for(MAAbrechnung ma : mabTemp) {
-            logger.info(ma);
         }
     }
 
