@@ -16,7 +16,7 @@ public class MAAbrechnung extends Rechnung {
     @OneToMany(fetch = FetchType.EAGER)
     private List <Bestellung> mitarbeiterBestellungList;
     private double umsatz;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     private Mitarbeiter mitarbeiter;
 
     public MAAbrechnung() {

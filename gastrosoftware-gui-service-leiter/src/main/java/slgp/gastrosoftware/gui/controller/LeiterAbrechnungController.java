@@ -78,11 +78,13 @@ public class LeiterAbrechnungController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
-        initBestellungen();
+        //initBestellungen();
 
         try {
             mitarbeiterAuswahlLaden();
+
             List<Bestellung> bestellungList = bestellungDaoTemp.findAllBezahlt(true);
+
 
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
@@ -114,17 +116,10 @@ public class LeiterAbrechnungController implements Initializable {
     }
 
     private void initBestellungen() {
-       /* MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
-        Mitarbeiter mA = new Mitarbeiter();
-        List <Mitarbeiter> maTempList = mitarbeiterDAOTemp.findAll();
-        mA = maTempList.get(0);
 
-        TischDAO tischDAOTemp = new TischDAOImpl();
-        List <Tisch> tiTempList = tischDAOTemp.findAll();
-        Tisch tA = new Tisch();
-        tA = tiTempList.get(0); */
 
-        try {
+       // Temporäre Lösung
+        /*try {
             BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
             List<Bestellung> beTempList = bestellungDAOTemp.findAll();
 
@@ -136,7 +131,7 @@ public class LeiterAbrechnungController implements Initializable {
 
         } catch (Exception e) {
             logger.error("Fehler beim Initialisieren der Bestellungen aufgetreten", e);
-        }
+        }*/
 
     }
 
@@ -145,6 +140,7 @@ public class LeiterAbrechnungController implements Initializable {
         try {
             BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
             List<Bestellung> tempList = new ArrayList<>();
+
             List<Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
 
             Double summeUmsatz = null;
@@ -232,7 +228,7 @@ public class LeiterAbrechnungController implements Initializable {
                 for (MAAbrechnung m : tempAb) {
                     if (m.getDatum().equals(maAbrTemp.getDatum()) && m.getMitarbeiter().equals(maAbrTemp.getMitarbeiter())) {
                         lblError.setTextFill(Color.RED);
-                        lblError.setText("Mitarbeiterabrechnung bereits vorhanden");
+                        lblError.setText("Mitarbeiterabrechnung bereits vorhanden bitte Update verwenden");
                         count = 1;
 
                     }

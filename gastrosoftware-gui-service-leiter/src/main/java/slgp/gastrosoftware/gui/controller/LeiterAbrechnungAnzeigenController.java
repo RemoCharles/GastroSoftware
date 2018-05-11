@@ -63,7 +63,6 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     @FXML
     private void mitarbeiterAbrechnungLaden() throws Exception {
-        System.out.println("Methode wird geladen");
         MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
 
         //Wann wird eine Rechnung als Mitarbeiterabrechnung persistiert?
@@ -75,7 +74,6 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
             if (m.getMitarbeiter().equals(mitarbeiterSuche)){
                 mabPerson.add(m);
-                logger.info(m + "---------------");
             } else {
                 System.out.println("Mitarbeiter wurde nicht verglichen");
             }
