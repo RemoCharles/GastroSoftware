@@ -29,6 +29,7 @@
         <module>gastrosoftware-gui-kueche</module>
         <module>gastrosoftware-gui-bar</module>
         <module>gastrosoftware-pdfprinter</module>
+        <module>gastrosoftware-api</module>
     </modules>
     <dependencies>
         <dependency>

@@ -1,4 +1,3 @@
-import api.PrinterService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
@@ -17,7 +16,7 @@ public class TestPrinter {
 
         List<BestellPosition> bestellPositionList = new ArrayList<>();
         for (Konsumartikel konsumartikel : konsumartikelList) {
-            bestellPositionList.add(new BestellPosition(konsumartikel, 1));
+            bestellPositionList.add(new BestellPosition(konsumartikel, 2));
         }
 
         Tisch tisch = new Tisch(6);
@@ -27,7 +26,7 @@ public class TestPrinter {
         List<Bestellung> bestellungList = new ArrayList<>();
         bestellungList.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
 
-        TischRechnung tischRechnung = new TischRechnung(LocalDate.now(), "Hallo", bestellungList);
+        TischRechnung tischRechnung = new TischRechnung(LocalDate.now(), bestellungList);
 
         PDFPrinter pdfPrinter = new PDFPrinter();
         try {

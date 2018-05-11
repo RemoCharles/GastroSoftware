@@ -10,7 +10,6 @@ import java.util.Objects;
         @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e")})
 public class TischRechnung extends Rechnung {
 
-
     @OneToMany(fetch = FetchType.EAGER)
     private List<Bestellung> bestellungList;
     private double summeBestellungen;

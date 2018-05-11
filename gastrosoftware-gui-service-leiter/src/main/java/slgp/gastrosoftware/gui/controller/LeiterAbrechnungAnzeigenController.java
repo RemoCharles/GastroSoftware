@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     private static Logger logger = LogManager.getLogger(LeiterAbrechnungAnzeigenController.class);
-    
+
     @FXML
     private Button btnZurueck;
 

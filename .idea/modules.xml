@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GastroSoftware.iml" filepath="$PROJECT_DIR$/GastroSoftware.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-api/gastrosoftware-api.iml" filepath="$PROJECT_DIR$/gastrosoftware-api/gastrosoftware-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business/gastrosoftware-business.iml" filepath="$PROJECT_DIR$/gastrosoftware-business/gastrosoftware-business.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-initializer/gastrosoftware-business-initializer.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-initializer/gastrosoftware-business-initializer.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-bar/gastrosoftware-gui-bar.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-bar/gastrosoftware-gui-bar.iml" />

@@ -9,30 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gastrosoftware-pdfprinter</artifactId>
-
+    <artifactId>gastrosoftware-api</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.9</version>
-        </dependency>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-model</artifactId>
-        </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-model</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-
     </dependencies>
 
 

@@ -17,16 +17,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.persister.*;
-import slgp.gastrosoftware.persister.impl.*;
-import slgp.gastrosoftware.model.*;
+import slgp.gastrosoftware.model.BestellPosition;
+import slgp.gastrosoftware.model.Bestellung;
+import slgp.gastrosoftware.model.TischRechnung;
+import slgp.gastrosoftware.persister.BestellPositionDAO;
+import slgp.gastrosoftware.persister.TischRechnungDAO;
+import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
+import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
+import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
+import slgp.gastrosoftware.persister.impl.TischRechnungDAOImpl;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 
 public class TischRechnungController implements Initializable {
     private static final Logger logger = LogManager.getLogger(TischRechnungController.class);
@@ -64,18 +69,16 @@ public class TischRechnungController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-
-
         tabelleFuellen();
-     updateTable();
+        updateTable();
     }
-
 
 
     public void setTischNummer(int tischNummer) {
         this.tischNummer = tischNummer;
     }
-    public int getTischNummer(){
+
+    public int getTischNummer() {
         return tischNummer;
     }
 
@@ -84,10 +87,8 @@ public class TischRechnungController implements Initializable {
     private void updateTable() {
 
         try {
-                tblBestellPosition.getItems().clear();
-                tabelleFuellen();
-
-
+            tblBestellPosition.getItems().clear();
+            tabelleFuellen();
         } catch (Exception e) {
             logger.error("Fehler beim Updaten der Tabelle: ", e);
             throw new RuntimeException();
@@ -97,91 +98,79 @@ public class TischRechnungController implements Initializable {
 
 
     @FXML
-   public void tabelleFuellen() {
+    public void tabelleFuellen() {
 
-       //Bestellungen find by Tischnummer (v query finden)
-       try {
+        //Bestellungen find by Tischnummer (v query finden)
+        try {
 
-           List<Bestellung> bestellungList = bestellungDAO.findByTischNummer(getTischNummer());
-           System.out.println(getTischNummer());
+            List<Bestellung> bestellungList = bestellungDAO.findByTischNummer(getTischNummer());
+            System.out.println(getTischNummer());
 
-           for (Bestellung b2 : bestellungList) {
-               if (b2.getBezahlt() == false) {
-                   bestellungListTemp.add(b2);
-               }
-           }
+            for (Bestellung b2 : bestellungList) {
+                if (b2.getBezahlt() == false) {
+                    bestellungListTemp.add(b2);
+                }
+            }
 
-           List<BestellPosition> bestellPositionList = new ArrayList<>();
+            List<BestellPosition> bestellPositionList = new ArrayList<>();
 
-           for (Bestellung b1 : bestellungListTemp) {
-               bestellPositionList.addAll(b1.getKonsumartikel());
-           }
+            for (Bestellung b1 : bestellungListTemp) {
+                bestellPositionList.addAll(b1.getKonsumartikel());
+            }
 
-           if (bestellPositionList.size() != 0) {
-               Double summeRechnung = 0.00;
-               for (BestellPosition b3 : bestellPositionList) {
+            if (bestellPositionList.size() != 0) {
+                Double summeRechnung = 0.00;
+                for (BestellPosition b3 : bestellPositionList) {
                     summeRechnung = summeRechnung + b3.getBerechneterPreis();
-               }
-               String txtsummeRechnung = String.valueOf(summeRechnung);
-               fxmlSumme.setText(txtsummeRechnung);
+                }
+                String txtsummeRechnung = String.valueOf(summeRechnung);
+                fxmlSumme.setText(txtsummeRechnung);
 
-           } else {
-               fxmlSumme.setText("0");
-           }
+            } else {
+                fxmlSumme.setText("0");
+            }
 
-           //List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
+            //List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
 
-           bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
-           bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
-           bPEinzelPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
-           bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("berechneterPreis"));
+            bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
+            bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
+            bPEinzelPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
+            bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("berechneterPreis"));
 
-           ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableArrayList(bestellPositionList);
+            ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableArrayList(bestellPositionList);
 
 
-           tblBestellPosition.setItems(bestellPositionObservableList);
-           for (BestellPosition bp2 : bestellPositionList) {
-               System.out.println(bp2.getBerechneterPreis());
-           }
+            tblBestellPosition.setItems(bestellPositionObservableList);
+            for (BestellPosition bp2 : bestellPositionList) {
+                System.out.println(bp2.getBerechneterPreis());
+            }
 
-       } catch (Exception e) {
-           logger.info("Tabelle konnte nicht befuellt werden");
-       }
-   }
+        } catch (Exception e) {
+            logger.info("Tabelle konnte nicht befuellt werden");
+        }
+    }
 
-   @FXML
+    @FXML
     public void rechnungBezahlt() {
 
-           try {
-               for (Bestellung b : bestellungListTemp) {
-                   b.setBezahlt(true);
-                    TischRechnung tr = new TischRechnung(LocalDate.now(), bestellungListTemp);
+        try {
+            for (Bestellung b : bestellungListTemp) {
+                b.setBezahlt(true);
+                TischRechnung tr = new TischRechnung(LocalDate.now(), bestellungListTemp);
+                tischRechnungDAO.save(tr);
+                logger.info(tr);
+                bestellungDAO.update(b);
+            }
+            updateTable();
+        } catch (Exception e) {
+            logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen");
+        }
 
-                    tischRechnungDAO.save(tr);
-                     logger.info(tr);
+    }
 
-                   bestellungDAO.update(b);
-               }
-
-
-               updateTable();
-
-
-           } catch (Exception e) {
-               logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen");
-           }
-
-       }
-
-//       public void berechneSummeRechnung(){
-//
-//        int summeRechnung = 0;
-//        for (bestellung)
-//
-
-//       }
-
-
+    @FXML
+    public void rechnungDrucken(){
+    }
 
     @FXML
     public void zurueck(ActionEvent event) throws Exception {

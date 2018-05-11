@@ -100,7 +100,6 @@ public class BestellPosition implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(konsumartikel, anzahl);
     }
 

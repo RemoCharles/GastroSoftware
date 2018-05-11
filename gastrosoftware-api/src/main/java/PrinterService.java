@@ -1,5 +1,3 @@
-package api;
-
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.Rechnung;
 import slgp.gastrosoftware.model.TischRechnung;

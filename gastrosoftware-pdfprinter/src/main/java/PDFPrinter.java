@@ -2,11 +2,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
-
-import api.PrinterService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -141,7 +138,7 @@ public class PDFPrinter implements PrinterService {
                     cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                     tbl.addCell(cell);
 
-                    cell = new PdfPCell(new Phrase("" + pos.getPreis(), tableFont));
+                    cell = new PdfPCell(new Phrase("" + pos.getBetrag(), tableFont));
                     cell.setBorderColor(BaseColor.BLACK);
                     cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                     tbl.addCell(cell);
@@ -153,14 +150,14 @@ public class PDFPrinter implements PrinterService {
             cell.setColspan(4);
             tbl.addCell(cell);
 
-            //cell = new PdfPCell(new Phrase("" + tischRechnung.getBetrag(), tableFont));
+            cell = new PdfPCell(new Phrase("" + tischRechnung.getSummeBestellungen(), tableFont));
             cell.setBorderColor(BaseColor.BLACK);
             cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
             tbl.addCell(cell);
 
             pdfDocument.add(tbl);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy ' um ' HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy ' um ' HH:mm");
             String zeitpunkt = sdf.format(new Date());
 
             Font datumFont = FontFactory.getFont("Courier", 8, BaseColor.BLACK);
