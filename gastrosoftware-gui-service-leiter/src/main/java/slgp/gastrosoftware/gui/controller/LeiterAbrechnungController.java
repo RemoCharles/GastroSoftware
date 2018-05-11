@@ -88,7 +88,7 @@ public class LeiterAbrechnungController implements Initializable {
 
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
-            tblAbrechnung.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Bestellung>() {
+            /*tblAbrechnung.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Bestellung>() {
 
                 @Override
                 public void changed(ObservableValue<? extends Bestellung> observable, Bestellung oldValue,
@@ -97,7 +97,7 @@ public class LeiterAbrechnungController implements Initializable {
                         updateView();
                     }
                 }
-            });
+            });*/
 
 
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
@@ -118,7 +118,7 @@ public class LeiterAbrechnungController implements Initializable {
     private void initBestellungen() {
 
 
-       // Temporäre Lösung
+        // Temporäre Lösung
         /*try {
             BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
             List<Bestellung> beTempList = bestellungDAOTemp.findAll();
@@ -175,16 +175,11 @@ public class LeiterAbrechnungController implements Initializable {
 
     }
 
-    @FXML
+    /*@FXML
     private void updateView() {
 
-    }
+    }*/
 
-    @FXML
-    private void anzeigen(ActionEvent event) throws Exception {
-
-
-    }
 
 
     @FXML
@@ -254,7 +249,7 @@ public class LeiterAbrechnungController implements Initializable {
 
         TreeSet<String> personAuswahl = new TreeSet<>();
 
-       // for (Bestellung b : bestellungDaoTemp.findAllBezahlt(true)) {
+        // for (Bestellung b : bestellungDaoTemp.findAllBezahlt(true)) {
         for(Bestellung b : bestellungDaoTemp.findAll()){
             personAuswahl.add(b.getMitarbeiter().getName());
             personAuswahl.add("Alle");

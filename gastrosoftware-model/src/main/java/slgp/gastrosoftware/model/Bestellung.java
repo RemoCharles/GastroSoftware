@@ -27,6 +27,7 @@ public class Bestellung implements Serializable {
     private boolean zubereitet;
     private LocalDate datum;
     private boolean bezahlt;
+    private double summeBestellPositionList;
 
     public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<BestellPosition> bestellPositionList, boolean zubereitet, boolean bezahlt, LocalDate datum) {
         this.mitarbeiter = mitarbeiter;
@@ -64,6 +65,14 @@ public class Bestellung implements Serializable {
     public int getAnzahlKonsumartikel (){
         int anz = getKonsumartikel().size();
         return anz;
+    }
+
+    public double getSummebestellPositionList(){
+       for (BestellPosition b : bestellPositionList){
+           summeBestellPositionList = b.getBetrag();
+       }
+
+       return summeBestellPositionList;
     }
 
     public double getSummePreisKonsumartikel (){
