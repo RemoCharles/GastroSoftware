@@ -18,5 +18,5 @@ public interface PrinterService {
      *
      * @param maAbrechnung
      */
-//    void printMAAbrechnungAlsPdf(MAAbrechnung maAbrechnung) throws Exception;
+    void printMAAbrechnungAlsPdf(MAAbrechnung maAbrechnung) throws Exception;
 }

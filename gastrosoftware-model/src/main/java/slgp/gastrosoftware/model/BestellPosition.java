@@ -16,7 +16,7 @@ public class BestellPosition implements Serializable {
     @OneToOne
     private Konsumartikel konsumartikel;
     private int anzahl;
-   // private double betrag;
+    private double betrag;
     private int tischNummer;
     private boolean zubereitet = false;
 
@@ -28,25 +28,25 @@ public class BestellPosition implements Serializable {
     public BestellPosition(Konsumartikel konsumartikel, int anzahl) {
         this.konsumartikel = konsumartikel;
         this.anzahl = anzahl;
-       // betrag = konsumartikel.getPreis()*anzahl;
+        betrag = konsumartikel.getPreis()*anzahl;
     }
 
     public BestellPosition(Konsumartikel konsumartikel) {
         this.konsumartikel = konsumartikel;
         anzahl = 0;
-      //  betrag = konsumartikel.getPreis()*anzahl;
+        betrag = konsumartikel.getPreis()*anzahl;
     }
 
     public void berechneBetrag() {
-  //      betrag = konsumartikel.getPreis()*anzahl;
+        betrag = konsumartikel.getPreis()*anzahl;
     }
 
-   // public double getBetrag() {
-     //   return betrag;
-   // }
+    public double getBetrag() {
+        return betrag;
+    }
 
     public void setBetrag(double betrag) {
-     //   this.betrag = betrag;
+        this.betrag = betrag;
     }
 
     public boolean isZubereitet() {
@@ -109,7 +109,7 @@ public class BestellPosition implements Serializable {
         return "BestellPosition{" +
                 "Konsumartikel=" + konsumartikel +
                 ", anzahl=" + anzahl +
-//                ", betrag=" + betrag +
+                ", betrag=" + betrag +
                 '}';
     }
 

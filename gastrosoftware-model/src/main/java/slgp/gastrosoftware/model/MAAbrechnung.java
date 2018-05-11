@@ -69,32 +69,6 @@ public class MAAbrechnung extends Rechnung {
         super.setDatum(datum);
     }
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        MAAbrechnung that = (MAAbrechnung) o;
-        return Objects.equals(mitarbeiterBestellungList, that.mitarbeiterBestellungList);
-    }*/
-
-    @Override
-    public boolean equals (Object obj){
-        if (this == obj){
-            return true;
-        }
-        if (!(obj instanceof MAAbrechnung)){
-            return false;
-        }
-        MAAbrechnung mab = (MAAbrechnung) obj;
-        return this.getDatum().equals(mab.getDatum()) && this.mitarbeiter.equals(mab.mitarbeiter);
-    }
-
-    /*@Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), mitarbeiterBestellungList);
-    }*/
 
     @Override
     public int hashCode(){

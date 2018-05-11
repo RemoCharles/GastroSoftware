@@ -54,10 +54,22 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            fuckthispieceofshit();
             mitarbeiterAbrechnungLaden();
 
         } catch (Exception e) {
             logger.error("Fehler beim Abruf der BestellungsListe ", e);
+        }
+    }
+
+    @FXML
+    private void fuckthispieceofshit() throws Exception{
+        System.out.println("FUCK THIS PIECE OF SHIT");
+        MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
+        List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
+
+        for(MAAbrechnung ma : mabTemp) {
+            logger.info(ma);
         }
     }
 
@@ -67,6 +79,7 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
         //Wann wird eine Rechnung als Mitarbeiterabrechnung persistiert?
         List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
+
         List <MAAbrechnung> mabPerson = new ArrayList<>();
 
         for (MAAbrechnung m : mabTemp){

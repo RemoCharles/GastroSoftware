@@ -10,29 +10,28 @@ import java.util.Objects;
         @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e")})
 public class TischRechnung extends Rechnung {
 
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Bestellung> bestellungList;
-
+    private double summeBestellungen;
 
     public TischRechnung() {
     }
 
     public TischRechnung(LocalDate datum, List<Bestellung> bestellungList) {
-
         super(datum);
         this.bestellungList = bestellungList;
+        berechneSummeBestellungen();
+    }
+
+    public void berechneSummeBestellungen() {
+        for (Bestellung bestellung : bestellungList){
+            summeBestellungen += bestellung.getSummebestellPositionList();
+        }
     }
 
     public int getId() {
         return super.getId();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TischRechnung that = (TischRechnung) o;
-        return Objects.equals(bestellungList, that.bestellungList);
     }
 
     public List<Bestellung> getBestellungList() {
@@ -45,17 +44,34 @@ public class TischRechnung extends Rechnung {
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        TischRechnung that = (TischRechnung) o;
+        return Double.compare(that.summeBestellungen, summeBestellungen) == 0 &&
+                Objects.equals(bestellungList, that.bestellungList);
+    }
+
+    @Override
     public int hashCode() {
 
-        return Objects.hash(bestellungList);
+        return Objects.hash(super.hashCode(), bestellungList, summeBestellungen);
+    }
+
+    public double getSummeBestellungen() {
+        return summeBestellungen;
+    }
+
+    public void setSummeBestellungen(double summeBestellungen) {
+        this.summeBestellungen = summeBestellungen;
     }
 
     @Override
     public String toString() {
-        return " TischRechnung{" + super.toString() +
+        return "TischRechnung{" +
                 "bestellungList=" + bestellungList +
+                ", summeBestellungen=" + summeBestellungen +
                 '}';
     }
-
-
 }

@@ -36,6 +36,7 @@ public class Bestellung implements Serializable {
         this.zubereitet = zubereitet;
         this.datum = datum;
         this.bezahlt = bezahlt;
+        summeBestellPositionList = berechneSummeBestellPositionList();
     }
 
     public Bestellung() {
@@ -67,11 +68,14 @@ public class Bestellung implements Serializable {
         return anz;
     }
 
-    public double getSummebestellPositionList(){
-       for (BestellPosition b : bestellPositionList){
-           summeBestellPositionList = b.getBetrag();
-       }
+    public double berechneSummeBestellPositionList() {
+        for (BestellPosition bestellPosition : bestellPositionList){
+            summeBestellPositionList += bestellPosition.getBetrag();
+        }
+        return summeBestellPositionList;
+    }
 
+    public double getSummebestellPositionList(){
        return summeBestellPositionList;
     }
 
@@ -118,12 +122,14 @@ public class Bestellung implements Serializable {
     @Override
     public String toString() {
         return "Bestellung{" +
+                "id=" + id +
                 ", mitarbeiter=" + mitarbeiter +
                 ", tisch=" + tisch +
-                ", BestellPositionList=" + bestellPositionList +
+                ", bestellPositionList=" + bestellPositionList +
                 ", zubereitet=" + zubereitet +
                 ", datum=" + datum +
                 ", bezahlt=" + bezahlt +
+                ", summeBestellPositionList=" + summeBestellPositionList +
                 '}';
     }
 
@@ -132,7 +138,10 @@ public class Bestellung implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bestellung that = (Bestellung) o;
-        return zubereitet == that.zubereitet && bezahlt == that.bezahlt &&
+        return id == that.id &&
+                zubereitet == that.zubereitet &&
+                bezahlt == that.bezahlt &&
+                Double.compare(that.summeBestellPositionList, summeBestellPositionList) == 0 &&
                 Objects.equals(mitarbeiter, that.mitarbeiter) &&
                 Objects.equals(tisch, that.tisch) &&
                 Objects.equals(bestellPositionList, that.bestellPositionList) &&
@@ -141,6 +150,7 @@ public class Bestellung implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mitarbeiter, tisch, bestellPositionList, zubereitet, datum, bezahlt);
+
+        return Objects.hash(id, mitarbeiter, tisch, bestellPositionList, zubereitet, datum, bezahlt, summeBestellPositionList);
     }
 }

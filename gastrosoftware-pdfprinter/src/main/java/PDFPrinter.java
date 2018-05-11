@@ -40,7 +40,6 @@ public class PDFPrinter implements PrinterService {
         FileOutputStream fos = null;
 
         try {
-
             int cnt = 1;
 
             Properties props = new Properties();
@@ -179,6 +178,11 @@ public class PDFPrinter implements PrinterService {
                 fos.close();
             }
         }
+    }
+
+    @Override
+    public void printMAAbrechnungAlsPdf(MAAbrechnung maAbrechnung) throws Exception {
+
     }
 
     /**
