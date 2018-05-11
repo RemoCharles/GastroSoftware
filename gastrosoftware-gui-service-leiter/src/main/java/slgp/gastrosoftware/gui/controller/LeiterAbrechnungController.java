@@ -18,14 +18,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
-import slgp.gastrosoftware.persister.BestellungDAO;
-import slgp.gastrosoftware.persister.MAAbrechnungDAO;
-import slgp.gastrosoftware.persister.MitarbeiterDAO;
-import slgp.gastrosoftware.persister.TischDAO;
-import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
-import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
-import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
-import slgp.gastrosoftware.persister.impl.TischDAOImpl;
+import slgp.gastrosoftware.persister.*;
+import slgp.gastrosoftware.persister.impl.*;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -40,9 +34,6 @@ public class LeiterAbrechnungController implements Initializable {
 
     @FXML
     private ComboBox<String> cmbMitarbeiter;
-
-    @FXML
-    private ComboBox<String> cmbAnzeigen;
 
     @FXML
     private TableView<Bestellung> tblAbrechnung;
@@ -88,22 +79,12 @@ public class LeiterAbrechnungController implements Initializable {
 
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
-            /*tblAbrechnung.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Bestellung>() {
-
-                @Override
-                public void changed(ObservableValue<? extends Bestellung> observable, Bestellung oldValue,
-                                    Bestellung newValue) {
-                    if (newValue != null) {
-                        updateView();
-                    }
-                }
-            });*/
 
 
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
             colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
             colDatum.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("datum"));
-            colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("SummePreisKonsumartikel"));
+            colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("SummebestellPositionList"));
 
             tblAbrechnung.setItems(bestellungObservableList);
 
@@ -115,25 +96,6 @@ public class LeiterAbrechnungController implements Initializable {
 
     }
 
-    private void initBestellungen() {
-
-
-        // Temporäre Lösung
-        /*try {
-            BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
-            List<Bestellung> beTempList = bestellungDAOTemp.findAll();
-
-            for (Bestellung b : beTempList) {
-                b.setBezahlt(true);
-                bestellungDAOTemp.update(b);
-            }
-
-
-        } catch (Exception e) {
-            logger.error("Fehler beim Initialisieren der Bestellungen aufgetreten", e);
-        }*/
-
-    }
 
     @FXML
     private void updateTabelle() {
@@ -156,7 +118,7 @@ public class LeiterAbrechnungController implements Initializable {
             if (tempList.size() != 0) {
                 Double summeBestellung = 0.00;
                 for (Bestellung b : tempList) {
-                    summeBestellung = summeBestellung + b.getSummePreisKonsumartikel();
+                    summeBestellung = summeBestellung + b.getSummebestellPositionList();
                 }
                 String txtUmsatzSumme = String.valueOf(summeBestellung);
                 txtUmsatz.setText(txtUmsatzSumme);
@@ -175,18 +137,17 @@ public class LeiterAbrechnungController implements Initializable {
 
     }
 
-    /*@FXML
-    private void updateView() {
-
-    }*/
-
 
 
     @FXML
     public void speichern(ActionEvent event) throws Exception {
-        BestellungDAO bestellungDAOTemp = new BestellungDAOImpl();
+        TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
+        List <TischRechnung> tischRechnungList = tischReschnungDaoTemp.findAll();
+        List <TischRechnung> tischRechnungAufMitarbeiter = new ArrayList<>();
+
         MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
-        List<Bestellung> bestellungTemp = new ArrayList<>();
+
+
         MAAbrechnung maAbrTemp = new MAAbrechnung();
 
         try {
@@ -201,18 +162,24 @@ public class LeiterAbrechnungController implements Initializable {
                 Mitarbeiter mitarbeiterA = new Mitarbeiter();
                 double summeUmsatz = 0;
 
-                for (Bestellung b : bestellungDAOTemp.findAllBezahlt(true)) {
-                    if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())) {
-                        bestellungTemp.add(b);
-                        mitarbeiterA = b.getMitarbeiter();
-                        summeUmsatz = summeUmsatz + b.getSummePreisKonsumartikel();
-                    }
 
+
+                for (TischRechnung t : tischRechnungList){
+                    if (t.getDatum().equals(LocalDate.now())){
+                        List <Bestellung> bestellungList = t.getBestellungList();
+                        for (Bestellung b : bestellungList){
+                            if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())){
+                                mitarbeiterA = b.getMitarbeiter();
+                                tischRechnungAufMitarbeiter.add(t);
+                            }
+                        }
+                    }
                 }
 
-               /*System.out.println("Test----------");
-                System.out.println(summeUmsatz);
-                System.out.println(mitarbeiterA.toString()); */
+                for (TischRechnung tischRechnungAufMitarbeiterSumme : tischRechnungAufMitarbeiter){
+                    summeUmsatz = summeUmsatz + tischRechnungAufMitarbeiterSumme.getSummeBestellungen();
+                }
+
 
                 maAbrTemp = new MAAbrechnung(LocalDate.now(), summeUmsatz, mitarbeiterA);
 
@@ -245,13 +212,22 @@ public class LeiterAbrechnungController implements Initializable {
 
 
     private void mitarbeiterAuswahlLaden() throws Exception {
-        BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
 
-        TreeSet<String> personAuswahl = new TreeSet<>();
+        TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
+        List <TischRechnung> tischRechnungListe = tischReschnungDaoTemp.findAll();
 
-        // for (Bestellung b : bestellungDaoTemp.findAllBezahlt(true)) {
-        for(Bestellung b : bestellungDaoTemp.findAll()){
-            personAuswahl.add(b.getMitarbeiter().getName());
+        System.out.println("--------------------------------" +tischRechnungListe.size());
+
+        TreeSet <String> personAuswahl = new TreeSet<>();
+
+        for(TischRechnung t : tischRechnungListe){
+            if (t.getDatum().equals(LocalDate.now())){
+                List <Bestellung> bestellungList = t.getBestellungList();
+                for (Bestellung b : bestellungList){
+                    personAuswahl.add(b.getMitarbeiter().getName());
+                }
+
+            }
             personAuswahl.add("Alle");
         }
 
@@ -259,23 +235,20 @@ public class LeiterAbrechnungController implements Initializable {
         ObservableList<String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
         cmbMitarbeiter.setItems(mitarbeiterListe);
         cmbMitarbeiter.getSelectionModel().select(0);
-        cmbAnzeigen.setItems(mitarbeiterListe);
-        cmbAnzeigen.getSelectionModel().select(0);
-
 
     }
 
     @FXML
     private void abrechnungAnz(ActionEvent event) throws Exception {
 
-        if (cmbAnzeigen.getSelectionModel().getSelectedItem() == "Alle") {
+        if (cmbMitarbeiter.getSelectionModel().getSelectedItem() == "Alle") {
 
             lblError.setTextFill(Color.RED);
             lblError.setText("Bitte Person auswählen");
 
         } else {
 
-            String nameSuche = cmbAnzeigen.getSelectionModel().getSelectedItem();
+            String nameSuche = cmbMitarbeiter.getSelectionModel().getSelectedItem();
 
             MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
 

@@ -7,7 +7,9 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e")})
+        @NamedQuery(name = "TischRechnung.findAll", query = "SELECT e FROM TischRechnung e"),
+        @NamedQuery(name = "TischRechnung.findByDatum", query = "SELECT e FROM TischRechnung e WHERE e.datum=:datum")
+})
 public class TischRechnung extends Rechnung {
 
     @OneToMany(fetch = FetchType.EAGER)
