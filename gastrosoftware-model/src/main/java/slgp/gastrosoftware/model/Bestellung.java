@@ -62,7 +62,6 @@ public class Bestellung implements Serializable {
         return bestellPositionList;
     }
 
-    //Rückgabe für DB
     public int getAnzahlKonsumartikel (){
         int anz = getKonsumartikel().size();
         return anz;

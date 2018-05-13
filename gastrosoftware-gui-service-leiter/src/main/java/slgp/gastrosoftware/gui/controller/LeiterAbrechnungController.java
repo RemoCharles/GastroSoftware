@@ -1,7 +1,6 @@
 package slgp.gastrosoftware.gui.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,8 +28,11 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 public class LeiterAbrechnungController implements Initializable {
-
     private static Logger logger = LogManager.getLogger(LeiterMitarbeiterController.class);
+    private static BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+    private static TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
+    private static MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
+    private static MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
 
     @FXML
     private ComboBox<String> cmbMitarbeiter;
@@ -54,32 +56,18 @@ public class LeiterAbrechnungController implements Initializable {
     private TextField txtUmsatz;
 
     @FXML
-    private Button btnSpeichern;
-
-    @FXML
     private Label lblError;
-
-    @FXML
-    private Button btnAbrechnungAnz;
 
     @FXML
     private Button btnZurueck;
 
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
-        //initBestellungen();
 
         try {
             mitarbeiterAuswahlLaden();
-
             List<Bestellung> bestellungList = bestellungDaoTemp.findAllBezahlt(true);
-
-
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
-
-
 
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
             colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
@@ -92,20 +80,14 @@ public class LeiterAbrechnungController implements Initializable {
         } catch (Exception e) {
             logger.error("Fehler beim Abruf der BestellungsListe ", e);
         }
-
-
     }
-
 
     @FXML
     private void updateTabelle() {
         try {
-            BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
             List<Bestellung> tempList = new ArrayList<>();
-
             List<Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
-
-            Double summeUmsatz = null;
+            Double summeBestellung = 0.00;
 
             for (Bestellung b : alleBestellungList) {
                 if (b.getMitarbeiter().getName().equals(cmbMitarbeiter.getSelectionModel().getSelectedItem())) {
@@ -116,7 +98,6 @@ public class LeiterAbrechnungController implements Initializable {
             }
 
             if (tempList.size() != 0) {
-                Double summeBestellung = 0.00;
                 for (Bestellung b : tempList) {
                     summeBestellung = summeBestellung + b.getSummebestellPositionList();
                 }
@@ -129,25 +110,15 @@ public class LeiterAbrechnungController implements Initializable {
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableArrayList(tempList);
             tblAbrechnung.setItems(bestellungObservableList);
 
-
         } catch (Exception e) {
             System.out.println("Ein Fehler beim Updaten ist aufgetreten" + e);
         }
-
-
     }
-
-
 
     @FXML
     public void speichern(ActionEvent event) throws Exception {
-        TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
         List <TischRechnung> tischRechnungList = tischReschnungDaoTemp.findAll();
         List <TischRechnung> tischRechnungAufMitarbeiter = new ArrayList<>();
-
-        MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
-
-
         MAAbrechnung maAbrTemp = new MAAbrechnung();
 
         try {
@@ -161,8 +132,6 @@ public class LeiterAbrechnungController implements Initializable {
 
                 Mitarbeiter mitarbeiterA = new Mitarbeiter();
                 double summeUmsatz = 0;
-
-
 
                 for (TischRechnung t : tischRechnungList){
                     if (t.getDatum().equals(LocalDate.now())){
@@ -180,9 +149,7 @@ public class LeiterAbrechnungController implements Initializable {
                     summeUmsatz = summeUmsatz + tischRechnungAufMitarbeiterSumme.getSummeBestellungen();
                 }
 
-
                 maAbrTemp = new MAAbrechnung(LocalDate.now(), summeUmsatz, mitarbeiterA);
-
 
                 List<MAAbrechnung> tempAb = maAbrechnungDaoTemp.findAll();
                 int count = 0;
@@ -192,7 +159,6 @@ public class LeiterAbrechnungController implements Initializable {
                         lblError.setTextFill(Color.RED);
                         lblError.setText("Mitarbeiterabrechnung bereits vorhanden bitte Update verwenden");
                         count = 1;
-
                     }
                 }
 
@@ -210,14 +176,8 @@ public class LeiterAbrechnungController implements Initializable {
 
     }
 
-
     private void mitarbeiterAuswahlLaden() throws Exception {
-
-        TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
         List <TischRechnung> tischRechnungListe = tischReschnungDaoTemp.findAll();
-
-        System.out.println("--------------------------------" +tischRechnungListe.size());
-
         TreeSet <String> personAuswahl = new TreeSet<>();
 
         for(TischRechnung t : tischRechnungListe){
@@ -226,15 +186,15 @@ public class LeiterAbrechnungController implements Initializable {
                 for (Bestellung b : bestellungList){
                     personAuswahl.add(b.getMitarbeiter().getName());
                 }
-
             }
             personAuswahl.add("Alle");
         }
 
-
         ObservableList<String> mitarbeiterListe = FXCollections.observableArrayList(personAuswahl);
         cmbMitarbeiter.setItems(mitarbeiterListe);
         cmbMitarbeiter.getSelectionModel().select(0);
+        txtUmsatz.setText("0");
+        lblError.setText("Bitte Mitarbeiter auswählen");
 
     }
 
@@ -250,8 +210,6 @@ public class LeiterAbrechnungController implements Initializable {
 
             String nameSuche = cmbMitarbeiter.getSelectionModel().getSelectedItem();
 
-            MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
-
             List<Mitarbeiter> mitarbeiterList = mitarbeiterDAOTemp.findAll();
 
             Mitarbeiter maController = new Mitarbeiter();
@@ -259,9 +217,9 @@ public class LeiterAbrechnungController implements Initializable {
             for (Mitarbeiter m : mitarbeiterList) {
                 if (m.getName().equals(nameSuche)) {
                     maController = m;
-                    logger.info(m);
                 }
             }
+
 
             ContextMitarbeiter.getInstance().setMitarbeiter(maController);
 
@@ -275,7 +233,6 @@ public class LeiterAbrechnungController implements Initializable {
         }
     }
 
-
     @FXML
     public void zurueck(ActionEvent event) throws Exception {
         Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
@@ -284,8 +241,6 @@ public class LeiterAbrechnungController implements Initializable {
         ma_stage.setScene(ma_interface_scene);
         ma_stage.show();
     }
-
-
 }
 
 

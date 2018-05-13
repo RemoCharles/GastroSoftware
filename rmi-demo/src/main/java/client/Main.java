@@ -11,7 +11,7 @@ public class Main {
         String rmiServerIP = "localhost";
         int rmiPort = 6666;
         // policy-Datei angeben und SecurityManager installieren
-        System.setProperty("java.security.policy", "file:/C:/Users/joshu/Documents/Personal Projects/GastroSoftware/rmi-demo/checker.policy");
+        System.setProperty("java.security.policy", "file:/C:\\Git-Projekte\\GastroSoftware\\rmi-demo\\checker.policy");
         //System.setProperty("java.security.policy", "checker.policy");
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());

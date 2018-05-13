@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,7 +21,9 @@ import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.persister.MAAbrechnungDAO;
+
 import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
+
 
 
 import java.net.URL;
@@ -30,14 +33,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class LeiterAbrechnungAnzeigenController implements Initializable {
-
     private static Logger logger = LogManager.getLogger(LeiterAbrechnungAnzeigenController.class);
+    private static MAAbrechnungDAO maAbrechnungDAOTemp = new MAAbrechnungDAOImpl();
 
     @FXML
     private Button btnZurueck;
-
-    @FXML
-    private Button btnLaden;
 
     @FXML
     private TableView<MAAbrechnung> tblAbrechnungAnzeigen;
@@ -48,6 +48,29 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
     @FXML
     private TableColumn<MAAbrechnung, Double> colUmsatz;
 
+    @FXML
+    private Label lblName;
+
+    @FXML
+    private Label lblVorname;
+
+    @FXML
+    private Label lblFunktion;
+
+    @FXML
+    private Label lblStrasse;
+
+    @FXML
+    private Label lblPlz;
+
+    @FXML
+    private Label lblOrt;
+
+    @FXML
+    private Label lblMail;
+
+    @FXML
+    private Label lblTelefon;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,15 +85,22 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
     @FXML
     private void mitarbeiterAbrechnungLaden() throws Exception {
-        MAAbrechnungDAO mitarbetierabr = new MAAbrechnungDAOImpl();
 
         //Wann wird eine Rechnung als Mitarbeiterabrechnung persistiert?
-        List<MAAbrechnung> mabTemp = mitarbetierabr.findAll();
-
+        List<MAAbrechnung> mabTemp = maAbrechnungDAOTemp.findAll();
         List <MAAbrechnung> mabPerson = new ArrayList<>();
+        Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
+
+        lblName.setText(mitarbeiterSuche.getName());
+        lblVorname.setText(mitarbeiterSuche.getVorname());
+        lblFunktion.setText(mitarbeiterSuche.getFunktion());
+        lblStrasse.setText(mitarbeiterSuche.getAdresse().getStrasse());
+        lblPlz.setText(String.valueOf(mitarbeiterSuche.getAdresse().getPlz()));
+        lblOrt.setText(mitarbeiterSuche.getAdresse().getOrt());
+        lblMail.setText(mitarbeiterSuche.getKontakt().getEmail());
+        lblTelefon.setText(mitarbeiterSuche.getKontakt().getTelefon());
 
         for (MAAbrechnung m : mabTemp){
-            Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
 
             if (m.getMitarbeiter().equals(mitarbeiterSuche)){
                 mabPerson.add(m);
