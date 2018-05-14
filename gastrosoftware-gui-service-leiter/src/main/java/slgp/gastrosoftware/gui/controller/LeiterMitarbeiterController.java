@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 public class LeiterMitarbeiterController implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(LeiterMitarbeiterController.class);
+	PersonDAOImpl personDAOTemp = new PersonDAOImpl();
 
 	@FXML
 	private Label lblError;
@@ -109,16 +110,11 @@ public class LeiterMitarbeiterController implements Initializable {
 
 	@FXML
 	public void speichern(ActionEvent event) throws Exception{
-		// Kontrolle ob dies funktioniert!
-
 
 		if (eingabeValid()) {
 
-
 				if (tblPerson.getSelectionModel().getSelectedItem() == null){
 
-
-				// Neue Person anlegen
 				String name = txtName.getText();
 				String vorname = txtVorname.getText();
 				String funktion = txtFunktion.getText();
@@ -131,13 +127,9 @@ public class LeiterMitarbeiterController implements Initializable {
 				String passwort = txtKennwort.getText();
 
 				Person personSpeichern = new Person(name, vorname, funktion, new Adresse(strasse, plz, ort), new Kontakt(email, telefon), new Login(username, passwort));
-				System.out.println(personSpeichern.toString());
-				
-				
+
 				try {
-					
-					PersonDAOImpl persDAOImpl = new PersonDAOImpl();
-					persDAOImpl.save(personSpeichern);
+					personDAOTemp.save(personSpeichern);
 					updateTabelle();
 
 			
@@ -166,31 +158,20 @@ public class LeiterMitarbeiterController implements Initializable {
 					person.setLogin(new Login (username, passwort));
 
 					try {
-						PersonDAOImpl persDAOImpl = new PersonDAOImpl();
-						persDAOImpl.update(person);
+						personDAOTemp.update(person);
 						updateTabelle();
 
 					} catch (Exception e){
-						logger.error("Fehlre beim Updaten de Person: ", e);
+						logger.error("Fehler beim Updaten der Person: ", e);
 					}
 				}
-
 		}
 	}
 
 	@FXML
 	public void neuenBenutzerErfassen(ActionEvent event) throws Exception{
-
 		reset();
 	}
-
-	@FXML
-	public void eingabeReset(ActionEvent event) throws Exception{
-
-		reset();
-
-	}
-
 
 	@FXML
 	private void reset() {
@@ -206,12 +187,8 @@ public class LeiterMitarbeiterController implements Initializable {
 		txtKennwort.setText("");
 	}
 
-
-
 	@FXML
 	public void loeschen(ActionEvent event) throws Exception{
-
-		PersonDAOImpl persDAOImpl = new PersonDAOImpl(); 
 
 		if(tblPerson.getSelectionModel().getSelectedItem() == null) {
 			return;
@@ -219,11 +196,9 @@ public class LeiterMitarbeiterController implements Initializable {
 
 		Person person = tblPerson.getSelectionModel().getSelectedItem();
 
-		// System.out.println(person);
-
 		if (person != null) {
 			try {
-				persDAOImpl.delete(person);
+				personDAOTemp.delete(person);
 				updateTabelle();
 			} catch (Exception e) {
 				logger.error("Fehler beim Löschen der Person: ", e);
@@ -262,16 +237,12 @@ public class LeiterMitarbeiterController implements Initializable {
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
 
-			PersonDAOImpl persDAOImpl = new PersonDAOImpl();
-			List <Person> allePersonenListe = persDAOImpl.findAll();
+			List <Person> allePersonenListe = personDAOTemp.findAll();
 
-			/* Tabelle konfigurieren */
 			colNummer.setCellValueFactory(new PropertyValueFactory<Person, Integer>("nummer"));
-			// System.out.println("---------------------Test 4");
 			colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
 			colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
 			colStrasse.setCellValueFactory(new PropertyValueFactory<Person, String>("strasse"));
-
 			colPlz.setCellValueFactory(new PropertyValueFactory<Person, Integer>("plz"));
 			colOrt.setCellValueFactory(new PropertyValueFactory<Person, String>("ort"));
 			colEmail.setCellValueFactory(new PropertyValueFactory<Person, String>("email"));
@@ -284,7 +255,6 @@ public class LeiterMitarbeiterController implements Initializable {
 			ObservableList<Person> observPersonen = FXCollections.observableArrayList(allePersonenListe);
 			tblPerson.setItems(observPersonen);
 
-			//Listener
 			tblPerson.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Person>() {
 
 				@Override
@@ -298,7 +268,6 @@ public class LeiterMitarbeiterController implements Initializable {
 
 			updateTabelle();
 
-
 		} catch (Exception e) {
 			logger.error("Tabelle konnte nicht befüllt werden...", e);
 		}
@@ -307,24 +276,19 @@ public class LeiterMitarbeiterController implements Initializable {
 	private void updateTabelle() {
 		try {
 
-			PersonDAOImpl PersDAOImpl = new PersonDAOImpl();
-			List <Person> allePersonenListe = PersDAOImpl.findAll();
-
+			List <Person> allePersonenListe = personDAOTemp.findAll();
 
 			tblPerson.getItems().clear();
 			tblPerson.getItems().addAll(allePersonenListe);
 
 			tblPerson.getSelectionModel().select(0);
 
-
 			updateView();
-
 
 		}  catch (Exception e) {
 			logger.error("Fehler bei der Aktualisierung der Tabelle: ", e);
 			throw new RuntimeException(e);
 		}
-
 	}
 
 	private void updateView() {
@@ -349,7 +313,6 @@ public class LeiterMitarbeiterController implements Initializable {
 
 			Person person = tblPerson.getSelectionModel().getSelectedItem();
 
-			// cmbRolle.getSelectionModel().select(benutzer.getRolle());
 			txtName.setText(person.getName());
 			txtVorname.setText(person.getVorname());
 			txtFunktion.setText(person.getFunktion());
@@ -363,8 +326,6 @@ public class LeiterMitarbeiterController implements Initializable {
 		}
 
 	}
-
-
 
 	@FXML
 	public void zurueck(ActionEvent event) throws Exception {

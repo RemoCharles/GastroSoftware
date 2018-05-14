@@ -23,13 +23,13 @@
         </columns>
       </TableView>
       <Label fx:id="lblName" layoutX="495.0" layoutY="100.0" text="Name" />
-      <Label fx:id="lblVorname" layoutX="488.0" layoutY="127.0" text="Vorname" />
-      <Label fx:id="lblFunktion" layoutX="489.0" layoutY="152.0" text="Funktion" />
-      <Label fx:id="lblStrasse" layoutX="488.0" layoutY="177.0" text="Strasse" />
+      <Label fx:id="lblVorname" layoutX="493.0" layoutY="127.0" text="Vorname" />
+      <Label fx:id="lblFunktion" layoutX="494.0" layoutY="152.0" text="Funktion" />
+      <Label fx:id="lblStrasse" layoutX="496.0" layoutY="177.0" text="Strasse" />
       <Label fx:id="lblPlz" layoutX="499.0" layoutY="202.0" text="Plz" />
       <Label fx:id="lblOrt" layoutX="499.0" layoutY="229.0" text="Ort" />
-      <Label fx:id="lblMail" layoutX="494.0" layoutY="255.0" text="Email" />
-      <Label fx:id="lblTelefon" layoutX="487.0" layoutY="284.0" text="Telefon" />
+      <Label fx:id="lblMail" layoutX="497.0" layoutY="255.0" text="Email" />
+      <Label fx:id="lblTelefon" layoutX="495.0" layoutY="284.0" text="Telefon" />
       <Text layoutX="379.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
       <Text layoutX="377.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname:" />
       <Text layoutX="377.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Funktion:" />

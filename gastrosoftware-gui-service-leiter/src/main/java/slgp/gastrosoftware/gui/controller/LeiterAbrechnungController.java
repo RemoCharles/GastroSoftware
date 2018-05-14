@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 public class LeiterAbrechnungController implements Initializable {
+
     private static Logger logger = LogManager.getLogger(LeiterMitarbeiterController.class);
     private static BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
     private static TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
@@ -111,7 +112,7 @@ public class LeiterAbrechnungController implements Initializable {
             tblAbrechnung.setItems(bestellungObservableList);
 
         } catch (Exception e) {
-            System.out.println("Ein Fehler beim Updaten ist aufgetreten" + e);
+            System.out.println("Ein Fehler bei der Anzeige aufgetreten" + e);
         }
     }
 
@@ -157,8 +158,15 @@ public class LeiterAbrechnungController implements Initializable {
                 for (MAAbrechnung m : tempAb) {
                     if (m.getDatum().equals(maAbrTemp.getDatum()) && m.getMitarbeiter().equals(maAbrTemp.getMitarbeiter())) {
                         lblError.setTextFill(Color.RED);
-                        lblError.setText("Mitarbeiterabrechnung bereits vorhanden bitte Update verwenden");
+                        lblError.setText("Mitarbeiterabrechnung bereits vorhanden ein Update wurde erstellt");
                         count = 1;
+
+                        try {
+                        m.setUmsatz(summeUmsatz);
+                        maAbrechnungDaoTemp.update(m);
+                        } catch (Exception e){
+                            logger.info("Ein Fehler ist aufgetreten beim Update der Abrechnung", e);
+                        }
                     }
                 }
 
@@ -229,7 +237,6 @@ public class LeiterAbrechnungController implements Initializable {
             Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             ma_stage.setScene(ma_interface_scene);
             ma_stage.show();
-
         }
     }
 
