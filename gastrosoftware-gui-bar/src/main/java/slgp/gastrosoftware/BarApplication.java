@@ -1,14 +1,13 @@
 package slgp.gastrosoftware;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 
-public class BarApplication extends javafx.application.Application {
-	private static Logger logger = (Logger) LogManager.getLogger(BarApplication.class);
+public class BarApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -16,6 +15,7 @@ public class BarApplication extends javafx.application.Application {
 		primaryStage.setTitle("Gastro Software");
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, 900, 600));
+		primaryStage.getIcons().add(new Image("restaurant.png"));
 		primaryStage.show();
 	}
 

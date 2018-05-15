@@ -1,4 +1,4 @@
-package impl;
+package slgp.gastrosoftware.impl;
 
 import slgp.RechnungManager;
 import slgp.gastrosoftware.RMIRechnungService;

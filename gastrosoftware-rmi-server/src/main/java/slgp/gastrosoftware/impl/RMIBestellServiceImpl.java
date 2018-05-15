@@ -1,4 +1,4 @@
-package impl;
+package slgp.gastrosoftware.impl;
 
 import slgp.BestellManager;
 import slgp.gastrosoftware.BestellService;

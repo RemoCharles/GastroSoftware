@@ -1,4 +1,4 @@
-package impl;
+package slgp.gastrosoftware.impl;
 
 import slgp.gastrosoftware.MenuManager;
 import slgp.gastrosoftware.MenuService;

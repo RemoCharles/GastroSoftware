@@ -1,11 +1,13 @@
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
-public class KuecheApplication extends javafx.application.Application {
+public class KuecheApplication extends Application {
     private static Logger logger = (Logger) LogManager.getLogger(KuecheApplication.class);
 
     @Override
@@ -14,21 +16,11 @@ public class KuecheApplication extends javafx.application.Application {
         primaryStage.setTitle("Gastro Software");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 900, 600));
+        primaryStage.getIcons().add(new Image("restaurant.png"));
         primaryStage.show();
     }
 
     public static void main(String[] args) throws Exception {
-//        Util.resetDb();
-////        Util.erstellePersonenListe();
-////        Util.createKonsumartikelListe();
-////        Util.createBestellPositionAlleKonsumartikel();
-////        //Util.createBestellungListe();
-////
-////        List<Bestellung> liste = Util.createBestellungListe();
-////        for (Bestellung b : liste) {
-////            logger.info(b);
-////        }
-////        Util.createTischRechnung();
         launch(args);
     }
 
