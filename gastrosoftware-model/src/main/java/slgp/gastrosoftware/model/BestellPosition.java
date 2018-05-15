@@ -10,6 +10,8 @@ import java.util.Objects;
 })
 
 public class BestellPosition implements Serializable {
+
+    private static final long serialVersionUID = 8609869317923782909L;
     @Id
     @GeneratedValue
     private int id;

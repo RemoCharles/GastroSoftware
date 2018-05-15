@@ -12,6 +12,7 @@ import java.util.Objects;
 })
 public class TischRechnung extends Rechnung {
 
+    private static final long serialVersionUID = 8394611679676118277L;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Bestellung> bestellungList;
     private double summeBestellungen;

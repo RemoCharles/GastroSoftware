@@ -10,6 +10,7 @@ import java.util.Objects;
         @NamedQuery(name = "Tisch.findByTischNummer", query = "SELECT e FROM Tisch e WHERE e.tischNummer=:tischNummer")})
 
 public class Tisch implements Serializable {
+    private static final long serialVersionUID = 5974664788311293565L;
     @Id
     @GeneratedValue
     private int id;

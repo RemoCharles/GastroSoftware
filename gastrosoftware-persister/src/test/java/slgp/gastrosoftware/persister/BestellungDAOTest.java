@@ -27,6 +27,9 @@ public class BestellungDAOTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
+        Util.deleteAllBestellung();
+        Util.deleteAllBestellPosition();
+        Util.deleteAllKonsumartikel();
     }
 
     @Before

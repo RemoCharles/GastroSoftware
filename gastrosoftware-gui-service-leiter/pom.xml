@@ -24,11 +24,6 @@
     </dependency>
     <dependency>
         <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-business</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
         <artifactId>gastrosoftware-business-initializer</artifactId>
         <version>1.0</version>
     </dependency>

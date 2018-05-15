@@ -9,6 +9,7 @@ import java.util.Objects;
         @NamedQuery(name = "Kontakt.findAll", query = "SELECT e FROM Kontakt e")})
 public class Kontakt implements Serializable {
 
+    private static final long serialVersionUID = -4160923981885672983L;
     @Id
     @GeneratedValue
     private int id;

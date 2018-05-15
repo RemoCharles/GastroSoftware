@@ -27,6 +27,9 @@ public class TischRechnungDAOTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
+        Util.deleteAllBestellung();
+        Util.deleteAllBestellPosition();
+        Util.deleteAllKonsumartikel();
         Util.deleteAllTischRechnung();
     }
 

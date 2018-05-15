@@ -11,7 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: slgp.informatik:gastrosoftware-business:1.0" level="project" />
     <orderEntry type="module" module-name="gastrosoftware-persister" />
     <orderEntry type="module" module-name="gastrosoftware-model" />
     <orderEntry type="module" module-name="gastrosoftware-gui-service-leiter" />

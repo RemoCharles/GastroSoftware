@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
         @NamedQuery(name = "Login.findAll", query = "SELECT e FROM Login e")})
 public class Login implements Serializable {
 
+    private static final long serialVersionUID = 5702603508046138354L;
     @Id
     @GeneratedValue
     private int id;

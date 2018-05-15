@@ -22,6 +22,13 @@ public class BestellPositionDAOTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
+        Util.deleteAllBestellPosition();
+        Util.deleteAllKonsumartikel();
+        Util.deleteAllBestellung();
+        Util.deleteAllGetraenke();
+        Util.deleteAllEsswaren();
+        Util.deleteAllBestellung();
+        Util.deleteAllKonsumartikel();
     }
 
     @Before
@@ -36,12 +43,7 @@ public class BestellPositionDAOTest {
 
     @After
     public void tearDown() throws Exception {
-        Util.deleteAllBestellPosition();
-        Util.deleteAllKonsumartikel();
-        Util.deleteAllBestellung();
-        Util.deleteAllGetraenke();
-        Util.deleteAllEsswaren();
-        Util.deleteAllBestellung();
+
     }
 
     private void init() throws Exception {
