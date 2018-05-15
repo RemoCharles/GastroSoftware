@@ -20,6 +20,12 @@ public class BestellManager implements BestellService {
 
     private static Logger logger = LogManager.getLogger(BestellManager.class);
 
+    private static BestellManager INSTANCE = new BestellManager();
+
+    public static BestellManager getInstance() {
+        return INSTANCE;
+    }
+
     private BestellungDAO bestellunDAO;
 
     public BestellungDAO getBestellunDAO() {
@@ -41,15 +47,48 @@ public class BestellManager implements BestellService {
 
     private BestellPositionDAO bestellPositionDAO;
 
-    public BestellPositionDAO getBestellPositionDAO(){
-        if (bestellPositionDAO == null){
+    public BestellPositionDAO getBestellPositionDAO() {
+        if (bestellPositionDAO == null) {
             bestellPositionDAO = new BestellPositionDAOImpl();
         }
-        return  bestellPositionDAO;
+        return bestellPositionDAO;
     }
 
     @Override
-    public List<Bestellung> findBestellungALl() throws Exception {
+    public Bestellung bestellungHinzufuegen(Bestellung bestellung) throws Exception {
+        try {
+            return getBestellunDAO().save(bestellung);
+        } catch (Exception e) {
+            String msg = "Bestellungen konnten nicht gespeichert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public Bestellung bestellungAktualisieren(Bestellung bestellung) throws Exception {
+        try {
+            return getBestellunDAO().update(bestellung);
+        } catch (Exception e) {
+            String msg = "Bestellungen konnten nicht aktualisiert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public void bestellungLoeschen(Bestellung bestellung) throws Exception {
+        try {
+            getBestellunDAO().delete(bestellung);
+        } catch (Exception e) {
+            String msg = "Bestellungen konnten nicht gelöscht werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public List<Bestellung> findBestellungAll() throws Exception {
         try {
             return getBestellunDAO().findAll();
         } catch (Exception e) {
@@ -93,6 +132,39 @@ public class BestellManager implements BestellService {
     }
 
     @Override
+    public Tisch tischHinzufuegen(Tisch tisch) throws Exception {
+        try {
+            return getTischDAO().save(tisch);
+        } catch (Exception e) {
+            String msg = "Tisch konnten nicht gespeichert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public Tisch tischAktualisieren(Tisch tisch) throws Exception {
+        try {
+            return getTischDAO().update(tisch);
+        } catch (Exception e) {
+            String msg = "Tisch konnten nicht aktualisiert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public void tischLoeschen(Tisch tisch) throws Exception {
+        try {
+            getTischDAO().delete(tisch);
+        } catch (Exception e) {
+            String msg = "Tisch konnten nicht gelöscht werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
     public List<Tisch> findTischAll() throws Exception {
         try {
             return getTischDAO().findAll();
@@ -109,6 +181,39 @@ public class BestellManager implements BestellService {
             return getTischDAO().findByTischNummer(tischNummer);
         } catch (Exception e) {
             String msg = "Es konnte kein Tisch mit der Nummer " + tischNummer + "gefunden werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public BestellPosition bestellPositionHinzufuegen(BestellPosition bestellPosition) throws Exception {
+        try {
+            return getBestellPositionDAO().save(bestellPosition);
+        } catch (Exception e) {
+            String msg = "Bestellposition konnten nicht gespeichert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public BestellPosition bestellPositionAktualisieren(BestellPosition bestellPosition) throws Exception {
+        try {
+            return getBestellPositionDAO().update(bestellPosition);
+        } catch (Exception e) {
+            String msg = "Bestellposition konnten nicht aktualisiert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public void bestellPositionLoeschen(BestellPosition bestellPosition) throws Exception {
+        try {
+            getBestellPositionDAO().delete(bestellPosition);
+        } catch (Exception e) {
+            String msg = "Bestellposition konnten nicht gelöscht werden";
             logger.error(msg, e);
             throw new Exception(msg);
         }

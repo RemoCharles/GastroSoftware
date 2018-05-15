@@ -35,6 +35,7 @@
         <module>gastrosoftware-business-bestellung</module>
         <module>gastrosoftware-business-konsumartikel</module>
         <module>gastrosoftware-business-rechnung</module>
+        <module>gastrosoftware-business-menu</module>
     </modules>
     <dependencies>
         <dependency>

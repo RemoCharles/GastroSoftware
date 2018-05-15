@@ -10,6 +10,7 @@
         <module name="gastrosoftware-business-bestellung" />
         <module name="gastrosoftware-business-initializer" />
         <module name="gastrosoftware-business-konsumartikel" />
+        <module name="gastrosoftware-business-menu" />
         <module name="gastrosoftware-business-person" />
         <module name="gastrosoftware-business-rechnung" />
         <module name="gastrosoftware-gui-bar" />
@@ -28,6 +29,7 @@
       <module name="gastrosoftware-business-bestellung" target="1.8" />
       <module name="gastrosoftware-business-initializer" target="1.8" />
       <module name="gastrosoftware-business-konsumartikel" target="1.8" />
+      <module name="gastrosoftware-business-menu" target="1.8" />
       <module name="gastrosoftware-business-person" target="1.8" />
       <module name="gastrosoftware-business-rechnung" target="1.8" />
       <module name="gastrosoftware-gui-bar" target="1.8" />

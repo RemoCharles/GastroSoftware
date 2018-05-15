@@ -8,6 +8,34 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface BestellService {
+
+    /**
+     * Speichert neue Bestellung
+     *
+     * @param bestellung
+     * @return
+     * @throws Exception
+     */
+    Bestellung bestellungHinzufuegen(Bestellung bestellung) throws Exception;
+
+    /**
+     * Aktualisiert Bestellung
+     *
+     * @param bestellung
+     * @return
+     * @throws Exception
+     */
+    Bestellung bestellungAktualisieren(Bestellung bestellung) throws Exception;
+
+    /**
+     * löscht Bestellung
+     *
+     * @param bestellung
+     * @return
+     * @throws Exception
+     */
+    void bestellungLoeschen(Bestellung bestellung) throws Exception;
+
     /**
      * Liefert alle Bestellungen zurück, falls welche gefunden worden sind, sonst eine leere liste.
      *
@@ -15,7 +43,7 @@ public interface BestellService {
      * @return
      * @throws Exception
      */
-    List<Bestellung> findBestellungALl() throws Exception;
+    List<Bestellung> findBestellungAll() throws Exception;
 
     /**
      * Liefert alle Bestellungen zur�ck, welche die Filiale an dem �bergebeneen
@@ -44,6 +72,34 @@ public interface BestellService {
      * @return
      * @throws Exception
      */
+
+    /**
+     * Speichert neuen Tisch
+     *
+     * @param tisch
+     * @return
+     * @throws Exception
+     */
+    Tisch tischHinzufuegen(Tisch tisch) throws Exception;
+
+    /**
+     * Aktualisiert Tisch
+     *
+     * @param tisch
+     * @return
+     * @throws Exception
+     */
+    Tisch tischAktualisieren(Tisch tisch) throws Exception;
+
+    /**
+     * löscht Tisch
+     *
+     * @param tisch
+     * @return
+     * @throws Exception
+     */
+    void tischLoeschen(Tisch tisch) throws Exception;
+
     List<Tisch> findTischAll() throws Exception;
 
     /**
@@ -56,7 +112,35 @@ public interface BestellService {
     Tisch findTischByTischNummer(int tischNummer) throws Exception;
 
     /**
+     * Speichert neuen BestellPosition
+     *
+     * @param bestellPosition
+     * @return
+     * @throws Exception
+     */
+    BestellPosition bestellPositionHinzufuegen(BestellPosition bestellPosition) throws Exception;
+
+    /**
+     * Aktualisiert Bestellposition
+     *
+     * @param bestellPosition
+     * @return
+     * @throws Exception
+     */
+    BestellPosition bestellPositionAktualisieren(BestellPosition bestellPosition) throws Exception;
+
+    /**
+     * löscht Bestellposition
+     *
+     * @param bestellPosition
+     * @return
+     * @throws Exception
+     */
+    void bestellPositionLoeschen(BestellPosition bestellPosition) throws Exception;
+
+    /**
      * Liefert alle Bestellpositionen zurück
+     *
      * @param
      * @return
      * @throws Exception

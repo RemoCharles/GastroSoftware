@@ -48,6 +48,39 @@ public class KonsumartikelManager implements KonsumartikelService {
     }
 
     @Override
+    public Konsumartikel konsumartikelHinzufuegen(Konsumartikel konsumartikel) throws Exception {
+        try {
+            return getKonsumartikelDAO().save(konsumartikel);
+        } catch (Exception e) {
+            String msg = "Konsumartikel konnten nicht gespeichert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public Konsumartikel konsumartikelAktualisieren(Konsumartikel konsumartikel) throws Exception {
+        try {
+            return getKonsumartikelDAO().update(konsumartikel);
+        } catch (Exception e) {
+            String msg = "Konsumartikel konnten nicht aktualisiert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public void konsumartikelLoeschen(Konsumartikel konsumartikel) throws Exception {
+        try {
+            getKonsumartikelDAO().delete(konsumartikel);
+        } catch (Exception e) {
+            String msg = "Konsumartikel konnten nicht gelöscht werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
     public Konsumartikel findKonsumartikelByBezeichnung(String bezeichnung) throws Exception {
         try {
             return getKonsumartikelDAO().findByBezeichnung(bezeichnung);
@@ -81,11 +114,77 @@ public class KonsumartikelManager implements KonsumartikelService {
     }
 
     @Override
+    public Getraenke getraenkeHinzufuegen(Getraenke getraenke) throws Exception {
+        try {
+            return getGetraenkeDAO().save(getraenke);
+        } catch (Exception e) {
+            String msg = "Getränk konnten nicht gespeichert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public Getraenke getraenkeAktualisieren(Getraenke getraenke) throws Exception {
+        try {
+            return getGetraenkeDAO().update(getraenke);
+        } catch (Exception e) {
+            String msg = "Getränk konnten nicht aktualisiert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public void getraenkeLoeschen(Getraenke getraenke) throws Exception {
+        try {
+            getGetraenkeDAO().delete(getraenke);
+        } catch (Exception e) {
+            String msg = "Getränk konnten nicht gelöscht werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
     public List<Getraenke> findGetraenkeAll() throws Exception {
         try {
             return getGetraenkeDAO().findAll();
         } catch (Exception e) {
             String msg = "Es konnte kein Getränk gefunden werden.";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public Esswaren esswarenHinzufuegen(Esswaren esswaren) throws Exception {
+        try {
+            return getEsswarenDAO().save(esswaren);
+        } catch (Exception e) {
+            String msg = "Essware konnten nicht gespeichert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public Esswaren esswarenAktualisieren(Esswaren esswaren) throws Exception {
+        try {
+            return getEsswarenDAO().update(esswaren);
+        } catch (Exception e) {
+            String msg = "Essware konnten nicht aktualisiert werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public void esswareLoeschen(Esswaren esswaren) throws Exception {
+        try {
+            getEsswarenDAO().delete(esswaren);
+        } catch (Exception e) {
+            String msg = "Essware konnten nicht gelöscht werden";
             logger.error(msg, e);
             throw new Exception(msg);
         }

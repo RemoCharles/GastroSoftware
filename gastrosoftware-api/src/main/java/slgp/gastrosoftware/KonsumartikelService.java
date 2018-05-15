@@ -8,6 +8,31 @@ import java.util.List;
 
 public interface KonsumartikelService {
     /**
+     * Speichert neuen Konsumartikel
+     *
+     * @param konsumartikel
+     * @return
+     * @throws Exception
+     */
+    Konsumartikel konsumartikelHinzufuegen(Konsumartikel konsumartikel) throws Exception;
+    /**
+     * Aktualisiert Konsumartikel
+     *
+     * @param konsumartikel
+     * @return
+     * @throws Exception
+     */
+    Konsumartikel konsumartikelAktualisieren(Konsumartikel konsumartikel) throws Exception;
+    /**
+     * löscht Konsumartikel
+     *
+     * @param konsumartikel
+     * @return
+     * @throws Exception
+     */
+    void konsumartikelLoeschen(Konsumartikel konsumartikel) throws Exception;
+
+    /**
      * Liefert den Konsumartikel zurück, dessen Bezeichnung übergeben wurde.
      *
      * @param bezeichnung
@@ -34,12 +59,62 @@ public interface KonsumartikelService {
     List<Konsumartikel> findKonsumartikelAll() throws Exception;
 
     /**
-     * Liefert alle Konsumartikel zurück
+     * Speichert neues Getränk
+     *
+     * @param getraenke
+     * @return
+     * @throws Exception
+     */
+    Getraenke getraenkeHinzufuegen(Getraenke getraenke) throws Exception;
+    /**
+     * Aktualisiert Getränk
+     *
+     * @param getraenke
+     * @return
+     * @throws Exception
+     */
+    Getraenke getraenkeAktualisieren(Getraenke getraenke) throws Exception;
+    /**
+     * löscht Getränk
+     *
+     * @param getraenke
+     * @return
+     * @throws Exception
+     */
+    void getraenkeLoeschen(Getraenke getraenke) throws Exception;
+
+    /**
+     * Liefert alle Getränke zurück
      *
      * @return
      * @throws Exception
      */
     List<Getraenke> findGetraenkeAll() throws Exception;
+
+    /**
+     * Speichert neue Essware
+     *
+     * @param esswaren
+     * @return
+     * @throws Exception
+     */
+    Esswaren esswarenHinzufuegen(Esswaren esswaren) throws Exception;
+    /**
+     * Aktualisiert Essware
+     *
+     * @param esswaren
+     * @return
+     * @throws Exception
+     */
+    Esswaren esswarenAktualisieren(Esswaren esswaren) throws Exception;
+    /**
+     * löscht Essware
+     *
+     * @param esswaren
+     * @return
+     * @throws Exception
+     */
+    void esswareLoeschen(Esswaren esswaren) throws Exception;
 
     /**
      * Liefert alle Esswaren zurück

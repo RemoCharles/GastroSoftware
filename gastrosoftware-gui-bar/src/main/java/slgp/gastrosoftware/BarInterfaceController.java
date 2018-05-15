@@ -1,3 +1,5 @@
+package slgp.gastrosoftware;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,16 +12,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.BestellManager;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.Getraenke;
-import slgp.gastrosoftware.persister.BestellPositionDAO;
-import slgp.gastrosoftware.persister.BestellungDAO;
-import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
-import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -28,8 +29,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class BarInterfaceController implements Initializable {
     private static final Logger logger = LogManager.getLogger(BarInterfaceController.class);
-    private static BestellungDAO bestellungen = new BestellungDAOImpl();
-    private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+
+    private BestellManager bestellManager = BestellManager.getInstance();
 
     @FXML
     private Button btBereit;
@@ -69,7 +70,7 @@ public class BarInterfaceController implements Initializable {
         if (bP != null) {
             try {
                 bP.setZubereitet(true);
-                bestellPositionDAO.update(bP);
+                bestellManager.bestellPositionAktualisieren(bP);
                 tabelleBefuellen();
             } catch (Exception e) {
                 logger.info("Bestellposition konnte nicht aktualisiert werden...");
@@ -85,7 +86,7 @@ public class BarInterfaceController implements Initializable {
 
     private void tabelleBefuellen() throws Exception {
         /* Bestellung initialisieren */
-        List<Bestellung> alleBestellungenListe = bestellungen.findAll();
+        List<Bestellung> alleBestellungenListe = bestellManager.findBestellungAll();
         List<BestellPosition> tempKonsList = new ArrayList<>();
 
         for (Bestellung b : alleBestellungenListe) {

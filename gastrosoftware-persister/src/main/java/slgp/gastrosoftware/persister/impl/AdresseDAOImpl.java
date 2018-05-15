@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class AdresseDAOImpl extends GenericPersisterDAOImpl<Adresse> implements AdresseDAO {
+
     public AdresseDAOImpl(Class<Adresse> type) {
         super(type);
     }

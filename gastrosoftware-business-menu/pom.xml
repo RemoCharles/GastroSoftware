@@ -9,20 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gastrosoftware-gui-bar</artifactId>
+    <artifactId>gastrosoftware-business-menu</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-model</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-persister</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-api</artifactId>
@@ -31,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-business-bestellung</artifactId>
+            <artifactId>gastrosoftware-persister</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>

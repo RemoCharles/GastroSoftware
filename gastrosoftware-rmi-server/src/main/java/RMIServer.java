@@ -1,15 +1,14 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.*;
+
+import javax.swing.*;
 import java.io.InputStream;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Properties;
-
-import slgp.gastrosoftware.RMIPersonService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javax.swing.*;
 
 public class RMIServer {
     //TODO: RMI Konfigurieren
@@ -33,7 +32,12 @@ public class RMIServer {
             Registry registry = LocateRegistry.createRegistry(1099);
             if (registry != null) {
                 registry.rebind(RMIPersonService.RO_NAME, registry);
-                JOptionPane.showMessageDialog(null, "Hallo");
+                registry.rebind(RMIBestellService.RO_NAME, registry);
+                registry.rebind(RMIKonsumartikelService.RO_NAME, registry);
+                registry.rebind(RMIMenuService.RO_NAME, registry);
+                registry.rebind(RMIRechnungService.RO_NAME, registry);
+                JOptionPane.showMessageDialog(null,
+                        "Ok to stop","GastroSoftwareRMI" , JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             }
         } catch (RemoteException e) {

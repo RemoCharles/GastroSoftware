@@ -1,4 +1,5 @@
-import slgp.gastrosoftware.PersonService;
+package slgp.gastrosoftware;
+
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.model.Person;

@@ -28,6 +28,36 @@
             <artifactId>gastrosoftware-rmi-api</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-business-bestellung</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-business-person</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-business-konsumartikel</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-business-menu</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-business-rechnung</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 
