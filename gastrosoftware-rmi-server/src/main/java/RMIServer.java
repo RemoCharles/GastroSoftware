@@ -1,3 +1,4 @@
+import impl.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.*;
@@ -21,23 +22,33 @@ public class RMIServer {
     /* Default Port-Nummer 1099 */
     private final static int DEFAULT_PORT_NUMMER = 1099;
 
-    public static void main(String[] args)  {
-
-//        System.setProperty("java.security.policy", "file:.checker.policy");
-//        if (System.getSecurityManager() == null) {
-//            System.setSecurityManager(new SecurityManager());
-//        }
+    public static void main(String[] args) {
 
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
             if (registry != null) {
-                registry.rebind(RMIPersonService.RO_NAME, registry);
-                registry.rebind(RMIBestellService.RO_NAME, registry);
-                registry.rebind(RMIKonsumartikelService.RO_NAME, registry);
-                registry.rebind(RMIMenuService.RO_NAME, registry);
-                registry.rebind(RMIRechnungService.RO_NAME, registry);
+                RMIPersonService personServiceRO = new RMIPersonServiceImpl();
+                registry.rebind(RMIPersonService.RO_NAME, personServiceRO);
+                logger.info("Remote Object \'" + RMIPersonService.RO_NAME + "\' bound!");
+
+                RMIBestellService bestellServiceRO = new RMIBestellServiceImpl();
+                registry.rebind(RMIBestellService.RO_NAME, bestellServiceRO);
+                logger.info("Remote Object \'" + RMIBestellService.RO_NAME + "\' bound!");
+
+                RMIKonsumartikelService konsumartikelServiceRO = new RMIKonsumartikelServiceImpl();
+                registry.rebind(RMIKonsumartikelService.RO_NAME, konsumartikelServiceRO);
+                logger.info("Remote Object \'" + RMIKonsumartikelService.RO_NAME + "\' bound!");
+
+                RMIMenuService menuServiceRO = new RMIMenuServiceImpl();
+                registry.rebind(RMIMenuService.RO_NAME, menuServiceRO);
+                logger.info("Remote Object \'" + RMIMenuService.RO_NAME + "\' bound!");
+
+                RMIRechnungService rechnungServiceRO = new RMIRechnungServiceImpl();
+                registry.rebind(RMIRechnungService.RO_NAME, rechnungServiceRO);
+                logger.info("Remote Object \'" + RMIRechnungService.RO_NAME + "\' bound!");
+
                 JOptionPane.showMessageDialog(null,
-                        "Ok to stop","GastroSoftwareRMI" , JOptionPane.INFORMATION_MESSAGE);
+                        "Ok to stop", "GastroSoftwareRMI", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             }
         } catch (RemoteException e) {

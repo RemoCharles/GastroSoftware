@@ -120,6 +120,9 @@ public class BarInterfaceController implements Initializable {
                 try {
                     tabelleBefuellen();
                     System.out.println("aktualisiert");
+                    for(BestellPosition bestellPosition : bestellManager.findBestellPositionAll()){
+                        logger.info(bestellPosition);
+                    }
                 } catch (Exception e) {
                     logger.info("Tabelle konnte nicht befüllt werden...");
                 }

@@ -1,7 +1,7 @@
 package slgp.gastrosoftware.gui;
 
-import slgp.gastrosoftware.gastrosoftware.model.*;
-import slgp.gastrosoftware.gastrosoftware.persister.impl.*;
+import slgp.gastrosoftware.model.*;
+import slgp.gastrosoftware.persister.impl.*;
 import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.*;
 import slgp.gastrosoftware.persister.impl.*;

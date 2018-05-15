@@ -15,6 +15,12 @@ public class MenuManager implements MenuService {
 
     private static Logger logger = LogManager.getLogger(MenuManager.class);
 
+    private static MenuManager INSTANCE = new MenuManager();
+
+    public static MenuManager getInstance() {
+        return INSTANCE;
+    }
+
     private TagesmenuDAO tagesmenuDAO;
 
     public TagesmenuDAO getTagesmenuDAO() {

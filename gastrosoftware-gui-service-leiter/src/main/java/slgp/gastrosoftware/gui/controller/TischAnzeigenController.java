@@ -15,11 +15,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.gastrosoftware.model.*;
-import slgp.gastrosoftware.gastrosoftware.persister.impl.*;
+import slgp.gastrosoftware.*;
+import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.*;
-import slgp.gastrosoftware.persister.*;
-import slgp.gastrosoftware.persister.impl.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,12 +26,12 @@ import java.util.TreeSet;
 
 public class TischAnzeigenController /*implements Initializable*/ {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
-    private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
-    private static KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
-    private static EsswarenDAO esswarenDAO = new EsswarenDAOImpl();
-    private static GetraenkeDAO getraenkeDAO = new GetraenkeDAOImpl();
-    private static TischDAOImpl tischDAO = new TischDAOImpl();
-    private static BestellungDAO bestellungDAO = new BestellungDAOImpl();
+
+    private static RMIPersonService personService = Context.getInstance().getPersonService();
+    private static RMIBestellService bestellService = Context.getInstance().getBestellService();
+    private static RMIRechnungService rechnungService = Context.getInstance().getRechnungService();
+    private static RMIKonsumartikelService konsumartikelService = Context.getInstance().getKonsumartikelService();
+    private static RMIMenuService menuService = Context.getInstance().getMenuService();
 
     @FXML
     private ComboBox<String> cmbKat;
@@ -86,7 +84,7 @@ public class TischAnzeigenController /*implements Initializable*/ {
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 0);
             spnAnzahl.setValueFactory(valueFactory);
 
-            List<Konsumartikel> konsumartikelList = konsumartikelDAO.findAll();
+            List<Konsumartikel> konsumartikelList = Context.getInstance().getKonsumartikelService().findKonsumartikelAll();
             List<BestellPosition> bestellPositionList = new ArrayList<>();
 
             bestellPositionObservableList = FXCollections.observableList(bestellPositionList);
@@ -132,7 +130,7 @@ public class TischAnzeigenController /*implements Initializable*/ {
     @FXML
     private void updateTable() throws Exception {
         try {
-            List<Konsumartikel> konsumartikelList = konsumartikelDAO.findAll();
+            List<Konsumartikel> konsumartikelList = konsumartikelService.findKonsumartikelAll();
             List<Konsumartikel> tempListe = new ArrayList<>();
             if (cmbKategorie.getSelectionModel().getSelectedItem() != null) {
 
@@ -172,15 +170,15 @@ public class TischAnzeigenController /*implements Initializable*/ {
                 bestellPosition.setTischNummer(tischNummer);
                 bestellPositionList.add(bestellPosition);
             }
-            Tisch tisch = tischDAO.findByTischNummer(tischNummer);
+            Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
 
             for (BestellPosition bestellPosition : bestellPositionList){
-                bestellPositionDAO.save(bestellPosition);
+                bestellService.bestellPositionHinzufuegen(bestellPosition);
             }
 
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
-            bestellungDAO.save(bestellung);
+            bestellService.bestellungHinzufuegen(bestellung);
             logger.info(bestellung);
         }
 
@@ -230,16 +228,16 @@ public class TischAnzeigenController /*implements Initializable*/ {
 
 
     public void listenLaden() throws Exception {
-        for(Esswaren esswaren : esswarenDAO.findAll()){
+        for(Esswaren esswaren : konsumartikelService.findEsswarenAll()){
             esswarenList.add(esswaren);
             konsumartikelKlasse.add(esswaren.getClass().getSimpleName());
         }
-        for (Getraenke getraenke : getraenkeDAO.findAll()){
+        for (Getraenke getraenke : konsumartikelService.findGetraenkeAll()){
             getraenkeList.add(getraenke);
             konsumartikelKlasse.add(getraenke.getClass().getSimpleName());
         }
 
-        for (BestellPosition bestellPosition : bestellPositionDAO.findAll()) {
+        for (BestellPosition bestellPosition : bestellService.findBestellPositionAll()) {
             konsumartikelKlasse.add(bestellPosition.getKonsumartikel().getClass().getSimpleName());
         }
         ObservableList<String> konsumArtikelBezeichnungList = FXCollections.observableArrayList(konsumartikelKlasse);

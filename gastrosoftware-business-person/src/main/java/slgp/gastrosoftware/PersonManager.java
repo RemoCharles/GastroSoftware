@@ -17,6 +17,12 @@ public class PersonManager implements PersonService {
 
     private static Logger logger = LogManager.getLogger(PersonManager.class);
 
+    private static PersonManager INSTANCE = new PersonManager();
+
+    public static PersonManager getInstance() {
+        return INSTANCE;
+    }
+
     private PersonDAO personDAO;
 
     public PersonDAO getPersonDAO() {

@@ -20,6 +20,12 @@ public class KonsumartikelManager implements KonsumartikelService {
 
     private static Logger logger = LogManager.getLogger(KonsumartikelManager.class);
 
+    private static KonsumartikelManager INSTANCE = new KonsumartikelManager();
+
+    public static KonsumartikelManager getInstance() {
+        return INSTANCE;
+    }
+
     private KonsumartikelDAO konsumartikelDAO;
 
     public KonsumartikelDAO getKonsumartikelDAO() {

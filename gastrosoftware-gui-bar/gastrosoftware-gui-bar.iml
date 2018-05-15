@@ -14,6 +14,7 @@
     <orderEntry type="module" module-name="gastrosoftware-persister" />
     <orderEntry type="module" module-name="gastrosoftware-api" />
     <orderEntry type="module" module-name="gastrosoftware-business-bestellung" />
+    <orderEntry type="module" module-name="gastrosoftware-rmi-api" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.7" level="project" />

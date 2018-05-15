@@ -16,6 +16,11 @@ public class RechnungManager implements RechnungService {
 
     private static Logger logger = LogManager.getLogger(RechnungManager.class);
 
+    private static RechnungManager INSTANCE = new RechnungManager();
+
+    public static RechnungManager getInstance() {
+        return INSTANCE;
+    }
 
     private TischRechnungDAO tischRechnungDAO;
 

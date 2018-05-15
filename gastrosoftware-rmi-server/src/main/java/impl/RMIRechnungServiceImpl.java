@@ -1,6 +1,7 @@
 package impl;
 
 import slgp.RechnungManager;
+import slgp.gastrosoftware.RMIRechnungService;
 import slgp.gastrosoftware.RechnungService;
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.TischRechnung;
@@ -9,11 +10,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class RMIRechnungManagerImpl extends UnicastRemoteObject implements RechnungService {
+public class RMIRechnungServiceImpl extends UnicastRemoteObject implements RMIRechnungService {
 
     private RechnungService rechnungService;
 
-    public RMIRechnungManagerImpl() throws RemoteException {
+    public RMIRechnungServiceImpl() throws RemoteException {
 
     }
 
@@ -26,41 +27,41 @@ public class RMIRechnungManagerImpl extends UnicastRemoteObject implements Rechn
 
     @Override
     public TischRechnung tischRechnungHinzufuegen(TischRechnung tischRechnung) throws Exception {
-        return rechnungService.tischRechnungHinzufuegen(tischRechnung);
+        return getRechnungService().tischRechnungHinzufuegen(tischRechnung);
     }
 
     @Override
     public TischRechnung tischRechnungAktualisieren(TischRechnung tischRechnung) throws Exception {
-        return rechnungService.tischRechnungAktualisieren(tischRechnung);
+        return getRechnungService().tischRechnungAktualisieren(tischRechnung);
     }
 
     @Override
     public void tischRechnungLoeschen(TischRechnung tischRechnung) throws Exception {
-        rechnungService.tischRechnungLoeschen(tischRechnung);
+        getRechnungService().tischRechnungLoeschen(tischRechnung);
     }
 
     @Override
     public List<TischRechnung> findTischRechnungAll() throws Exception {
-        return rechnungService.findTischRechnungAll();
+        return getRechnungService().findTischRechnungAll();
     }
 
     @Override
     public MAAbrechnung maAbrechnungHinzufuegen(MAAbrechnung maAbrechnung) throws Exception {
-        return rechnungService.maAbrechnungHinzufuegen(maAbrechnung);
+        return getRechnungService().maAbrechnungHinzufuegen(maAbrechnung);
     }
 
     @Override
     public MAAbrechnung maAbrechnungAktualisieren(MAAbrechnung maAbrechnung) throws Exception {
-        return rechnungService.maAbrechnungAktualisieren(maAbrechnung);
+        return getRechnungService().maAbrechnungAktualisieren(maAbrechnung);
     }
 
     @Override
     public void maAbrechnungLoeschen(MAAbrechnung maAbrechnung) throws Exception {
-        rechnungService.maAbrechnungLoeschen(maAbrechnung);
+        getRechnungService().maAbrechnungLoeschen(maAbrechnung);
     }
 
     @Override
     public List<MAAbrechnung> findMAAbrechnungAll() throws Exception {
-        return rechnungService.findMAAbrechnungAll();
+        return getRechnungService().findMAAbrechnungAll();
     }
 }

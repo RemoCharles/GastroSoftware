@@ -2,6 +2,7 @@ package impl;
 
 import slgp.gastrosoftware.MenuManager;
 import slgp.gastrosoftware.MenuService;
+import slgp.gastrosoftware.RMIMenuService;
 import slgp.gastrosoftware.model.Menukarte;
 import slgp.gastrosoftware.model.Tagesmenu;
 
@@ -9,11 +10,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class RMIMenuManagerImpl extends UnicastRemoteObject implements MenuService {
+public class RMIMenuServiceImpl extends UnicastRemoteObject implements RMIMenuService {
 
     private MenuService menuService;
 
-    public RMIMenuManagerImpl() throws RemoteException {
+    public RMIMenuServiceImpl() throws RemoteException {
 
     }
 
@@ -26,46 +27,46 @@ public class RMIMenuManagerImpl extends UnicastRemoteObject implements MenuServi
 
     @Override
     public Menukarte menukarteHinzufuegen(Menukarte menukarte) throws Exception {
-        return menuService.menukarteHinzufuegen(menukarte);
+        return getMenuService().menukarteHinzufuegen(menukarte);
     }
 
     @Override
     public Menukarte menukarteAktualisieren(Menukarte menukarte) throws Exception {
-        return menuService.menukarteAktualisieren(menukarte);
+        return getMenuService().menukarteAktualisieren(menukarte);
     }
 
     @Override
     public void menukarteLoeschen(Menukarte menukarte) throws Exception {
-        menuService.menukarteLoeschen(menukarte);
+        getMenuService().menukarteLoeschen(menukarte);
     }
 
     @Override
     public List<Menukarte> findMenukarteAll() throws Exception {
-        return menuService.findMenukarteAll();
+        return getMenuService().findMenukarteAll();
     }
 
     @Override
     public Tagesmenu tagesmenuHinzufuegen(Tagesmenu tagesmenu) throws Exception {
-        return menuService.tagesmenuHinzufuegen(tagesmenu);
+        return getMenuService().tagesmenuHinzufuegen(tagesmenu);
     }
 
     @Override
     public Tagesmenu tagesmenuAktualisieren(Tagesmenu tagesmenu) throws Exception {
-        return menuService.tagesmenuAktualisieren(tagesmenu);
+        return getMenuService().tagesmenuAktualisieren(tagesmenu);
     }
 
     @Override
     public void tagesmenuLoeschen(Tagesmenu tagesmenu) throws Exception {
-        menuService.tagesmenuLoeschen(tagesmenu);
+        getMenuService().tagesmenuLoeschen(tagesmenu);
     }
 
     @Override
     public List<Tagesmenu> findyTagesmenuByWochenTag(String wochenTag) throws Exception {
-        return menuService.findyTagesmenuByWochenTag(wochenTag);
+        return getMenuService().findyTagesmenuByWochenTag(wochenTag);
     }
 
     @Override
     public List<Tagesmenu> findTagesmenuAll() throws Exception {
-        return menuService.findTagesmenuAll();
+        return getMenuService().findTagesmenuAll();
     }
 }

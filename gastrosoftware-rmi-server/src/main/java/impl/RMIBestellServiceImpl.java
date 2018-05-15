@@ -12,12 +12,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.List;
 
-public class RMIBestellManagerImpl extends UnicastRemoteObject implements RMIBestellService {
+public class RMIBestellServiceImpl extends UnicastRemoteObject implements RMIBestellService {
 
     private BestellService bestellService;
 
-    public RMIBestellManagerImpl() throws RemoteException {
-
+    public RMIBestellServiceImpl() throws RemoteException {
     }
 
     public BestellService getBestellService() {
@@ -29,81 +28,81 @@ public class RMIBestellManagerImpl extends UnicastRemoteObject implements RMIBes
 
     @Override
     public Bestellung bestellungHinzufuegen(Bestellung bestellung) throws Exception {
-        return bestellService.bestellungHinzufuegen(bestellung);
+        return getBestellService().bestellungHinzufuegen(bestellung);
     }
 
     @Override
     public Bestellung bestellungAktualisieren(Bestellung bestellung) throws Exception {
-        return bestellService.bestellungAktualisieren(bestellung);
+        return getBestellService().bestellungAktualisieren(bestellung);
     }
 
     @Override
     public void bestellungLoeschen(Bestellung bestellung) throws Exception {
-        bestellService.bestellungLoeschen(bestellung);
+        getBestellService().bestellungLoeschen(bestellung);
     }
 
     @Override
     public List<Bestellung> findBestellungAll() throws Exception {
-        return bestellService.findBestellungAll();
+        return getBestellService().findBestellungAll();
     }
 
     @Override
     public List<Bestellung> findBestellungByDatum(LocalDate datum) throws Exception {
-        return bestellService.findBestellungByDatum(datum);
+        return getBestellService().findBestellungByDatum(datum);
     }
 
     @Override
     public List<Bestellung> findBestellungAllBezahlt(boolean bezahlt) throws Exception {
-        return bestellService.findBestellungAllBezahlt(bezahlt);
+        return getBestellService().findBestellungAllBezahlt(bezahlt);
     }
 
     @Override
     public List<Bestellung> findBestellungByTischNummer(Integer tischNummer) throws Exception {
-        return bestellService.findBestellungByTischNummer(tischNummer);
+        return getBestellService().findBestellungByTischNummer(tischNummer);
     }
 
     @Override
     public Tisch tischHinzufuegen(Tisch tisch) throws Exception {
-        return bestellService.tischHinzufuegen(tisch);
+        return getBestellService().tischHinzufuegen(tisch);
     }
 
     @Override
     public Tisch tischAktualisieren(Tisch tisch) throws Exception {
-        return bestellService.tischAktualisieren(tisch);
+        return getBestellService().tischAktualisieren(tisch);
     }
 
     @Override
     public void tischLoeschen(Tisch tisch) throws Exception {
-        bestellService.tischLoeschen(tisch);
+        getBestellService().tischLoeschen(tisch);
     }
 
     @Override
     public List<Tisch> findTischAll() throws Exception {
-        return bestellService.findTischAll();
+        return getBestellService().findTischAll();
     }
 
     @Override
     public Tisch findTischByTischNummer(int tischNummer) throws Exception {
-        return bestellService.findTischByTischNummer(tischNummer);
+        return getBestellService().findTischByTischNummer(tischNummer);
     }
 
     @Override
     public BestellPosition bestellPositionHinzufuegen(BestellPosition bestellPosition) throws Exception {
-        return bestellService.bestellPositionHinzufuegen(bestellPosition);
+        return getBestellService().bestellPositionHinzufuegen(bestellPosition);
     }
 
     @Override
     public BestellPosition bestellPositionAktualisieren(BestellPosition bestellPosition) throws Exception {
-        return bestellService.bestellPositionAktualisieren(bestellPosition);
+        return getBestellService().bestellPositionAktualisieren(bestellPosition);
     }
 
     @Override
     public void bestellPositionLoeschen(BestellPosition bestellPosition) throws Exception {
-        bestellService.bestellPositionLoeschen(bestellPosition);
+        getBestellService().bestellPositionLoeschen(bestellPosition);
     }
 
     @Override
     public List<BestellPosition> findBestellPositionAll() throws Exception {
-        return bestellService.findBestellPositionAll();
+        return getBestellService().findBestellPositionAll();
     }
 }
