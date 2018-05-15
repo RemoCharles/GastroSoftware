@@ -2,7 +2,6 @@ package slgp.gastrosoftware.gui.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,12 +14,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.*;
-import slgp.gastrosoftware.gui.Context;
+import slgp.gastrosoftware.persister.MAAbrechnungDAO;
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.Mitarbeiter;
+
+import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,8 +32,7 @@ import java.util.ResourceBundle;
 
 public class LeiterAbrechnungAnzeigenController implements Initializable {
     private static Logger logger = LogManager.getLogger(LeiterAbrechnungAnzeigenController.class);
-
-    private static RMIRechnungService rechnungService = Context.getInstance().getRechnungService();
+    private static MAAbrechnungDAO maAbrechnungDAOTemp = new MAAbrechnungDAOImpl();
 
     @FXML
     private Button btnZurueck;
@@ -83,7 +85,7 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
     private void mitarbeiterAbrechnungLaden() throws Exception {
 
         //Wann wird eine Rechnung als Mitarbeiterabrechnung persistiert?
-        List<MAAbrechnung> mabTemp = rechnungService.findMAAbrechnungAll();
+        List<MAAbrechnung> mabTemp = maAbrechnungDAOTemp.findAll();
         List <MAAbrechnung> mabPerson = new ArrayList<>();
         Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
 

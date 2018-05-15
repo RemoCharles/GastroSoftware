@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class TischAnzeigenController {
+public class TischAnzeigenController /*implements Initializable*/ {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
 
     private static RMIPersonService personService = Context.getInstance().getPersonService();

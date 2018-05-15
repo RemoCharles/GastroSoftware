@@ -16,12 +16,18 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.*;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.model.TischRechnung;
+import slgp.gastrosoftware.persister.BestellungDAO;
+import slgp.gastrosoftware.persister.MAAbrechnungDAO;
+import slgp.gastrosoftware.persister.MitarbeiterDAO;
+import slgp.gastrosoftware.persister.TischRechnungDAO;
+import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
+import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
+import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
+import slgp.gastrosoftware.persister.impl.TischRechnungDAOImpl;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -33,12 +39,10 @@ import java.util.TreeSet;
 public class LeiterAbrechnungController implements Initializable {
 
     private static Logger logger = LogManager.getLogger(LeiterMitarbeiterController.class);
-
-    private static RMIPersonService personService = Context.getInstance().getPersonService();
-    private static RMIBestellService bestellService = Context.getInstance().getBestellService();
-    private static RMIRechnungService rechnungService = Context.getInstance().getRechnungService();
-    private static RMIKonsumartikelService konsumartikelService = Context.getInstance().getKonsumartikelService();
-    private static RMIMenuService menuService = Context.getInstance().getMenuService();
+    private static BestellungDAO bestellungDaoTemp = new BestellungDAOImpl();
+    private static TischRechnungDAO tischReschnungDaoTemp = new TischRechnungDAOImpl();
+    private static MAAbrechnungDAO maAbrechnungDaoTemp = new MAAbrechnungDAOImpl();
+    private static MitarbeiterDAO mitarbeiterDAOTemp = new MitarbeiterDAOImpl();
 
     @FXML
     private ComboBox<String> cmbMitarbeiter;
@@ -72,7 +76,7 @@ public class LeiterAbrechnungController implements Initializable {
 
         try {
             mitarbeiterAuswahlLaden();
-            List<Bestellung> bestellungList = bestellService.findBestellungAllBezahlt(true);
+            List<Bestellung> bestellungList = bestellungDaoTemp.findAllBezahlt(true);
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
 
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
@@ -92,7 +96,7 @@ public class LeiterAbrechnungController implements Initializable {
     private void updateTabelle() {
         try {
             List<Bestellung> tempList = new ArrayList<>();
-            List<Bestellung> alleBestellungList = bestellService.findBestellungAllBezahlt(true);
+            List<Bestellung> alleBestellungList = bestellungDaoTemp.findAllBezahlt(true);
             Double summeBestellung = 0.00;
 
             for (Bestellung b : alleBestellungList) {
@@ -123,7 +127,7 @@ public class LeiterAbrechnungController implements Initializable {
 
     @FXML
     public void speichern(ActionEvent event) throws Exception {
-        List <TischRechnung> tischRechnungList = rechnungService.findTischRechnungAll();
+        List <TischRechnung> tischRechnungList = tischReschnungDaoTemp.findAll();
         List <TischRechnung> tischRechnungAufMitarbeiter = new ArrayList<>();
         MAAbrechnung maAbrTemp = new MAAbrechnung();
 
@@ -157,7 +161,7 @@ public class LeiterAbrechnungController implements Initializable {
 
                 maAbrTemp = new MAAbrechnung(LocalDate.now(), summeUmsatz, mitarbeiterA);
 
-                List<MAAbrechnung> tempAb = rechnungService.findMAAbrechnungAll();
+                List<MAAbrechnung> tempAb = maAbrechnungDaoTemp.findAll();
                 int count = 0;
 
                 for (MAAbrechnung m : tempAb) {
@@ -168,7 +172,7 @@ public class LeiterAbrechnungController implements Initializable {
 
                         try {
                         m.setUmsatz(summeUmsatz);
-                        rechnungService.maAbrechnungAktualisieren(m);
+                        maAbrechnungDaoTemp.update(m);
                         } catch (Exception e){
                             logger.info("Ein Fehler ist aufgetreten beim Update der Abrechnung", e);
                         }
@@ -176,7 +180,7 @@ public class LeiterAbrechnungController implements Initializable {
                 }
 
                 if (count == 0) {
-                    rechnungService.maAbrechnungHinzufuegen(maAbrTemp);
+                    maAbrechnungDaoTemp.save(maAbrTemp);
                     lblError.setTextFill(Color.GREEN);
                     lblError.setText("Mitarbeiter Abrechnung wurde gespeichert");
                 }
@@ -190,7 +194,7 @@ public class LeiterAbrechnungController implements Initializable {
     }
 
     private void mitarbeiterAuswahlLaden() throws Exception {
-        List <TischRechnung> tischRechnungListe = rechnungService.findTischRechnungAll();
+        List <TischRechnung> tischRechnungListe = tischReschnungDaoTemp.findAll();
         TreeSet <String> personAuswahl = new TreeSet<>();
 
         for(TischRechnung t : tischRechnungListe){
@@ -223,7 +227,7 @@ public class LeiterAbrechnungController implements Initializable {
 
             String nameSuche = cmbMitarbeiter.getSelectionModel().getSelectedItem();
 
-            List<Mitarbeiter> mitarbeiterList = personService.findMitarbeiterAll();
+            List<Mitarbeiter> mitarbeiterList = mitarbeiterDAOTemp.findAll();
 
             Mitarbeiter maController = new Mitarbeiter();
 

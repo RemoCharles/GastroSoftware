@@ -24,27 +24,22 @@ public class KonsumartikelDAOTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        Util.deleteAllKonsumartikel();
-        Util.deleteAllGetraenke();
-        Util.deleteAllEsswaren();
     }
 
     @Before
     public void setUp() throws Exception {
-        Util.deleteAllKonsumartikel();
         Util.deleteAllGetraenke();
         Util.deleteAllEsswaren();
     }
 
     @After
     public void tearDown() throws Exception {
-        Util.deleteAllKonsumartikel();
-        Util.deleteAllGetraenke();
-        Util.deleteAllEsswaren();
+
     }
 
     private void init() throws Exception {
-        Util.createKonsumartikelListe();
+        Util.createEsswarenListe();
+        Util.createGetraenkeListe();
         logger.info("Initalisierung fertig!");
     }
 
@@ -58,9 +53,6 @@ public class KonsumartikelDAOTest {
     @Test
     public void testEsswarenDelete() throws Exception {
         init();
-        for(Esswaren esswaren : esswarenDAO.findAll()){
-            logger.info(esswaren);
-        }
         logger.info(esswarenDAO.findAll().size());
         assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN);
         int size = esswarenDAO.findAll().size();
@@ -70,7 +62,7 @@ public class KonsumartikelDAOTest {
         for(Esswaren esswaren : esswarenDAO.findAll()){
             logger.info(esswaren);
         }
-        Assert.assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN - 1);
+        assertTrue(esswarenDAO.findAll().size() == Util.INIT_SIZE_ESSWAREN - 1);
     }
 
     @Test
@@ -102,11 +94,8 @@ public class KonsumartikelDAOTest {
         int size = getraenkeDAO.findAll().size();
         Getraenke lastGetraenke = getraenkeDAO.findAll().get(size - 1);
         getraenkeDAO.delete(lastGetraenke);
-        Assert.assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE - 1);
+        assertTrue(getraenkeDAO.findAll().size() == Util.INIT_SIZE_GETRAENKE - 1);
 
-        for (Getraenke g : getraenkeDAO.findAll()) {
-            logger.info(g);
-        }
     }
 
     @Test

@@ -10,11 +10,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.RMIBestellService;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.Esswaren;
+import slgp.gastrosoftware.persister.BestellPositionDAO;
+import slgp.gastrosoftware.persister.BestellungDAO;
+import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
+import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +30,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class KuecheInterfaceController implements Initializable{
     private static final Logger logger = LogManager.getLogger(KuecheInterfaceController.class);
-    private static RMIBestellService bestellService = Context.getInstance().getBestellService();
+    private static BestellungDAO bestellungen = new BestellungDAOImpl();
+    private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
 
     @FXML
     private Button btBereit;
@@ -66,7 +69,7 @@ public class KuecheInterfaceController implements Initializable{
         if (bP != null) {
             try {
                 bP.setZubereitet(true);
-                bestellService.bestellPositionAktualisieren(bP);
+                bestellPositionDAO.update(bP);
                 tabelleBefuellen();
 
             } catch (Exception e) {
@@ -85,7 +88,7 @@ public class KuecheInterfaceController implements Initializable{
     private void tabelleBefuellen() {
         /* Bestellung initialisieren */
         try {
-            List<Bestellung> alleBestellungenListe = bestellService.findBestellungAll();
+            List<Bestellung> alleBestellungenListe = bestellungen.findAll();
             List<BestellPosition> tempKonsList = new ArrayList<>();
 
             for (Bestellung b : alleBestellungenListe) {

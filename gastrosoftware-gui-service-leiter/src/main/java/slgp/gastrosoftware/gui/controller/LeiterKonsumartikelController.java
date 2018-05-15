@@ -16,11 +16,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.RMIKonsumartikelService;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.model.Getraenke;
 import slgp.gastrosoftware.model.Konsumartikel;
+import slgp.gastrosoftware.persister.KonsumartikelDAO;
+import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ import java.util.TreeSet;
 
 public class LeiterKonsumartikelController implements Initializable {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
+    private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
 
-   private static RMIKonsumartikelService konsumartikelService = Context.getInstance().getKonsumartikelService();
 
     @FXML
     private ComboBox<String> cmbKat;
@@ -110,7 +110,7 @@ public class LeiterKonsumartikelController implements Initializable {
     public void updateTable() {
         try {
             List<Konsumartikel> alleKonsumartikelList = new ArrayList<>();
-            List<Konsumartikel> tempList = konsumartikelService.findKonsumartikelAll();
+            List<Konsumartikel> tempList = konsumartikelDAO.findAll();
             for (Konsumartikel kA : tempList) {
                 if (kA.getVerfuegbar() == true) {
                     alleKonsumartikelList.add(kA);
@@ -178,7 +178,7 @@ public class LeiterKonsumartikelController implements Initializable {
         try {
             //Klassen Kategorie ComboBox füllen
             TreeSet<String> konsumartikelKategorie = new TreeSet<>();
-            for (Konsumartikel kA : konsumartikelService.findKonsumartikelAll()) {
+            for (Konsumartikel kA : konsumartikelDAO.findAll()) {
                 if (kA.getVerfuegbar() == true) {
                     konsumartikelKategorie.add(kA.getKategorie());
                 }
@@ -218,7 +218,7 @@ public class LeiterKonsumartikelController implements Initializable {
         if (kA != null) {
             try {
                 kA.setVerfuegbar(false);
-                konsumartikelService.konsumartikelAktualisieren(kA);
+                konsumartikelDAO.update(kA);
                 kategorienAuswahlLaden();
                 tabelleBefuellen();
             } catch (Exception e) {
@@ -254,11 +254,11 @@ public class LeiterKonsumartikelController implements Initializable {
                     if (kuecheBarKategorie == "Esswaren") {
                         Konsumartikel konsumartikelSpeichern = new Esswaren(bez, kategorie, preis);
                         System.out.println(konsumartikelSpeichern.toString());
-                        konsumartikelService.konsumartikelHinzufuegen(konsumartikelSpeichern);
+                        konsumartikelDAO.save(konsumartikelSpeichern);
                     } else {
                         Konsumartikel konsumartikelSpeichern = new Getraenke(bez, kategorie, preis);
                         System.out.println(konsumartikelSpeichern.toString());
-                        konsumartikelService.konsumartikelHinzufuegen(konsumartikelSpeichern);
+                        konsumartikelDAO.save(konsumartikelSpeichern);
                     }
                     kategorienAuswahlLaden();
                     tabelleBefuellen();
@@ -282,7 +282,8 @@ public class LeiterKonsumartikelController implements Initializable {
                 kA.setPreis(preis);
 
                 try {
-                    konsumartikelService.konsumartikelAktualisieren(kA);
+                    KonsumartikelDAO konsumartikelDAOImpl = new KonsumartikelDAOImpl();
+                    konsumartikelDAOImpl.update(kA);
                     kategorienAuswahlLaden();
                     tabelleBefuellen();
 
@@ -297,7 +298,7 @@ public class LeiterKonsumartikelController implements Initializable {
     public void verfuegbarkeitFiltern() {
         try {
             List<Konsumartikel> kAListDisabled = new ArrayList<>();
-            List<Konsumartikel> tempList = konsumartikelService.findKonsumartikelAll();
+            List<Konsumartikel> tempList = konsumartikelDAO.findAll();
             for (Konsumartikel kA : tempList) {
                 if (kA.getVerfuegbar() == false) {
                     kAListDisabled.add(kA);
@@ -315,7 +316,7 @@ public class LeiterKonsumartikelController implements Initializable {
     public void reActivate() throws Exception {
         Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
         kA.setVerfuegbar(true);
-        konsumartikelService.konsumartikelAktualisieren(kA);
+        konsumartikelDAO.update(kA);
         verfuegbarkeitFiltern();
     }
 
@@ -361,7 +362,7 @@ public class LeiterKonsumartikelController implements Initializable {
         try {
             List<Konsumartikel> konsumartikelList = new ArrayList<>();
 
-            List<Konsumartikel> tempList = konsumartikelService.findKonsumartikelAll();
+            List<Konsumartikel> tempList = konsumartikelDAO.findAll();
             for (Konsumartikel kA : tempList) {
                 if (kA.getVerfuegbar() == (true)) {
                     konsumartikelList.add(kA);
