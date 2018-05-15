@@ -4,16 +4,19 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GastroSoftware.iml" filepath="$PROJECT_DIR$/GastroSoftware.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-api/gastrosoftware-api.iml" filepath="$PROJECT_DIR$/gastrosoftware-api/gastrosoftware-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business/gastrosoftware-business.iml" filepath="$PROJECT_DIR$/gastrosoftware-business/gastrosoftware-business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-bestellung/gastrosoftware-business-bestellung.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-bestellung/gastrosoftware-business-bestellung.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-initializer/gastrosoftware-business-initializer.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-initializer/gastrosoftware-business-initializer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-konsumartikel/gastrosoftware-business-konsumartikel.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-konsumartikel/gastrosoftware-business-konsumartikel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-person/gastrosoftware-business-person.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-person/gastrosoftware-business-person.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-business-rechnung/gastrosoftware-business-rechnung.iml" filepath="$PROJECT_DIR$/gastrosoftware-business-rechnung/gastrosoftware-business-rechnung.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-bar/gastrosoftware-gui-bar.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-bar/gastrosoftware-gui-bar.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-kueche/gastrosoftware-gui-kueche.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-kueche/gastrosoftware-gui-kueche.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-gui-service-leiter/gastrosoftware-gui-service-leiter.iml" filepath="$PROJECT_DIR$/gastrosoftware-gui-service-leiter/gastrosoftware-gui-service-leiter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" filepath="$PROJECT_DIR$/gastrosoftware-model/gastrosoftware-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-pdfprinter/gastrosoftware-pdfprinter.iml" filepath="$PROJECT_DIR$/gastrosoftware-pdfprinter/gastrosoftware-pdfprinter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" filepath="$PROJECT_DIR$/gastrosoftware-persister/gastrosoftware-persister.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-rmi-server/gastrosoftware-rmi-server.iml" filepath="$PROJECT_DIR$/gastrosoftware-rmi-server/gastrosoftware-rmi-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rmi/rmi.iml" filepath="$PROJECT_DIR$/rmi/rmi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-rmi-server/gastrosoftware-rmi-Server.iml" filepath="$PROJECT_DIR$/gastrosoftware-rmi-server/gastrosoftware-rmi-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gastrosoftware-rmi-api/gastrosoftware-rmi-api.iml" filepath="$PROJECT_DIR$/gastrosoftware-rmi-api/gastrosoftware-rmi-api.iml" />
     </modules>
   </component>
 </project>

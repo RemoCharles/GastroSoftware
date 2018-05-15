@@ -1,5 +1,5 @@
-import slgp.gastrosoftware.model.MAAbrechnung;
-import slgp.gastrosoftware.model.Rechnung;
+package api;
+
 import slgp.gastrosoftware.model.TischRechnung;
 
 import java.rmi.Remote;
@@ -12,7 +12,6 @@ public interface PrinterService extends Remote {
      *
      * @param rechnung
      */
-    String TischRechnung_RO = "TischRechnungRO";
     void printTischRechnungAlsPdf(TischRechnung rechnung) throws RemoteException, Exception;
 
 //    /**

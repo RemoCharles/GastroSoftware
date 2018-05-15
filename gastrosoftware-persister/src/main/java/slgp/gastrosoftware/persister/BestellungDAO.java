@@ -31,6 +31,7 @@ public interface BestellungDAO extends GenericPersisterDAO<Bestellung> {
     List<Bestellung> findAllBezahlt(boolean bezahlt) throws Exception;
 
     List<Bestellung> findByTischNummer(Integer tischNummer) throws Exception;
+
 }
 
 

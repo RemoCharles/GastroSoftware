@@ -71,7 +71,6 @@ public class BarInterfaceController implements Initializable {
                 bP.setZubereitet(true);
                 bestellPositionDAO.update(bP);
                 tabelleBefuellen();
-
             } catch (Exception e) {
                 logger.info("Bestellposition konnte nicht aktualisiert werden...");
             }

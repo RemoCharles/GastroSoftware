@@ -1,8 +1,8 @@
 package slgp.gastrosoftware.persister.impl;
 
-import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.util.JpaUtil;
+import slgp.gastrosoftware.model.Bestellung;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

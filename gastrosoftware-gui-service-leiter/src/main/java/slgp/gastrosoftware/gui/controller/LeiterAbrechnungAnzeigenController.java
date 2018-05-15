@@ -18,17 +18,15 @@ import javafx.event.ActionEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.persister.MAAbrechnungDAO;
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.Mitarbeiter;
-import slgp.gastrosoftware.persister.MAAbrechnungDAO;
 
 import slgp.gastrosoftware.persister.impl.MAAbrechnungDAOImpl;
 
 
-
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 

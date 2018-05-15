@@ -6,7 +6,6 @@ import slgp.gastrosoftware.model.Login;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.model.Person;
 import slgp.gastrosoftware.persister.LoginDAO;
-import slgp.gastrosoftware.persister.MitarbeiterDAO;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;

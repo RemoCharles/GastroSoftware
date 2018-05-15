@@ -21,7 +21,7 @@
         </plugins>
     </build>
     <modules>
-        <module>gastrosoftware-business</module>
+        <module>gastrosoftware-business-person</module>
         <module>gastrosoftware-business-initializer</module>
         <module>gastrosoftware-gui-service-leiter</module>
         <module>gastrosoftware-model</module>
@@ -30,9 +30,11 @@
         <module>gastrosoftware-gui-bar</module>
         <module>gastrosoftware-pdfprinter</module>
         <module>gastrosoftware-api</module>
-        <module>rmi</module>
         <module>gastrosoftware-rmi-Server</module>
-        <module>rmi</module>
+        <module>gastrosoftware-rmi-api</module>
+        <module>gastrosoftware-business-bestellung</module>
+        <module>gastrosoftware-business-konsumartikel</module>
+        <module>gastrosoftware-business-rechnung</module>
     </modules>
     <dependencies>
         <dependency>
@@ -68,7 +70,6 @@
             <artifactId>eclipselink</artifactId>
             <version>2.7.0</version>
         </dependency>
-
     </dependencies>
 
 </project>

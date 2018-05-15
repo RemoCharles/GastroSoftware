@@ -3,10 +3,10 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
-import slgp.gastrosoftware.model.TischRechnung;
 import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
 import slgp.gastrosoftware.persister.impl.RechnungDAOImpl;
 import slgp.gastrosoftware.persister.impl.TischRechnungDAOImpl;
+import slgp.gastrosoftware.model.TischRechnung;
 import slgp.gastrosoftware.persister.util.Util;
 
 import static org.junit.Assert.assertTrue;

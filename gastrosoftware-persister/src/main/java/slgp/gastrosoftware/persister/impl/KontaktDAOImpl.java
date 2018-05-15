@@ -1,7 +1,7 @@
 package slgp.gastrosoftware.persister.impl;
 
-import slgp.gastrosoftware.model.Kontakt;
 import slgp.gastrosoftware.persister.KontaktDAO;
+import slgp.gastrosoftware.model.Kontakt;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;

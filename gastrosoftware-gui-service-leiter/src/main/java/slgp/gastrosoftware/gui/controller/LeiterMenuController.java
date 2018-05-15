@@ -14,12 +14,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.persister.EsswarenDAO;
 import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.model.Tagesmenu;
-import slgp.gastrosoftware.persister.EsswarenDAO;
 import slgp.gastrosoftware.persister.TagesmenuDAO;
 import slgp.gastrosoftware.persister.impl.EsswarenDAOImpl;
 import slgp.gastrosoftware.persister.impl.TagesmenuDAOImpl;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

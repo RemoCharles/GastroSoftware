@@ -2,8 +2,8 @@ package slgp.gastrosoftware.persister.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.model.Konsumartikel;
 import slgp.gastrosoftware.persister.KonsumartikelDAO;
+import slgp.gastrosoftware.model.Konsumartikel;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;

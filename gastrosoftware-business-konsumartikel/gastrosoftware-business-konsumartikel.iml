@@ -13,8 +13,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="gastrosoftware-api" />
     <orderEntry type="module" module-name="gastrosoftware-model" />
-    <orderEntry type="module" module-name="gastrosoftware-pdfprinter" />
-    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.9" level="project" />
+    <orderEntry type="module" module-name="gastrosoftware-persister" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.7" level="project" />

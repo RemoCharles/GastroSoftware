@@ -4,10 +4,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
-import slgp.gastrosoftware.gui.Util;
-import slgp.gastrosoftware.model.Bestellung;
-
-import java.util.List;
 
 public class KuecheApplication extends javafx.application.Application {
     private static Logger logger = (Logger) LogManager.getLogger(KuecheApplication.class);

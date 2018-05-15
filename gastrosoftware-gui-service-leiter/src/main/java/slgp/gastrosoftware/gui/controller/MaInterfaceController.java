@@ -1,6 +1,5 @@
 package slgp.gastrosoftware.gui.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +25,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import slgp.gastrosoftware.model.BestellPosition;
-import slgp.gastrosoftware.model.Konsumartikel;
 import slgp.gastrosoftware.persister.BestellPositionDAO;
 import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
-
-import javax.xml.bind.annotation.XmlList;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 

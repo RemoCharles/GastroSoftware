@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileOutputStream;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
@@ -8,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import api.PrinterService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +21,9 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import slgp.gastrosoftware.model.*;
+import slgp.gastrosoftware.model.BestellPosition;
+import slgp.gastrosoftware.model.Bestellung;
+import slgp.gastrosoftware.model.TischRechnung;
 
 public class PDFPrinter extends UnicastRemoteObject implements PrinterService {
 

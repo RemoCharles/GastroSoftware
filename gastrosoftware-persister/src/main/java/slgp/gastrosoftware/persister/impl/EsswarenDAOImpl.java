@@ -1,7 +1,7 @@
 package slgp.gastrosoftware.persister.impl;
 
-import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.persister.EsswarenDAO;
+import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 
 import javax.persistence.EntityManager;

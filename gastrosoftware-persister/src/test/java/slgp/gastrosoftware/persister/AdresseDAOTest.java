@@ -14,10 +14,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import slgp.gastrosoftware.persister.util.Util;
-import slgp.gastrosoftware.persister.impl.*;
-import slgp.gastrosoftware.model.*;
+import slgp.gastrosoftware.model.Adresse;
+import slgp.gastrosoftware.persister.impl.AdresseDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
+import slgp.gastrosoftware.persister.util.Util;
 
 public class AdresseDAOTest {
 

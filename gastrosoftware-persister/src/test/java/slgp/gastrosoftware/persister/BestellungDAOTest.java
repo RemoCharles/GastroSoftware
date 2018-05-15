@@ -3,10 +3,9 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
-import slgp.gastrosoftware.model.BestellPosition;
-import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
+import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.util.Util;
 
 import java.time.LocalDate;

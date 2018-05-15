@@ -15,6 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.gastrosoftware.model.*;
+import slgp.gastrosoftware.gastrosoftware.persister.impl.*;
 import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.*;
 import slgp.gastrosoftware.persister.impl.*;

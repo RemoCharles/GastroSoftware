@@ -5,11 +5,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Properties;
 
-import javafx.print.Printer;
+import slgp.gastrosoftware.RMIPersonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.*;
+
 public class RMIServer {
+    //TODO: RMI Konfigurieren
 
     private static Logger logger = LogManager.getLogger(RMIServer.class);
 
@@ -21,23 +24,21 @@ public class RMIServer {
 
     public static void main(String[] args)  {
 
-        // TODO - Entferntes Objekt erstellen und bei dem Namensdienst
-        // (rmiregistry) anmelden (binding)
-
-//        PDFPrinter pdfPrinter = new PrinterService();
+//        System.setProperty("java.security.policy", "file:.checker.policy");
+//        if (System.getSecurityManager() == null) {
+//            System.setSecurityManager(new SecurityManager());
+//        }
 
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
             if (registry != null) {
-//                registry.rebind(PrinterService.TischRechnung_RO, );
+                registry.rebind(RMIPersonService.RO_NAME, registry);
+                JOptionPane.showMessageDialog(null, "Hallo");
+                System.exit(0);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-
-
-        // HINWEIS:
-        // Die Property-Datei musss evtl. angepasst werden ...
     }
 
     private static int getRmiPort() throws Exception {
