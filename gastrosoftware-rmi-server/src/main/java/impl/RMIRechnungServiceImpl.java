@@ -64,4 +64,5 @@ public class RMIRechnungServiceImpl extends UnicastRemoteObject implements RMIRe
     public List<MAAbrechnung> findMAAbrechnungAll() throws Exception {
         return getRechnungService().findMAAbrechnungAll();
     }
+
 }

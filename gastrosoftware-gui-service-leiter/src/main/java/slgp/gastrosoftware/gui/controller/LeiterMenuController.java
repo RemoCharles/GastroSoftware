@@ -14,12 +14,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.persister.EsswarenDAO;
+import slgp.gastrosoftware.RMIKonsumartikelService;
+import slgp.gastrosoftware.RMIMenuService;
+import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.model.Tagesmenu;
-import slgp.gastrosoftware.persister.TagesmenuDAO;
-import slgp.gastrosoftware.persister.impl.EsswarenDAOImpl;
-import slgp.gastrosoftware.persister.impl.TagesmenuDAOImpl;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,10 +28,11 @@ import java.util.ResourceBundle;
 public class LeiterMenuController implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(LeiterMenuController.class);
-	private static TagesmenuDAO tagesmenuDAO = new TagesmenuDAOImpl();
-	private static EsswarenDAO esswarenDAO = new EsswarenDAOImpl();
 
-	@FXML
+  private static RMIKonsumartikelService konsumartikelService = Context.getInstance().getKonsumartikelService();
+    private static RMIMenuService menuService = Context.getInstance().getMenuService();
+
+    @FXML
 	private ComboBox<String> cmbWochentage;
 
 	@FXML
@@ -91,7 +91,7 @@ public class LeiterMenuController implements Initializable {
 			return;
 		}
 		Esswaren esswaren = tblMenu.getSelectionModel().getSelectedItem();
-		List<Tagesmenu> tgList = tagesmenuDAO.findAll();
+		List<Tagesmenu> tgList = menuService.findTagesmenuAll();
 
 		if (esswaren != null) {
 			try {
@@ -99,14 +99,14 @@ public class LeiterMenuController implements Initializable {
 				Tagesmenu tagesmenuVorLoeschen = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), esswarenListObsv);
 				for (Tagesmenu t : tgList){
 					if(t.equals(tagesmenuVorLoeschen)){
-						tagesmenuDAO.delete(t);
+						menuService.tagesmenuLoeschen(t);
 					}
 				}
 				esswarenListObsv.remove(esswaren);
 				tblMenu.setItems(esswarenListObsv);
 				List<Esswaren> tagesMenuList = tblMenu.getItems();
 				Tagesmenu tagesmenu = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), tagesMenuList);
-				tagesmenuDAO.save(tagesmenu);
+				menuService.tagesmenuHinzufuegen(tagesmenu);
 
 			} catch (Exception e) {
 				logger.error("Fehler beim Löschen der Essware: ", e);
@@ -143,12 +143,12 @@ public class LeiterMenuController implements Initializable {
 			if(tagesMenuList.size() == 0){
 				lblError.setText("Dieses Tagesmenü enthält keine Elemente.");
 			}
-				List<Tagesmenu> tagesMenuListDB = tagesmenuDAO.findyByWochenTag(wochenTag);
+				List<Tagesmenu> tagesMenuListDB = menuService.findyTagesmenuByWochenTag(wochenTag);
 				Tagesmenu tagesmenu = new Tagesmenu(wochenTag, tagesMenuList);
 				for(Tagesmenu t : tagesMenuListDB){
-						tagesmenuDAO.delete(t);
+						menuService.tagesmenuLoeschen(t);
 				}
-				tagesmenuDAO.save(tagesmenu);
+				menuService.tagesmenuHinzufuegen(tagesmenu);
 				System.out.println(tagesmenu);
 
 		} catch (Exception e) {
@@ -181,7 +181,7 @@ public class LeiterMenuController implements Initializable {
 
 	public void tabelleLaden() throws Exception {
 		tagesmenuLaden();
-		List<Esswaren> esswarenList = esswarenDAO.findAll();
+		List<Esswaren> esswarenList = konsumartikelService.findEsswarenAll();
 		List<Esswaren> esswarenListTemp = new ArrayList<>();
 		for(Esswaren e : esswarenList){
 			if(e.getVerfuegbar()){
@@ -199,7 +199,7 @@ public class LeiterMenuController implements Initializable {
 		try {
 			lblError.setText("");
 			String wochenTag = cmbWochentage.getSelectionModel().getSelectedItem();
-			List<Tagesmenu> tagesMenuList = tagesmenuDAO.findyByWochenTag(wochenTag);
+			List<Tagesmenu> tagesMenuList = menuService.findyTagesmenuByWochenTag(wochenTag);
 			ObservableList<Esswaren> tagesMenuListObsv = FXCollections.observableArrayList();
 			for (Tagesmenu tagM : tagesMenuList) {
 					tagesMenuListObsv.addAll(tagM.getListeKonsumartikel());

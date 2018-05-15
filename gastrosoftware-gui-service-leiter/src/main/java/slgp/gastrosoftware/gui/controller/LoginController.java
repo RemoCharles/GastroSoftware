@@ -11,12 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import slgp.gastrosoftware.model.Mitarbeiter;
-import slgp.gastrosoftware.persister.MitarbeiterDAO;
-import slgp.gastrosoftware.persister.impl.LoginDAOImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
-import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
+import slgp.gastrosoftware.RMIPersonService;
+import slgp.gastrosoftware.gui.Context;
+import slgp.gastrosoftware.model.Mitarbeiter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,8 +24,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     @FXML
-    // Variablen
-            Button genLogi;
+    Button genLogi;
 
     @FXML
     private TextField genBenu;
@@ -43,7 +41,8 @@ public class LoginController implements Initializable {
     @FXML
     private Button genAbbr;
 
-    private static MitarbeiterDAO mitarbeiterDAO = new MitarbeiterDAOImpl();
+    private static RMIPersonService personService = Context.getInstance().getPersonService();
+
     private static Logger logger = (Logger) LogManager.getLogger(LoginController.class);
 
     @Override
@@ -56,11 +55,9 @@ public class LoginController implements Initializable {
     private void loginaction(ActionEvent event) throws Exception {
         logger.info("Login Button gedrückt");
 
-        LoginDAOImpl loginDAO = new LoginDAOImpl();
+        if (personService.pruefeLogin(genBenu.getText(), genPass.getText())) {
 
-        if (loginDAO.pruefeLogin(genBenu.getText(), genPass.getText())) {
-
-            if ("Kuechenpersonal".equals(loginDAO.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
+            if ("Kuechenpersonal".equals(personService.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
                 logger.info("Ansicht Küche wird geladen");
                 Parent kueche_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
                 Scene kueche_interface_scene = new Scene(kueche_interface_parent);
@@ -68,13 +65,13 @@ public class LoginController implements Initializable {
                 kueche_stage.setScene(kueche_interface_scene);
                 kueche_stage.show();
 
-            } else if ("Servicepersonal".equals(loginDAO.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
+            } else if ("Servicepersonal".equals(personService.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
                 logger.info("Ansicht Service wird geladen");
                 Parent ma_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/MaInterface.fxml"));
                 Scene ma_interface_scene = new Scene(ma_interface_parent);
                 Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                Mitarbeiter mitarbeiter = mitarbeiterDAO.findByUsername(genBenu.getText());
+                Mitarbeiter mitarbeiter = personService.findMitarbeiterByUsername(genBenu.getText());
                 //controller.setMitarbeiter(mitarbeiter);
 
                 ContextMitarbeiter.getInstance().setMitarbeiter(mitarbeiter);
@@ -82,7 +79,7 @@ public class LoginController implements Initializable {
                 ma_stage.setScene(ma_interface_scene);
                 ma_stage.show();
 
-            } else if ("Barpersonal".equals(loginDAO.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
+            } else if ("Barpersonal".equals(personService.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
                 logger.info("Ansicht Bar wird geladen");
                 Parent bar_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/BarInterface.fxml"));
                 Scene bar_interface_scene = new Scene(bar_interface_parent);
@@ -90,7 +87,7 @@ public class LoginController implements Initializable {
                 bar_stage.setScene(bar_interface_scene);
                 bar_stage.show();
 
-            } else if ("Leiter".equals(loginDAO.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
+            } else if ("Leiter".equals(personService.getFunktionPerson(genBenu.getText(), genPass.getText()))) {
                 logger.info("Ansicht Leiter wird geladen");
                 Parent leiter_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterInterface.fxml"));
                 Scene leiter_interface_scene = new Scene(leiter_interface_parent);

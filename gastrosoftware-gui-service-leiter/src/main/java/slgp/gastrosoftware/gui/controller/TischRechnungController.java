@@ -17,15 +17,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.persister.BestellPositionDAO;
+import slgp.gastrosoftware.*;
+import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.TischRechnung;
-import slgp.gastrosoftware.persister.TischRechnungDAO;
-import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
-import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
-import slgp.gastrosoftware.persister.impl.KonsumartikelDAOImpl;
-import slgp.gastrosoftware.persister.impl.TischRechnungDAOImpl;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -35,10 +31,10 @@ import java.util.ResourceBundle;
 
 public class TischRechnungController implements Initializable {
     private static final Logger logger = LogManager.getLogger(TischRechnungController.class);
-    private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
-    private static KonsumartikelDAOImpl konsumartikelDAO = new KonsumartikelDAOImpl();
-    private static BestellungDAOImpl bestellungDAO = new BestellungDAOImpl();
-    private static TischRechnungDAO tischRechnungDAO = new TischRechnungDAOImpl();
+
+    private static RMIBestellService bestellService = Context.getInstance().getBestellService();
+    private static RMIRechnungService rechnungService = Context.getInstance().getRechnungService();
+
     @FXML
     private ComboBox<String> cmbKat;
 
@@ -103,7 +99,7 @@ public class TischRechnungController implements Initializable {
         //Bestellungen find by Tischnummer (v query finden)
         try {
 
-            List<Bestellung> bestellungList = bestellungDAO.findByTischNummer(getTischNummer());
+            List<Bestellung> bestellungList = bestellService.findBestellungByTischNummer(getTischNummer());
             System.out.println(getTischNummer());
 
             for (Bestellung b2 : bestellungList) {
@@ -130,7 +126,6 @@ public class TischRechnungController implements Initializable {
                 fxmlSumme.setText("0");
             }
 
-            //List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
 
             bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
             bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
@@ -157,9 +152,9 @@ public class TischRechnungController implements Initializable {
             for (Bestellung b : bestellungListTemp) {
                 b.setBezahlt(true);
                 TischRechnung tr = new TischRechnung(LocalDate.now(), bestellungListTemp);
-                tischRechnungDAO.save(tr);
+                rechnungService.tischRechnungHinzufuegen(tr);
                 logger.info(tr);
-                bestellungDAO.update(b);
+                bestellService.bestellungAktualisieren(b);
             }
             updateTable();
         } catch (Exception e) {
@@ -169,7 +164,7 @@ public class TischRechnungController implements Initializable {
     }
 
     @FXML
-    public void rechnungDrucken(){
+    public void rechnungDrucken() {
     }
 
     @FXML

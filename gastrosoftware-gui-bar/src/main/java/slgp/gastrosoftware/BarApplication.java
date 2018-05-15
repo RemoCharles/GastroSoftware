@@ -20,16 +20,6 @@ public class BarApplication extends javafx.application.Application {
 	}
 
 	public static void main(String[] args) throws Exception {
-//		Util.resetDb();
-////		Util.erstellePersonenListe();
-////		Util.createKonsumartikelListe();
-////		Util.createBestellPositionAlleKonsumartikel();
-////		//Util.createBestellungListe();
-////		List<Bestellung> liste = Util.createBestellungListe();
-////		for(Bestellung b : liste) {
-////			logger.info(b);
-////		}
-////		Util.createTischRechnung();
 		launch(args);
 	}
 }

@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+//TODO: Tischnummerierung definieren
+
 public class TerrasseController implements Initializable{
 
 

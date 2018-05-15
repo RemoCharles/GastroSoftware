@@ -6,13 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
-import slgp.gastrosoftware.persister.MitarbeiterDAO;
-import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
+import slgp.gastrosoftware.RMIPersonService;
 import slgp.gastrosoftware.model.Mitarbeiter;
 
 public class ServiceLeiterApplication extends javafx.application.Application {
     private static Logger logger = (Logger) LogManager.getLogger(ServiceLeiterApplication.class);
 
+    private static RMIPersonService personService = Context.getInstance().getPersonService();
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
@@ -23,21 +23,8 @@ public class ServiceLeiterApplication extends javafx.application.Application {
     }
 
     public static void main(String[] args) throws Exception {
-//		Util.resetDb();
-//		Util.erstellePersonenListe();
-//		Util.createKonsumartikelListe();
-//		Util.createBestellPositionAlleKonsumartikel();
-//		//Util.createBestellungListe();
-//
-//		List<Bestellung> liste = Util.createBestellungListe();
-//		for(Bestellung b : liste) {
-//			logger.info(b);
-//		}
-//		Util.createTischRechnung();
 
-
-        MitarbeiterDAO mitarbeiterDAO = new MitarbeiterDAOImpl();
-        for (Mitarbeiter mitarbeiter : mitarbeiterDAO.findAll()) {
+        for (Mitarbeiter mitarbeiter : personService.findMitarbeiterAll()) {
             logger.info(mitarbeiter);
         }
         launch(args);
