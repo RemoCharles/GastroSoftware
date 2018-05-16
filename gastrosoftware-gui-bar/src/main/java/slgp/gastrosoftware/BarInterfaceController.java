@@ -30,7 +30,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class BarInterfaceController implements Initializable {
     private static final Logger logger = LogManager.getLogger(BarInterfaceController.class);
 
-    private BestellManager bestellManager = BestellManager.getInstance();
+    private RMIBestellService bestellService = Context.getInstance().getBestellService();
 
     @FXML
     private Button btBereit;
@@ -68,7 +68,7 @@ public class BarInterfaceController implements Initializable {
         if (bP != null) {
             try {
                 bP.setZubereitet(true);
-                bestellManager.bestellPositionAktualisieren(bP);
+                bestellService.bestellPositionAktualisieren(bP);
                 tabelleBefuellen();
             } catch (Exception e) {
                 logger.info("Bestellposition konnte nicht aktualisiert werden...");
@@ -85,7 +85,7 @@ public class BarInterfaceController implements Initializable {
     private void tabelleBefuellen() throws Exception {
         /* Bestellung initialisieren */
         logger.info("Tabelle befüllen wurde ausgeführt");
-        List<Bestellung> alleBestellungenListe = bestellManager.findBestellungAll();
+        List<Bestellung> alleBestellungenListe = bestellService.findBestellungAll();
         logger.info(alleBestellungenListe.size());
         for (Bestellung bestellung : alleBestellungenListe) {
             logger.info(bestellung);
