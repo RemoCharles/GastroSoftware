@@ -1,4 +1,3 @@
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,16 +9,16 @@ import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
-public class KuecheApplication extends Application {
+public class KuecheApplication extends javafx.application.Application {
     private static Logger logger = (Logger) LogManager.getLogger(KuecheApplication.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
-        primaryStage.setTitle("Gastro Software");
+        primaryStage.setTitle("Gastro Software - Küche");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 900, 600));
-        primaryStage.getIcons().add(new Image("restaurant.png"));
+        primaryStage.getIcons().add(new Image("/restaurant.png"));
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

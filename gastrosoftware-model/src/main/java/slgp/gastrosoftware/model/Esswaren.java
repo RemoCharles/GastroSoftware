@@ -7,8 +7,6 @@ import javax.persistence.*;
         @NamedQuery(name = "Esswaren.findAll", query = "SELECT e FROM Esswaren e")})
 public class Esswaren extends Konsumartikel{
 
-    private static final long serialVersionUID = 7396730561410576340L;
-
     public Esswaren() {
     }
 

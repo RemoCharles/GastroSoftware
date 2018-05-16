@@ -11,7 +11,6 @@ import java.io.Serializable;
         @NamedQuery(name = "Konsumartikel.findAll", query = "SELECT e FROM Konsumartikel e")})
 
 public class Konsumartikel implements Serializable {
-    private static final long serialVersionUID = 5196825761525651581L;
     @Id
     @GeneratedValue
     private int id;

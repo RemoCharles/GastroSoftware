@@ -9,7 +9,9 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "MAAbrechnung.findAll", query = "SELECT e FROM MAAbrechnung e")})
 public class MAAbrechnung extends Rechnung {
-    private static final long serialVersionUID = -5039934739503932388L;
+
+    //@OneToMany(fetch=FetchType.EAGER)
+    //private List<TischRechnung> tischRechnungList;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List <Bestellung> mitarbeiterBestellungList;

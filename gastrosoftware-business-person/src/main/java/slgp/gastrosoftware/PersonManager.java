@@ -1,14 +1,17 @@
 package slgp.gastrosoftware;
 
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.model.Login;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.model.Person;
 
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
+import slgp.gastrosoftware.persister.LoginDAO;
 import slgp.gastrosoftware.persister.MitarbeiterDAO;
 import slgp.gastrosoftware.persister.PersonDAO;
+import slgp.gastrosoftware.persister.impl.LoginDAOImpl;
 import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
 import slgp.gastrosoftware.persister.impl.PersonDAOImpl;
 
@@ -21,6 +24,15 @@ public class PersonManager implements PersonService {
 
     public static PersonManager getInstance() {
         return INSTANCE;
+    }
+
+    private LoginDAO loginDAO;
+
+    public LoginDAO getLoginDAO() {
+        if(loginDAO== null) {
+            loginDAO = new LoginDAOImpl();
+        }
+        return loginDAO;
     }
 
     private PersonDAO personDAO;
@@ -41,6 +53,59 @@ public class PersonManager implements PersonService {
         }
         return mitarbeiterDAO;
     }
+
+    @Override
+    public boolean pruefeLogin(String username, String passwort) throws Exception {
+        try {
+            return getLoginDAO().pruefeLogin(username, passwort);
+        } catch (Exception e) {
+            String msg = "Es konnte kein Login gefunden werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }    }
+
+    @Override
+    public String getFunktionPerson(String username, String passwort) throws Exception {
+        try {
+            return getLoginDAO().getFunktionPerson(username, passwort);
+        } catch (Exception e) {
+            String msg = "Es Konnte keine Funktion gefunden werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public List<Login> findLoginAll() throws Exception {
+        try {
+            return getLoginDAO().findAll();
+        } catch (Exception e) {
+            String msg = "Es Konnte kein Login gefunden werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public List<Person> findPersonAll() throws Exception {
+        try {
+            return getPersonDAO().findAll();
+        } catch (Exception e) {
+            String msg = "Es Konnte keine Person gefunden werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }
+    }
+
+    @Override
+    public List<Mitarbeiter> findMitarbeiterAll() throws Exception {
+        try {
+            return getMitarbeiterDAO().findAll();
+        } catch (Exception e) {
+            String msg = "Es Konnte kein Mitarbeiter gefunden werden";
+            logger.error(msg, e);
+            throw new Exception(msg);
+        }    }
 
     @Override
     public Person personHinzufuegen(Person person) throws Exception {

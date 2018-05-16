@@ -23,23 +23,5 @@
         <module name="gastrosoftware-rmi-Server" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="GastroSoftware" target="1.8" />
-      <module name="gastrosoftware-api" target="1.8" />
-      <module name="gastrosoftware-business-bestellung" target="1.8" />
-      <module name="gastrosoftware-business-initializer" target="1.8" />
-      <module name="gastrosoftware-business-konsumartikel" target="1.8" />
-      <module name="gastrosoftware-business-menu" target="1.8" />
-      <module name="gastrosoftware-business-person" target="1.8" />
-      <module name="gastrosoftware-business-rechnung" target="1.8" />
-      <module name="gastrosoftware-gui-bar" target="1.8" />
-      <module name="gastrosoftware-gui-kueche" target="1.8" />
-      <module name="gastrosoftware-gui-service-leiter" target="1.8" />
-      <module name="gastrosoftware-model" target="1.8" />
-      <module name="gastrosoftware-pdfprinter" target="1.8" />
-      <module name="gastrosoftware-persister" target="1.8" />
-      <module name="gastrosoftware-rmi-api" target="1.8" />
-      <module name="gastrosoftware-rmi-Server" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -15,8 +15,6 @@ import java.util.Objects;
 public class Mitarbeiter extends Person {
 
 
-    private static final long serialVersionUID = 6097417211785233996L;
-
     public Mitarbeiter(String name, String vorname, String funktion, Adresse adresse, Kontakt kontakt, Login login) {
         super(name, vorname, funktion, adresse, kontakt, login);
     }

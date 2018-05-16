@@ -10,12 +10,10 @@ import java.util.Objects;
 })
 
 public class BestellPosition implements Serializable {
-
-    private static final long serialVersionUID = 8609869317923782909L;
     @Id
     @GeneratedValue
     private int id;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.PERSIST)
     private Konsumartikel konsumartikel;
     private int anzahl;
     private double betrag;
@@ -26,21 +24,20 @@ public class BestellPosition implements Serializable {
     }
 
 
-
     public BestellPosition(Konsumartikel konsumartikel, int anzahl) {
         this.konsumartikel = konsumartikel;
         this.anzahl = anzahl;
-        betrag = konsumartikel.getPreis()*anzahl;
+        betrag = konsumartikel.getPreis() * anzahl;
     }
 
     public BestellPosition(Konsumartikel konsumartikel) {
         this.konsumartikel = konsumartikel;
         anzahl = 0;
-        betrag = konsumartikel.getPreis()*anzahl;
+        betrag = konsumartikel.getPreis() * anzahl;
     }
 
     public void berechneBetrag() {
-        betrag = konsumartikel.getPreis()*anzahl;
+        betrag = konsumartikel.getPreis() * anzahl;
     }
 
     public double getBetrag() {
@@ -55,15 +52,15 @@ public class BestellPosition implements Serializable {
         return zubereitet;
     }
 
-    public String getBezeichnung(){
+    public String getBezeichnung() {
         return konsumartikel.getBezeichnung();
     }
 
-    public double getPreis(){
+    public double getPreis() {
         return konsumartikel.getPreis();
     }
 
-    public String getKategorie(){
+    public String getKategorie() {
         return konsumartikel.getKategorie();
     }
 
@@ -83,13 +80,21 @@ public class BestellPosition implements Serializable {
         this.anzahl = anzahl;
     }
 
-    public int getTischNummer() { return tischNummer;}
+    public int getTischNummer() {
+        return tischNummer;
+    }
 
-    public void setTischNummer(int tischNummer) { this.tischNummer = tischNummer;}
+    public void setTischNummer(int tischNummer) {
+        this.tischNummer = tischNummer;
+    }
 
-    public boolean getZubereitet() {return zubereitet;}
+    public boolean getZubereitet() {
+        return zubereitet;
+    }
 
-    public void setZubereitet(boolean zubereitet) {this.zubereitet = zubereitet;}
+    public void setZubereitet(boolean zubereitet) {
+        this.zubereitet = zubereitet;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -114,7 +119,7 @@ public class BestellPosition implements Serializable {
                 '}';
     }
 
-    public double getBerechneterPreis(){
+    public double getBerechneterPreis() {
         double kumulierterPreis = this.anzahl * this.konsumartikel.getPreis();
         return kumulierterPreis;
     }

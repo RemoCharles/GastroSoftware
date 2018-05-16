@@ -10,7 +10,6 @@ import java.util.Objects;
         @NamedQuery(name = "Tagesmenu.findyByWochenTag", query = "SELECT e FROM Tagesmenu e WHERE e.wochenTag=:wochenTag"),
         @NamedQuery(name = "Tagesmenu.findAll", query = "SELECT e FROM Tagesmenu e")})
 public class Tagesmenu implements Serializable {
-    private static final long serialVersionUID = -1545250198197193445L;
     @Id
     @GeneratedValue
     private int id;

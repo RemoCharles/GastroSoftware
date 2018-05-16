@@ -15,56 +15,56 @@
       </Text>
       <ButtonBar layoutX="211.0" layoutY="133.0" prefHeight="35.0" prefWidth="435.0" scaleX="2.0" scaleY="2.0" snapToPixel="false">
         <buttons>
-            <Button id="51" mnemonicParsing="false" onAction="#tischAction" text="51" />
-          <Button id="52" mnemonicParsing="false" onAction="#tischAction" text="52" />
-            <Button id="53" mnemonicParsing="false" onAction="#tischAction" text="53" />
-            <Button id="54" mnemonicParsing="false" onAction="#tischAction" text="54" />
-            <Button id="55" mnemonicParsing="false" onAction="#tischAction" text="55" />
+            <Button id="51" mnemonicParsing="false" onAction="#tischAction" text="1" />
+          <Button id="52" mnemonicParsing="false" onAction="#tischAction" text="2" />
+            <Button id="53" mnemonicParsing="false" onAction="#tischAction" text="3" />
+            <Button id="54" mnemonicParsing="false" onAction="#tischAction" text="4" />
+            <Button id="55" mnemonicParsing="false" onAction="#tischAction" text="5" />
         </buttons>
       </ButtonBar>
       <ButtonBar layoutX="211.0" layoutY="210.0" prefHeight="40.0" prefWidth="310.0" scaleX="2.0" scaleY="2.0">
         <buttons>
-            <Button id="56" mnemonicParsing="false" onAction="#tischAction" text="56" />
-            <Button id="57" mnemonicParsing="false" onAction="#tischAction" text="57" />
-            <Button id="58" mnemonicParsing="false" onAction="#tischAction" text="58" />
-            <Button id="59" mnemonicParsing="false" onAction="#tischAction" text="59" />
-            <Button id="60" mnemonicParsing="false" onAction="#tischAction" text="60" />
+            <Button id="56" mnemonicParsing="false" onAction="#tischAction" text="6" />
+            <Button id="57" mnemonicParsing="false" onAction="#tischAction" text="7" />
+            <Button id="58" mnemonicParsing="false" onAction="#tischAction" text="8" />
+            <Button id="59" mnemonicParsing="false" onAction="#tischAction" text="9" />
+            <Button id="60" mnemonicParsing="false" onAction="#tischAction" text="10" />
         </buttons>
       </ButtonBar>
       <ButtonBar layoutX="211.0" layoutY="289.0" prefHeight="38.0" prefWidth="435.0" scaleX="2.0" scaleY="2.0">
         <buttons>
-          <Button id="61" mnemonicParsing="false" onAction="#tischAction" text="61" />
-            <Button id="62" mnemonicParsing="false" onAction="#tischAction" text="62" />
-            <Button id="63" mnemonicParsing="false" onAction="#tischAction" text="63" />
-            <Button id="64" mnemonicParsing="false" onAction="#tischAction" text="64" />
-            <Button id="65" mnemonicParsing="false" onAction="#tischAction" text="65" />
+          <Button id="61" mnemonicParsing="false" onAction="#tischAction" text="11" />
+            <Button id="62" mnemonicParsing="false" onAction="#tischAction" text="12" />
+            <Button id="63" mnemonicParsing="false" onAction="#tischAction" text="13" />
+            <Button id="64" mnemonicParsing="false" onAction="#tischAction" text="14" />
+            <Button id="65" mnemonicParsing="false" onAction="#tischAction" text="15" />
         </buttons>
       </ButtonBar>
       <ButtonBar layoutX="211.0" layoutY="366.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
         <buttons>
-            <Button id="66" mnemonicParsing="false" onAction="#tischAction" text="66" />
-          <Button id="67" mnemonicParsing="false" onAction="#tischAction" text="67" />
-            <Button id="68" mnemonicParsing="false" onAction="#tischAction" text="68" />
-            <Button id="69" mnemonicParsing="false" onAction="#tischAction" text="69" />
-            <Button id="70" mnemonicParsing="false" onAction="#tischAction" text="70" />
+            <Button id="66" mnemonicParsing="false" onAction="#tischAction" text="16" />
+          <Button id="67" mnemonicParsing="false" onAction="#tischAction" text="17" />
+            <Button id="68" mnemonicParsing="false" onAction="#tischAction" text="18" />
+            <Button id="69" mnemonicParsing="false" onAction="#tischAction" text="19" />
+            <Button id="70" mnemonicParsing="false" onAction="#tischAction" text="20" />
         </buttons>
       </ButtonBar>
         <ButtonBar layoutX="211.0" layoutY="443.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
         <buttons>
-            <Button id="71" mnemonicParsing="false" onAction="#tischAction" text="71" />
-          <Button id="72" mnemonicParsing="false" onAction="#tischAction" text="72" />
-            <Button id="73" mnemonicParsing="false" onAction="#tischAction" text="73" />
-            <Button id="74" mnemonicParsing="false" onAction="#tischAction" text="74" />
-            <Button id="75" mnemonicParsing="false" onAction="#tischAction" text="75" />
+            <Button id="71" mnemonicParsing="false" onAction="#tischAction" text="21" />
+          <Button id="72" mnemonicParsing="false" onAction="#tischAction" text="22" />
+            <Button id="73" mnemonicParsing="false" onAction="#tischAction" text="23" />
+            <Button id="74" mnemonicParsing="false" onAction="#tischAction" text="24" />
+            <Button id="75" mnemonicParsing="false" onAction="#tischAction" text="25" />
         </buttons>
       </ButtonBar>
       <ButtonBar layoutX="211.0" layoutY="520.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
         <buttons>
-            <Button id="76" mnemonicParsing="false" onAction="#tischAction" text="76" />
-          <Button id="77" mnemonicParsing="false" onAction="#tischAction" text="77" />
-            <Button id="78" mnemonicParsing="false" onAction="#tischAction" text="78" />
-            <Button id="79" mnemonicParsing="false" onAction="#tischAction" text="79" />
-            <Button id="80" mnemonicParsing="false" onAction="#tischAction" text="80" />
+            <Button id="76" mnemonicParsing="false" onAction="#tischAction" text="26" />
+          <Button id="77" mnemonicParsing="false" onAction="#tischAction" text="27" />
+            <Button id="78" mnemonicParsing="false" onAction="#tischAction" text="28" />
+            <Button id="79" mnemonicParsing="false" onAction="#tischAction" text="29" />
+            <Button id="80" mnemonicParsing="false" onAction="#tischAction" text="30" />
         </buttons>
       </ButtonBar>
       <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />

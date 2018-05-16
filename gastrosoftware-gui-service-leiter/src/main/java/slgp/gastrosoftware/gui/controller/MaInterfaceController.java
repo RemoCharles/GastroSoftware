@@ -1,20 +1,8 @@
 package slgp.gastrosoftware.gui.controller;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,11 +10,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.*;
+import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.BestellPosition;
-import slgp.gastrosoftware.persister.BestellPositionDAO;
-import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -46,9 +47,10 @@ public class MaInterfaceController implements Initializable{
 	private TableColumn<BestellPosition, Integer> colTisch;
 
 	private static final Logger logger = LogManager.getLogger(MaInterfaceController.class);
-	private static BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
 
-	@Override
+    private static RMIBestellService bestellService = Context.getInstance().getBestellService();
+
+    @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		colBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
 		colTisch.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("tischNummer"));
@@ -60,13 +62,13 @@ public class MaInterfaceController implements Initializable{
 	private void serviert(ActionEvent event) throws Exception{
 		BestellPosition bP = tblBestellungen.getSelectionModel().getSelectedItem();
 		bP.setZubereitet(false);
-		bestellPositionDAO.update(bP);
+		bestellService.bestellPositionHinzufuegen(bP);
 		tabelleFuellen();
 	}
 
 	private void tabelleFuellen() {
 		try {
-			List<BestellPosition> bestellPositionList = bestellPositionDAO.findAll();
+			List<BestellPosition> bestellPositionList = bestellService.findBestellPositionAll();
 			List<BestellPosition> offeneBestellungenList = new ArrayList<>();
 			for (BestellPosition bP : bestellPositionList) {
 				if (bP.getZubereitet()) {

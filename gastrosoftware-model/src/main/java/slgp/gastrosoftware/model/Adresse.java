@@ -9,8 +9,6 @@ import java.util.Objects;
         @NamedQuery(name = "Adresse.findAll", query = "SELECT e FROM Adresse e")})
 public class Adresse implements Serializable {
 
-    private static final long serialVersionUID = 7616866152702125763L;
-
     @Id
     @GeneratedValue
     private int id;

@@ -58,13 +58,11 @@ public class BarInterfaceController implements Initializable {
         }
     }
 
-
     @FXML
     private void artBereit(ActionEvent event) throws Exception {
         if (tblOffeneBest.getSelectionModel().getSelectedItem() == null) {
             return;
         }
-
         BestellPosition bP = tblOffeneBest.getSelectionModel().getSelectedItem();
 
         if (bP != null) {
@@ -86,7 +84,13 @@ public class BarInterfaceController implements Initializable {
 
     private void tabelleBefuellen() throws Exception {
         /* Bestellung initialisieren */
+        logger.info("Tabelle befüllen wurde ausgeführt");
         List<Bestellung> alleBestellungenListe = bestellManager.findBestellungAll();
+        logger.info(alleBestellungenListe.size());
+        for (Bestellung bestellung : alleBestellungenListe) {
+            logger.info(bestellung);
+        }
+
         List<BestellPosition> tempKonsList = new ArrayList<>();
 
         for (Bestellung b : alleBestellungenListe) {
@@ -120,9 +124,6 @@ public class BarInterfaceController implements Initializable {
                 try {
                     tabelleBefuellen();
                     System.out.println("aktualisiert");
-                    for(BestellPosition bestellPosition : bestellManager.findBestellPositionAll()){
-                        logger.info(bestellPosition);
-                    }
                 } catch (Exception e) {
                     logger.info("Tabelle konnte nicht befüllt werden...");
                 }

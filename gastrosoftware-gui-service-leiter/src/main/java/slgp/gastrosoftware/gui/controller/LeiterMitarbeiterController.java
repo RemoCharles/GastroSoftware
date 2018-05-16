@@ -16,11 +16,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.RMIPersonService;
+import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Adresse;
 import slgp.gastrosoftware.model.Kontakt;
 import slgp.gastrosoftware.model.Login;
 import slgp.gastrosoftware.model.Person;
-import slgp.gastrosoftware.persister.impl.PersonDAOImpl;
 
 import java.net.URL;
 import java.util.List;
@@ -30,7 +31,8 @@ import java.util.ResourceBundle;
 public class LeiterMitarbeiterController implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(LeiterMitarbeiterController.class);
-	PersonDAOImpl personDAOTemp = new PersonDAOImpl();
+
+	private static RMIPersonService personService = Context.getInstance().getPersonService();
 
 	@FXML
 	private Label lblError;
@@ -129,7 +131,7 @@ public class LeiterMitarbeiterController implements Initializable {
 				Person personSpeichern = new Person(name, vorname, funktion, new Adresse(strasse, plz, ort), new Kontakt(email, telefon), new Login(username, passwort));
 
 				try {
-					personDAOTemp.save(personSpeichern);
+					personService.personHinzufuegen(personSpeichern);
 					updateTabelle();
 
 			
@@ -158,7 +160,7 @@ public class LeiterMitarbeiterController implements Initializable {
 					person.setLogin(new Login (username, passwort));
 
 					try {
-						personDAOTemp.update(person);
+						personService.personAktualisieren(person);
 						updateTabelle();
 
 					} catch (Exception e){
@@ -198,7 +200,7 @@ public class LeiterMitarbeiterController implements Initializable {
 
 		if (person != null) {
 			try {
-				personDAOTemp.delete(person);
+				personService.personLoeschen(person);
 				updateTabelle();
 			} catch (Exception e) {
 				logger.error("Fehler beim Löschen der Person: ", e);
@@ -237,7 +239,7 @@ public class LeiterMitarbeiterController implements Initializable {
 	public void initialize (URL location, ResourceBundle resources) {
 		try {
 
-			List <Person> allePersonenListe = personDAOTemp.findAll();
+			List <Person> allePersonenListe = personService.findPersonAll();
 
 			colNummer.setCellValueFactory(new PropertyValueFactory<Person, Integer>("nummer"));
 			colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
@@ -276,7 +278,7 @@ public class LeiterMitarbeiterController implements Initializable {
 	private void updateTabelle() {
 		try {
 
-			List <Person> allePersonenListe = personDAOTemp.findAll();
+			List <Person> allePersonenListe = personService.findPersonAll();
 
 			tblPerson.getItems().clear();
 			tblPerson.getItems().addAll(allePersonenListe);

@@ -12,7 +12,6 @@ import java.util.Objects;
         @NamedQuery(name = "Rechnung.findAll", query = "SELECT e FROM Rechnung e")})
 
 public class Rechnung implements Serializable {
-    private static final long serialVersionUID = 1627453629034804350L;
     @Id
     @GeneratedValue
     private int id;

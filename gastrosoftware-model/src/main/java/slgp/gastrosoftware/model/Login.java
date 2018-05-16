@@ -15,7 +15,6 @@ import javax.persistence.NamedQuery;
         @NamedQuery(name = "Login.findAll", query = "SELECT e FROM Login e")})
 public class Login implements Serializable {
 
-    private static final long serialVersionUID = 5702603508046138354L;
     @Id
     @GeneratedValue
     private int id;
@@ -33,15 +32,12 @@ public class Login implements Serializable {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getPasswort() {
         return passwort;
     }
-
     public void setPasswort(String password) {
         this.passwort = passwort;
     }
@@ -59,11 +55,17 @@ public class Login implements Serializable {
             return false;
         }
 
-        Login login = (Login) obj;
-        return this.username.equals(login.username) && this.passwort.equals(login.passwort);
+        Login logi = (Login) obj;
+
+        return this.username.equals(logi.username) && this.passwort.equals(logi.passwort);
+
     }
 
     public String toString() {
         return "Login [username=" + username + ", passwort=" + passwort + "]";
     }
+
+
+
+
 }

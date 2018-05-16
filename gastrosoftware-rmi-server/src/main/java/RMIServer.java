@@ -1,17 +1,16 @@
-package slgp.gastrosoftware;
-
+import impl.*;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
-import javafx.stage.WindowEvent;
-import slgp.gastrosoftware.impl.*;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.*;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -31,6 +30,11 @@ public class RMIServer extends Application {
     private final static int DEFAULT_PORT_NUMMER = 1099;
 
     public static void main(String[] args) {
+        try {
+            startRMI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         launch(args);
     }
 
@@ -64,7 +68,7 @@ public class RMIServer extends Application {
         }
     }
 
-    private void startRMI() throws Exception {
+    private static void startRMI() throws Exception {
 
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
@@ -100,7 +104,7 @@ public class RMIServer extends Application {
         primaryStage.setTitle("Gastro Software");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 300, 200));
-        primaryStage.getIcons().add(new Image("restaurant.png"));
+        primaryStage.getIcons().add(new Image("/restaurant.png"));
         primaryStage.show();
 
         //TODO: Wie registry unbinden nach Window close?

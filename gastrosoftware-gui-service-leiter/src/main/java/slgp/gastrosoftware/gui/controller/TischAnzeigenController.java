@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class TischAnzeigenController /*implements Initializable*/ {
+public class TischAnzeigenController {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
 
     private static RMIPersonService personService = Context.getInstance().getPersonService();
@@ -181,9 +181,6 @@ public class TischAnzeigenController /*implements Initializable*/ {
             bestellService.bestellungHinzufuegen(bestellung);
             logger.info(bestellung);
         }
-
-        //Mitarbeiter mitarbeiter, Tisch tisch, List<BestellPosition> bestellPositionList, boolean zubereitet, boolean bezahlt, LocalDate datum
-
 
     }
 

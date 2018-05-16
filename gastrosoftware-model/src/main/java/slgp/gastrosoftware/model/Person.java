@@ -24,7 +24,6 @@ import javax.persistence.OneToOne;
 
 public class Person implements Serializable {
 
-    private static final long serialVersionUID = 8384793184683358592L;
     @Id
     @GeneratedValue
     private int id;

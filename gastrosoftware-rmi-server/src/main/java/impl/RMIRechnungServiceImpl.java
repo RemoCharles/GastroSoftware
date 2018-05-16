@@ -1,4 +1,4 @@
-package slgp.gastrosoftware.impl;
+package impl;
 
 import slgp.RechnungManager;
 import slgp.gastrosoftware.RMIRechnungService;
@@ -64,4 +64,5 @@ public class RMIRechnungServiceImpl extends UnicastRemoteObject implements RMIRe
     public List<MAAbrechnung> findMAAbrechnungAll() throws Exception {
         return getRechnungService().findMAAbrechnungAll();
     }
+
 }

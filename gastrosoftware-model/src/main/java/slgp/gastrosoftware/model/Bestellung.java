@@ -15,7 +15,6 @@ import java.util.Objects;
         @NamedQuery(name = "Bestellung.findByTischNummer", query = "SELECT e FROM Bestellung e WHERE e.tisch.tischNummer=:tischNummer")})
 
 public class Bestellung implements Serializable {
-    private static final long serialVersionUID = -8450132561848108867L;
     @Id
     @GeneratedValue
     private int id;

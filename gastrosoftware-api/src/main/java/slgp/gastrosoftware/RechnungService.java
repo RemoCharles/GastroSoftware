@@ -7,6 +7,8 @@ import slgp.gastrosoftware.model.MAAbrechnung;
 import java.util.List;
 
 public interface RechnungService {
+
+
     /**
      * Speichert neue Tischrechnung
      *
@@ -72,4 +74,8 @@ public interface RechnungService {
      * @throws Exception
      */
     List<MAAbrechnung> findMAAbrechnungAll() throws Exception;
+
+
+
+
 }

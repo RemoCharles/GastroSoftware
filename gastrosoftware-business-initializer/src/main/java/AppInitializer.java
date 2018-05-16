@@ -157,7 +157,7 @@ public class AppInitializer {
 
     private static void initTisch() throws Exception {
         TischDAO tischDAO = new TischDAOImpl();
-        for (int i = 1; i<101; i++) {
+        for (int i = 1; i<110; i++) {
             Tisch tisch = new Tisch(i);
             tischDAO.save(tisch);
         }

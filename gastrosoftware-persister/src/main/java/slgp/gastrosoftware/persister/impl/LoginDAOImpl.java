@@ -55,7 +55,6 @@ public class LoginDAOImpl extends GenericPersisterDAOImpl<Login> implements Logi
     }
 
     public String getFunktionPerson(String username, String passwort) throws Exception {
-        logger.info("DAO wurde aufgerufen");
         EntityManager em = JpaUtil.createEntityManager();
 
         TypedQuery<Person> query = em.createNamedQuery("Person.findByUsername", Person.class);

@@ -1,7 +1,5 @@
 package slgp.gastrosoftware.persister.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.*;
 import slgp.gastrosoftware.persister.impl.*;
 import slgp.gastrosoftware.persister.*;
@@ -12,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Util {
-    private static Logger logger = LogManager.getLogger(JpaUtil.class);
 
     public static final int INIT_SIZE_PERSONEN = 3;
     public static final int INIT_SIZE_ESSWAREN = 3;
@@ -66,9 +63,8 @@ public class Util {
     }
 
     public static void deleteAllEsswaren() throws Exception {
-        EsswarenDAO pEsswaren = new EsswarenDAOImpl();
+        EsswarenDAO pEsswaren = (EsswarenDAO) new EsswarenDAOImpl();
         for (Esswaren e : pEsswaren.findAll()) {
-            logger.info(e);
             pEsswaren.delete(e);
         }
     }
@@ -88,10 +84,10 @@ public class Util {
     }
 
     public static void deleteAllGetraenke() throws Exception {
-        GetraenkeDAO getraenkeDAO = new GetraenkeDAOImpl();
-            for (Getraenke g : getraenkeDAO.findAll()) {
-                getraenkeDAO.delete(g);
-            }
+        GetraenkeDAO pGetraenke = new GetraenkeDAOImpl();
+        for (Getraenke g : pGetraenke.findAll()) {
+            pGetraenke.delete(g);
+        }
     }
 
     public static List<Konsumartikel> createKonsumartikelListe() throws Exception {

@@ -9,7 +9,6 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Menukarte.findAll", query = "SELECT e FROM Menukarte e")})
 public class Menukarte implements Serializable {
-    private static final long serialVersionUID = 8582546833847000408L;
     @Id
     @GeneratedValue
     private int id;
