@@ -114,8 +114,8 @@ public class BestellPosition implements Serializable {
     public String toString() {
         return "BestellPosition{" +
                 "Konsumartikel=" + konsumartikel +
-                ", anzahl=" + anzahl +
-                ", betrag=" + betrag +
+                ", Anzahl=" + anzahl +
+                ", Betrag=" + betrag +
                 '}';
     }
 

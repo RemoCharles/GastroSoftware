@@ -12,7 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.BestellManager;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.Getraenke;

@@ -1,3 +1,6 @@
+package slgp.gastrosoftware.gui;
+
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +12,7 @@ import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
-public class KuecheApplication extends javafx.application.Application {
+public class KuecheApplication extends Application {
     private static Logger logger = (Logger) LogManager.getLogger(KuecheApplication.class);
 
     @Override

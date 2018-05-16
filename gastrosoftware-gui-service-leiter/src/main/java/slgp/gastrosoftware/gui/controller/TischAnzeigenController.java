@@ -169,6 +169,7 @@ public class TischAnzeigenController {
             for (BestellPosition bestellPosition : bestellPositionObservableList) {
                 bestellPosition.setTischNummer(tischNummer);
                 bestellPositionList.add(bestellPosition);
+                logger.info(bestellPosition);
             }
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();

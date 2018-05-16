@@ -11,51 +11,25 @@
 
     <artifactId>gastrosoftware-gui-service-leiter</artifactId>
 
-<dependencies>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-persister</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-model</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-business-initializer</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-pdfprinter</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-business-bestellung</artifactId>
-        <version>1.0</version>
-        <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-business-konsumartikel</artifactId>
-        <version>1.0</version>
-        <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-rmi-api</artifactId>
-        <version>1.0</version>
-        <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>slgp.informatik</groupId>
-        <artifactId>gastrosoftware-rmi-Server</artifactId>
-        <version>1.0</version>
-        <scope>compile</scope>
-    </dependency>
-</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-model</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-rmi-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

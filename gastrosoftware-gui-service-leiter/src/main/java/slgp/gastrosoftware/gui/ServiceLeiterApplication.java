@@ -1,5 +1,6 @@
 package slgp.gastrosoftware.gui;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -8,16 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
-import slgp.gastrosoftware.RMIPersonService;
-import slgp.gastrosoftware.model.Mitarbeiter;
 
-public class ServiceLeiterApplication extends javafx.application.Application {
-    private static Logger logger = (Logger) LogManager.getLogger(ServiceLeiterApplication.class);
-
-    private static RMIPersonService personService = Context.getInstance().getPersonService();
-
+public class ServiceLeiterApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
@@ -37,9 +30,6 @@ public class ServiceLeiterApplication extends javafx.application.Application {
     }
 
     public static void main(String[] args) throws Exception {
-
         launch(args);
-
-
     }
 }

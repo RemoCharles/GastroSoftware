@@ -1,3 +1,5 @@
+package slgp.gastrosoftware.gui;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.RMIBestellService;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.Esswaren;

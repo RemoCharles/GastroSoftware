@@ -1,3 +1,5 @@
+package slgp.gastrosoftware.gui;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.*;

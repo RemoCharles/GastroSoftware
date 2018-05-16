@@ -13,13 +13,19 @@
     <dependencies>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-persister</artifactId>
+            <artifactId>gastrosoftware-model</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-gui-service-leiter</artifactId>
+            <artifactId>gastrosoftware-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-rmi-api</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>

@@ -1,5 +1,6 @@
 package slgp.gastrosoftware;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,7 @@ import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
-public class BarApplication extends javafx.application.Application {
+public class BarApplication extends Application {
 	private static Logger logger = (Logger) LogManager.getLogger(BarApplication.class);
 
 	@Override
