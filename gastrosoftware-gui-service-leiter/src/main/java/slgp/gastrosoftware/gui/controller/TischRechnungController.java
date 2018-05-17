@@ -105,6 +105,8 @@ public class TischRechnungController implements Initializable {
             for (Bestellung b2 : bestellungList) {
                 if (b2.getBezahlt() == false) {
                     bestellungListTemp.add(b2);
+                    String summeText = String.valueOf(b2.berechneSummeBestellPositionList());
+                    fxmlSumme.setText(summeText);
                 }
             }
 
