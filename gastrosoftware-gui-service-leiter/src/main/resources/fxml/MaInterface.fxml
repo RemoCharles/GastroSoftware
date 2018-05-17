@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.gui.controller.MaInterfaceController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="268.0" layoutY="96.0" prefHeight="51.0" prefWidth="364.0" text="Saal oder Terrasse wählen">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Button layoutX="210.0" layoutY="416.0" mnemonicParsing="false" onAction="#saal1Action" prefHeight="69.0" prefWidth="117.0" text="Saal " />
+      <Button layoutX="574.0" layoutY="416.0" mnemonicParsing="false" onAction="#terrasseAction" prefHeight="69.0" prefWidth="117.0" text="Terrasse" />
+      <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" prefHeight="28.0" prefWidth="80.0" text="Logout" />
+      <TableView fx:id="tblBestellungen" layoutX="209.0" layoutY="147.0" prefHeight="249.0" prefWidth="482.0">
+        <columns>
+          <TableColumn fx:id="colBez" prefWidth="401.5" text="Bezeichnung" />
+          <TableColumn fx:id="colTisch" prefWidth="79.5" text="Tisch" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnServiert" layoutX="706.0" layoutY="147.0" mnemonicParsing="false" onAction="#serviert" prefHeight="249.0" prefWidth="80.0" text="serviert" />
+   </children>
+</AnchorPane>

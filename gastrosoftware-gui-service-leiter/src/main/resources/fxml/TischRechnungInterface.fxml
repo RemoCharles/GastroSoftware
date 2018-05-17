@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.gui.controller.TischRechnungController">
+   <children>
+      <Label fx:id="lbltis" layoutX="60.0" layoutY="34.0" prefHeight="36.0" prefWidth="169.0" text="Tischrechnung">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblBestellPosition" layoutX="60.0" layoutY="122.0" prefHeight="294.0" prefWidth="729.0">
+         <columns>
+            <TableColumn fx:id="bPBez" prefWidth="234.0" text="Artikel" />
+            <TableColumn fx:id="bPAnzahl" minWidth="1.0" prefWidth="97.0" text="Anzahl" />
+            <TableColumn fx:id="bPEinzelPreis" prefWidth="235.0" text="Einzelpreis" />
+            <TableColumn fx:id="bPPreis" prefWidth="162.0" text="Preis" />
+         </columns>
+      </TableView>
+      <Button layoutX="811.0" layoutY="27.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
+      <Button fx:id="bezahlt" layoutX="806.0" layoutY="488.0" mnemonicParsing="false" onAction="#rechnungBezahlt" prefHeight="28.0" prefWidth="80.0" text="Bezahlt" />
+      <Label layoutX="449.0" layoutY="488.0" prefHeight="31.0" prefWidth="134.0" text="Summe Total CHF:" />
+      <Label fx:id="lblFxmlSumme" layoutX="614.0" layoutY="488.0" prefHeight="31.0" prefWidth="141.0" />
+      <Button fx:id="berechnen" layoutX="257.0" layoutY="37.0" mnemonicParsing="false" onAction="#tabelleFuellen" prefHeight="31.0" prefWidth="134.0" text="Berechnen" />
+   </children>
+</AnchorPane>

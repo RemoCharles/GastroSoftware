@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.gui.controller.LeiterKonsumartikelController">
+   <children>
+      <Label fx:id="lbltis" layoutX="50.0" layoutY="24.0" prefHeight="36.0" prefWidth="282.0" text="Konsumartikel anpassen">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
+      <Button layoutX="801.0" layoutY="57.0" mnemonicParsing="false" onAction="#loeschen" prefHeight="28.0" prefWidth="80.0" text="Löschen" />
+      <Button fx:id="btnNeu" layoutX="801.0" layoutY="97.0" mnemonicParsing="false" onAction="#neuHinzufuegen" prefHeight="28.0" prefWidth="80.0" text="Neu" />
+      <ComboBox fx:id="cmbKat" layoutX="116.0" layoutY="99.0" onAction="#updateTable" prefHeight="25.0" prefWidth="263.0" AnchorPane.leftAnchor="116.0" />
+      <CheckBox fx:id="cbVerfuegbarkeit" layoutX="406.0" layoutY="103.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="88.0" text="Verfügbar" />
+      <Button fx:id="btReActivate" layoutX="494.0" layoutY="98.0" mnemonicParsing="false" onAction="#reActivate" prefHeight="28.0" prefWidth="150.0" text="Artikel wiederaufnehmen" />
+      <ComboBox fx:id="cmbKategorieKuecheBar" layoutX="56.0" layoutY="530.0" prefHeight="25.0" prefWidth="120.0" />
+      <ComboBox fx:id="cmbKat2" layoutX="176.0" layoutY="530.0" prefWidth="120.0" />
+      <TextField fx:id="lblBez" layoutX="296.0" layoutY="530.0" prefHeight="25.0" prefWidth="355.0" />
+      <TextField fx:id="lblPreis" layoutX="651.0" layoutY="530.0" prefHeight="25.0" prefWidth="120.0" />
+      <Button fx:id="btnSpeichern" layoutX="801.0" layoutY="529.0" mnemonicParsing="false" onAction="#speichern" prefHeight="28.0" prefWidth="80.0" text="Speichern" />
+      <TableView fx:id="tblKonsumartikel" layoutX="46.0" layoutY="135.0" prefHeight="352.0" prefWidth="721.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="46.0">
+        <columns>
+          <TableColumn fx:id="bPKat" prefWidth="87.5" text="Kategorie" />
+          <TableColumn fx:id="bPBez" minWidth="1.0" prefWidth="560.5" text="Bezeichnung" />
+            <TableColumn fx:id="bPPreis" prefWidth="72.5" text="Preis" />
+        </columns>
+      </TableView>
+      <Label layoutX="50.0" layoutY="103.0" prefHeight="17.0" prefWidth="66.0" text="Kategorie:" AnchorPane.leftAnchor="50.0" />
+      <Text layoutX="56.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategorie" textAlignment="CENTER" wrappingWidth="119.99999284744263" />
+      <Text layoutX="296.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bezeichnung" textAlignment="CENTER" wrappingWidth="355.0000123679638" />
+      <Text layoutX="651.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preis" textAlignment="CENTER" wrappingWidth="119.99999955296516" />
+      <Label fx:id="lblError" layoutX="57.0" layoutY="557.0" prefHeight="17.0" prefWidth="238.0" text="Error" textFill="#a90505" />
+   </children>
+</AnchorPane>
