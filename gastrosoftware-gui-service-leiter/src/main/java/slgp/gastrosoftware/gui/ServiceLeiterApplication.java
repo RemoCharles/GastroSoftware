@@ -18,7 +18,7 @@ public class ServiceLeiterApplication extends Application {
         primaryStage.setTitle("Gastro Software");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.getIcons().add(new Image("/restaurant.png"));
+        primaryStage.getIcons().add(new Image("/restaurant_w_bg.png"));
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

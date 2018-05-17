@@ -6,20 +6,18 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="gastrosoftware.api" />
+    <orderEntry type="module" module-name="gastrosoftware-rmi-slgp.gastrosoftware.api" />
     <orderEntry type="module" module-name="gastrosoftware-api" />
     <orderEntry type="module" module-name="gastrosoftware-model" />
     <orderEntry type="module" module-name="gastrosoftware-pdfprinter" />
     <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.9" level="project" />
-    <orderEntry type="library" name="Maven: slgp.informatik:gastrosoftware-rmi-api:1.0" level="project" />
+    <orderEntry type="module" module-name="gastrosoftware-rmi-api" />
     <orderEntry type="module" module-name="gastrosoftware-business-bestellung" />
     <orderEntry type="module" module-name="gastrosoftware-persister" />
-    <orderEntry type="library" name="Maven: slgp.informatik:gastrosoftware-slgp.gastrosoftware.api:1.0" level="project" />
     <orderEntry type="module" module-name="gastrosoftware-business-person" />
     <orderEntry type="module" module-name="gastrosoftware-business-konsumartikel" />
     <orderEntry type="module" module-name="gastrosoftware-business-menu" />

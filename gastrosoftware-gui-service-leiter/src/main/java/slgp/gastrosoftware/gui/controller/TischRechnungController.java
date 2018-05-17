@@ -151,14 +151,14 @@ public class TischRechnungController implements Initializable {
         try {
             logger.info(bestellungListTemp.size());
             for (Bestellung bestellung : bestellungListTemp) {
-//                logger.info(bestellung);
+                logger.info(bestellung);
                 bestellung.setBezahlt(true);
-//                logger.info(bestellung);
+                logger.info(bestellung);
                 bestellService.bestellungAktualisieren(bestellung);
             }
             tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, 2);
             rechnungService.tischRechnungHinzufuegen(tischRechnung);
-//            rechnungDrucken();
+            rechnungDrucken();
             updateTable();
         } catch (Exception e) {
             logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: " + e);

@@ -21,6 +21,11 @@
             <artifactId>gastrosoftware-rmi-Server</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-rmi-api</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>

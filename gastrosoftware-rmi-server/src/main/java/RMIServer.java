@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.*;
 
+
 import java.io.InputStream;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -104,7 +105,7 @@ public class RMIServer extends Application {
         primaryStage.setTitle("Gastro Software");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 300, 200));
-        primaryStage.getIcons().add(new Image("/restaurant.png"));
+        primaryStage.getIcons().add(new Image("/restaurant_w_bg.png"));
         primaryStage.show();
 
         //TODO: Wie registry unbinden nach Window close?

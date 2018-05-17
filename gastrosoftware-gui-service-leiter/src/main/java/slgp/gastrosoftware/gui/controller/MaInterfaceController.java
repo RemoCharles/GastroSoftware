@@ -61,7 +61,7 @@ public class MaInterfaceController implements Initializable{
 	private void serviert(ActionEvent event) throws Exception{
 		BestellPosition bP = tblBestellungen.getSelectionModel().getSelectedItem();
 		bP.setZubereitet(false);
-		bestellService.bestellPositionHinzufuegen(bP);
+		bestellService.bestellPositionAktualisieren(bP);
 		tabelleFuellen();
 	}
 

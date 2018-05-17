@@ -171,6 +171,7 @@ public class TischAnzeigenController {
                 logger.info(bestellPosition);
             }
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
+            logger.info(tisch);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
 
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());

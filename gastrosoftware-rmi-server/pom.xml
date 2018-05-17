@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gastrosoftware-rmi-Server</artifactId>
+    <artifactId>gastrosoftware-rmi-server</artifactId>
 
     <dependencies>
         <dependency>
@@ -52,6 +52,12 @@
             <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-business-rechnung</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-rmi-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

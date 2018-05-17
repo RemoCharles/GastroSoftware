@@ -13,12 +13,6 @@
     <dependencies>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-slgp.gastrosoftware.api</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-persister</artifactId>
             <version>1.0</version>
             <scope>compile</scope>

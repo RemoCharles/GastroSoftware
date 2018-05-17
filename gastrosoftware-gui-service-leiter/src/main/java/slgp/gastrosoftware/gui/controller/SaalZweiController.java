@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.RMIBestellService;
-import slgp.gastrosoftware.gui.Context;
+import slgp.gastrosoftware.Context;
 import slgp.gastrosoftware.model.Tisch;
 
 import java.io.IOException;

@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import slgp.gastrosoftware.RMIBestellService;
 import slgp.gastrosoftware.RMIPersonService;
-import slgp.gastrosoftware.gui.Context;
+import slgp.gastrosoftware.Context;
 import slgp.gastrosoftware.model.Konsumartikel;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.model.Tisch;

@@ -20,7 +20,7 @@ public class BarApplication extends Application {
 		primaryStage.setTitle("Gastro Software - Bar");
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, 900, 600));
-		primaryStage.getIcons().add(new Image("/restaurant.png"));
+		primaryStage.getIcons().add(new Image("/restaurant_w_bg.png"));
 		primaryStage.show();
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
