@@ -4,7 +4,6 @@ import slgp.gastrosoftware.model.TischRechnung;
 import slgp.gastrosoftware.persister.TischRechnungDAO;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;

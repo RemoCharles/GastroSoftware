@@ -69,7 +69,7 @@ public class Bestellung implements Serializable {
 
     public double berechneSummeBestellPositionList() {
         for (BestellPosition bestellPosition : bestellPositionList){
-            summeBestellPositionList += bestellPosition.getBetrag();
+            summeBestellPositionList =+ bestellPosition.getBetrag();
         }
         return summeBestellPositionList;
     }

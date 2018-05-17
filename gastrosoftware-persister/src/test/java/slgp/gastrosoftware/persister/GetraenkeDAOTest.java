@@ -3,8 +3,8 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
-import slgp.gastrosoftware.persister.impl.GetraenkeDAOImpl;
 import slgp.gastrosoftware.model.Getraenke;
+import slgp.gastrosoftware.persister.impl.GetraenkeDAOImpl;
 import slgp.gastrosoftware.persister.util.Util;
 
 import static junit.framework.TestCase.assertTrue;

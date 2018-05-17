@@ -13,11 +13,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
 public class BarApplication extends Application {
-	private static Logger logger = (Logger) LogManager.getLogger(BarApplication.class);
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BarInterface.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Landing.fxml"));
 		primaryStage.setTitle("Gastro Software - Bar");
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, 900, 600));

@@ -3,8 +3,8 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
-import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.model.BestellPosition;
+import slgp.gastrosoftware.persister.impl.BestellPositionDAOImpl;
 import slgp.gastrosoftware.persister.util.Util;
 
 import static org.junit.Assert.assertTrue;

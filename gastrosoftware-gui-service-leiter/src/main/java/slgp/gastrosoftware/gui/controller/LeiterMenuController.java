@@ -14,9 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.Context;
 import slgp.gastrosoftware.RMIKonsumartikelService;
 import slgp.gastrosoftware.RMIMenuService;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.model.Tagesmenu;
 

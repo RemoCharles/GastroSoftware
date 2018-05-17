@@ -15,6 +15,7 @@ public class TischRechnung extends Rechnung {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Bestellung> bestellungList;
     private double summeBestellungen;
+    private int rechnungNummer;
 
     public TischRechnung() {
     }
@@ -23,6 +24,12 @@ public class TischRechnung extends Rechnung {
         super(datum);
         this.bestellungList = bestellungList;
         berechneSummeBestellungen();
+    }
+    public TischRechnung(LocalDate datum, List<Bestellung> bestellungList, Integer rechnungNummer) {
+        super(datum);
+        this.bestellungList = bestellungList;
+        berechneSummeBestellungen();
+        this.rechnungNummer = rechnungNummer;
     }
 
     public void berechneSummeBestellungen() {
@@ -43,6 +50,13 @@ public class TischRechnung extends Rechnung {
         this.bestellungList = bestellungList;
     }
 
+    public int getRechnungNummer() {
+        return rechnungNummer;
+    }
+
+    public void setRechnungNummer(int rechnungNummer) {
+        this.rechnungNummer = rechnungNummer;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -75,4 +89,6 @@ public class TischRechnung extends Rechnung {
                 ", summeBestellungen=" + summeBestellungen +
                 '}';
     }
+
+
 }

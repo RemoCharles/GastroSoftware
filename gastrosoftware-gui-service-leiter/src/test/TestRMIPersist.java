@@ -1,5 +1,3 @@
-import org.junit.*;
-import slgp.gastrosoftware.*;
 import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Konsumartikel;
 

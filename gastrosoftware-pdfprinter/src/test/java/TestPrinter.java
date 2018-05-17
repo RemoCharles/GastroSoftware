@@ -1,6 +1,7 @@
-import api.PrinterService;
+import slgp.gastrosoftware.api.PrinterService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.PDFPrinter;
 import slgp.gastrosoftware.model.*;
 
 import java.rmi.RemoteException;

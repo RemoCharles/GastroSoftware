@@ -27,12 +27,6 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-
     </dependencies>
 
 

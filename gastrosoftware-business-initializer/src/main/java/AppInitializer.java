@@ -1,21 +1,5 @@
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import javax.xml.XMLConstants;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//import org.jdom2.Document;
-//import org.jdom2.Element;
-//import org.jdom2.JDOMException;
-//import org.jdom2.input.SAXBuilder;
-//import org.jdom2.input.sax.XMLReaderJDOMFactory;
-//import org.jdom2.input.sax.XMLReaderSchemaFactory;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -32,6 +16,22 @@ import slgp.gastrosoftware.persister.impl.GetraenkeDAOImpl;
 import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
 import slgp.gastrosoftware.persister.impl.TischDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
+
+import javax.xml.XMLConstants;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+//import org.jdom2.Document;
+//import org.jdom2.Element;
+//import org.jdom2.JDOMException;
+//import org.jdom2.input.SAXBuilder;
+//import org.jdom2.input.sax.XMLReaderJDOMFactory;
+//import org.jdom2.input.sax.XMLReaderSchemaFactory;
 
 
 public class AppInitializer {

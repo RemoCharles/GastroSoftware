@@ -1,6 +1,7 @@
 package slgp.gastrosoftware.persister;
 
 import slgp.gastrosoftware.model.Getraenke;
+
 import java.util.List;
 
 public interface GetraenkeDAO extends GenericPersisterDAO<Getraenke> {

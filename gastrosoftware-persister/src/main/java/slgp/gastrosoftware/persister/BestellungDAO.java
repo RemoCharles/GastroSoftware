@@ -1,10 +1,10 @@
 package slgp.gastrosoftware.persister;
 
 
+import slgp.gastrosoftware.model.Bestellung;
+
 import java.time.LocalDate;
 import java.util.List;
-
-import slgp.gastrosoftware.model.Bestellung;
 /**
  * Interface für Persistierung von Bestellung-Entities.
  * 

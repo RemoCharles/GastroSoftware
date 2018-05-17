@@ -11,9 +11,10 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class ServiceLeiterApplication extends Application {
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/UserLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Landing.fxml"));
         primaryStage.setTitle("Gastro Software");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 600, 400));

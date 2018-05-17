@@ -1,9 +1,8 @@
 package slgp.gastrosoftware.persister.util;
 
 import slgp.gastrosoftware.model.*;
-import slgp.gastrosoftware.persister.impl.*;
 import slgp.gastrosoftware.persister.*;
-
+import slgp.gastrosoftware.persister.impl.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -173,24 +172,30 @@ public class Util {
     }
 
     public static List<Bestellung> createBestellungListe() throws Exception {
-        MitarbeiterDAO pMitarbeiter = new MitarbeiterDAOImpl();
-        BestellungDAO pBestellung = new BestellungDAOImpl();
-        KonsumartikelDAO pKonsumartikel = new KonsumartikelDAOImpl();
-        TischDAO pTisch = new TischDAOImpl();
+        BestellungDAO bestellungDAO = new BestellungDAOImpl();
+        KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
+        TischDAO tischDAO = new TischDAOImpl();
+        MitarbeiterDAO mitarbeiterDAO = new MitarbeiterDAOImpl();
 
-        List<BestellPosition> bestellPositionList = createBestellPosition();
-        List<Bestellung> list = new ArrayList<Bestellung>();
+        Konsumartikel konsumartikel = new Konsumartikel("Banana", "Hauptspeise", 13);
+        konsumartikelDAO.save(konsumartikel);
 
-        List<Tisch> tischList = createTisch();
-        Tisch tisch = tischList.get(0);
-        List<Mitarbeiter> maList = createMitarbeiter();
-        Mitarbeiter ma = maList.get(0);
-        list.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
+        List<BestellPosition> bestellPositionList = new ArrayList<>();
+        bestellPositionList.add(new BestellPosition(konsumartikel, 13));
 
-        for (Bestellung b : list) {
-            pBestellung.save(b);
+        Tisch tisch = new Tisch(2);
+        tischDAO.save(tisch);
+
+        Mitarbeiter mitarbeiter = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
+        mitarbeiterDAO.save(mitarbeiter);
+
+        List<Bestellung> bestellungList = new ArrayList<>();
+        bestellungList.add(new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now()));
+
+        for (Bestellung b : bestellungList) {
+            bestellungDAO.save(b);
         }
-        return list;
+        return bestellungList;
     }
 
     public static void deleteAllBestellung() throws Exception {
@@ -227,34 +232,38 @@ public class Util {
     }
 
     public static List<TischRechnung> createTischRechnung() throws Exception {
-        TischRechnungDAO pTischRechnung = new TischRechnungDAOImpl();
-        BestellungDAO pBestellung = new BestellungDAOImpl();
-        MitarbeiterDAO pMitarbeiter = new MitarbeiterDAOImpl();
+        TischRechnungDAO tischRechnungDAO = new TischRechnungDAOImpl();
+        BestellungDAO bestellungDAO = new BestellungDAOImpl();
+        MitarbeiterDAO mitarbeiterDAO = new MitarbeiterDAOImpl();
         TischDAO tischDAO = new TischDAOImpl();
         KonsumartikelDAO konsumartikelDAO = new KonsumartikelDAOImpl();
-        List<TischRechnung> list = new ArrayList<>();
-        List<BestellPosition> bestellPositionList = Util.createBestellPosition();
-        Tisch tisch = new Tisch(6);
-        List<Bestellung> bestellungList = new ArrayList<Bestellung>();
-        List<Konsumartikel> konsumList = new ArrayList<Konsumartikel>();
-        konsumList.add(new Esswaren("Pasta", "Hauptspeise", 500));
-        konsumList.add(new Getraenke("Cola", "Softgetraenke", 5));
-        Mitarbeiter ma = new Mitarbeiter("Meierhans", "Franz", "Barpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
-        bestellungList.add(new Bestellung(ma, tisch, bestellPositionList, false, false, LocalDate.now()));
-        list.add(new TischRechnung(LocalDate.now(), bestellungList));
-        pMitarbeiter.save(ma);
+
+        Konsumartikel konsumartikel = new Konsumartikel("Banana", "Hauptspeise", 13);
+        konsumartikelDAO.save(konsumartikel);
+
+        List<BestellPosition> bestellPositionList = new ArrayList<>();
+        bestellPositionList.add(new BestellPosition(konsumartikel, 13));
+
+        Tisch tisch = new Tisch(2);
         tischDAO.save(tisch);
-        for (Konsumartikel k : konsumList) {
-            konsumartikelDAO.save(k);
+
+        Mitarbeiter mitarbeiter = new Mitarbeiter("Meierhans", "Franz", "Kuechenpersonal", new Adresse("Luzernerstrasse 4", 6023, "Basel"), new Kontakt("test@gsdmx.ch", "041 233 34 22"));
+        mitarbeiterDAO.save(mitarbeiter);
+
+        List<Bestellung> bestellungList = new ArrayList<>();
+        bestellungList.add(new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now()));
+        for (Bestellung bestellung : bestellungList) {
+            bestellungDAO.save(bestellung);
         }
 
-        for (Bestellung b : bestellungList) {
-            pBestellung.save(b);
+        List<TischRechnung> tischRechnungList = new ArrayList<>();
+        tischRechnungList.add(new TischRechnung(LocalDate.now(), bestellungList));
+
+        for(TischRechnung tischRechnung : tischRechnungList){
+            tischRechnungDAO.save(tischRechnung);
         }
-        for (TischRechnung tr : list) {
-            pTischRechnung.save(tr);
-        }
-        return list;
+
+        return tischRechnungList;
     }
 
     public static void deleteAllTischRechnung() throws Exception {

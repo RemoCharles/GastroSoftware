@@ -1,8 +1,7 @@
 package slgp.gastrosoftware;
 
-import slgp.gastrosoftware.model.Tisch;
-import slgp.gastrosoftware.model.TischRechnung;
 import slgp.gastrosoftware.model.MAAbrechnung;
+import slgp.gastrosoftware.model.TischRechnung;
 
 import java.util.List;
 

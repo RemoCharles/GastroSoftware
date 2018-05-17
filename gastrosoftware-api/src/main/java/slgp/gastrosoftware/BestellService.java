@@ -1,8 +1,8 @@
 package slgp.gastrosoftware;
 
-import slgp.gastrosoftware.model.Tisch;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
+import slgp.gastrosoftware.model.Tisch;
 
 import java.time.LocalDate;
 import java.util.List;

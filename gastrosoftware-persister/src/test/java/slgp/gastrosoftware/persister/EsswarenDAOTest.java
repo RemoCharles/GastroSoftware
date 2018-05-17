@@ -8,7 +8,6 @@ import slgp.gastrosoftware.persister.impl.EsswarenDAOImpl;
 import slgp.gastrosoftware.persister.util.Util;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
 public class EsswarenDAOTest {
     private static Logger logger = LogManager.getLogger(EsswarenDAOTest.class);

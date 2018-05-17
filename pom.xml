@@ -22,6 +22,7 @@
         </plugins>
     </build>
     <modules>
+        <module>gastrosoftware-api</module>
         <module>gastrosoftware-business-person</module>
         <module>gastrosoftware-business-initializer</module>
         <module>gastrosoftware-gui-service-leiter</module>
@@ -30,13 +31,12 @@
         <module>gastrosoftware-gui-kueche</module>
         <module>gastrosoftware-gui-bar</module>
         <module>gastrosoftware-pdfprinter</module>
-        <module>gastrosoftware-api</module>
         <module>gastrosoftware-rmi-Server</module>
-        <module>gastrosoftware-rmi-api</module>
         <module>gastrosoftware-business-bestellung</module>
         <module>gastrosoftware-business-konsumartikel</module>
         <module>gastrosoftware-business-rechnung</module>
         <module>gastrosoftware-business-menu</module>
+        <module>gastrosoftware-rmi-connector</module>
     </modules>
     <dependencies>
         <dependency>
@@ -45,11 +45,6 @@
             <version>RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.7</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>

@@ -3,9 +3,9 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
+import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.impl.BestellungDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
-import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.persister.util.Util;
 
 import java.time.LocalDate;
@@ -113,7 +113,6 @@ public class BestellungDAOTest {
         init();
         assertTrue(pBestellungDAO.findAll().size() == Util.INIT_SIZE_BESTELLUNG_LISTE);
         List<Bestellung> liste = pBestellungDAO.findByTischNummer(1);
-        assertTrue(pBestellungDAO.findByTischNummer(1).size() == 1);
+        assertTrue(pBestellungDAO.findByTischNummer(2).size() == 1);
     }
-
 }

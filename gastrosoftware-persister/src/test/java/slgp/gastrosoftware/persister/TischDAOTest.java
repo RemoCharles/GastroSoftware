@@ -3,9 +3,9 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
+import slgp.gastrosoftware.model.Tisch;
 import slgp.gastrosoftware.persister.impl.TischDAOImpl;
 import slgp.gastrosoftware.persister.util.Util;
-import slgp.gastrosoftware.model.Tisch;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

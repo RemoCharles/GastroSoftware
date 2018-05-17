@@ -1,8 +1,8 @@
 package slgp.gastrosoftware.persister;
 
-import java.util.List;
-
 import slgp.gastrosoftware.model.Tagesmenu;
+
+import java.util.List;
 
 public interface TagesmenuDAO extends GenericPersisterDAO<Tagesmenu>{
 	 /**

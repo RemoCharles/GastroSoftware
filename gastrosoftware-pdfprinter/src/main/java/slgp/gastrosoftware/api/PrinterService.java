@@ -1,4 +1,4 @@
-package api;
+package slgp.gastrosoftware.api;
 
 import slgp.gastrosoftware.model.TischRechnung;
 

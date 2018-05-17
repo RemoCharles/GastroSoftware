@@ -1,8 +1,8 @@
 package slgp.gastrosoftware;
 
+import slgp.gastrosoftware.model.Esswaren;
 import slgp.gastrosoftware.model.Getraenke;
 import slgp.gastrosoftware.model.Konsumartikel;
-import slgp.gastrosoftware.model.Esswaren;
 
 import java.util.List;
 

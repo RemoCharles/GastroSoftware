@@ -3,10 +3,10 @@ package slgp.gastrosoftware.persister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
-import slgp.gastrosoftware.persister.impl.PersonDAOImpl;
-import slgp.gastrosoftware.persister.util.JpaUtil;
 import slgp.gastrosoftware.model.Kontakt;
 import slgp.gastrosoftware.model.Person;
+import slgp.gastrosoftware.persister.impl.PersonDAOImpl;
+import slgp.gastrosoftware.persister.util.JpaUtil;
 import slgp.gastrosoftware.persister.util.Util;
 
 import javax.persistence.EntityManager;

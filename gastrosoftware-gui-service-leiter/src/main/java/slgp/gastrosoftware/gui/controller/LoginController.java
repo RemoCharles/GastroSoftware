@@ -13,8 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
+import slgp.gastrosoftware.Context;
 import slgp.gastrosoftware.RMIPersonService;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.Mitarbeiter;
 
 import java.io.IOException;
@@ -53,7 +53,6 @@ public class LoginController implements Initializable {
     // Userlogin Buttons
     @FXML
     private void loginaction(ActionEvent event) throws Exception {
-        logger.info("Login Button gedrückt");
 
         if (personService.pruefeLogin(genBenu.getText(), genPass.getText())) {
 

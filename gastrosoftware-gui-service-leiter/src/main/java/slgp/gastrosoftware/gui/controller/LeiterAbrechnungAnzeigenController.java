@@ -17,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.*;
-import slgp.gastrosoftware.gui.Context;
+import slgp.gastrosoftware.Context;
+import slgp.gastrosoftware.RMIRechnungService;
 import slgp.gastrosoftware.model.MAAbrechnung;
 import slgp.gastrosoftware.model.Mitarbeiter;
 

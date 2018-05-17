@@ -1,19 +1,18 @@
 package slgp.gastrosoftware;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.model.Login;
 import slgp.gastrosoftware.model.Mitarbeiter;
 import slgp.gastrosoftware.model.Person;
-
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
 import slgp.gastrosoftware.persister.LoginDAO;
 import slgp.gastrosoftware.persister.MitarbeiterDAO;
 import slgp.gastrosoftware.persister.PersonDAO;
 import slgp.gastrosoftware.persister.impl.LoginDAOImpl;
 import slgp.gastrosoftware.persister.impl.MitarbeiterDAOImpl;
 import slgp.gastrosoftware.persister.impl.PersonDAOImpl;
+
+import java.util.List;
 
 public class PersonManager implements PersonService {
 

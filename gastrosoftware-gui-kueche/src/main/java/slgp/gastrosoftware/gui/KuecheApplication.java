@@ -17,7 +17,7 @@ public class KuecheApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/KuecheInterface.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Landing.fxml"));
         primaryStage.setTitle("Gastro Software - Küche");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 900, 600));

@@ -1,3 +1,16 @@
+package slgp.gastrosoftware;
+
+import slgp.gastrosoftware.api.PrinterService;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.model.BestellPosition;
+import slgp.gastrosoftware.model.Bestellung;
+import slgp.gastrosoftware.model.TischRechnung;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.rmi.RemoteException;
@@ -7,30 +20,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import api.PrinterService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import slgp.gastrosoftware.model.BestellPosition;
-import slgp.gastrosoftware.model.Bestellung;
-import slgp.gastrosoftware.model.TischRechnung;
-
 public class PDFPrinter extends UnicastRemoteObject implements PrinterService {
 
     private static Logger logger = LogManager.getLogger(PDFPrinter.class);
 
 
-    protected PDFPrinter() throws RemoteException {
+    public PDFPrinter() throws RemoteException {
     }
 
 

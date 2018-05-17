@@ -1,5 +1,7 @@
 package slgp.gastrosoftware.gui.controller;
 
+import slgp.gastrosoftware.PDFPrinter;
+import slgp.gastrosoftware.api.PrinterService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +19,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slgp.gastrosoftware.*;
-import slgp.gastrosoftware.gui.Context;
+import slgp.gastrosoftware.Context;
+import slgp.gastrosoftware.RMIBestellService;
+import slgp.gastrosoftware.RMIRechnungService;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.TischRechnung;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +61,13 @@ public class TischRechnungController implements Initializable {
     private TableColumn<BestellPosition, Double> bPPreis;
 
     @FXML
-    private Label fxmlSumme;
-
+    private Label lblFxmlSumme;
 
     private int tischNummer;
+
     List<Bestellung> bestellungListTemp = new ArrayList<>();
+
+    private TischRechnung tischRechnung;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -81,7 +87,6 @@ public class TischRechnungController implements Initializable {
 
     @FXML
     private void updateTable() {
-
         try {
             tblBestellPosition.getItems().clear();
             tabelleFuellen();
@@ -89,45 +94,41 @@ public class TischRechnungController implements Initializable {
             logger.error("Fehler beim Updaten der Tabelle: ", e);
             throw new RuntimeException();
         }
-
     }
 
 
     @FXML
     public void tabelleFuellen() {
 
-        //Bestellungen find by Tischnummer (v query finden)
         try {
-
             List<Bestellung> bestellungList = bestellService.findBestellungByTischNummer(getTischNummer());
             System.out.println(getTischNummer());
 
-            for (Bestellung b2 : bestellungList) {
-                if (b2.getBezahlt() == false) {
-                    bestellungListTemp.add(b2);
-                    String summeText = String.valueOf(b2.berechneSummeBestellPositionList());
-                    fxmlSumme.setText(summeText);
+            for (Bestellung bestellung : bestellungList) {
+                if (!bestellung.getBezahlt()) {
+                    bestellungListTemp.add(bestellung);
+                    String summeText = String.valueOf(bestellung.berechneSummeBestellPositionList());
+                    lblFxmlSumme.setText(summeText);
                 }
             }
 
             List<BestellPosition> bestellPositionList = new ArrayList<>();
 
-            for (Bestellung b1 : bestellungListTemp) {
-                bestellPositionList.addAll(b1.getKonsumartikel());
+            for (Bestellung bestellung : bestellungListTemp) {
+                bestellPositionList.addAll(bestellung.getKonsumartikel());
             }
 
             if (bestellPositionList.size() != 0) {
                 Double summeRechnung = 0.00;
-                for (BestellPosition b3 : bestellPositionList) {
-                    summeRechnung = summeRechnung + b3.getBerechneterPreis();
+                for (BestellPosition bestellPosition : bestellPositionList) {
+                    summeRechnung = summeRechnung + bestellPosition.getBerechneterPreis();
                 }
                 String txtsummeRechnung = String.valueOf(summeRechnung);
-                fxmlSumme.setText(txtsummeRechnung);
+                lblFxmlSumme.setText(txtsummeRechnung);
 
             } else {
-                fxmlSumme.setText("0");
+                lblFxmlSumme.setText("0");
             }
-
 
             bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
             bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
@@ -136,12 +137,10 @@ public class TischRechnungController implements Initializable {
 
             ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableArrayList(bestellPositionList);
 
-
             tblBestellPosition.setItems(bestellPositionObservableList);
-            for (BestellPosition bp2 : bestellPositionList) {
-                System.out.println(bp2.getBerechneterPreis());
+            for (BestellPosition bestellPosition : bestellPositionList) {
+                System.out.println(bestellPosition.getBerechneterPreis());
             }
-
         } catch (Exception e) {
             logger.info("Tabelle konnte nicht befuellt werden");
         }
@@ -149,24 +148,34 @@ public class TischRechnungController implements Initializable {
 
     @FXML
     public void rechnungBezahlt() {
-
         try {
-            for (Bestellung b : bestellungListTemp) {
-                b.setBezahlt(true);
-                TischRechnung tr = new TischRechnung(LocalDate.now(), bestellungListTemp);
-                rechnungService.tischRechnungHinzufuegen(tr);
-                logger.info(tr);
-                bestellService.bestellungAktualisieren(b);
+            logger.info(bestellungListTemp.size());
+            for (Bestellung bestellung : bestellungListTemp) {
+//                logger.info(bestellung);
+                bestellung.setBezahlt(true);
+//                logger.info(bestellung);
+                bestellService.bestellungAktualisieren(bestellung);
             }
+            tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, 2);
+            rechnungService.tischRechnungHinzufuegen(tischRechnung);
+//            rechnungDrucken();
             updateTable();
         } catch (Exception e) {
-            logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen");
+            logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: " + e);
         }
 
     }
 
     @FXML
     public void rechnungDrucken() {
+        try {
+            PrinterService printerService = new PDFPrinter();
+            printerService.printTischRechnungAlsPdf(tischRechnung);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

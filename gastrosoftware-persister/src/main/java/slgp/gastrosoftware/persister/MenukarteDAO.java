@@ -1,8 +1,8 @@
 package slgp.gastrosoftware.persister;
 
-import java.util.List;
-
 import slgp.gastrosoftware.model.Menukarte;
+
+import java.util.List;
 
 public interface MenukarteDAO extends GenericPersisterDAO<Menukarte>{
 

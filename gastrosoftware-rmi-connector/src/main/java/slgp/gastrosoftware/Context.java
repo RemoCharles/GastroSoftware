@@ -292,7 +292,7 @@ public class Context {
                     } catch (NumberFormatException nfe) {
                         String msg = "Die Portnummer-Angabe \'" + strPort + "\' ist nicht korrekt";
                         logger.error(msg, nfe);
-                        throw new RuntimeException(nfe);
+                        throw new RuntimeException(msg, nfe);
                     }
                 }
             } catch (Exception e) {

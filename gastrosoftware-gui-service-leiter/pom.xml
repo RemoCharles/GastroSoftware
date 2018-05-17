@@ -26,7 +26,12 @@
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-rmi-api</artifactId>
+            <artifactId>gastrosoftware-rmi-connector</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-pdfprinter</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>

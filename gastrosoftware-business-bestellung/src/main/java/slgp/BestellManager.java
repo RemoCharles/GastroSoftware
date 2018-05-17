@@ -1,8 +1,8 @@
 package slgp;
 
-import slgp.gastrosoftware.BestellService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slgp.gastrosoftware.BestellService;
 import slgp.gastrosoftware.model.BestellPosition;
 import slgp.gastrosoftware.model.Bestellung;
 import slgp.gastrosoftware.model.Tisch;
@@ -169,7 +169,7 @@ public class BestellManager implements BestellService {
         try {
             return getTischDAO().findAll();
         } catch (Exception e) {
-            String msg = "Es konnten keine Tische gefunden werden";
+            String msg = "Es konnten keine Tische gefunden werden" + e;
             logger.error(msg, e);
             throw new Exception(msg);
         }

@@ -1,8 +1,8 @@
 package slgp.gastrosoftware.persister;
 
-import java.util.List;
-
 import slgp.gastrosoftware.model.Login;
+
+import java.util.List;
 
 public interface LoginDAO extends GenericPersisterDAO<Login> {
 	/**

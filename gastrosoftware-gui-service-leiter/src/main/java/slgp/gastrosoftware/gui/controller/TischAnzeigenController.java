@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slgp.gastrosoftware.*;
-import slgp.gastrosoftware.gui.Context;
 import slgp.gastrosoftware.model.*;
 
 import java.time.LocalDate;
@@ -174,12 +173,6 @@ public class TischAnzeigenController {
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
 
-//            for (BestellPosition bestellPosition : bestellPositionList){
-//                bestellService.bestellPositionHinzufuegen(bestellPosition);
-//            }
-
-
-
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
             bestellService.bestellungHinzufuegen(bestellung);
             logger.info(bestellung);
@@ -187,9 +180,7 @@ public class TischAnzeigenController {
 
     }
 
-
     @FXML
-
     private void kategorienAuswahlLaden() throws Exception {
         TreeSet<String> konsumartikelKategorie = new TreeSet<>();
         if (cmbKat.getSelectionModel().getSelectedItem().startsWith("E")) {

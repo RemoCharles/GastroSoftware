@@ -19,15 +19,20 @@
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-api</artifactId>
+            <artifactId>gastrosoftware-slgp.gastrosoftware.api</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-rmi-api</artifactId>
+            <artifactId>gastrosoftware-rmi-slgp.gastrosoftware.api</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>slgp.informatik</groupId>
+            <artifactId>gastrosoftware-rmi-connector</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

@@ -1,23 +1,17 @@
 package slgp.gastrosoftware.persister;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import org.junit.*;
 import slgp.gastrosoftware.model.Adresse;
 import slgp.gastrosoftware.persister.impl.AdresseDAOImpl;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 import slgp.gastrosoftware.persister.util.Util;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class AdresseDAOTest {
 
