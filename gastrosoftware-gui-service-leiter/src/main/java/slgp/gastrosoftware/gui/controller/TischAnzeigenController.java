@@ -174,9 +174,11 @@ public class TischAnzeigenController {
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
 
-            for (BestellPosition bestellPosition : bestellPositionList){
-                bestellService.bestellPositionHinzufuegen(bestellPosition);
-            }
+//            for (BestellPosition bestellPosition : bestellPositionList){
+//                bestellService.bestellPositionHinzufuegen(bestellPosition);
+//            }
+
+
 
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
             bestellService.bestellungHinzufuegen(bestellung);

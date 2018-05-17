@@ -1,5 +1,7 @@
 package slgp.gastrosoftware.persister.impl;
 
+import slgp.gastrosoftware.model.BestellPosition;
+import slgp.gastrosoftware.persister.BestellPositionDAO;
 import slgp.gastrosoftware.persister.BestellungDAO;
 import slgp.gastrosoftware.persister.util.JpaUtil;
 import slgp.gastrosoftware.model.Bestellung;
@@ -55,6 +57,10 @@ public class BestellungDAOImpl extends GenericPersisterDAOImpl<Bestellung> imple
 
     @Override
     public Bestellung save(Bestellung entity) throws Exception {
+        BestellPositionDAO bestellPositionDAO = new BestellPositionDAOImpl();
+        for (BestellPosition bestellPosition : entity.getBestellPositionList()) {
+            bestellPositionDAO.save(bestellPosition);
+        }
         return super.save(entity);
     }
 

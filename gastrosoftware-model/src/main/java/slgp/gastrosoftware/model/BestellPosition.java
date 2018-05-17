@@ -13,7 +13,7 @@ public class BestellPosition implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne
     private Konsumartikel konsumartikel;
     private int anzahl;
     private double betrag;

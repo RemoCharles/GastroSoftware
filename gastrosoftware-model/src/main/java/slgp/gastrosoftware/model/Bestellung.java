@@ -108,6 +108,30 @@ public class Bestellung implements Serializable {
         this.bezahlt = bezahlt;
     }
 
+    public List<BestellPosition> getBestellPositionList() {
+        return bestellPositionList;
+    }
+
+    public void setBestellPositionList(List<BestellPosition> bestellPositionList) {
+        this.bestellPositionList = bestellPositionList;
+    }
+
+    public boolean isZubereitet() {
+        return zubereitet;
+    }
+
+    public boolean isBezahlt() {
+        return bezahlt;
+    }
+
+    public double getSummeBestellPositionList() {
+        return summeBestellPositionList;
+    }
+
+    public void setSummeBestellPositionList(double summeBestellPositionList) {
+        this.summeBestellPositionList = summeBestellPositionList;
+    }
+
     @Override
     public String toString() {
         return "Bestellung{" +
