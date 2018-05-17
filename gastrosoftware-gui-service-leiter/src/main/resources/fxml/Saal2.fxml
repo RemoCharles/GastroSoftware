@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="usrZuru" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.gui.controller.SaalController">
+<AnchorPane id="usrZuru" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slgp.gastrosoftware.gui.controller.SaalZweiController">
    <children>
       <Text layoutX="409.0" layoutY="76.0" scaleX="3.0" scaleY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tisch wählen" wrappingWidth="79.447265625">
          <font>
@@ -14,49 +14,49 @@
          </font>
       </Text>
       <ButtonBar layoutX="211.0" layoutY="133.0" prefHeight="35.0" prefWidth="435.0" scaleX="2.0" scaleY="2.0" snapToPixel="false">
-        <buttons>
-            <Button id="26" mnemonicParsing="false" onAction="#tischAction" text="26" />
-          <Button id="27" mnemonicParsing="false" onAction="#tischAction" text="27" />
-            <Button id="28" mnemonicParsing="false" onAction="#tischAction" text="28" />
-            <Button id="29" mnemonicParsing="false" onAction="#tischAction" text="29" />
-            <Button id="30" mnemonicParsing="false" onAction="#tischAction" text="30" />
-        </buttons>
+          <buttons>
+              <Button fx:id="tisch26" mnemonicParsing="false" onAction="#tischAction" text="26" />
+              <Button fx:id="tisch27" mnemonicParsing="false" onAction="#tischAction" text="27" />
+              <Button fx:id="tisch28" mnemonicParsing="false" onAction="#tischAction" text="28" />
+              <Button fx:id="tisch29" mnemonicParsing="false" onAction="#tischAction" text="29" />
+              <Button fx:id="tisch30" mnemonicParsing="false" onAction="#tischAction" text="30" />
+          </buttons>
       </ButtonBar>
-      <ButtonBar layoutX="211.0" layoutY="210.0" prefHeight="40.0" prefWidth="310.0" scaleX="2.0" scaleY="2.0">
-        <buttons>
-            <Button id="31" mnemonicParsing="false" onAction="#tischAction" text="31" />
-            <Button id="32" mnemonicParsing="false" onAction="#tischAction" text="32" />
-            <Button id="33" mnemonicParsing="false" onAction="#tischAction" text="33" />
-            <Button id="34" mnemonicParsing="false" onAction="#tischAction" text="34" />
-            <Button id="35" mnemonicParsing="false" onAction="#tischAction" text="35" />
-        </buttons>
-      </ButtonBar>
-      <ButtonBar layoutX="211.0" layoutY="289.0" prefHeight="38.0" prefWidth="435.0" scaleX="2.0" scaleY="2.0">
-        <buttons>
-          <Button id="36" mnemonicParsing="false" onAction="#tischAction" text="36" />
-            <Button id="37" mnemonicParsing="false" onAction="#tischAction" text="37" />
-            <Button id="38" mnemonicParsing="false" onAction="#tischAction" text="38" />
-            <Button id="39" mnemonicParsing="false" onAction="#tischAction" text="39" />
-            <Button id="40" mnemonicParsing="false" onAction="#tischAction" text="40" />
-        </buttons>
-      </ButtonBar>
-      <ButtonBar layoutX="211.0" layoutY="366.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
-        <buttons>
-            <Button id="41" mnemonicParsing="false" onAction="#tischAction" text="41" />
-          <Button id="42" mnemonicParsing="false" onAction="#tischAction" text="42" />
-            <Button id="43" mnemonicParsing="false" onAction="#tischAction" text="43" />
-            <Button id="44" mnemonicParsing="false" onAction="#tischAction" text="44" />
-            <Button id="45" mnemonicParsing="false" onAction="#tischAction" text="45" />
-        </buttons>
-      </ButtonBar>
-        <ButtonBar layoutX="211.0" layoutY="443.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
-        <buttons>
-            <Button id="46" mnemonicParsing="false" onAction="#tischAction" text="46" />
-          <Button id="47" mnemonicParsing="false" onAction="#tischAction" text="47" />
-            <Button id="48" mnemonicParsing="false" onAction="#tischAction" text="48" />
-            <Button id="49" mnemonicParsing="false" onAction="#tischAction" text="49" />
-            <Button id="50" mnemonicParsing="false" onAction="#tischAction" text="50" />
-        </buttons>
+       <ButtonBar layoutX="211.0" layoutY="210.0" prefHeight="40.0" prefWidth="310.0" scaleX="2.0" scaleY="2.0">
+           <buttons>
+               <Button fx:id="tisch31" mnemonicParsing="false" onAction="#tischAction" text="31" />
+               <Button fx:id="tisch32" mnemonicParsing="false" onAction="#tischAction" text="32" />
+               <Button fx:id="tisch33" mnemonicParsing="false" onAction="#tischAction" text="33" />
+               <Button fx:id="tisch34" mnemonicParsing="false" onAction="#tischAction" text="34" />
+               <Button fx:id="tisch35" mnemonicParsing="false" onAction="#tischAction" text="35" />
+           </buttons>
+       </ButtonBar>
+       <ButtonBar layoutX="211.0" layoutY="289.0" prefHeight="38.0" prefWidth="435.0" scaleX="2.0" scaleY="2.0">
+           <buttons>
+               <Button  fx:id="tisch36" mnemonicParsing="false" onAction="#tischAction" text="36" />
+               <Button fx:id="tisch37" mnemonicParsing="false" onAction="#tischAction" text="37" />
+               <Button fx:id="tisch38" mnemonicParsing="false" onAction="#tischAction" text="38" />
+               <Button fx:id="tisch39" mnemonicParsing="false" onAction="#tischAction" text="39" />
+               <Button fx:id="tisch40" mnemonicParsing="false" onAction="#tischAction" text="40" />
+           </buttons>
+       </ButtonBar>
+       <ButtonBar layoutX="211.0" layoutY="366.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
+           <buttons>
+               <Button fx:id="tisch41" mnemonicParsing="false" onAction="#tischAction" text="41" />
+               <Button fx:id="tisch42" mnemonicParsing="false" onAction="#tischAction" text="42" />
+               <Button fx:id="tisch43" mnemonicParsing="false" onAction="#tischAction" text="43" />
+               <Button fx:id="tisch44" mnemonicParsing="false" onAction="#tischAction" text="44" />
+               <Button fx:id="tisch45" mnemonicParsing="false" onAction="#tischAction" text="45" />
+           </buttons>
+       </ButtonBar>
+       <ButtonBar layoutX="211.0" layoutY="443.0" prefHeight="40.0" prefWidth="200.0" scaleX="2.0" scaleY="2.0">
+           <buttons>
+               <Button fx:id="tisch46" mnemonicParsing="false" onAction="#tischAction" text="46" />
+               <Button fx:id="tisch47" mnemonicParsing="false" onAction="#tischAction" text="47" />
+               <Button fx:id="tisch48" mnemonicParsing="false" onAction="#tischAction" text="48" />
+               <Button fx:id="tisch49" mnemonicParsing="false" onAction="#tischAction" text="49" />
+               <Button fx:id="tisch50" mnemonicParsing="false" onAction="#tischAction" text="50" />
+           </buttons>
       </ButtonBar>
       <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
       <Button layoutX="801.0" layoutY="57.0" mnemonicParsing="false" onAction="#lastSeite" prefHeight="28.0" prefWidth="80.0" text="Seite 1" />

@@ -95,18 +95,20 @@ public class LeiterMenuController implements Initializable {
 
 		if (esswaren != null) {
 			try {
-				ObservableList<Esswaren> esswarenListObsv = tblMenu.getItems();
-				Tagesmenu tagesmenuVorLoeschen = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), esswarenListObsv);
+				List<Esswaren> esswarenList = new ArrayList<>(tblMenu.getItems());
+				Tagesmenu tagesmenuVorLoeschen = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), esswarenList);
 				for (Tagesmenu t : tgList){
 					if(t.equals(tagesmenuVorLoeschen)){
 						menuService.tagesmenuLoeschen(t);
 					}
 				}
-				esswarenListObsv.remove(esswaren);
+				esswarenList.remove(esswaren);
+				ObservableList<Esswaren> esswarenListObsv = FXCollections.observableArrayList(esswarenList);
 				tblMenu.setItems(esswarenListObsv);
-				List<Esswaren> tagesMenuList = tblMenu.getItems();
+				List<Esswaren> tagesMenuList = new ArrayList<>(tblMenu.getItems());
 				Tagesmenu tagesmenu = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), tagesMenuList);
 				menuService.tagesmenuHinzufuegen(tagesmenu);
+				lblError.setText("Tagesmenü erfolgreich angepasst.");
 
 			} catch (Exception e) {
 				logger.error("Fehler beim Löschen der Essware: ", e);
@@ -138,7 +140,7 @@ public class LeiterMenuController implements Initializable {
 	@FXML
 	private void erstellen(ActionEvent event) {
 		try {
-			List<Esswaren> tagesMenuList = tblMenu.getItems();
+			List<Esswaren> tagesMenuList = new ArrayList<>(tblMenu.getItems());
 			String wochenTag = cmbWochentage.getSelectionModel().getSelectedItem();
 			if(tagesMenuList.size() == 0){
 				lblError.setText("Dieses Tagesmenü enthält keine Elemente.");
@@ -149,7 +151,7 @@ public class LeiterMenuController implements Initializable {
 						menuService.tagesmenuLoeschen(t);
 				}
 				menuService.tagesmenuHinzufuegen(tagesmenu);
-				System.out.println(tagesmenu);
+				lblError.setText("Tagesmenü erfolgreich hinzugefügt.");
 
 		} catch (Exception e) {
 			logger.error("Fehler beim Speichern des Tagesmenu: ", e);
@@ -203,7 +205,6 @@ public class LeiterMenuController implements Initializable {
 			ObservableList<Esswaren> tagesMenuListObsv = FXCollections.observableArrayList();
 			for (Tagesmenu tagM : tagesMenuList) {
 					tagesMenuListObsv.addAll(tagM.getListeKonsumartikel());
-					System.out.println(tagM.getWochenTag());
 			}
 			tblMenu.setItems(tagesMenuListObsv);
 

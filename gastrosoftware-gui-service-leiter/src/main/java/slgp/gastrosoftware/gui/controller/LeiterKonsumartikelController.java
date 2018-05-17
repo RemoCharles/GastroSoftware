@@ -141,8 +141,6 @@ public class LeiterKonsumartikelController implements Initializable {
     @FXML
     private void updateView() {
         if (tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
-            // cmbRolle.getSelectionModel().clearSelection();
-
             lblBez.setText("");
             lblPreis.setText("");
         } else {
@@ -221,6 +219,7 @@ public class LeiterKonsumartikelController implements Initializable {
                 konsumartikelService.konsumartikelAktualisieren(kA);
                 kategorienAuswahlLaden();
                 tabelleBefuellen();
+                lblError.setText("Artikel erfolgreich gelöscht.");
             } catch (Exception e) {
                 logger.error("Fehler beim Löschen des Konsumartikels: ", e);
             }
@@ -248,21 +247,18 @@ public class LeiterKonsumartikelController implements Initializable {
                 double preis = Double.parseDouble(lblPreis.getText());
                 String kategorie = cmbKat2.getSelectionModel().getSelectedItem().toString();
                 String kuecheBarKategorie = cmbKategorieKuecheBar.getSelectionModel().getSelectedItem();
-                System.out.println(bez + " " + preis + " " + kategorie + " " + kuecheBarKategorie);
                 try {
 
                     if (kuecheBarKategorie == "Esswaren") {
                         Konsumartikel konsumartikelSpeichern = new Esswaren(bez, kategorie, preis);
-                        System.out.println(konsumartikelSpeichern.toString());
                         konsumartikelService.konsumartikelHinzufuegen(konsumartikelSpeichern);
                     } else {
                         Konsumartikel konsumartikelSpeichern = new Getraenke(bez, kategorie, preis);
-                        System.out.println(konsumartikelSpeichern.toString());
                         konsumartikelService.konsumartikelHinzufuegen(konsumartikelSpeichern);
                     }
                     kategorienAuswahlLaden();
                     tabelleBefuellen();
-
+                    lblError.setText("Artikel wurde erfolgreich abgespeichert.");
                 } catch (Exception e) {
                     logger.error("Fehler beim Speichern des Konsumartikels: ", e);
                 }
@@ -274,9 +270,6 @@ public class LeiterKonsumartikelController implements Initializable {
 
                 double preis = Double.parseDouble(lblPreis.getText());
 
-                //Ausgabe vom geänderter Artikel
-                System.out.println(bez + " " + preis + " " + kategorie + " " + kuecheBarKategorie);
-
                 kA.setBezeichnung(bez);
                 kA.setKategorie(kategorie);
                 kA.setPreis(preis);
@@ -285,7 +278,7 @@ public class LeiterKonsumartikelController implements Initializable {
                     konsumartikelService.konsumartikelAktualisieren(kA);
                     kategorienAuswahlLaden();
                     tabelleBefuellen();
-
+                    lblError.setText("Artikel erfolgreich abgespeichert.");
                 } catch (Exception e) {
                     logger.error("Fehler beim Updaten des Konsumartikels: ", e);
                 }
