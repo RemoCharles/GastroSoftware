@@ -47,7 +47,6 @@ public class MaInterfaceController implements Initializable{
 	private TableColumn<BestellPosition, Integer> colTisch;
 
 	private static final Logger logger = LogManager.getLogger(MaInterfaceController.class);
-
     private static RMIBestellService bestellService = Context.getInstance().getBestellService();
 
     @Override
@@ -84,7 +83,7 @@ public class MaInterfaceController implements Initializable{
             });
 
 		}catch(Exception e){
-			logger.info("Tabelle konnte nicht befèllt werden.");
+			logger.info("Tabelle konnte nicht befuellt werden.");
 		}
 	}
 

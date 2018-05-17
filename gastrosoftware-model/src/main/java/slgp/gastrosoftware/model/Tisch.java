@@ -15,6 +15,7 @@ public class Tisch implements Serializable {
     private int id;
     //TODO: @Column(unique = true)
     private int tischNummer;
+    private boolean verfuegbarkeit = true;
 
 
     public Tisch() {
@@ -36,6 +37,10 @@ public class Tisch implements Serializable {
     public void setTischNummer(int tischNummer) {
         this.tischNummer = tischNummer;
     }
+
+    public boolean getVerfuegbarkeit() { return verfuegbarkeit; }
+
+    public void setVerfuegbarkeit(boolean verfuegbarkeit) { this.verfuegbarkeit = verfuegbarkeit; }
 
     @Override
     public String toString() {

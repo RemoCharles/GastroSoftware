@@ -53,11 +53,11 @@ public class LeiterInterfaceController implements Initializable {
 	}
 	@FXML
 	private void tischVerwaltungAnzeigen(ActionEvent event) throws Exception {
-		Parent saal1_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/Saal1.fxml"));
-		Scene saal1_interface_scene = new Scene(saal1_interface_parent);
-		Stage saal1_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
-		saal1_stage.setScene(saal1_interface_scene);
-		saal1_stage.show();
+		Parent tischVerwaltung_interface_parent = FXMLLoader.load(getClass().getResource("/fxml/LeiterTischverwaltung.fxml"));
+		Scene tischVerwaltung_interface_scene = new Scene(tischVerwaltung_interface_parent);
+		Stage tischVerwaltung_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+		tischVerwaltung_stage.setScene(tischVerwaltung_interface_scene);
+		tischVerwaltung_stage.show();
 	}
 	@FXML
 	private void logout(ActionEvent event) throws Exception {
