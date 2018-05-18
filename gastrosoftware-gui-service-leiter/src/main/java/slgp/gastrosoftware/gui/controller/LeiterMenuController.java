@@ -125,6 +125,7 @@ public class LeiterMenuController implements Initializable {
 		for(Esswaren e : vorhandeneMenuList) {
 			if(e.getBezeichnung().equals(essware.getBezeichnung())){
 				lblError.setText("Sie haben diesen Artikel bereits im Tagesmenü.");
+				break;
 			}
 		}
 			esswarenObservableList.addAll(vorhandeneMenuList);
@@ -163,7 +164,6 @@ public class LeiterMenuController implements Initializable {
 		try {
 			// ComboBox füllen
 			List<String> wochenTag = new ArrayList<>();
-
 			wochenTag.add("Montag");
 			wochenTag.add("Dienstag");
 			wochenTag.add("Mittwoch");

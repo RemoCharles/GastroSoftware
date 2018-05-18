@@ -125,7 +125,6 @@ public class MaInterfaceController implements Initializable{
             public void run() {
                 try {
                     tabelleFuellen();
-                    System.out.println("aktualisiert");
                 } catch (Exception e) {
                     logger.info("Tabelle konnte nicht befüllt werden...");
                 }

@@ -50,7 +50,6 @@ public class LeiterTischverwaltungController implements Initializable {
     private TableColumn<Tisch, Boolean> colVerfuegbarkeit;
 
 
-    //TODO Service für
     private static RMIBestellService bestellService = Context.getInstance().getBestellService();
     private static Logger logger = (Logger) LogManager.getLogger(LeiterTischverwaltungController.class);
 

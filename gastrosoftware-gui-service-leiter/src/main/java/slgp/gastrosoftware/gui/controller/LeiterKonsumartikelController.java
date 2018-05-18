@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 public class LeiterKonsumartikelController implements Initializable {
-    private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
+    private static final Logger logger = LogManager.getLogger(LeiterKonsumartikelController.class);
 
    private static RMIKonsumartikelService konsumartikelService = Context.getInstance().getKonsumartikelService();
 
@@ -88,7 +88,6 @@ public class LeiterKonsumartikelController implements Initializable {
                     }
                 }
             });
-
             cbVerfuegbarkeit.selectedProperty().addListener(new ChangeListener<Boolean>() {
 
                 @Override
@@ -236,10 +235,7 @@ public class LeiterKonsumartikelController implements Initializable {
     @FXML
     public void speichern(ActionEvent event) throws Exception {
         // Kontrolle ob dies funktioniert!
-
         if (eingabeValid()) {
-
-
             if (tblKonsumartikel.getSelectionModel().getSelectedItem() == null) {
 
                 // Neuer Konsumartikel anlegen
@@ -266,8 +262,6 @@ public class LeiterKonsumartikelController implements Initializable {
                 Konsumartikel kA = tblKonsumartikel.getSelectionModel().getSelectedItem();
                 String bez = lblBez.getText();
                 String kategorie = cmbKat2.getSelectionModel().getSelectedItem().toString();
-                String kuecheBarKategorie = cmbKategorieKuecheBar.getSelectionModel().getSelectedItem();
-
                 double preis = Double.parseDouble(lblPreis.getText());
 
                 kA.setBezeichnung(bez);
@@ -360,8 +354,6 @@ public class LeiterKonsumartikelController implements Initializable {
                     konsumartikelList.add(kA);
                 }
             }
-
-
             ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections.observableList(konsumartikelList);
 
             for (Konsumartikel kA : konsumartikelObservableList) {

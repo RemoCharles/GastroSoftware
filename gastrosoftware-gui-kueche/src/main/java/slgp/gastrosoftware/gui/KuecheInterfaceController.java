@@ -124,7 +124,6 @@ public class KuecheInterfaceController implements Initializable{
             public void run() {
                 try {
                     tabelleBefuellen();
-                    System.out.println("aktualisiert");
                 } catch (Exception e) {
                     logger.info("Tabelle konnte nicht befüllt werden...");
                 }

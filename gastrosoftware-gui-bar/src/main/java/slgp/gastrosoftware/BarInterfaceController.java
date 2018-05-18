@@ -28,7 +28,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class BarInterfaceController implements Initializable {
     private static final Logger logger = LogManager.getLogger(BarInterfaceController.class);
-
     private RMIBestellService bestellService = Context.getInstance().getBestellService();
 
     @FXML
@@ -122,7 +121,6 @@ public class BarInterfaceController implements Initializable {
             public void run() {
                 try {
                     tabelleBefuellen();
-                    System.out.println("aktualisiert");
                 } catch (Exception e) {
                     logger.info("Tabelle konnte nicht befüllt werden...");
                 }
