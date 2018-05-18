@@ -19,6 +19,7 @@ public class BestellPosition implements Serializable {
     private double betrag;
     private int tischNummer;
     private boolean zubereitet = false;
+    private boolean serviert = false;
 
     public BestellPosition() {
     }
@@ -94,6 +95,14 @@ public class BestellPosition implements Serializable {
 
     public void setZubereitet(boolean zubereitet) {
         this.zubereitet = zubereitet;
+    }
+
+    public boolean getServiert() {
+        return serviert;
+    }
+
+    public void setServiert(boolean serviert) {
+        this.serviert = serviert;
     }
 
     @Override

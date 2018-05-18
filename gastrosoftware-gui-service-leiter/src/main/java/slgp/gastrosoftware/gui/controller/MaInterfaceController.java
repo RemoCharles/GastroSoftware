@@ -46,6 +46,9 @@ public class MaInterfaceController implements Initializable{
 	@FXML
 	private TableColumn<BestellPosition, Integer> colTisch;
 
+	@FXML
+	private TableColumn<BestellPosition, Integer> colAnz;
+
 	private static final Logger logger = LogManager.getLogger(MaInterfaceController.class);
     private static RMIBestellService bestellService = Context.getInstance().getBestellService();
 
@@ -53,6 +56,7 @@ public class MaInterfaceController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		colBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
 		colTisch.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("tischNummer"));
+		colAnz.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
 		tabelleFuellen();
 		tabelleAktualisieren();
 	}
@@ -60,7 +64,7 @@ public class MaInterfaceController implements Initializable{
 	@FXML
 	private void serviert(ActionEvent event) throws Exception{
 		BestellPosition bP = tblBestellungen.getSelectionModel().getSelectedItem();
-		bP.setZubereitet(false);
+		bP.setServiert(true);
 		bestellService.bestellPositionAktualisieren(bP);
 		tabelleFuellen();
 	}
@@ -70,7 +74,7 @@ public class MaInterfaceController implements Initializable{
 			List<BestellPosition> bestellPositionList = bestellService.findBestellPositionAll();
 			List<BestellPosition> offeneBestellungenList = new ArrayList<>();
 			for (BestellPosition bP : bestellPositionList) {
-				if (bP.getZubereitet()) {
+				if (bP.getZubereitet()==true && bP.getServiert()==false) {
 					offeneBestellungenList.add(bP);
 				}
 			}
