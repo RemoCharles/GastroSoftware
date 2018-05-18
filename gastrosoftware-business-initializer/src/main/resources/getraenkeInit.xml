@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getraenke>
+    <getraenke>
+        <bezeichnung>Wasser</bezeichnung>
+        <kategorie>Alkoholfrei</kategorie>
+        <preis>1.50</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Cola</bezeichnung>
+        <kategorie>Alkoholfrei</kategorie>
+        <preis>2.00</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Eistee</bezeichnung>
+        <kategorie>Alkoholfrei</kategorie>
+        <preis>2.50</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Eichhof</bezeichnung>
+        <kategorie>Bier</kategorie>
+        <preis>3.00</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Heineken</bezeichnung>
+        <kategorie>Bier</kategorie>
+        <preis>3.50</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Calanda</bezeichnung>
+        <kategorie>Bier</kategorie>
+        <preis>4.00</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Cabernet Sauvignon</bezeichnung>
+        <kategorie>Wein</kategorie>
+        <preis>12.50</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Merlot</bezeichnung>
+        <kategorie>Wein</kategorie>
+        <preis>14.50</preis>
+    </getraenke>
+    <getraenke>
+        <bezeichnung>Syrah </bezeichnung>
+        <kategorie>Wein</kategorie>
+        <preis>15.50</preis>
+    </getraenke>
+</getraenke>

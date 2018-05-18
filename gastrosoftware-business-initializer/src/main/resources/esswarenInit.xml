@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<esswaren>
+	<esswaren>
+		<bezeichnung>Pizza Margarita</bezeichnung>
+		<kategorie>Hauptspeise</kategorie>
+		<preis>16.50</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Pizza Calzone</bezeichnung>
+		<kategorie>Hauptspeise</kategorie>
+		<preis>19.00</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Spaghetti Carbonara</bezeichnung>
+		<kategorie>Hauptspeise</kategorie>
+		<preis>17.00</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Spaghetti Tomatensauce</bezeichnung>
+		<kategorie>Hauptspeise</kategorie>
+		<preis>17.00</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Blattsalat</bezeichnung>
+		<kategorie>Vorspeise</kategorie>
+		<preis>8.50</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Caesar Salad</bezeichnung>
+		<kategorie>Vorspeise</kategorie>
+		<preis>10.50</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Kürbis Suppe</bezeichnung>
+		<kategorie>Vorspeise</kategorie>
+		<preis>9.50</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Glace</bezeichnung>
+		<kategorie>Nachspeise</kategorie>
+		<preis>4.50</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Schokoladentorte</bezeichnung>
+		<kategorie>Nachspeise</kategorie>
+		<preis>5.50</preis>
+	</esswaren>
+	<esswaren>
+		<bezeichnung>Creme Brulee</bezeichnung>
+		<kategorie>Nachspeise</kategorie>
+		<preis>6.00</preis>
+	</esswaren>
+</esswaren>
