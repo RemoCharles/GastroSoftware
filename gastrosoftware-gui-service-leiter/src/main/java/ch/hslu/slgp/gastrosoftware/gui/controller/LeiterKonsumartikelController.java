@@ -356,9 +356,6 @@ public class LeiterKonsumartikelController implements Initializable {
             }
             ObservableList<Konsumartikel> konsumartikelObservableList = FXCollections.observableList(konsumartikelList);
 
-            for (Konsumartikel kA : konsumartikelObservableList) {
-                logger.info(kA);
-            }
             tblKonsumartikel.setItems(konsumartikelObservableList);
         } catch (Exception e){
             logger.info("Tabelle konnte nicht befüllt werden.");

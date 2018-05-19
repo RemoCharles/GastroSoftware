@@ -102,7 +102,6 @@ public class TischRechnungController implements Initializable {
 
         try {
             List<Bestellung> bestellungList = bestellService.findBestellungByTischNummer(getTischNummer());
-            System.out.println(getTischNummer());
 
             for (Bestellung bestellung : bestellungList) {
                 if (!bestellung.getBezahlt()) {
@@ -138,9 +137,7 @@ public class TischRechnungController implements Initializable {
             ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableArrayList(bestellPositionList);
 
             tblBestellPosition.setItems(bestellPositionObservableList);
-            for (BestellPosition bestellPosition : bestellPositionList) {
-                System.out.println(bestellPosition.getBerechneterPreis());
-            }
+
         } catch (Exception e) {
             logger.info("Tabelle konnte nicht befuellt werden");
         }
@@ -149,11 +146,8 @@ public class TischRechnungController implements Initializable {
     @FXML
     public void rechnungBezahlt() {
         try {
-            logger.info(bestellungListTemp.size());
             for (Bestellung bestellung : bestellungListTemp) {
-                logger.info(bestellung);
                 bestellung.setBezahlt(true);
-                logger.info(bestellung);
                 bestellService.bestellungAktualisieren(bestellung);
             }
             tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, 2);

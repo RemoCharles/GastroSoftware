@@ -27,11 +27,8 @@ import java.util.TreeSet;
 public class TischAnzeigenController {
     private static final Logger logger = LogManager.getLogger(TischAnzeigenController.class);
 
-    private static RMIPersonService personService = Context.getInstance().getPersonService();
     private static RMIBestellService bestellService = Context.getInstance().getBestellService();
-    private static RMIRechnungService rechnungService = Context.getInstance().getRechnungService();
     private static RMIKonsumartikelService konsumartikelService = Context.getInstance().getKonsumartikelService();
-    private static RMIMenuService menuService = Context.getInstance().getMenuService();
 
     @FXML
     private ComboBox<String> cmbKat;
@@ -169,15 +166,12 @@ public class TischAnzeigenController {
             for (BestellPosition bestellPosition : bestellPositionObservableList) {
                 bestellPosition.setTischNummer(tischNummer);
                 bestellPositionList.add(bestellPosition);
-                logger.info(bestellPosition);
             }
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
-            logger.info(tisch);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
 
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
             bestellService.bestellungHinzufuegen(bestellung);
-            logger.info(bestellung);
         }
 
     }
@@ -188,12 +182,10 @@ public class TischAnzeigenController {
         if (cmbKat.getSelectionModel().getSelectedItem().startsWith("E")) {
             for (Esswaren esswaren : esswarenList) {
                 konsumartikelKategorie.add(esswaren.getKategorie());
-                logger.info("Bestellposition Essware: " + esswaren);
             }
         } else {
             for (Getraenke getraenke : getraenkeList) {
                 konsumartikelKategorie.add(getraenke.getKategorie());
-                logger.info("Bestellposition Getränke: " + getraenke);
             }
         }
         ObservableList<String> konsumArtikelKategorieListe = FXCollections.observableArrayList(konsumartikelKategorie);
