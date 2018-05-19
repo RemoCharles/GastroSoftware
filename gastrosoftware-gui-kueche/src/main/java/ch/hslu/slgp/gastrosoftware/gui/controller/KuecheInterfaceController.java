@@ -116,7 +116,6 @@ public class KuecheInterfaceController implements Initializable{
             logger.info("Tabelle konnte nicht befüllt werden..");
         }
     }
-//TODO Thread Fehler
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public void tabelleAktualisieren() {

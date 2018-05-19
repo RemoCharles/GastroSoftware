@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//TODO: Menu aktualisiern korrigieren
-
 public class LeiterMenuController implements Initializable {
 
 	private static Logger logger = LogManager.getLogger(LeiterMenuController.class);
@@ -48,9 +46,6 @@ public class LeiterMenuController implements Initializable {
 
 	@FXML
 	private TableColumn<Esswaren, Double> colPreis;
-
-	@FXML
-	private Button btnErstellen;
 
 	@FXML
 	private Button btnLoeschen;
@@ -100,7 +95,7 @@ public class LeiterMenuController implements Initializable {
 				List<Esswaren> esswarenList = new ArrayList<>(tblMenu.getItems());
 				Tagesmenu tagesmenuVorLoeschen = new Tagesmenu(cmbWochentage.getSelectionModel().getSelectedItem(), esswarenList);
 				for (Tagesmenu t : tgList){
-					if(t.equals(tagesmenuVorLoeschen)){
+					if(t.getWochenTag().equals(tagesmenuVorLoeschen.getWochenTag())){
 						menuService.tagesmenuLoeschen(t);
 					}
 				}
@@ -120,47 +115,40 @@ public class LeiterMenuController implements Initializable {
 
 	@FXML
 	private void hinzufuegen(ActionEvent event) {
-		ObservableList<Esswaren> esswarenObservableList = FXCollections.observableArrayList();
-		Esswaren essware = tblKonsumartikel.getSelectionModel().getSelectedItem();
-		List<Esswaren> vorhandeneMenuList = tblMenu.getItems();
-		if (vorhandeneMenuList.size() > 0) {
-		for(Esswaren e : vorhandeneMenuList) {
-			if(e.getBezeichnung().equals(essware.getBezeichnung())){
-				lblError.setText("Sie haben diesen Artikel bereits im Tagesmenü.");
-				break;
-			}
-		}
-			esswarenObservableList.addAll(vorhandeneMenuList);
-			esswarenObservableList.add(essware);
-			tblMenu.setItems(esswarenObservableList);
-		} else {
-			esswarenObservableList.add(essware);
-			tblMenu.setItems(esswarenObservableList);
-		}
-	}
-
-
-	@FXML
-	private void erstellen(ActionEvent event) {
 		try {
-			List<Esswaren> tagesMenuList = new ArrayList<>(tblMenu.getItems());
+			ObservableList<Esswaren> esswarenObservableList = FXCollections.observableArrayList();
+
+			Esswaren essware = tblKonsumartikel.getSelectionModel().getSelectedItem();
+			List<Esswaren> vorhandeneMenuList = new ArrayList<>(tblMenu.getItems());
 			String wochenTag = cmbWochentage.getSelectionModel().getSelectedItem();
-			if(tagesMenuList.size() == 0){
-				lblError.setText("Dieses Tagesmenü enthält keine Elemente.");
-			}
-				List<Tagesmenu> tagesMenuListDB = menuService.findyTagesmenuByWochenTag(wochenTag);
-				Tagesmenu tagesmenu = new Tagesmenu(wochenTag, tagesMenuList);
-				for(Tagesmenu t : tagesMenuListDB){
-						menuService.tagesmenuLoeschen(t);
+			List<Tagesmenu> tagesMenuListDB = menuService.findyTagesmenuByWochenTag(wochenTag);
+
+			if (vorhandeneMenuList.size() > 0) {
+				for (Esswaren e : vorhandeneMenuList) {
+					if (e.getBezeichnung().equals(essware.getBezeichnung())) {
+						lblError.setText("Sie haben diesen Artikel bereits im Tagesmenü.");
+						return;
+					}
 				}
-				menuService.tagesmenuHinzufuegen(tagesmenu);
-				lblError.setText("Tagesmenü erfolgreich hinzugefügt.");
+				esswarenObservableList.addAll(vorhandeneMenuList);
+				esswarenObservableList.add(essware);
+				tblMenu.setItems(esswarenObservableList);
+			} else {
+				esswarenObservableList.add(essware);
+				tblMenu.setItems(esswarenObservableList);
+			}
+			for(Tagesmenu t : tagesMenuListDB){
+				menuService.tagesmenuLoeschen(t);
+			}
+			vorhandeneMenuList.add(essware);
+			Tagesmenu tagesmenuNeu = new Tagesmenu(wochenTag, vorhandeneMenuList);
+			menuService.tagesmenuHinzufuegen(tagesmenuNeu);
+			lblError.setText("Tagesmenü erfolgreich hinzugefügt.");
 
 		} catch (Exception e) {
-			logger.error("Fehler beim Speichern des Tagesmenu: ", e);
+				logger.info(e);
 		}
 	}
-
 
 	private void wochentagAuswaehlen() throws Exception {
 		try {

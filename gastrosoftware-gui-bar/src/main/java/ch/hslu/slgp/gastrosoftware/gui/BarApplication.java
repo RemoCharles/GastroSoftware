@@ -1,4 +1,4 @@
-package ch.hslu.slgp.gastrosoftware.pdfprinter;
+package ch.hslu.slgp.gastrosoftware.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;

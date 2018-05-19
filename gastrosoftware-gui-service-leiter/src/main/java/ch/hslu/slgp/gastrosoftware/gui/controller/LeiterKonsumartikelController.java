@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 
-//TODO: Konsumartikel Verfügbar korrigieren
-
 public class LeiterKonsumartikelController implements Initializable {
     private static final Logger logger = LogManager.getLogger(LeiterKonsumartikelController.class);
 
