@@ -35,12 +35,6 @@ public class LoginController implements Initializable {
     @FXML
     private Label genPwEr;
 
-    @FXML
-    private Button maiTisc1;
-
-    @FXML
-    private Button genAbbr;
-
     private static RMIPersonService personService = Context.getInstance().getPersonService();
     private static Logger logger = (Logger) LogManager.getLogger(LoginController.class);
 
@@ -67,6 +61,7 @@ public class LoginController implements Initializable {
                 Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 Mitarbeiter mitarbeiter = personService.findMitarbeiterByUsername(genBenu.getText());
+
                 ContextMitarbeiter.getInstance().setMitarbeiter(mitarbeiter);
 
                 ma_stage.setScene(ma_interface_scene);

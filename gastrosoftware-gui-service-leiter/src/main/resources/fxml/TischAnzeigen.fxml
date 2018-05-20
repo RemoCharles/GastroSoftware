@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hslu.slgp.gastrosoftware.gui.controller.TischAnzeigenController">
     <children>
         <Label fx:id="lbltis" layoutX="50.0" layoutY="24.0" prefHeight="36.0" prefWidth="169.0" text="Konsumartikel">
@@ -26,7 +32,7 @@
         <Button layoutX="801.0" layoutY="17.0" mnemonicParsing="false" onAction="#zurueck" prefHeight="28.0" prefWidth="80.0" text="Zurück" />
         <Spinner fx:id="spnAnzahl" layoutX="494.0" layoutY="33.0" styleClass="split-arrows-vertical">
         </Spinner>
-      <TableView fx:id="tblAlleKonsumartikel" layoutX="50.0" layoutY="125.0" prefHeight="272.0" prefWidth="721.0">
+      <TableView fx:id="tblAlleKonsumartikel" layoutX="50.0" layoutY="125.0" prefHeight="260.0" prefWidth="721.0">
          <columns>
             <TableColumn fx:id="konsKat" prefWidth="120.5" text="Kategorie" />
             <TableColumn fx:id="konsBez" minWidth="1.0" prefWidth="320.5" text="Bezeichnung" />
@@ -34,5 +40,7 @@
          </columns>
       </TableView>
       <Button layoutX="801.0" layoutY="125.0" mnemonicParsing="false" onAction="#addToBestellPositionListe" prefHeight="28.0" prefWidth="80.0" text="Add" />
+      <Label fx:id="lblBestellungBestätigung" layoutX="494.0" layoutY="96.0" text=" " />
+      <Button layoutX="801.0" layoutY="429.0" mnemonicParsing="false" onAction="#deleteBestellPosition" prefHeight="28.0" prefWidth="80.0" text="Löschen" />
     </children>
 </AnchorPane>

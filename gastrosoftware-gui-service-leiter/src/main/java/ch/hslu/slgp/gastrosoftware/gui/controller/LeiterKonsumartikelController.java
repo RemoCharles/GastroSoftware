@@ -198,7 +198,7 @@ public class LeiterKonsumartikelController implements Initializable {
             cmbKategorieKuecheBar.setItems(katKuecheBarList);
             cmbKategorieKuecheBar.getSelectionModel().select(0);
         }catch(Exception e){
-            logger.info("Kategorienauswahl konnte nicht geladen werden.");
+            logger.info("Kategorienauswahl konnte nicht geladen werden.", e);
         }
 
     }
@@ -294,7 +294,7 @@ public class LeiterKonsumartikelController implements Initializable {
             tblKonsumartikel.setItems(konsumartikelDisabledObservableList);
 
         } catch (Exception e) {
-            logger.info("Es konnte nicht gefiltert werden...");
+            logger.info("Es konnte nicht gefiltert werden...", e);
         }
     }
 
@@ -358,7 +358,7 @@ public class LeiterKonsumartikelController implements Initializable {
 
             tblKonsumartikel.setItems(konsumartikelObservableList);
         } catch (Exception e){
-            logger.info("Tabelle konnte nicht befüllt werden.");
+            logger.info("Tabelle konnte nicht befüllt werden.", e);
         }
     }
 }

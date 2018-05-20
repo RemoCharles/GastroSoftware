@@ -2,6 +2,8 @@ package ch.hslu.slgp.gastrosoftware.gui.controller;
 
 import ch.hslu.slgp.gastrosoftware.model.MAAbrechnung;
 import ch.hslu.slgp.gastrosoftware.model.Mitarbeiter;
+import ch.hslu.slgp.gastrosoftware.pdfprinter.PDFPrinter;
+import ch.hslu.slgp.gastrosoftware.pdfprinter.api.PrinterService;
 import ch.hslu.slgp.gastrosoftware.rmi.api.RMIRechnungService;
 import ch.hslu.slgp.gastrosoftware.rmi.context.Context;
 import javafx.collections.FXCollections;
@@ -28,6 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class LeiterAbrechnungAnzeigenController implements Initializable {
+    //TODO: Null Exception abfangen
     private static Logger logger = LogManager.getLogger(LeiterAbrechnungAnzeigenController.class);
 
     private static RMIRechnungService rechnungService = Context.getInstance().getRechnungService();
@@ -68,6 +71,9 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
     @FXML
     private Label lblTelefon;
 
+    private List <MAAbrechnung> maAbrechnungList = new ArrayList<>();
+    private Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -84,7 +90,7 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
 
         //Wann wird eine Rechnung als Mitarbeiterabrechnung persistiert?
         List<MAAbrechnung> mabTemp = rechnungService.findMAAbrechnungAll();
-        List <MAAbrechnung> mabPerson = new ArrayList<>();
+
         Mitarbeiter mitarbeiterSuche = ContextMitarbeiter.getInstance().getMitarbeiter();
 
         lblName.setText(mitarbeiterSuche.getName());
@@ -99,13 +105,13 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
         for (MAAbrechnung m : mabTemp){
 
             if (m.getMitarbeiter().equals(mitarbeiterSuche)){
-                mabPerson.add(m);
+                maAbrechnungList.add(m);
             } else {
                 System.out.println("Mitarbeiter wurde nicht verglichen");
             }
         }
 
-        ObservableList<MAAbrechnung> maAbrechnungListe = FXCollections.observableList(mabPerson);
+        ObservableList<MAAbrechnung> maAbrechnungListe = FXCollections.observableList(maAbrechnungList);
         colDatum.setCellValueFactory(new PropertyValueFactory<MAAbrechnung, String>("datum"));
         colUmsatz.setCellValueFactory(new PropertyValueFactory<MAAbrechnung, Double>("umsatz"));
         tblAbrechnungAnzeigen.setItems(maAbrechnungListe);
@@ -117,5 +123,11 @@ public class LeiterAbrechnungAnzeigenController implements Initializable {
         Stage ma_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ma_stage.setScene(ma_interface_scene);
         ma_stage.show();
+    }
+
+    @FXML
+    private void maAbrechnungDrucken() throws Exception {
+        PrinterService printerService = new PDFPrinter();
+        printerService.printMAAbrechnungAlsPdf(maAbrechnungList, mitarbeiterSuche);
     }
 }

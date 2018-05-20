@@ -139,7 +139,7 @@ public class TischRechnungController implements Initializable {
             tblBestellPosition.setItems(bestellPositionObservableList);
 
         } catch (Exception e) {
-            logger.info("Tabelle konnte nicht befuellt werden");
+            logger.info("Tabelle konnte nicht befuellt werden", e);
         }
     }
 
@@ -155,7 +155,7 @@ public class TischRechnungController implements Initializable {
             rechnungDrucken();
             updateTable();
         } catch (Exception e) {
-            logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: " + e);
+            logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: ", e);
         }
 
     }

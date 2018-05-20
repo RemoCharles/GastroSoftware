@@ -242,7 +242,6 @@ public class LeiterMitarbeiterController implements Initializable {
 
 			List <Person> allePersonenListe = personService.findPersonAll();
 
-			colNummer.setCellValueFactory(new PropertyValueFactory<Person, Integer>("nummer"));
 			colName.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
 			colVorname.setCellValueFactory(new PropertyValueFactory<Person, String>("vorname"));
 			colStrasse.setCellValueFactory(new PropertyValueFactory<Person, String>("strasse"));

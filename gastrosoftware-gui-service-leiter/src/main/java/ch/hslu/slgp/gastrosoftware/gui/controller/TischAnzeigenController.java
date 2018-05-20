@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,6 +66,9 @@ public class TischAnzeigenController {
 
     @FXML
     TableColumn<Konsumartikel, Integer> konsPreis;
+
+    @FXML
+    private Label lblBestellungBestätigung;
 
     private List<Getraenke> getraenkeList = new ArrayList<>();
     private List<Esswaren> esswarenList = new ArrayList<>();
@@ -117,13 +121,6 @@ public class TischAnzeigenController {
 
     }
 
-
-    @FXML
-    private void updateSpinner() throws Exception {
-        selectedBestellPosition = tblBestellPosition.getSelectionModel().getSelectedItem();
-        spnAnzahl.getValueFactory().setValue(selectedBestellPosition.getAnzahl());
-    }
-
     @FXML
     private void updateTable() throws Exception {
         try {
@@ -146,8 +143,26 @@ public class TischAnzeigenController {
         }
     }
 
+
+    @FXML
+    private void updateSpinner() throws Exception {
+        if (tblBestellPosition.getSelectionModel().getSelectedCells().size() > 0) {
+            selectedBestellPosition = tblBestellPosition.getSelectionModel().getSelectedItem();
+            spnAnzahl.getValueFactory().setValue(selectedBestellPosition.getAnzahl());
+        }
+    }
+
+    @FXML
+    void deleteBestellPosition() throws Exception {
+        if (tblBestellPosition.getSelectionModel().getSelectedCells().size() > 0) {
+            BestellPosition bestellPosition = tblBestellPosition.getSelectionModel().getSelectedItem();
+            bestellPositionObservableList.remove(bestellPosition);
+        }
+    }
+
     @FXML
     private void addToBestellPositionListe() {
+        if (tblAlleKonsumartikel.getSelectionModel().getSelectedItems().size() > 0) {
         Konsumartikel konsumartikel = tblAlleKonsumartikel.getSelectionModel().getSelectedItem();
         BestellPosition bestellPosition = new BestellPosition(konsumartikel, 1);
         List<Konsumartikel> konsumartikelListAusBestellPosition = new ArrayList<>();
@@ -156,22 +171,30 @@ public class TischAnzeigenController {
         }
         if (!konsumartikelListAusBestellPosition.contains(konsumartikel)) {
             bestellPositionObservableList.add(bestellPosition);
-        }
+        }}
     }
 
     @FXML
     private void createNewBestellung() throws Exception {
         if (bestellPositionObservableList.size() > 0) {
             List<BestellPosition> bestellPositionList = new ArrayList<>();
+
             for (BestellPosition bestellPosition : bestellPositionObservableList) {
                 bestellPosition.setTischNummer(tischNummer);
                 bestellPositionList.add(bestellPosition);
             }
+
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
-
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
+
             bestellService.bestellungHinzufuegen(bestellung);
+
+            lblBestellungBestätigung.setText("Bestellung erfolgreich");
+            lblBestellungBestätigung.setTextFill(Color.web("#00ff00"));
+        } else {
+            lblBestellungBestätigung.setText("Kein Konsumartikel in Bestellliste");
+            lblBestellungBestätigung.setTextFill(Color.web("#ff0000"));
         }
 
     }
@@ -207,17 +230,18 @@ public class TischAnzeigenController {
     public void setTischNummer(int tischNummer) {
         this.tischNummer = tischNummer;
     }
-    public int getTischNummer(){
+
+    public int getTischNummer() {
         return tischNummer;
     }
 
 
     public void listenLaden() throws Exception {
-        for(Esswaren esswaren : konsumartikelService.findEsswarenAll()){
+        for (Esswaren esswaren : konsumartikelService.findEsswarenAll()) {
             esswarenList.add(esswaren);
             konsumartikelKlasse.add(esswaren.getClass().getSimpleName());
         }
-        for (Getraenke getraenke : konsumartikelService.findGetraenkeAll()){
+        for (Getraenke getraenke : konsumartikelService.findGetraenkeAll()) {
             getraenkeList.add(getraenke);
             konsumartikelKlasse.add(getraenke.getClass().getSimpleName());
         }

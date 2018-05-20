@@ -33,7 +33,6 @@ public class LoginDAOImpl extends GenericPersisterDAOImpl<Login> implements Logi
         em.close();
 
         if (liste.size() != 1) {
-            System.out.println("Es wurden keine oder mehrere Personen gefunden");
             logger.info("Es wurden keine oder mehrere Personen gefunden");
 
         }
@@ -45,7 +44,6 @@ public class LoginDAOImpl extends GenericPersisterDAOImpl<Login> implements Logi
                 pw = true;
             } else {
                 pw = false;
-                logger.info("Passwort falsch");
             }
         }
 

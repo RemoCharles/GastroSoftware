@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestPrinter {
-    public static void main (String[] args) throws RemoteException {
+    public static void main(String[] args) throws RemoteException {
         Logger logger = LogManager.getLogger(TestPrinter.class);
 
         List<Konsumartikel> konsumartikelList = new ArrayList<>();
@@ -32,13 +32,23 @@ public class TestPrinter {
         TischRechnung tischRechnung = new TischRechnung(LocalDate.now(), bestellungList);
 
         PrinterService printerService = new PDFPrinter();
+
+        List<MAAbrechnung> maAbrechnungList = new ArrayList<>();
+        maAbrechnungList.add(new MAAbrechnung(LocalDate.now(), bestellungList));
         try {
             logger.info("Starting PDF Print");
             printerService.printTischRechnungAlsPdf(tischRechnung);
+            if (maAbrechnungList.size() > 0) {
+                printerService.printMAAbrechnungAlsPdf(maAbrechnungList, ma);
+            }
+
             logger.info("DONE!");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
+
 
 }

@@ -10,9 +10,6 @@ import java.util.Objects;
         @NamedQuery(name = "MAAbrechnung.findAll", query = "SELECT e FROM MAAbrechnung e")})
 public class MAAbrechnung extends Rechnung {
 
-    //@OneToMany(fetch=FetchType.EAGER)
-    //private List<TischRechnung> tischRechnungList;
-
     @OneToMany(fetch = FetchType.EAGER)
     private List <Bestellung> mitarbeiterBestellungList;
     private double umsatz;
