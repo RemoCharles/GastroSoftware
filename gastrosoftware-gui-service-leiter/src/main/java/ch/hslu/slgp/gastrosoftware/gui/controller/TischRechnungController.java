@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,11 +64,15 @@ public class TischRechnungController implements Initializable {
     @FXML
     private Label lblFxmlSumme;
 
+    @FXML
+    private Label lblTischrechnungBestätigung;
+
     private int tischNummer;
 
     List<Bestellung> bestellungListTemp = new ArrayList<>();
 
     private TischRechnung tischRechnung;
+    private ObservableList<BestellPosition> bestellPositionObservableList;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -117,22 +122,23 @@ public class TischRechnungController implements Initializable {
                 bestellPositionList.addAll(bestellung.getKonsumartikel());
             }
 
-            if (bestellPositionList.size() != 0) {
-                Double summeRechnung = 0.00;
-                for (BestellPosition bestellPosition : bestellPositionList) {
-                    summeRechnung = summeRechnung + bestellPosition.getBerechneterPreis();
-                }
-                String txtsummeRechnung = String.valueOf(summeRechnung);
-                lblFxmlSumme.setText(txtsummeRechnung);
 
-            } else {
-                lblFxmlSumme.setText("0");
-            }
+//            if (bestellPositionList.size() != 0) {
+//                Double summeRechnung = 0.00;
+//                for (BestellPosition bestellPosition : bestellPositionList) {
+//                    summeRechnung = summeRechnung + bestellPosition.getBerechneterPreis();
+//                }
+//                String txtsummeRechnung = String.valueOf(summeRechnung);
+//                lblFxmlSumme.setText(txtsummeRechnung);
+//
+//            } else {
+//                lblFxmlSumme.setText("0");
+//            }
 
             bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
             bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
             bPEinzelPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("preis"));
-            bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("berechneterPreis"));
+            bPPreis.setCellValueFactory(new PropertyValueFactory<BestellPosition, Double>("Betrag"));
 
             ObservableList<BestellPosition> bestellPositionObservableList = FXCollections.observableArrayList(bestellPositionList);
 
@@ -145,20 +151,28 @@ public class TischRechnungController implements Initializable {
 
     @FXML
     public void rechnungBezahlt() {
-        try {
-            for (Bestellung bestellung : bestellungListTemp) {
-                bestellung.setBezahlt(true);
-                bestellService.bestellungAktualisieren(bestellung);
+
+            try {
+
+
+                for (Bestellung bestellung : bestellungListTemp) {
+                    bestellung.setBezahlt(true);
+                    bestellService.bestellungAktualisieren(bestellung);
+                }
+                tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, 2);
+                rechnungService.tischRechnungHinzufuegen(tischRechnung);
+
+                lblTischrechnungBestätigung.setText("Tischrechnung erstellen erfolgreich");
+                lblTischrechnungBestätigung.setTextFill(Color.web("#00ff00"));
+
+            } catch (Exception e) {
+                logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: ", e);
             }
-            tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, 2);
-            rechnungService.tischRechnungHinzufuegen(tischRechnung);
             rechnungDrucken();
             updateTable();
-        } catch (Exception e) {
-            logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: ", e);
+
         }
 
-    }
 
     @FXML
     public void rechnungDrucken() {

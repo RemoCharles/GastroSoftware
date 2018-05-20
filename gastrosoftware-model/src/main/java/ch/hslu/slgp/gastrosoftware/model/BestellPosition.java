@@ -34,14 +34,15 @@ public class BestellPosition implements Serializable {
     public BestellPosition(Konsumartikel konsumartikel) {
         this.konsumartikel = konsumartikel;
         anzahl = 0;
-        betrag = konsumartikel.getPreis() * anzahl;
+        betrag = konsumartikel.getPreis() * this.anzahl;
     }
 
-    public void berechneBetrag() {
-        betrag = konsumartikel.getPreis() * anzahl;
-    }
+//    public void berechneBetrag() {
+//        betrag = this.konsumartikel.getPreis() * this.anzahl;
+//    }
 
     public double getBetrag() {
+        betrag = this.anzahl * this.konsumartikel.getPreis() ;
         return betrag;
     }
 
@@ -128,8 +129,8 @@ public class BestellPosition implements Serializable {
                 '}';
     }
 
-    public double getBerechneterPreis() {
-        double kumulierterPreis = this.anzahl * this.konsumartikel.getPreis();
-        return kumulierterPreis;
-    }
+//    public double getBerechneterPreis() {
+//        double kumulierterPreis = this.anzahl * this.konsumartikel.getPreis();
+//        return kumulierterPreis;
+//    }
 }
