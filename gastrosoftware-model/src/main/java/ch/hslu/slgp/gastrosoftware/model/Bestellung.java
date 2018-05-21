@@ -27,7 +27,7 @@ public class Bestellung implements Serializable {
     private boolean zubereitet;
     private LocalDate datum;
     private boolean bezahlt;
-    private double summeBestellPositionList;
+    private double summeBestellPositionList = 0;
 
     public Bestellung(Mitarbeiter mitarbeiter, Tisch tisch, List<BestellPosition> bestellPositionList, boolean zubereitet, boolean bezahlt, LocalDate datum) {
         this.mitarbeiter = mitarbeiter;
@@ -36,7 +36,6 @@ public class Bestellung implements Serializable {
         this.zubereitet = zubereitet;
         this.datum = datum;
         this.bezahlt = bezahlt;
-        summeBestellPositionList = berechneSummeBestellPositionList();
     }
 
     public Bestellung() {
@@ -63,15 +62,17 @@ public class Bestellung implements Serializable {
     }
 
     public int getAnzahlKonsumartikel (){
-        int anz = getKonsumartikel().size();
-        return anz;
+        int anz = 0;
+        for (BestellPosition bP : getKonsumartikel()){
+            anz =+ bP.getAnzahl();
+        }
+       return anz;
     }
 
-    public double berechneSummeBestellPositionList() {
+    public void berechneSummeBestellPositionList() {
         for (BestellPosition bestellPosition : bestellPositionList){
-            summeBestellPositionList =+ bestellPosition.getBetrag();
+            summeBestellPositionList = summeBestellPositionList + bestellPosition.getBetrag();
         }
-        return summeBestellPositionList;
     }
 
     public double getSummebestellPositionList(){
@@ -124,13 +125,6 @@ public class Bestellung implements Serializable {
         return bezahlt;
     }
 
-    public double getSummeBestellPositionList() {
-        return summeBestellPositionList;
-    }
-
-    public void setSummeBestellPositionList(double summeBestellPositionList) {
-        this.summeBestellPositionList = summeBestellPositionList;
-    }
 
     @Override
     public String toString() {

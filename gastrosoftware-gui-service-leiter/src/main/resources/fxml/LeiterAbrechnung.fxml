@@ -18,7 +18,7 @@
       <TableView fx:id="tblAbrechnung" layoutX="24.0" layoutY="129.0" prefHeight="371.0" prefWidth="829.0">
         <columns>
           <TableColumn fx:id="colTisch" prefWidth="182.66668701171875" text="Tisch" />
-          <TableColumn fx:id="colBestellung" prefWidth="209.66668701171875" text="Bezahlte Rechnungen" />
+          <TableColumn fx:id="colBestellung" prefWidth="209.66668701171875" text="Anzahl Konsumartikel" />
             <TableColumn fx:id="colDatum" prefWidth="203.33331298828125" text="Datum" />
             <TableColumn fx:id="colSumme" prefWidth="235.66668701171875" text="Summe" />
         </columns>

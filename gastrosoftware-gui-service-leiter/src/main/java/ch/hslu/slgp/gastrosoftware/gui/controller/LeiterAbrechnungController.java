@@ -74,14 +74,23 @@ public class LeiterAbrechnungController implements Initializable {
             mitarbeiterAuswahlLaden();
             List<Bestellung> bestellungList = bestellService.findBestellungAllBezahlt(true);
             ObservableList<Bestellung> bestellungObservableList = FXCollections.observableList(bestellungList);
+            double summeBestellungAll = 0;
 
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
             colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
             colDatum.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("datum"));
-            colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("SummeBestellPositionList"));
-
+            colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("summebestellPositionList"));
             tblAbrechnung.setItems(bestellungObservableList);
 
+            if (bestellungList.size() != 0) {
+                for (Bestellung b : bestellungList) {
+                    summeBestellungAll = summeBestellungAll + b.getSummebestellPositionList();
+                }
+                String txtUmsatzSumme = String.valueOf(summeBestellungAll);
+                txtUmsatz.setText(txtUmsatzSumme);
+            } else {
+                txtUmsatz.setText("0");
+            }
 
         } catch (Exception e) {
             logger.error("Fehler beim Abruf der BestellungsListe ", e);

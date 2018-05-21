@@ -75,7 +75,7 @@ public class BarInterfaceController implements Initializable {
             }
         }
     }
-
+    
 
     @FXML
     private void logout(ActionEvent event) throws Exception {
@@ -84,12 +84,7 @@ public class BarInterfaceController implements Initializable {
 
     private void tabelleBefuellen() throws Exception {
         /* Bestellung initialisieren */
-        logger.info("Tabelle befüllen wurde ausgeführt");
         List<Bestellung> alleBestellungenListe = bestellService.findBestellungAll();
-        logger.info(alleBestellungenListe.size());
-        for (Bestellung bestellung : alleBestellungenListe) {
-            logger.info(bestellung);
-        }
 
         List<BestellPosition> tempKonsList = new ArrayList<>();
 

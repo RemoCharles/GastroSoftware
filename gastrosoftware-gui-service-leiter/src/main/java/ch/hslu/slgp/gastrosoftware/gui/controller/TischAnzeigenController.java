@@ -109,6 +109,7 @@ public class TischAnzeigenController {
                                     Integer oldValue, Integer newValue) {
                     if (selectedBestellPosition != null) {
                         selectedBestellPosition.setAnzahl(newValue);
+                        selectedBestellPosition.berechneBetrag();
                     }
                     tblBestellPosition.refresh();
                 }
@@ -181,12 +182,14 @@ public class TischAnzeigenController {
 
             for (BestellPosition bestellPosition : bestellPositionObservableList) {
                 bestellPosition.setTischNummer(tischNummer);
+                bestellPosition.berechneBetrag();
                 bestellPositionList.add(bestellPosition);
             }
 
             Tisch tisch = bestellService.findTischByTischNummer(tischNummer);
             Mitarbeiter mitarbeiter = ContextMitarbeiter.getInstance().getMitarbeiter();
             Bestellung bestellung = new Bestellung(mitarbeiter, tisch, bestellPositionList, false, false, LocalDate.now());
+
 
             bestellService.bestellungHinzufuegen(bestellung);
 

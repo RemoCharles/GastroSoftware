@@ -68,6 +68,7 @@ public class TischRechnungController implements Initializable {
     private Label lblTischrechnungBestätigung;
 
     private int tischNummer;
+    private int rechnungsNummer = 0;
 
     List<Bestellung> bestellungListTemp = new ArrayList<>();
 
@@ -76,8 +77,7 @@ public class TischRechnungController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        tabelleFuellen();
-        updateTable();
+
     }
 
 
@@ -106,13 +106,13 @@ public class TischRechnungController implements Initializable {
     public void tabelleFuellen() {
 
         try {
-            List<Bestellung> bestellungList = bestellService.findBestellungByTischNummer(getTischNummer());
+            List<Bestellung> bestellungList = bestellService.findBestellungByTischNummer(tischNummer);
 
             for (Bestellung bestellung : bestellungList) {
                 if (!bestellung.getBezahlt()) {
+                    bestellung.berechneSummeBestellPositionList();
                     bestellungListTemp.add(bestellung);
-                    String summeText = String.valueOf(bestellung.berechneSummeBestellPositionList());
-                    lblFxmlSumme.setText(summeText);
+                    bestellService.bestellungAktualisieren(bestellung);
                 }
             }
 
@@ -168,6 +168,9 @@ public class TischRechnungController implements Initializable {
             } catch (Exception e) {
                 logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: ", e);
             }
+            rechnungsNummerCounter();
+            tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, rechnungsNummer);
+            rechnungService.tischRechnungHinzufuegen(tischRechnung);
             rechnungDrucken();
             updateTable();
 
@@ -195,6 +198,9 @@ public class TischRechnungController implements Initializable {
         ma_stage.show();
     }
 
+    public void rechnungsNummerCounter(){
+        rechnungsNummer++;
+    }
 
 }
 
