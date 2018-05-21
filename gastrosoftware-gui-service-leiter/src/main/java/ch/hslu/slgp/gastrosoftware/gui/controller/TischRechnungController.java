@@ -123,17 +123,17 @@ public class TischRechnungController implements Initializable {
             }
 
 
-//            if (bestellPositionList.size() != 0) {
-//                Double summeRechnung = 0.00;
-//                for (BestellPosition bestellPosition : bestellPositionList) {
-//                    summeRechnung = summeRechnung + bestellPosition.getBerechneterPreis();
-//                }
-//                String txtsummeRechnung = String.valueOf(summeRechnung);
-//                lblFxmlSumme.setText(txtsummeRechnung);
-//
-//            } else {
-//                lblFxmlSumme.setText("0");
-//            }
+            if (bestellPositionList.size() != 0) {
+                Double summeRechnung = 0.00;
+                for (BestellPosition bestellPosition : bestellPositionList) {
+                    summeRechnung = summeRechnung + bestellPosition.getBerechneterPreis();
+                }
+                String txtsummeRechnung = String.valueOf(summeRechnung);
+                lblFxmlSumme.setText(txtsummeRechnung);
+
+            } else {
+                lblFxmlSumme.setText("0");
+            }
 
             bPBez.setCellValueFactory(new PropertyValueFactory<BestellPosition, String>("bezeichnung"));
             bPAnzahl.setCellValueFactory(new PropertyValueFactory<BestellPosition, Integer>("anzahl"));
@@ -159,8 +159,11 @@ public class TischRechnungController implements Initializable {
                     bestellung.setBezahlt(true);
                     bestellService.bestellungAktualisieren(bestellung);
                 }
-                tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, 2);
+                rechnungsNummerCounter();
+                tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, rechnungsNummer);
                 rechnungService.tischRechnungHinzufuegen(tischRechnung);
+                rechnungDrucken();
+                updateTable();
 
                 lblTischrechnungBestätigung.setText("Tischrechnung erstellen erfolgreich");
                 lblTischrechnungBestätigung.setTextFill(Color.web("#00ff00"));
@@ -168,11 +171,7 @@ public class TischRechnungController implements Initializable {
             } catch (Exception e) {
                 logger.info("Konnte Bestellungen nicht auf bezahlt = true setzen: ", e);
             }
-            rechnungsNummerCounter();
-            tischRechnung = new TischRechnung(LocalDate.now(), bestellungListTemp, rechnungsNummer);
-            rechnungService.tischRechnungHinzufuegen(tischRechnung);
-            rechnungDrucken();
-            updateTable();
+
 
         }
 

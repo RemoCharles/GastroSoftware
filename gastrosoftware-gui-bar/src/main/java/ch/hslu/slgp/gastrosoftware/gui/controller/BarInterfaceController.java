@@ -75,7 +75,7 @@ public class BarInterfaceController implements Initializable {
             }
         }
     }
-    
+
 
     @FXML
     private void logout(ActionEvent event) throws Exception {
