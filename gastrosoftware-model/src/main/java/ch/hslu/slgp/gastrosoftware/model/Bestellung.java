@@ -64,7 +64,7 @@ public class Bestellung implements Serializable {
     public int getAnzahlKonsumartikel (){
         int anz = 0;
         for (BestellPosition bP : getKonsumartikel()){
-            anz =+ bP.getAnzahl();
+            anz += bP.getAnzahl();
         }
        return anz;
     }

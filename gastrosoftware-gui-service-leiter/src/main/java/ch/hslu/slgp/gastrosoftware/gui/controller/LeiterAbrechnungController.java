@@ -77,7 +77,7 @@ public class LeiterAbrechnungController implements Initializable {
             double summeBestellungAll = 0;
 
             colTisch.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("tisch"));
-            colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("anzahlKonsumartikel"));
+            colBestellung.setCellValueFactory(new PropertyValueFactory<Bestellung, Integer>("AnzahlKonsumartikel"));
             colDatum.setCellValueFactory(new PropertyValueFactory<Bestellung, String>("datum"));
             colSumme.setCellValueFactory(new PropertyValueFactory<Bestellung, Double>("summebestellPositionList"));
             tblAbrechnung.setItems(bestellungObservableList);
