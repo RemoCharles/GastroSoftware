@@ -82,7 +82,7 @@ public class LeiterTischverwaltungController implements Initializable {
            tblTische.setItems(tischListObsv);
 
        }catch (Exception e){
-           logger.info("Tabelle konnte nicht befuellt werden.");
+           logger.info("Tabelle konnte nicht befuellt werden.", e);
            lblError.setText("Tabelle konnte nicht befuellt werden.");
        }
     }

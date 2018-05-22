@@ -157,7 +157,7 @@ public void tischeLaden(){
 			}
 		}
 	}catch(Exception e){
-		logger.info("TischList konnte nicht geladen werden.");
+		logger.info("TischList konnte nicht geladen werden.", e);
 	}
 }
 	

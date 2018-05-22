@@ -166,7 +166,7 @@ public class LeiterMenuController implements Initializable {
 			cmbWochentage.setItems(wochenTagObservableList);
 			cmbWochentage.getSelectionModel().select(0);
 		} catch (Exception e) {
-			logger.info("Kategorienauswahl konnte nicht geladen werden.");
+			logger.info("Kategorienauswahl konnte nicht geladen werden.", e);
 		}
 
 	}

@@ -87,7 +87,7 @@ public class MaInterfaceController implements Initializable{
             });
 
 		}catch(Exception e){
-			logger.info("Tabelle konnte nicht befuellt werden.");
+			logger.info("Tabelle konnte nicht befuellt werden.", e);
 		}
 	}
 
@@ -126,7 +126,7 @@ public class MaInterfaceController implements Initializable{
                 try {
                     tabelleFuellen();
                 } catch (Exception e) {
-                    logger.info("Tabelle konnte nicht befüllt werden...");
+                    logger.info("Tabelle konnte nicht befüllt werden...", e);
                 }
             }
         };

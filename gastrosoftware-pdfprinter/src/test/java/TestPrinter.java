@@ -36,13 +36,10 @@ public class TestPrinter {
         List<MAAbrechnung> maAbrechnungList = new ArrayList<>();
         maAbrechnungList.add(new MAAbrechnung(LocalDate.now(), bestellungList));
         try {
-            logger.info("Starting PDF Print");
             printerService.printTischRechnungAlsPdf(tischRechnung);
             if (maAbrechnungList.size() > 0) {
                 printerService.printMAAbrechnungAlsPdf(maAbrechnungList, ma);
             }
-
-            logger.info("DONE!");
         } catch (Exception e) {
             e.printStackTrace();
         }

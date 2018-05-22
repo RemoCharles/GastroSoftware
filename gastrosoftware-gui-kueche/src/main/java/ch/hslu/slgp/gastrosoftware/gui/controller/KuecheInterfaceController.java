@@ -53,7 +53,7 @@ public class KuecheInterfaceController implements Initializable{
             tabelleBefuellen();
             tabelleAktualisieren();
         } catch (Exception e) {
-            logger.error("Tabelle konnte nicht befüllt werden...");
+            logger.error("Tabelle konnte nicht befüllt werden...", e);
         }
     }
 
@@ -72,7 +72,7 @@ public class KuecheInterfaceController implements Initializable{
                 tabelleBefuellen();
 
             } catch (Exception e) {
-                logger.info("Bestellposition konnte nicht aktualisiert werden...");
+                logger.info("Bestellposition konnte nicht aktualisiert werden...", e);
             }
         }
     }
@@ -113,7 +113,7 @@ public class KuecheInterfaceController implements Initializable{
             });
 
         } catch (Exception e) {
-            logger.info("Tabelle konnte nicht befüllt werden..");
+            logger.info("Tabelle konnte nicht befüllt werden..", e);
         }
     }
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -124,7 +124,7 @@ public class KuecheInterfaceController implements Initializable{
                 try {
                     tabelleBefuellen();
                 } catch (Exception e) {
-                    logger.info("Tabelle konnte nicht befüllt werden...");
+                    logger.info("Tabelle konnte nicht befüllt werden...", e);
                 }
             }
         };

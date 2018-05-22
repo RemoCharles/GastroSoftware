@@ -149,7 +149,7 @@ public class SaalZweiController implements Initializable{
 				}
 			}
 		}catch(Exception e){
-			logger.info("TischList konnte nicht geladen werden.");
+			logger.info("TischList konnte nicht geladen werden.", e);
 		}
 	}
 

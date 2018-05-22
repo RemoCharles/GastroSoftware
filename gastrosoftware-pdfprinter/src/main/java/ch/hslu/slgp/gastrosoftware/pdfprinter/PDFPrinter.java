@@ -209,9 +209,6 @@ public class PDFPrinter extends UnicastRemoteObject implements PrinterService {
             /* Anschrift zusammenstellen */
             StringBuilder sb = new StringBuilder();
 
-
-            logger.info(mitarbeiter);
-
             sb.append(mitarbeiter.getName()).append("\n");
             sb.append(mitarbeiter.getVorname()).append("\n");
             sb.append(mitarbeiter.getEmail()).append("\n");
