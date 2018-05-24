@@ -19,11 +19,6 @@
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
-            <artifactId>gastrosoftware-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-rmi-connector</artifactId>
             <version>1.0</version>
         </dependency>

@@ -25,11 +25,6 @@ public class Rechnung implements Serializable {
         this.datum = datum;
     }
 
-
-    public Rechnung(LocalDate datum, String nameRestaunt) {
-        this.datum = datum;
-    }
-
     public LocalDate getDatum() {
         return datum;
     }

@@ -15,7 +15,6 @@
             <groupId>slgp.informatik</groupId>
             <artifactId>gastrosoftware-persister</artifactId>
             <version>1.0</version>
-
         </dependency>
         <dependency>
             <groupId>slgp.informatik</groupId>
